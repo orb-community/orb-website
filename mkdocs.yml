@@ -1,3 +1,28 @@
-site_name: Orb
+site_name: Orb Network Observability Platform
 theme:
   name: material
+  features:
+    - navigation.tracking
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+markdown_extensions:
+  - toc:
+      permalink: true
+plugins:
+  - search
+repo_url: https://github.com/ns1labs/orb
+repo_name: ns1labs/orb
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ns1labs/orb
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/ns1labs
+    - icon: fontawesome/brands/slack
+      link: https://join.slack.com/t/ns1labs/shared_invite/zt-p0uzy9zq-ZgD~QkKQ9cWMSiI4DgJSaA
+    - icon: octicons/mail-24
+      link: "mailto:info@pktvisor.dev"
