@@ -18,7 +18,6 @@ plugins:
   - search
 nav:
   - Home: 'index.md'
-  - About: 'about.md'
   - Install: 'install.md'
   - Resources: 'docs.md'
   - Follow: 'contact.md'
