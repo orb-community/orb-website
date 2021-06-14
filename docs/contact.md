@@ -1,5 +1,4 @@
 # Follow Orb
-<!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 **Orb** is a new project and just gathering speed. Star the project to show your interest!
