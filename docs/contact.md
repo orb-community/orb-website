@@ -7,6 +7,7 @@
 
 We are very interested in hearing about your use cases, feature requests, and other feedback.
 
+* [Sign up to get updates on Orb and pktvisor from the team](https://resources.ns1.com/get-orb-updates)
 * [File an issue](https://github.com/ns1labs/orb/issues/new)
 * Follow our [public work board](https://github.com/ns1labs/orb/projects/1)
 * Start a [Discussion](https://github.com/ns1labs/orb/discussions)
