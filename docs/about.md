@@ -1,7 +1,7 @@
 # About
 
 ## Intro
-Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform, fully [open source](http://orb.community) and backed by [NS1](https://ns1.com). Orb orchestrates network observability policies across a fleet of agents on the edge in real time, allowing you to dynamically filter and collect precise “small data” from your global network, providing you with lightweight, immediately actionable results you can make sense of.
+Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform, fully [open source](http://orb.community) and backed by [NS1](https://ns1.com). Orb orchestrates network observability policies across a fleet of agents on the edge in real-time, allowing you to dynamically filter and collect precise “small data” from your global network, providing you with lightweight, immediately actionable results you can make sense of.
 
 ## How is Orb Different?
 
