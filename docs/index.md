@@ -26,6 +26,7 @@ the [pktvisor](https://github.com/ns1/pktvisor) observability agent. The platfor
  A side-car style agent (the open-source [pktvisor](https://github.com/ns1/pktvisor)) performs edge analysis on network data streams, combined with an IoT-inspired central control plane and UI that provide fleet and configuration management functionality.
 
 **Orb** focuses on edge analysis, preferring “small data” style actionable metrics over collection and storage of terabytes of raw, inscrutable data: think of it as a scalpel rather than a machete.
+
 * Powerful control plane to adjust analysis and collection parameters in real time across the entire fleet
 * Designed to plug in to popular observability stacks, like Prometheus and Elasticsearch, plus cloud storage and data pipelines
 * Visualize and automate on results both at the edge (for hyper-real-time local view) or centrally in the cloud (for global view)
