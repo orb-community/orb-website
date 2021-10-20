@@ -1,15 +1,16 @@
-# Follow Orb
+# Contribute
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-**Orb** is a new project and just gathering speed. Star the project to show your interest!
+**Orb** is a new project and just gathering speed. Check back later for guidelines on how you can contribute. Until then, star the project to show your interest!
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
 
-We are very interested in hearing about your use cases, feature requests, and other feedback.
+# Contact
+We are very interested to hear about your use cases, feature requests, and other feedback.
 
-* [Sign up to get updates on Orb and pktvisor from the team](https://resources.ns1.com/get-orb-updates)
-* [File an issue](https://github.com/ns1labs/orb/issues/new)
+* Sign up to get Orb [updates](https://resources.ns1.com/get-orb-updates)
+* File an [issue](https://github.com/ns1labs/orb/issues/new)
 * Follow our [public work board](https://github.com/ns1labs/orb/projects/1)
-* Start a [Discussion](https://github.com/ns1labs/orb/discussions)
-* [Join us on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA)
+* Start a [discussion](https://github.com/ns1labs/orb/discussions)
+* Join us on [Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA)
 * Send mail to [info@pktvisor.dev](mailto:info@pktvisor.dev)
