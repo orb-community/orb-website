@@ -20,7 +20,7 @@ nav:
   - Home: 'index.md'
   - Install: 'install.md'
   - Resources: 'docs.md'
-  - Follow: 'contact.md'
+  - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
 edit_uri: ""
