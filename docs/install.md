@@ -4,28 +4,30 @@ There is not yet an official release of Orb, but you can [interact with us](cont
 
 Releases will be made available in [GitHub](https://github.com/ns1labs/orb/releases) and [DockerHub](https://hub.docker.com/u/ns1labs).
 
-You can preview Orb technology today by trying out [pktvisor](https://pktvisor.dev), a production ready observability agent.
+Preview Orb technology today by trying out [pktvisor](https://pktvisor.dev), a production-ready observability agent.
 
-# Installing a Helm Chart for Orb
-Helm Chart for the Orb Observability Platform
+# Installing a Helm chart for Orb
+The repo for these Orb Helm chart deployment instructions can be found [here](https://github.com/ns1labs/orb-helm/tree/main/charts/orb).
 
 ## Prerequisites
 * Helm v3
 
 ## Configuration
 ### Instructions
-This guide assumes installation into name space orb. It requires a HOSTNAME you have DNS control over. It uses Let's Encrypt for TLS certification management.
+This guide assumes installation into namespace `orb`. It requires a HOSTNAME over which you have DNS control. It uses Let's Encrypt for TLS certification management.
 
 * cd to working directory `charts/orb`
 
 * Add helm repos for dependencies.
 
-     helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
-     helm repo add bitnami https://charts.bitnami.com/bitnami
-     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-     helm repo add jetstack https://charts.jetstack.io
-     helm repo update
-     helm dependency update
+`   `
+
+    helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+    helm repo add bitnami https://charts.bitnami.com/bitnami
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo add jetstack https://charts.jetstack.io
+    helm repo update
+    helm dependency update
 
 
 * Create `orb` namespace.
@@ -40,7 +42,7 @@ This guide assumes installation into name space orb. It requires a HOSTNAME you 
 
 `kubectl create secret generic orb-user-service --from-literal=adminEmail=user@example.com --from-literal=adminPassword=12345678 -n orb`
 
-* Deploy [ingres-nginx helm](https://kubernetes.github.io/ingress-nginx/deploy/#using-helm) (to default namespace) with tcp config map configured from helm for 8883 (MQTTS). Note you need to reference both namespace and helm release name here!
+* Deploy [ingres-nginx helm](https://kubernetes.github.io/ingress-nginx/deploy/#using-helm) (to default namespace) with tcp config map configured from helm for 8883 (MQTTS). Note you need to reference both namespace and helm release name here.
 
 `helm install --set tcp.8883=orb/my-orb-nginx-internal:8883 ingress-nginx ingress-nginx/ingress-nginx`
 
@@ -59,7 +61,7 @@ This guide assumes installation into name space orb. It requires a HOSTNAME you 
     - Edit `issuers/production-issuer.yaml` and change `spec.acme.email` to a real email address.
     - `kubectl create -f issuers/production-issuer.yaml -n orb`
 
-* Install orb. Replace my-orb with your helm release name.
+* Install Orb. Replace `my-orb` with your helm release name.
 
 `helm install --set ingress.hostname=HOSTNAME -n orb my-orb .`
 
