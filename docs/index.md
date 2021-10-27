@@ -8,43 +8,38 @@ hide:
 
 *A business intelligence platform for orchestrating dynamic edge observability*
 
-## What is Orb?
-Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform, fully [open source](http://orb.community) and backed by [NS1](https://ns1.com), that helps operators, developers, and end users understand their networks, distributed applications, and traffic flows in real time.
-
-It combines concepts from Edge Compute, Internet of Things (IoT), and high-throughput stream processing to offer command of a fleet of distributed agents that can be orchestrated in real time to summarize high-volume, information-dense data streams down to lightweight, actionable datasets directly at the edge.
-
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star on GitHub</a>
 
-## Why use Orb?
+## Introduction
+Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. Orb allows you to collect and filter critical "small data" from your global network and translates that data into lightweight, actionable insight. The platform is completely [open-source](https://github.com/ns1labs/orb), extensible, vendor-neutral, and cloud-native.
 
-**Orb** gives you a precision instrument to collect just the observability data you are interested in, extracting the needles from the haystack at the edge. It is based on
-the [pktvisor](https://github.com/ns1/pktvisor) observability agent. The platform is open source, extensible, vendor-neutral, and cloud-native.
+Orb combines concepts from Edge Compute, Internet of Things (IoT), and high-throughput stream processing—giving you command over a fleet of distributed observability agents deployed at the edge.
 
-## How does Orb work?
+## Features
 ### Form
- **Orb** orchestrates network observability policies across a fleet of agents on the edge in real time. This allows you to dynamically filter and collect precise “small data” from your global network, providing you with lightweight, immediately actionable results.
+ **Orb** orchestrates network observability policies across a fleet of agents on the edge—providing you with lightweight, immediately actionable results in real time.
 
-* Designed to plug into popular observability stacks, like Prometheus and Elasticsearch, plus cloud storage and data pipelines
-* Fast, reliable, secure, modular, extensible, open source
-* Dynamic administration and configuration
-* Modular system of inputs and analyzers
-* Cloud-native, microservices-based architecture
-* Self-host (docker-compose or k8s) or SaaS option
+* Plugs into popular observability stacks, like Prometheus and Elasticsearch, as well as cloud storage and data pipelines
+* Powered by a fast, reliable, secure, modular, extensible, open-source platform
+* Enables dynamic administration and configuration
+* Deployed as a modular system of inputs and analyzers
+* Built using a cloud-native, microservices-based architecture
+* Offers a self-hosted (via docker-compose or k8s) or SaaS option
 
 ### Function
- A resource-efficient side-car style agent (the open source [pktvisor](https://github.com/ns1/pktvisor)) performs edge analysis on network data streams, combined with an IoT-inspired central control plane and UI that provide fleet and configuration management functionality.
+ The resource-efficient, side-car style [pktvisor](https://github.com/ns1/pktvisor) observability agent performs edge analysis on network data streams, while an IoT-inspired central control plane and UI provides fleet and configuration management tools.
 
-* Adjusts analysis and collection parameters in real time across the entire fleet via a powerful control plane
-* Manages a fleet of pktvisor agents, including heartbeats, tagging, and grouping
-* Orchestrates dataset policies to decide what data to extract from which agents
+* Adjusts analysis and collection parameters dynamically across the entire fleet via a powerful control plane
+* Provides centralized fleet management, allowing you to configure heartbeats, tagging, and grouping for each of the pktvisor agents
+* Orchestrates data set policies that specify the type of data to extract from each agent
 
 ### Outcome
-**Orb** focuses on edge analysis, preferring “small data” style actionable metrics over collection and storage of terabytes of raw, inscrutable data: think of it as a scalpel rather than a machete.
+**Orb** focuses on edge analysis, preferring “small data”-style, actionable metrics over the collection and storage of terabytes of raw, inscrutable data.
 
-* Visualize and automate on results both at the edge (for hyper-real-time local view) or centrally in the cloud (for global view)
-* Central collection and exporting of summarized results that are then available for analytics, security, automation, etc.
+* Allows you to visualize and automate on data at the edge for a hyper-real-time local view or centrally in the cloud for a global view
+* Streamlines data collection and exporting back to the control data where it is available for analytics, security, automation, etc.
 * Provides a single pane of glass across all sensors
-* Provides a deep dive into visualizations and analytics that can help you make more effective network decisions in the future 
+* Delivers the necessary tools to help you make more effective network decisions 
 
 <img src="../img/ORB-diagram1.png" alt="Orb" width="400"/>
 
