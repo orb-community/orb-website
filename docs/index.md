@@ -11,9 +11,9 @@ hide:
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star on GitHub</a>
 
 ## Introduction
-Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. Orb allows you to collect and filter critical "small data" from your global network and translates that data into lightweight, actionable insight. The platform is completely [open-source](https://github.com/ns1labs/orb), extensible, vendor-neutral, and cloud-native.
+Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. Orb allows you to collect and filter critical "small data" from your global network and translates that data into lightweight, actionable insights. The platform is completely [open-source](https://github.com/ns1labs/orb), extensible, vendor-neutral, and cloud-native.
 
-Orb combines concepts from Edge Compute, Internet of Things (IoT), and high-throughput stream processing—giving you command over a fleet of distributed observability agents deployed at the edge.
+Orb combines concepts from edge computing, the Internet of Things (IoT), and high-throughput stream processing—giving you command over a fleet of distributed observability agents deployed at the edge.
 
 ## Features
 ### Form
@@ -36,7 +36,7 @@ Orb combines concepts from Edge Compute, Internet of Things (IoT), and high-thro
 ### Outcome
 **Orb** focuses on edge analysis, preferring “small data”-style, actionable metrics over the collection and storage of terabytes of raw, inscrutable data.
 
-* Allows you to visualize and automate on data at the edge for a hyper-real-time local view or centrally in the cloud for a global view
+* Allows you to visualize and automate on data at the edge for a hyper-real-time *local view* or centrally in the cloud for a *global view*
 * Streamlines data collection and exporting back to the control data where it is available for analytics, security, automation, etc.
 * Provides a single pane of glass across all sensors
 * Delivers the necessary tools to help you make more effective network decisions 
