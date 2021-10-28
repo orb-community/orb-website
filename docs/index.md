@@ -41,5 +41,5 @@ Orb combines concepts from edge computing, the Internet of Things (IoT), and hig
 * Provides a single pane of glass across all sensors
 * Delivers the necessary tools to help you make more effective network decisions 
 
-<img src="../img/ORB-diagram1.png" alt="Orb" width="400"/>
+<img src="../img/ORB-diagram1.png" alt="Orb" width="600"/>
 
