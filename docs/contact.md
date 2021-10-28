@@ -1,7 +1,7 @@
 # Contribute
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-**Orb** is a new project and just gathering speed. Check back later for guidelines on how you can contribute. Until then, star the project to show your interest!
+**Orb** is a new open-source project and just gathering speed. Check back later for guidelines on how you can contribute. Until then, star the project to show your interest!
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
 
