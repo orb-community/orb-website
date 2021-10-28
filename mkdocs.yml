@@ -18,6 +18,7 @@ plugins:
   - search
 nav:
   - Home: 'index.md'
+  - About: 'about.md'
   - Installation: 'install.md'
   - Documentation: 'docs.md'
   - Community: 'contact.md'
