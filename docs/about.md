@@ -23,3 +23,5 @@
 * Streamlines data collection and exporting back to the control data where it is available for analytics, security, automation, etc.
 * Provides a single pane of glass across all sensors
 * Delivers the necessary tools to help you make more effective network decisions
+
+<img src="../img/ORB-diagram2.png" alt="Orb" width="600"/>
