@@ -13,9 +13,10 @@ hide:
 ## Introduction
 Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. Orb allows you to collect and filter critical "small data" from your global network and translates that data into lightweight, actionable insights. The platform is completely [open-source](https://github.com/ns1labs/orb), extensible, vendor-neutral, and cloud-native.
 
-Orb combines concepts from edge computing, the Internet of Things (IoT), and high-throughput stream processing—giving you command over a fleet of distributed observability agents deployed at the edge.
+Orb combines concepts from edge computing, the Internet of Things (IoT), and high-throughput stream processing—giving you command over a fleet of **distributed observability agents** deployed at the edge. 
 
-Orb gives you a precision instrument to collect just the observability data you are interested in, extracting the needles from the haystack at the edge. It is based on the [pktvisor](https://pktvisor.dev/) observability agent.
+As an **IoT control plane**, Orb manages these agents that collect network data from applications, systems, and edge locations (VMs, containers, servers) in real-time. While ingesting a high volume of information-dense data streams, the agents translate this information to deliver consumable, actionable data sets. Developers and network operators can view this data locally at the edge via the agent command-line interface and globally at the central database via a standard dashboard tool (such as Grafana). 
+
 
 <img src="../img/ORB-diagram1.png" alt="Orb" width="600"/>
 
