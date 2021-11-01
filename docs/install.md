@@ -1,10 +1,10 @@
 # Getting started
 
-There is not yet an official release of Orb, but you can [interact with us](contact.md) today!
+There is not yet an official release of Orb, but you can [interact with us](contact.md) today! Releases will be made available in [GitHub](https://github.com/ns1labs/orb/releases) and [DockerHub](https://hub.docker.com/u/ns1labs).
 
-Releases will be made available in [GitHub](https://github.com/ns1labs/orb/releases) and [DockerHub](https://hub.docker.com/u/ns1labs).
-
-Preview Orb technology today by trying out [pktvisor](https://pktvisor.dev), a production-ready observability agent.
+In the lead-up to an official release, you can utilize Orb in the following ways:
+* Preview Orb technology today by checking out [pktvisor](https://pktvisor.dev), a production-ready observability agent.
+* Try out the Orb platform for the first time by self-installing it from GitHub and running everything locally on a single node. Follow the instructions below to self-install Orb.
 
 ## Orb with Docker Compose
 Try out Orb with Docker Compose by accessing the YAML file [here](https://github.com/ns1labs/orb/blob/develop/docker/docker-compose.yml).
