@@ -1,9 +1,7 @@
-# Resources
+# Documentation
 
-## Documentation
-Official documentation will be released with the first public version of Orb.
 
-## Orb Architecture
+## Orb Concepts
 ### Agent
 This is a sensor that is installed next to a data source (at the edge) so that it can summarize, analyze, and collect information.
 
