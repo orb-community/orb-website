@@ -19,3 +19,15 @@ These are instructions for how specific agents in the fleet (matched according t
 
 ### Sinks
 This is where you send the data. This is the system that collects the data and allows you to sync that data to different locations. Currently supports Prometheus but will support more backends in the future.
+
+## Running Orb Agent
+### Sample provisioning command
+Replace `mock` interface with host network interface (e.g. `eth0`).
+
+        docker run -d --net=host
+        -e ORB_CLOUD_ADDRESS=<HOST>
+        -e ORB_CLOUD_MQTT_ID=<AGENTID>
+        -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
+        -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
+        ns1labs/orb-agent
