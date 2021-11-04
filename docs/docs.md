@@ -20,7 +20,7 @@ These are instructions for how specific agents in the fleet (matched according t
 ### Sinks
 This is where you send the data. This is the system that collects the data and allows you to sync that data to different locations. Currently supports Prometheus but will support more backends in the future.
 
-## Running an Orb Agent
+## Running Orb Agent
 ### Sample provisioning command
 Replace `mock` interface with a host network interface (e.g. `eth0`).
 
