@@ -19,7 +19,8 @@ plugins:
 nav:
   - Home: 'index.md'
   - About: 'about.md'
-  - Installation: 'install.md'
+  - SaaS: 'saas.md'
+  - Self-host: 'install.md'
   - Documentation: 'docs.md'
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
