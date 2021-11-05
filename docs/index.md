@@ -22,14 +22,14 @@ While ingesting a high volume of information-dense data streams, the agents tran
 ### The control plane
 Orb combines concepts from edge computing, the Internet of Things (IoT), and high-throughput stream processing. 
 
-As an IoT-inspired cloud **control plane**, Orb connects a fleet of distributed observability agents deployed at the edge and gives you command over that fleet. In operating the control plane, you issue instructions to the agents, dynamically programming and re-programming them with data-collection policies to build different data sets in real time. 
+As an IoT-inspired cloud **control plane**, Orb connects a fleet of distributed observability agents (such as the [open source pktvisor](https://github.com/ns1labs/pktvisor/)) deployed at the edge and gives you command over that fleet. In operating the control plane, you issue instructions to the agents, dynamically programming and re-programming them with data-collection policies to build different data sets in real time. 
   
 ## The features
-Orb orchestrates network observability policies across a fleet of agents on the edge—providing you with lightweight, immediately actionable results in real time.
+Orb orchestrates network observability policies across a fleet of agents on the edge—providing you with lightweight, immediately actionable results.
 
 * Plugs into popular observability stacks, like Prometheus and Elasticsearch, as well as cloud storage and data pipelines
 * Built using a cloud-native, microservices-based architecture
-* Offers a self-hosted (via docker-compose or k8s) or SaaS option
+* Offers a self-hosted (via Docker Compose or Kubernetes) or a SaaS option
 
 Orb focuses on edge analysis, preferring “small data”-style, actionable metrics over the collection and storage of terabytes of raw, inscrutable data.
 
