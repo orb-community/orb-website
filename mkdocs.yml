@@ -19,7 +19,7 @@ plugins:
 nav:
   - Home: 'index.md'
   - About: 'about.md'
-  - SaaS: 'saas.md'
+  - orb.live: 'saas.md'
   - Self-host: 'install.md'
   - Documentation: 'docs.md'
   - Community: 'contact.md'
