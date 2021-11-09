@@ -106,3 +106,10 @@ Replace `mock` interface with a host network interface (e.g. `eth0`).
         docker run -v /local/orb:/usr/local/orb/ --rm --net=host \
         -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
         ns1labs/orb-agent:develop -d -c /usr/local/orb/agent.yaml
+
+## API Documentation
+Follow the links below for API documentation of each respective Orb microservice:
+
+* [Fleet](https://getorb.io/api/fleet.html)
+* [Policies](https://getorb.io/api/policies.html)
+* [Sinks](https://getorb.io/api/sinks.html)
