@@ -1,4 +1,4 @@
-The Orb software-as-a-service platform ([orb.live](orb.live)) is now in development. 
+The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in development. 
 
 Check back soon for the official release of the SaaS platform.
 
