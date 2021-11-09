@@ -14,6 +14,16 @@ jobs:
         with:
           args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/fleet/api/http/openapi.yaml -o docs/api/fleet.html'
 
+      - name: redoc-cli sinks
+        uses: seeebiii/redoc-cli-github-action@v10
+        with:
+          args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/sinks/api/http/openapi.yaml -o docs/api/sinks.html'
+
+      - name: redoc-cli policies
+        uses: seeebiii/redoc-cli-github-action@v10
+        with:
+          args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/policies/api/openapi.yaml -o docs/api/policies.html'
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
