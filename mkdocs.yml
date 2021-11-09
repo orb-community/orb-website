@@ -4,8 +4,6 @@ theme:
   favicon: img/ORB-logo-ring.png
   logo: img/ORB-logo-ring.png
   custom_dir: api/
-  static_templates:
-    - fleet.html
   features:
     - navigation.tracking
     - navigation.instant
