@@ -15,7 +15,7 @@ Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability
 
 ## The components
 ### The agents
-Orb manages **observability agents** that collect network data from applications, systems, and edge locations (VMs, containers, servers) in real time. You run agents on your edge locations and orchestrate them via the control plane.
+Orb manages **observability agents** that collect network data from applications, systems, and edge locations (VMs, containers, servers) in real time. An agent acts as a sensor installed next to a data source so it can summarize, analyze, and collect information. You run agents on your edge locations and orchestrate them via the control plane.
 
 While ingesting a high volume of information-dense data streams, the agents translate this information to deliver consumable, actionable data sets. Developers and network operators can view this data locally at the edge via the agent's command-line interface and globally in a central database via a standard dashboard tool (such as Grafana).
 
