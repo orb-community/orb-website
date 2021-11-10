@@ -11,7 +11,7 @@ Try out Orb with Docker Compose by accessing the YAML file [here](https://github
 To configure and deploy an Orb Helm Chart, follow the instructions below.
 
 ### Prerequisites
-* [Helm v3](https://helm.sh/docs/intro/install/)
+* [Helm v3](https://helm.sh/docs/intro/quickstart/)
 
 ### Configuration
 #### Instructions
