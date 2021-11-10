@@ -1,5 +1,5 @@
 # Documentation
-This page contains process-oriented instructions and descriptions to help you get moving with Orb.
+Find process-oriented instructions and descriptions below to help you get moving with Orb.
 
 ## Running Orb Agent
 ### Sample provisioning command
