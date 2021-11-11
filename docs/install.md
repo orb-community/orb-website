@@ -1,20 +1,26 @@
+## SaaS
+The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in development. Check back soon for its official release.
+
+Until then, see our self-host installation instructions below, [interact with us](https://getorb.io/contact/) today and check out [pktvisor](https://pktvisor.dev/)—a production-ready observability agent.
+
+## Self-host
 You can self-host Orb via **Docker Compose** or **Kubernetes** by self-installing and running everything locally on a single node. Follow the instructions below to self-host Orb. 
 
 To find the latest release, check [GitHub](https://github.com/ns1labs/orb/releases) or [DockerHub](https://hub.docker.com/u/ns1labs).
 
-## Orb with Docker Compose
+### Orb with Docker Compose
 Try out Orb with Docker Compose by accessing the YAML file [here](https://github.com/ns1labs/orb/blob/develop/docker/docker-compose.yml).
 
-## Orb Helm Chart
+### Orb Helm Chart
 [Helm](https://helm.sh/) is a package manager for Kubernetes. A Helm Chart is a package that allows you to customize your deployment on Kubernetes.
 
 To configure and deploy an Orb Helm Chart, follow the instructions below.
 
-### Prerequisites
+#### Prerequisites
 * [Helm v3](https://helm.sh/docs/intro/quickstart/)
 
-### Configuration
-#### Instructions
+#### Configuration
+##### Instructions
 This guide assumes installation into namespace `orb`. It requires a HOSTNAME over which you have DNS control. It uses [Let's Encrypt](https://letsencrypt.org/) for TLS certification management.
 
 * cd to working directory `charts/orb`
