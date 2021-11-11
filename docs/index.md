@@ -6,9 +6,11 @@ hide:
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
 
-*An open source orchestration platform for dynamic edge observability*
+*An open-source orchestration platform for dynamic edge observability*
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star on GitHub</a>
+
+[Get started with Orb](https://getorb.io/install/)
 
 ## The story
 Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of observability platform that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. Orb supplements your observability stack by providing dynamic orchestration of observability agents that can extract business intelligence at the edge. The platform is completely [open source](https://github.com/ns1labs/orb), extensible, vendor-neutral, and cloud-native.
