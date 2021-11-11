@@ -1,3 +1,5 @@
+You can use Orb via a SaaS or self-hosted method. While our SaaS platform is still in development, check out the self-host instructions below to get Orb up and running quickly.
+
 ## SaaS
 The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in development. Check back soon for its official release.
 
