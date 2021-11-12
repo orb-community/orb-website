@@ -14,6 +14,8 @@ theme:
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
+  - abbr
+  - pymdownx.snippets
   - attr_list
   - md_in_html
   - toc:

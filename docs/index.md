@@ -20,22 +20,34 @@ hide:
 # Why Orb?
 
 ## Distributed Deep Network Observability
-Orb manages a fleet of agents deployed across distributed, hybrid infrastructure: containers, VMs, servers, routers and switches. 
+Orb manages a [fleet](about/#fleet) of [agents](about/#agent) deployed across distributed, hybrid infrastructure: containers, VMs, servers, routers and switches. 
 The agent taps into traffic streams and extracts real time insights, resulting in light-weight, actionable metrics.
 
 ## Streaming Analysis at the Edge
 Based on the [pktvisor observability agent](https://pktvisor.dev), Orb's goal is to push analysis to the edge, where high resolution
-data can be analysed in real time without sending it to a central location for batch processing.
+data can be analysed in real time without the need to send raw data to a central location for batch processing.
 
 ## Realtime Agent Orchestration
-agents connect out to control plane. iot tech. policies in real time.
+Orb uses IoT principals to allow the observability agents to connect out to the Orb central control plane, avoiding firewall problems.
+Once connected, agents are controlled in real time from the Orb Portal or REST API, orchestrating observability [policies](about/#policies) designed
+to precisely extract the designed insights. Agents are grouped and and addressed based on [tags](about/#agent-group).
+
+*[IoT]: Internet of Things
+*[MPL]: Mozilla Public License
 
 ## Flexible Integration With Modern Observability Stacks
-prometheus first. collection included.
+Orb was built to integrate with modern observability stacks, supporting [Prometheus](https://prometheus.io/) natively and
+designed to support arbitrary [sinks](about/#sinks) in the future. Collection and sinking of the metrics from the agents
+is included, there is no need to run additional data collection pipelines.
 
 ## Portal and REST API Included
+Orb includes a modern, responsive UI for managing Agents, Agent Groups, Policies and Sinks. Orb is API first, and all platform functionality
+is available for automation via the [well documented REST API](docs/#working-with-api-docs).
 
 ## Open Source, Vendor Neutral, Cloud Native
+Orb is free, open source software (FOSS) released under MPL. It's a modern microservices application that can be deployed
+to any Kubernetes service in private or public cloud. It does not depend on any particular vendor technology to function, resulting
+in no vendor lock-in.
 
 ***
 
