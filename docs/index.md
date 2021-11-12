@@ -20,22 +20,22 @@ hide:
 # Why Orb?
 
 ## Distributed Deep Network Observability
-<p>pktvisor agents . distributed infrastructure, hybrid topology.</p>
+Orb manages a fleet of agents deployed across distributed, hybrid infrastructure: containers, VMs, servers, routers and switches. 
+The agent taps into traffic streams and extracts real time insights, resulting in light-weight, actionable metrics.
 
 ## Streaming Analysis at the Edge
-<p>High speed streaming algorithms. Business intelligence.</p>
+Based on the [pktvisor observability agent](https://pktvisor.dev), Orb's goal is to push analysis to the edge, where high resolution
+data can be analysed in real time without sending it to a central location for batch processing.
 
 ## Realtime Agent Orchestration
-<p>agents connect out to control plane. iot tech. policies in real time.</p>
+agents connect out to control plane. iot tech. policies in real time.
 
 ## Flexible Integration With Modern Observability Stacks
-<p>prometheus first. collection included.</p>
+prometheus first. collection included.
 
 ## Portal and REST API Included
-<p>foo</p>
 
 ## Open Source, Vendor Neutral, Cloud Native
-<p>foo</p>
 
 ***
 
