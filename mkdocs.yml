@@ -1,6 +1,7 @@
 site_name: Orb Observability Platform
 theme:
   name: material
+  custom_dir: overrides
   favicon: img/ORB-logo-ring.png
   logo: img/ORB-logo-ring.png
   features:
@@ -8,10 +9,13 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.top
     - search.suggest
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - toc:
       permalink: true
 plugins:
