@@ -25,7 +25,8 @@ The agent taps into traffic streams and extracts real time insights, resulting i
 
 ## Streaming Analysis at the Edge
 Based on the [pktvisor observability agent](https://pktvisor.dev), Orb's goal is to push analysis to the edge, where high resolution
-data can be analysed in real time without the need to send raw data to a central location for batch processing.
+data can be analysed in real time without the need to send raw data to a central location for batch processing. 
+[Current analysis](https://github.com/ns1labs/pktvisor/wiki/Current-Metrics) focuses on L2-L3 Network, DNS, and DHCP with more analyzers in the works.
 
 ## Realtime Agent Orchestration
 Orb uses IoT principals to allow the observability agents to connect out to the Orb central control plane, avoiding firewall problems.
