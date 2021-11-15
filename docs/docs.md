@@ -4,67 +4,100 @@ Find process-oriented instructions and descriptions below to help you get moving
 ## Getting started
 Follow the steps below after setting up your [self-host installation](https://getorb.io/install/#self-host).
 
-1. Register a new account.
+### Register a new account.
 
 <img src="img/register.png" alt="Orb" width="300"/>
 
-* After registering, you should see the home page with a welcome message.
+After registering, you should see the home page with a welcome message.
 
-2. Create an Agent.
+<img src="img/welcome_to_orb.png" alt="Orb" width="300"/>
 
-* Click **New Agent**.
-* Fill in an *Agent Name* and click **Next**.
-* Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**.
-* Then click **Save** to confirm your Agent’s name and tags. 
-* Your Agent credentials should appear. Copy the Provisioning Command.
-* Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command.
-* Confirm the provisioning command is complete, and note the Docker ID.
-* Type `docker logs -f <id>` into your terminal to follow the orb-agent and pktvisor output logs from the provision command.
-* Confirm successful orb-agent and pktvisor startup in the logs.
-* Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
-* Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
 
-3. Create an agent group.
+### Create an Agent.
 
-* Click **New Agent Group**.
-* Fill in an *Agent Group Name* and click **Next**.
-* Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu, then click **Next**.
-* You should see a message about the number of agents matching. Then click **Save**.
-* View the newly created group in the *Agent Groups* list.
-* Click the number in the *Agents* column to view the matching agents.
+1. Click **New Agent**.
 
-4. Create a Sink.
+<img src="img/new_agent.png" alt="Orb" width="300"/>
 
-* Click **New Sink**.
-* Fill in a sink name and click **Next**.
-* Fill in your sink destination details. This includes the host/username/password from your Prometheus database.
-* Optionally, add sink tags. Click **Next**.
-* Review and confirm your sink details and click **Save**.
-* View your newly created Sink in the *All Sinks* list.
+2. Fill in an *Agent Name* and click **Next**.
 
-5. Create a policy.
+3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**.
 
-* Click **New Policy**.
-* Fill in a policy name and click **Next**.
-* Select the “default_pcap” tap from the drop-down. Click **Next**.
-* Select a handler from the drop-down with regard to how you want to handle the data. Add “dhcp”, “dns”, or “net.” You have the ability to select one of each.
-* Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
+4. Then click **Save** to confirm your Agent’s name and tags. 
 
-6. Create a data set.
+5. Your Agent credentials should appear. Copy the Provisioning Command.
 
-* Click **New Set**.
-* Fill in a label name for the dataset. Click **Next**.
-* Select an Agent Group from the drop-down. Click **Next**.
-* Select the desired policy from the drop-down. Click **Next**.
-* Select the desired sink from the drop-down. Click **+** after selecting each sink. and then click **Next**.
+6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command.
 
-7. Check your terminal log output and confirm your Agent received and applied the policy.
+7. Confirm the provisioning command is complete, and note the Docker ID.
 
-8. Wait one minute, then check your terminal log output and confirm your Agent is sending metrics.
+8. Type `docker logs -f <id>` into your terminal to follow the orb-agent and pktvisor output logs from the provision command.
 
-9. Check your Sink status in UI and confirm it is *Active*.
+9. Confirm successful orb-agent and pktvisor startup in the logs.
 
-10. Navigate to Grafana Cloud, select your policy, and verify pktvisor dashboard metrics from your agent now actively display in the graphs.
+10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
+
+11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
+
+### Create an agent group.
+
+1. Click **New Agent Group**.
+
+2. Fill in an *Agent Group Name* and click **Next**.
+
+3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu, then click **Next**.
+
+4. You should see a message about the number of agents matching. Then click **Save**.
+
+5. View the newly created group in the *Agent Groups* list.
+
+6. Click the number in the *Agents* column to view the matching agents.
+
+### Create a Sink.
+
+1. Click **New Sink**.
+
+2. Fill in a sink name and click **Next**.
+
+3. Fill in your sink destination details. This includes the host/username/password from your Prometheus database.
+
+4. Optionally, add sink tags. Click **Next**.
+
+5. Review and confirm your sink details and click **Save**.
+
+6. View your newly created Sink in the *All Sinks* list.
+
+### Create a policy.
+
+1. Click **New Policy**.
+
+2. Fill in a policy name and click **Next**.
+
+3. Select the “default_pcap” tap from the drop-down. Click **Next**.
+
+4. Select a handler from the drop-down with regard to how you want to handle the data. Add “dhcp”, “dns”, or “net.” You have the ability to select one of each.
+
+5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
+
+### Create a dataset.
+
+1. Click **New Set**.
+
+2. Fill in a label name for the dataset. Click **Next**.
+
+3. Select an Agent Group from the drop-down. Click **Next**.
+
+4. Select the desired policy from the drop-down. Click **Next**.
+
+5. Select the desired sink from the drop-down. Click **+** after selecting each sink. and then click **Next**.
+
+6. Check your terminal log output and confirm your Agent received and applied the policy.
+
+7. Wait one minute, then check your terminal log output and confirm your Agent is sending metrics.
+
+8. Check your Sink status in UI and confirm it is *Active*.
+
+9. Navigate to Grafana Cloud, select your policy, and verify pktvisor dashboard metrics from your agent now actively display in the graphs.
 
 
 ## Running Orb Agent
