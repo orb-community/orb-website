@@ -6,6 +6,8 @@ Follow the steps below after setting up your [self-host installation](https://ge
 
 ### Register a new account.
 
+![](./img/register.png)
+
 <img src="img/register.png" alt="Orb" width="300"/>
 
 After registering, you should see the home page with a welcome message.
@@ -39,7 +41,7 @@ After registering, you should see the home page with a welcome message.
 
 11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
 
-### Create an agent group.
+### Create an Agent Group.
 
 1. Click **New Agent Group**.
 
@@ -67,7 +69,7 @@ After registering, you should see the home page with a welcome message.
 
 6. View your newly created Sink in the *All Sinks* list.
 
-### Create a policy.
+### Create a Policy.
 
 1. Click **New Policy**.
 
@@ -79,7 +81,7 @@ After registering, you should see the home page with a welcome message.
 
 5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
 
-### Create a dataset.
+### Create a Dataset.
 
 1. Click **New Set**.
 
