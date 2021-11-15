@@ -1,4 +1,4 @@
-You can use Orb via a SaaS or self-hosted method. While our SaaS platform is still in development, check out the self-host instructions below to get Orb up and running quickly.
+You can use Orb via a SaaS or self-hosted method. While our SaaS platform is still in development, check out the self-host instructions below to get Orb up and running quickly. To find the latest release, check [GitHub](https://github.com/ns1labs/orb/releases).
 
 ## SaaS
 The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in development. Check back soon for its official release.
@@ -6,12 +6,31 @@ The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in d
 Until then, see our self-host installation instructions below, [interact with us](https://getorb.io/contact/) today and check out [pktvisor](https://pktvisor.dev/)—a production-ready observability agent.
 
 ## Self-host
-You can self-host Orb via **Docker Compose** or **Kubernetes** by self-installing and running everything locally on a single node. Follow the instructions below to self-host Orb. 
+To self-host Orb (self-install and run everything locally on a single node), you can choose between two options for setup:
 
-To find the latest release, check [GitHub](https://github.com/ns1labs/orb/releases) or [DockerHub](https://hub.docker.com/u/ns1labs).
+* **Docker Compose** - Consider this option as a developer installation in which you clone Orb’s repository and try it on a single machine.
+* **Helm Chart** - Consider this option if you want to deploy a real production deployment, as you would be spinning up Kubernetes.
+
+Follow the instructions below after choosing a self-host option. 
 
 ### Orb with Docker Compose
 Try out Orb with Docker Compose by accessing the YAML file [here](https://github.com/ns1labs/orb/blob/develop/docker/docker-compose.yml).
+
+#### Requirements
+
+* Install `Git`
+* Install `Make`
+* Install [Docker](https://docs.docker.com/engine/install/)
+* Install [Docker Compose](https://docs.docker.com/compose/gettingstarted/) (minimum version 1.29.2)
+
+#### Instructions
+
+* Clone the [Orb repository](https://github.com/ns1labs/orb).
+* Paste it into your terminal via git clone command.
+* Make run command. This will pull Orb’s containers from [DockerHub](https://hub.docker.com/u/ns1labs).
+
+You are now running the Orb control plane on your machine and exposing it to your respective IP address as a website.
+
 
 ### Orb Helm Chart
 [Helm](https://helm.sh/) is a package manager for Kubernetes. A Helm Chart is a package that allows you to customize your deployment on Kubernetes.
