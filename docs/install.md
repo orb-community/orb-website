@@ -25,11 +25,14 @@ Try out Orb with Docker Compose by accessing the YAML file [here](https://github
 
 #### Instructions
 
-* Clone the [Orb repository](https://github.com/ns1labs/orb).
-* Paste it into your terminal via git clone command.
-* Make run command. This will pull Orb’s containers from [DockerHub](https://hub.docker.com/u/ns1labs).
+1.        git clone https://github.com/ns1labs/orb.git
+2.        cd orb
+3.        make run
 
-You are now running the Orb control plane on your machine and exposing it to your respective IP address as a website.
+
+This will pull Orb’s containers from [DockerHub](https://hub.docker.com/u/ns1labs).
+
+If you are running on localhost, the Orb UI will be available at https://localhost.
 
 
 ### Orb Helm Chart
