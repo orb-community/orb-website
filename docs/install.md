@@ -25,9 +25,9 @@ Try out Orb with Docker Compose by accessing the YAML file [here](https://github
 
 #### Instructions
 
-1.        git clone https://github.com/ns1labs/orb.git
-2.        cd orb
-3.        make run
+*       git clone https://github.com/ns1labs/orb.git
+*       cd orb
+*       make run
 
 
 This will pull Orb’s containers from [DockerHub](https://hub.docker.com/u/ns1labs).
