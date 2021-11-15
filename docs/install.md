@@ -37,11 +37,10 @@ You are now running the Orb control plane on your machine and exposing it to you
 
 To configure and deploy an Orb Helm Chart, follow the instructions below.
 
-#### Prerequisites
+#### Requirements
 * [Helm v3](https://helm.sh/docs/intro/quickstart/)
 
 #### Configuration
-##### Instructions
 This guide assumes installation into namespace `orb`. It requires a HOSTNAME over which you have DNS control. It uses [Let's Encrypt](https://letsencrypt.org/) for TLS certification management.
 
 * cd to working directory `charts/orb`
