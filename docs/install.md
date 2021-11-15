@@ -32,7 +32,7 @@ Try out Orb with Docker Compose by accessing the YAML file [here](https://github
 
 This will pull Orb’s containers from [DockerHub](https://hub.docker.com/u/ns1labs).
 
-If you are running on localhost, the Orb UI will be available at https://localhost.
+If you are running on a localhost, the Orb UI will be available at https://localhost.
 
 
 ### Orb Helm Chart
