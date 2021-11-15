@@ -5,7 +5,7 @@ central location (usually a cloud environment on Kubernetes)
 1. The **Orb Agent** which is a lightweight observability agent that is deployed to all of the infrastructure that you wish to monitor
 
 The **Control Plane** may be [self-hosted](#self-host) or you may use the free [Orb SaaS](#saas) service. Self-hosting gives you full privacy and control but is more complex.
-On the other hand, SaaS allows you to get up and running quickly since you only need to create a free account and install the **Orb Agent** to your infrastructure.
+On the other hand, SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 ## SaaS
 The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in active development. This free service allows you to enjoy 
@@ -35,7 +35,7 @@ The Orb repo contains a full Docker Compose environment, useful both for develop
 try Orb for the first time.
 
 Running Orb with Docker Compose requires you to have a copy of the Orb repo, although it is not necessary to build any software as the 
-compose file will download appropriate versions of services from Docker Hub.
+compose file will download appropriate versions of the services from Docker Hub.
 
 If you would like to build the software, or you need to troubleshoot your environment, you can find more detailed instructions on [setting up a development environment here](https://github.com/ns1labs/orb/wiki/Development-Environment-Configuration).
 
