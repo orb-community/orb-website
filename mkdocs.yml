@@ -16,6 +16,11 @@ theme:
 markdown_extensions:
   - abbr
   - pymdownx.snippets
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
   - attr_list
   - md_in_html
   - toc:
