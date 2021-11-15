@@ -25,11 +25,12 @@ Try out Orb with Docker Compose by accessing the YAML file [here](https://github
 
 #### Instructions
 
-1.      git clone https://github.com/ns1labs/orb.git
->
-2.      cd orb
->
-3.      make run
+1. 
+                git clone https://github.com/ns1labs/orb.git
+2. 
+        cd orb
+3. 
+        make run
 
 
 
