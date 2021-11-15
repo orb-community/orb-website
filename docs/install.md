@@ -11,7 +11,8 @@ On the other hand, SaaS allows you to get up and running quickly since you only 
 The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in active development. This free service allows you to enjoy 
 the benefits of the Orb platform without having to run your own control plane.
 
-While not officially open, you may preview the service at [beta.orb.live](http://beta.orb.live).
+While not officially open, you may preview the service at [beta.orb.live](http://beta.orb.live). To join our email list for notifications when the SaaS service
+is generally available, [click here](https://resources.ns1.com/get-orb-updates).
 
 !!! danger
 
