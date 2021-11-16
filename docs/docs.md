@@ -3,7 +3,7 @@
 ## Getting started
 Follow the steps below after logging in to your Orb Portal to get an Agent up and running.
 
-### Register a new account.
+### Register a new account
 
 ![](./img/register.png)
 
@@ -12,7 +12,7 @@ After registering, you should see the home page with a welcome message.
 
 ![](./img/welcome_to_orb.png)
 
-### Create an Agent.
+### Create an Agent
 
 1. Click **New Agent**.
 ![](./img/new_agent.png)
@@ -43,7 +43,7 @@ After registering, you should see the home page with a welcome message.
 11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
 
 
-### Create an Agent Group.
+### Create an Agent Group
 
 1. Click **New Agent Group**.
 ![](./img/new_agent_group.png)
@@ -61,7 +61,7 @@ After registering, you should see the home page with a welcome message.
 6. Click the number in the *Agents* column to view the matching agents.
 ![](./img/matching_agent.png)
 
-### Create a Sink.
+### Create a Sink
 
 1. Click **New Sink**.
 ![](./img/new_sink.png)
@@ -81,7 +81,7 @@ After registering, you should see the home page with a welcome message.
 6. View your newly created Sink in the *All Sinks* list.
 ![](./img/new_sink_list.png)
 
-### Create a Policy.
+### Create a Policy
 
 1. Click **New Policy**.
 ![](./img/new_policy.png)
@@ -98,7 +98,7 @@ After registering, you should see the home page with a welcome message.
 5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
 ![](./img/policy_handler_label.png)
 
-### Create a Dataset.
+### Create a Dataset
 
 1. Click **New Set**.
 ![](./img/new_dataset.png)
@@ -136,7 +136,9 @@ To run an agent, you will need:
 
 !!! tip 
 
-    If you are unsure which network interface to monitor, you may list the available interfaces on your host.
+    If you are unsure which network interface to monitor, you may list the available interfaces on your host. Note that to allow 
+    the agent access to these interfaces, you must run the container with `--net=host`
+    
 
     === "Linux"
 
@@ -164,6 +166,8 @@ The Agent credentials include three pieces of information, each of which is a UU
 
     === "Generic"
 
+        Use this command as a template by substituting in the appropriate values
+
         ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=<HOST>
@@ -174,6 +178,9 @@ The Agent credentials include three pieces of information, each of which is a UU
         ns1labs/orb-agent
         ```
     === "localhost, mock"
+        
+        This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/install/#orb-with-docker-compose). 
+        Note that the "mock" interface will generate random traffic rather than observe real traffic.
 
         ``` shell 
         docker run -d --net=host
@@ -187,6 +194,8 @@ The Agent credentials include three pieces of information, each of which is a UU
         ```
 
     === "orb.live, eth0"
+        
+        This command is similar to one you would use on the orb.live SaaS platform
 
         ``` shell 
         docker run -d --net=host
@@ -200,7 +209,7 @@ The Agent credentials include three pieces of information, each of which is a UU
 
 !!! question 
 
-    Is the Agent docker image not starting correctly? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    Is the Agent docker image not starting correctly? Have special needs? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ### Advanced auto-provisioning setup
@@ -250,40 +259,41 @@ To do so you will need to create an API key which can be used by `orb-agent` to 
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
         --header 'Authorization: <SESSION_TOKEN>'
 
-7. Create a config for Orb and pktvisor taps, for example, /`local/orb/agent.yaml`:
+7. Create a config for Orb and pktvisor taps, for example, `/local/orb/agent.yaml`:
+```yaml
+version: "1.0"
 
-        version: "1.0"
+visor:
+   taps:
+      ethernet:
+         input_type: pcap
+         config:
+            iface: "eth0"
 
-        visor:
-          taps:
-            ethernet:
-              input_type: pcap
-              config:
-                iface: "eth0"
-
-        orb:
-          db:
-            file: /usr/local/orb/orb-agent.db
-          tags:
-            region: EU
-            pop: ams02
-            node_type: dns
-          cloud:
-            config:
-              agent_name: myagent1
-            api:
-              address: https://HOST
-            mqtt:
-              address: tls://HOST:8883
+orb:
+   db:
+      file: /usr/local/orb/orb-agent.db
+   tags:
+      region: EU
+      pop: ams02
+      node_type: dns
+   cloud:
+      config:
+         agent_name: myagent1
+      api:
+         address: https://HOST
+      mqtt:
+         address: tls://HOST:8883
+```
 
 8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
-        docker pull ns1labs/orb-agent:develop
-    and:
-
-        docker run -v /local/orb:/usr/local/orb/ --rm --net=host \
-        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-        ns1labs/orb-agent:develop -d -c /usr/local/orb/agent.yaml
+```shell
+docker pull ns1labs/orb-agent
+docker run -v /local/orb:/usr/local/orb/ --net=host \
+       -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+```
 
 ## Working with API Docs
 Follow the links below for API documentation of each respective Orb microservice:
