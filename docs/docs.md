@@ -16,23 +16,18 @@ After registering, you should see the home page with a welcome message.
 ### Create an Agent.
 
 1. Click **New Agent**.
-
 ![](./img/new_agent.png)
 
 2. Fill in an *Agent Name* and click **Next**.
-
 ![](./img/agent_name.png)
 
 3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**.
-
 ![](./img/new_agent_tag.png)
 
 4. Then click **Save** to confirm your Agent’s name and tags. 
-
 ![](./img/new_agent_tag_save.png)
 
 5. Your Agent credentials should appear. Copy the Provisioning Command.
-
 ![](./img/provisioning_command.png)
 
 6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command.
@@ -44,7 +39,6 @@ After registering, you should see the home page with a welcome message.
 9. Confirm successful orb-agent and pktvisor startup in the logs.
 
 10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
-
 ![](./img/agent_online.png)
 
 11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
@@ -53,7 +47,6 @@ After registering, you should see the home page with a welcome message.
 ### Create an Agent Group.
 
 1. Click **New Agent Group**.
-
 ![](./img/new_agent_group.png)
 
 2. Fill in an *Agent Group Name* and click **Next**.
@@ -61,73 +54,57 @@ After registering, you should see the home page with a welcome message.
 3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu, then click **Next**.
 
 4. You should see a message about the number of agents matching. Then click **Save**.
-
 ![](./img/new_agent_group_test.png)
 
 5. View the newly created group in the *Agent Groups* list.
-
 ![](./img/agent_group_list.png)
 
 6. Click the number in the *Agents* column to view the matching agents.
-
 ![](./img/matching_agent.png)
 
 ### Create a Sink.
 
 1. Click **New Sink**.
-
 ![](./img/new_sink.png)
 
 2. Fill in a sink name and click **Next**.
-
 ![](./img/new_sink_grafana.png)
 
 3. Fill in your sink destination details. This includes the host/username/password from your Prometheus database.
-
 ![](./img/new_sink_prometheus.png)
 
 4. Optionally, add sink tags. Click **Next**.
-
 ![](./img/sink_tags.png)
 
 5. Review and confirm your sink details and click **Save**.
-
 ![](./img/sink_save.png)
 
 6. View your newly created Sink in the *All Sinks* list.
-
 ![](./img/new_sink_list.png)
 
 ### Create a Policy.
 
 1. Click **New Policy**.
-
 ![](./img/new_policy.png)
 
 2. Fill in a policy name and click **Next**.
-
 ![](./img/policy_name.png)
 
 3. Select the “default_pcap” tap from the drop-down. Click **Next**.
-
 ![](./img/policy_pcap.png)
 
 4. Select a handler from the drop-down with regard to how you want to handle the data. Add “dhcp”, “dns”, or “net.” You have the ability to select one of each.
-
 ![](./img/policy_handler.png)
 
 5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
-
 ![](./img/policy_handler_label.png)
 
 ### Create a Dataset.
 
 1. Click **New Set**.
-
 ![](./img/new_dataset.png)
 
 2. Fill in a label name for the dataset. Click **Next**.
-
 ![](./img/dataset_details.png)
 
 3. Select an Agent Group from the drop-down. Click **Next**.
