@@ -7,7 +7,6 @@ Follow the steps below after logging in to your Orb Portal to get an Agent up an
 
 ![](./img/register.png)
 
-
 After registering, you should see the home page with a welcome message.
 
 ![](./img/welcome_to_orb.png)
@@ -20,7 +19,8 @@ After registering, you should see the home page with a welcome message.
 2. Fill in an *Agent Name* and click **Next**.
 ![](./img/agent_name.png)
 
-3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**.
+3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**. These tags represent
+the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc.
 ![](./img/new_agent_tag.png)
 
 4. Then click **Save** to confirm your Agent’s name and tags. 
@@ -29,18 +29,10 @@ After registering, you should see the home page with a welcome message.
 5. Your Agent credentials should appear. Copy the Provisioning Command.
 ![](./img/provisioning_command.png)
 
-6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command.
-
-7. Confirm the provisioning command is complete, and note the Docker ID.
-
-8. Type `docker logs -f <id>` into your terminal to follow the orb-agent and pktvisor output logs from the provision command.
-
-9. Confirm successful orb-agent and pktvisor startup in the logs.
+6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more.
 
 10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
-
-11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
 
 
 ### Create an Agent Group
@@ -111,10 +103,6 @@ After registering, you should see the home page with a welcome message.
 4. Select the desired policy from the drop-down. Click **Next**.
 
 5. Select the desired sink from the drop-down. Click **+** after selecting each sink. and then click **Next**.
-
-6. Check your terminal log output and confirm your Agent received and applied the policy.
-
-7. Wait one minute, then check your terminal log output and confirm your Agent is sending metrics.
 
 8. Check your Sink status in UI and confirm it is *Active*.
 
