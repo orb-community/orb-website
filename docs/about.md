@@ -47,7 +47,7 @@ To view a Grafana dashboard for visualizing pktvisor Prometheus metrics, look [h
 
 The concepts below comprise Orb’s architecture.
 
-![](./img/concepts.png){ width="500" }
+![](./img/concepts.png){ width="700" }
 
 ### Agent
 This is a sensor installed next to a data source (at the edge) so it can summarize, analyze, and collect information.
