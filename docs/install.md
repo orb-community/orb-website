@@ -1,12 +1,12 @@
-Orb consists of two major components
+Orb consists of two major components:
 
 1. The **Control Plane**, which is comprised of microservices, communication systems, databases, etc. and is deployed to a 
-central location (usually a cloud environment on Kubernetes)
-1. The **[Orb Agent](/docs/#running-orb-agent)**, which is a lightweight observability agent that is deployed to all of the infrastructure that you wish to monitor
+central location (usually a cloud environment on Kubernetes).
+1. The **[Orb Agent](/docs/#running-orb-agent)**, which is a lightweight observability agent that is deployed to all of the infrastructure that you wish to monitor.
 
 The instructions below are only regarding the **Control Plane**. If you need to install the **Orb Agent**, [see these instructions instead](/docs/#running-orb-agent).
 
-The **Control Plane** may be [self-hosted](#self-host) or you may use the free [Orb SaaS](#saas) service. Self-hosting gives you full privacy and control but is more complex.
+The **Control Plane** may be [self-hosted](#self-host), or you may use the free [Orb SaaS](#saas) service. Self-hosting gives you full privacy and control but is more complex.
 On the other hand, SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 ## SaaS
@@ -20,8 +20,8 @@ If you need to install the **Orb Agent** to be used with orb.live, [see these in
 
 !!! danger
 
-    The Orb SaaS service is still under active develoment and is not yet production ready! Please use it for non-production, testing purposes only.
-    The service may become unavailable and your data may be reset without notice.
+    The Orb SaaS service is still under active development and is not yet production ready! Please use it for non-production, testing purposes only.
+    The service may become unavailable, and your data may be reset without notice.
 
 ## Self-host
 There are two main deployment methods for those wishing to self-host:
@@ -36,8 +36,7 @@ Follow the instructions below after choosing a self-host option.
     If you're just interested in trying out Orb quickly to see what it's all about, use the Docker Compose method.
 
 ### Orb with Docker Compose
-The Orb repo contains a full Docker Compose environment, useful both for developers wishing to contribute, and causal users looking to
-try Orb for the first time.
+The Orb repo contains a full Docker Compose environment, useful both for developers wishing to contribute, and casual users looking to try Orb for the first time.
 
 Running Orb with Docker Compose requires you to have a copy of the Orb repo, although it is not necessary to build any software as the 
 compose file will download appropriate versions of the services from Docker Hub.
@@ -138,3 +137,5 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
     Is the Helm deployment not working correctly? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
+
+Upon successful installation, visit our [Getting Started](https://getorb.io/docs/#getting-started) section to keep moving forward with Orb.
