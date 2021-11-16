@@ -47,22 +47,22 @@ To view a Grafana dashboard for visualizing pktvisor Prometheus metrics, look [h
 
 The concepts below comprise Orb’s architecture.
 
-![](./img/concepts.png)
+![](./img/concepts.png){ align=left width="300" }
 
 ### Agent
 This is a sensor installed next to a data source (at the edge) so it can summarize, analyze, and collect information.
 
-![](./img/concept_agent.png)
+![](./img/concept_agent.png){ align=left width="250" }
 
 ### Agent group
 This is a list of simple key/value pairs that match against agent tags to dynamically define a group of agents. For example, “region: US” will group all agents in the fleet that have this key/value set in their tags.
 
-![](./img/concept_agent_group.png)
+![](./img/concept_agent_group.png){ align=left width="250" }
 
 ### Fleet
 This is a collection of agents which may be widely distributed and number in the tens, hundreds, or thousands and are all able to connect to and contribute to the same observability system.
 
-![](./img/concept_fleet_manager.png)
+![](./img/concept_fleet_manager.png){ align=left width="250" }
 
 ### Policies
 These are the instructions sent to the agents to define how to collect metrics. It is backend-specific information that is needed at the edge.
@@ -70,7 +70,7 @@ These are the instructions sent to the agents to define how to collect metrics. 
 ### Dataset
 These are instructions for how specific agents in the fleet (matched according to a given agent group), should apply collection policies and where they should sink their data. Orb will manage many data sets concurrently.
 
-![](./img/concept_dataset.png)
+![](./img/concept_dataset.png){ align=left width="250" }
 
 ### Sinks
 This is where you send the data. This is the system that collects the data and allows you to sync that data to different locations. Currently, Orb supports Prometheus but will support more backends in the future.
