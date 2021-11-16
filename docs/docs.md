@@ -123,7 +123,11 @@ After registering, you should see the home page with a welcome message.
 
 ## Running Orb Agent
 
-An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. To run an agent, you will need:
+An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight
+docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies
+and send its metric output.
+
+To run an agent, you will need:
 
 1. Docker, to run the agent image ([ns1labs/orb-agent](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an Agent](/docs/#create-an-agent)
@@ -155,9 +159,12 @@ The Agent credentials include three pieces of information, each of which is a UU
 2. **Agent Channel ID**, which uniquely identifies the agent's communication channel
 3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once, upon creation!
 
-### Sample provisioning command
-Replace `mock` interface with a host network interface (e.g. `eth0`).
+### Sample provisioning commands
+!!! example  
 
+    === "Generic"
+
+        ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=<HOST>
         -e ORB_CLOUD_MQTT_ID=<AGENTID>
@@ -165,8 +172,33 @@ Replace `mock` interface with a host network interface (e.g. `eth0`).
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         ns1labs/orb-agent
+        ```
+    === "localhost, mock"
 
-!!! bug
+        ``` shell 
+        docker run -d --net=host
+        -e ORB_CLOUD_ADDRESS=localhost
+        -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+        -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
+        -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
+        -e ORB_TLS_VERIFY=false
+        ns1labs/orb-agent
+        ```
+
+    === "orb.live, eth0"
+
+        ``` shell 
+        docker run -d --net=host
+        -e ORB_CLOUD_ADDRESS=orb.live
+        -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+        -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
+        -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
+        ns1labs/orb-agent
+        ```
+
+!!! question 
 
     Is the Agent docker image not starting correctly? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
