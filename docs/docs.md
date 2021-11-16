@@ -1,8 +1,7 @@
 # Documentation
-Find process-oriented instructions and descriptions below to help you get moving with Orb.
 
 ## Getting started
-Follow the steps below after setting up your [self-host installation](https://getorb.io/install/#self-host).
+Follow the steps below after logging in to your Orb Portal to get an Agent up and running.
 
 ### Register a new account.
 
@@ -124,20 +123,37 @@ After registering, you should see the home page with a welcome message.
 
 ## Running Orb Agent
 
-An Orb agent needs to run on all infrastructure to be monitored. To run an agent, you will need:
+An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. To run an agent, you will need:
 
-1. Docker to run the agent image (`ns1labs/orb-agent`)
-2. Agent Credentials provided by the Orb UI or REST API after creating an Agent
+1. Docker, to run the agent image ([ns1labs/orb-agent](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
+2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an Agent](/docs/#create-an-agent)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
 
-The Agent credentials include three pieces of information:
+!!! tip 
 
-1. Agent UUID
-2. Agent Channel UUID
-3. Agent Key UUID
+    If you are unsure which network interface to monitor, you may list the available interfaces on your host.
 
-Once you have this information, you may run the docker image.
+    === "Linux"
+
+        ``` shell 
+        ip -stats -color -human addr
+        ```
+
+
+    === "OSX"
+
+        ``` shell 
+        ifconfig
+        ```
+
+### Agent Credentials 
+
+The Agent credentials include three pieces of information, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
+
+1. **Agent ID**, which uniquely identifies the agent
+2. **Agent Channel ID**, which uniquely identifies the agent's communication channel
+3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once, upon creation!
 
 ### Sample provisioning command
 Replace `mock` interface with a host network interface (e.g. `eth0`).
@@ -156,8 +172,12 @@ Replace `mock` interface with a host network interface (e.g. `eth0`).
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ### Advanced auto-provisioning setup
-Some use-cases require a way to provision agents directly on edge infrstructure. To do so you will need to create an API key
-which can be used by `orb-agent` to provision itself.
+Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. 
+To do so you will need to create an API key which can be used by `orb-agent` to provision itself.
+
+!!! warning
+
+    Auto-provisioning is an advanced use case, most users will find [creating an Agent in the UI](/docs/#create-an-agent) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
