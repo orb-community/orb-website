@@ -13,6 +13,9 @@ After registering, you should see the home page with a welcome message.
 
 ### Create an Agent
 
+You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has
+a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
+
 1. Click **New Agent**.
 ![](./img/new_agent.png)
 
@@ -37,6 +40,8 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 
 ### Create an Agent Group
 
+Agents are organized into groups based on tag matching.
+
 1. Click **New Agent Group**.
 ![](./img/new_agent_group.png)
 
@@ -55,13 +60,16 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 
 ### Create a Sink
 
+A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, future versions will support more options.
+You can use a private Prometheus instance, or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
+
 1. Click **New Sink**.
 ![](./img/new_sink.png)
 
 2. Fill in a sink name and click **Next**.
 ![](./img/new_sink_grafana.png)
 
-3. Fill in your sink destination details. This includes the host/username/password from your Prometheus database.
+3. Fill in your sink destination details. This includes the host/username/password from your Prometheus `remote_write` configuration.
 ![](./img/new_sink_prometheus.png)
 
 4. Optionally, add sink tags. Click **Next**.
@@ -75,6 +83,8 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 
 ### Create a Policy
 
+Agent Policies are the recipes sent to Agents that describe which metrics to collect.
+
 1. Click **New Policy**.
 ![](./img/new_policy.png)
 
@@ -84,13 +94,15 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 3. Select the “default_pcap” tap from the drop-down. Click **Next**.
 ![](./img/policy_pcap.png)
 
-4. Select a handler from the drop-down with regard to how you want to handle the data. Add “dhcp”, “dns”, or “net.” You have the ability to select one of each.
+4. Select which handlers (analyzers) should run in the agent from the drop-down. 
 ![](./img/policy_handler.png)
 
 5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
 ![](./img/policy_handler_label.png)
 
 ### Create a Dataset
+
+Datasets tie all of the previous pieces together: they describe _which Agents_ to send _which Policy_, and _where to "sink"_ the resulting metrics.
 
 1. Click **New Set**.
 ![](./img/new_dataset.png)
@@ -106,8 +118,12 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 
 8. Check your Sink status in UI and confirm it is *Active*.
 
-9. Navigate to Grafana Cloud, select your policy, and verify pktvisor dashboard metrics from your agent now actively display in the graphs.
+### Visualize and alert on your metrics
 
+1. Your Agent should now be running the Agent Policy you created. After 1 minute of collection time, the metrics will be sent to your Prometheus sink.
+2. You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is [Grafana](https://grafana.com).
+3. A pre-made dashboard for visualizing Orb/pktvisor metrics is [available for import here](https://grafana.com/grafana/dashboards/14221).
+![](./img/grafana_dash.png)
 
 ## Running Orb Agent
 
