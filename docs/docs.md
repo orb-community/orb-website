@@ -157,7 +157,7 @@ To run an agent, you will need:
         ifconfig
         ```
 
-### Agent Credentials 
+### Agent credentials 
 
 The Agent credentials include three pieces of information, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
 
@@ -215,6 +215,66 @@ The Agent credentials include three pieces of information, each of which is a UU
 
     Is the Agent docker image not starting correctly? Have special needs? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+
+### Configuration files
+
+Most configuration options can be passed to the container as environment variables, but there are some situations that require a configuration file.
+
+You will need to use a configuration file if:
+
+* You want to assign tags to the Agent at the edge
+* You want to setup custom pktvisor Taps
+* You want the Agent to [auto-provision](#advanced-auto-provisioning-setup)
+
+The configuration file is written in YAML. 
+You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
+start here:
+
+```yaml
+version: "1.0"
+
+# this section is used by pktvisor
+# see https://github.com/ns1labs/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
+visor:
+   taps:
+      mydefault:
+         input_type: pcap
+         config:
+            iface: "eth0"
+
+# this section is used orb-agent
+# most sections and keys are optional
+orb:
+   # these are arbitrary key value pairs used for organization in the control plane and UI
+   tags:
+      region: EU
+      pop: ams02
+      node_type: dns
+   cloud:
+      config:
+         # optionally specify an agent name to use during auto provisioning
+         # hostname will be used if it's not specified here
+         agent_name: my-agent1
+         auto_provision: true
+      api:
+         address: https://orb.live
+         # if auto provisioning, specify API token here (or pass on the command line)
+         token: TOKEN
+      mqtt:
+         address: tls://orb.live:8883
+         # if not auto provisioning, specify agent connection details here
+         id: "AGENT_UUID"
+         key: "AGENT_KEY_UUID"
+         channel_id: "AGENT_CHANNEL_UUID"
+```
+
+You must mount your configuration file into the `orb-agent` container. For example, if your configuration file
+is on the host at `/local/orb/agent.yaml`, you can mount it into the container with this command:
+
+```shell
+docker run -v /local/orb:/usr/local/orb/ --net=host \
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+```
 
 ### Advanced auto-provisioning setup
 Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. 
