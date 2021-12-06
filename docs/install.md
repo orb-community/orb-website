@@ -13,11 +13,8 @@ The **Control Plane** may be [self-hosted](#self-host), or you may use the free 
 On the other hand, SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 ## orb.live 
-The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in active development. This free service allows you to enjoy 
+The Orb software-as-a-service platform ([orb.live](http://orb.live)) is now in active development. This free-forever service allows you to enjoy 
 the benefits of the Orb platform without having to run your own control plane.
-
-While not officially open, you may preview the service at [beta.orb.live](http://beta.orb.live). To join our email list for notifications when the SaaS service
-is generally available, [click here](https://resources.ns1.com/get-orb-updates).
 
 If you need to install the **Orb Agent** to be used with orb.live, [see these instructions](/docs/#running-orb-agent).
 
