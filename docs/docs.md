@@ -237,10 +237,11 @@ version: "1.0"
 # see https://github.com/ns1labs/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
 visor:
    taps:
-      mydefault:
+      default_pcap:
          input_type: pcap
          config:
             iface: "eth0"
+            host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
 
 # this section is used orb-agent
 # most sections and keys are optional
