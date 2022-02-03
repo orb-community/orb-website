@@ -119,7 +119,7 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
 
 * Choose a HOSTNAME, then point an A record for this hostname to the external IP.
 
-* Deploy [cert manager helm](https://cert-manager.io/docs/installation/helm/) to [secure nginx ingress](https://cert-manager.io/docs/tutorials/acme/ingress/).
+* Deploy [cert manager helm](https://cert-manager.io/docs/installation/helm/) to [secure nginx ingress](https://cert-manager.io/v0.14-docs/tutorials/acme/ingress/).
 
         helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.3 --set installCRDs=true
 
