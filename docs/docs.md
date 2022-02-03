@@ -1,19 +1,20 @@
 # Documentation
-Find process-oriented instructions and descriptions below to help you get moving with Orb.
 
 ## Getting started
-Follow the steps below after setting up your [self-host installation](https://getorb.io/install/#self-host).
+Follow the steps below after logging in to your Orb Portal to get an Agent up and running.
 
-### Register a new account.
+### Register a new account
 
 ![](./img/register.png)
-
 
 After registering, you should see the home page with a welcome message.
 
 ![](./img/welcome_to_orb.png)
 
-### Create an Agent.
+### Create an Agent
+
+You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has
+a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
 
 1. Click **New Agent**.
 ![](./img/new_agent.png)
@@ -21,7 +22,8 @@ After registering, you should see the home page with a welcome message.
 2. Fill in an *Agent Name* and click **Next**.
 ![](./img/agent_name.png)
 
-3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**.
+3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**. These tags represent
+the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc.
 ![](./img/new_agent_tag.png)
 
 4. Then click **Save** to confirm your Agent’s name and tags. 
@@ -30,21 +32,15 @@ After registering, you should see the home page with a welcome message.
 5. Your Agent credentials should appear. Copy the Provisioning Command.
 ![](./img/provisioning_command.png)
 
-6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command.
-
-7. Confirm the provisioning command is complete, and note the Docker ID.
-
-8. Type `docker logs -f <id>` into your terminal to follow the orb-agent and pktvisor output logs from the provision command.
-
-9. Confirm successful orb-agent and pktvisor startup in the logs.
+6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more.
 
 10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
 
-11. Click the Agent to see a detailed view that includes the Agent ID, version of the agent, and last heartbeat.
 
+### Create an Agent Group
 
-### Create an Agent Group.
+Agents are organized into groups based on tag matching.
 
 1. Click **New Agent Group**.
 ![](./img/new_agent_group.png)
@@ -62,7 +58,10 @@ After registering, you should see the home page with a welcome message.
 6. Click the number in the *Agents* column to view the matching agents.
 ![](./img/matching_agent.png)
 
-### Create a Sink.
+### Create a Sink
+
+A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, future versions will support more options.
+You can use a private Prometheus instance, or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
 
 1. Click **New Sink**.
 ![](./img/new_sink.png)
@@ -70,7 +69,7 @@ After registering, you should see the home page with a welcome message.
 2. Fill in a sink name and click **Next**.
 ![](./img/new_sink_grafana.png)
 
-3. Fill in your sink destination details. This includes the host/username/password from your Prometheus database.
+3. Fill in your sink destination details. This includes the host/username/password from your Prometheus `remote_write` configuration.
 ![](./img/new_sink_prometheus.png)
 
 4. Optionally, add sink tags. Click **Next**.
@@ -82,7 +81,9 @@ After registering, you should see the home page with a welcome message.
 6. View your newly created Sink in the *All Sinks* list.
 ![](./img/new_sink_list.png)
 
-### Create a Policy.
+### Create a Policy
+
+Agent Policies are the recipes sent to Agents that describe which metrics to collect.
 
 1. Click **New Policy**.
 ![](./img/new_policy.png)
@@ -93,13 +94,15 @@ After registering, you should see the home page with a welcome message.
 3. Select the “default_pcap” tap from the drop-down. Click **Next**.
 ![](./img/policy_pcap.png)
 
-4. Select a handler from the drop-down with regard to how you want to handle the data. Add “dhcp”, “dns”, or “net.” You have the ability to select one of each.
+4. Select which handlers (analyzers) should run in the agent from the drop-down. 
 ![](./img/policy_handler.png)
 
 5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
 ![](./img/policy_handler_label.png)
 
-### Create a Dataset.
+### Create a Dataset
+
+Datasets tie all of the previous pieces together: they describe _which Agents_ to send _which Policy_, and _where to "sink"_ the resulting metrics.
 
 1. Click **New Set**.
 ![](./img/new_dataset.png)
@@ -113,35 +116,63 @@ After registering, you should see the home page with a welcome message.
 
 5. Select the desired sink from the drop-down. Click **+** after selecting each sink. and then click **Next**.
 
-6. Check your terminal log output and confirm your Agent received and applied the policy.
-
-7. Wait one minute, then check your terminal log output and confirm your Agent is sending metrics.
-
 8. Check your Sink status in UI and confirm it is *Active*.
 
-9. Navigate to Grafana Cloud, select your policy, and verify pktvisor dashboard metrics from your agent now actively display in the graphs.
+### Visualize and alert on your metrics
 
+1. Your Agent should now be running the Agent Policy you created. After 1 minute of collection time, the metrics will be sent to your Prometheus sink.
+2. You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is [Grafana](https://grafana.com).
+3. A pre-made dashboard for visualizing Orb/pktvisor metrics is [available for import here](https://grafana.com/grafana/dashboards/14221).
+![](./img/grafana_dash.png)
 
 ## Running Orb Agent
 
-An Orb agent needs to run on all infrastructure to be monitored. To run an agent, you will need:
+An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight
+docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies
+and send its metric output.
 
-1. Docker to run the agent image (`ns1labs/orb-agent`)
-2. Agent Credentials provided by the Orb UI or REST API after creating an Agent
+To run an agent, you will need:
+
+1. Docker, to run the agent image ([ns1labs/orb-agent](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
+2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an Agent](/docs/#create-an-agent)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
 
-The Agent credentials include three pieces of information:
+!!! tip 
 
-1. Agent UUID
-2. Agent Channel UUID
-3. Agent Key UUID
+    If you are unsure which network interface to monitor, you may list the available interfaces on your host. Note that to allow 
+    the agent access to these interfaces, you must run the container with `--net=host`
+    
 
-Once you have this information, you may run the docker image.
+    === "Linux"
 
-### Sample provisioning command
-Replace `mock` interface with a host network interface (e.g. `eth0`).
+        ``` shell 
+        ip -stats -color -human addr
+        ```
 
+
+    === "OSX"
+
+        ``` shell 
+        ifconfig
+        ```
+
+### Agent credentials 
+
+The Agent credentials include three pieces of information, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
+
+1. **Agent ID**, which uniquely identifies the agent
+2. **Agent Channel ID**, which uniquely identifies the agent's communication channel
+3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once, upon creation!
+
+### Sample provisioning commands
+!!! example  
+
+    === "Generic"
+
+        Use this command as a template by substituting in the appropriate values
+
+        ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=<HOST>
         -e ORB_CLOUD_MQTT_ID=<AGENTID>
@@ -149,15 +180,110 @@ Replace `mock` interface with a host network interface (e.g. `eth0`).
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         ns1labs/orb-agent
+        ```
+    === "localhost, mock"
+        
+        This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/install/#orb-with-docker-compose). 
+        Note that the "mock" interface will generate random traffic rather than observe real traffic.
 
-!!! bug
+        ``` shell 
+        docker run -d --net=host
+        -e ORB_CLOUD_ADDRESS=localhost
+        -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+        -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
+        -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
+        -e ORB_TLS_VERIFY=false
+        ns1labs/orb-agent
+        ```
 
-    Is the Agent docker image not starting correctly? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    === "orb.live, eth0"
+        
+        This command is similar to one you would use on the orb.live SaaS platform
+
+        ``` shell 
+        docker run -d --net=host
+        -e ORB_CLOUD_ADDRESS=orb.live
+        -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+        -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
+        -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
+        ns1labs/orb-agent
+        ```
+
+!!! question 
+
+    Is the Agent docker image not starting correctly? Have special needs? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
+### Configuration files
+
+Most configuration options can be passed to the container as environment variables, but there are some situations that require a configuration file.
+
+You will need to use a configuration file if:
+
+* You want to assign tags to the Agent at the edge
+* You want to setup custom pktvisor Taps
+* You want the Agent to [auto-provision](#advanced-auto-provisioning-setup)
+
+The configuration file is written in YAML. 
+You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
+start here:
+
+```yaml
+version: "1.0"
+
+# this section is used by pktvisor
+# see https://github.com/ns1labs/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
+visor:
+   taps:
+      default_pcap:
+         input_type: pcap
+         config:
+            iface: "eth0"
+            host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
+
+# this section is used orb-agent
+# most sections and keys are optional
+orb:
+   # these are arbitrary key value pairs used for organization in the control plane and UI
+   tags:
+      region: EU
+      pop: ams02
+      node_type: dns
+   cloud:
+      config:
+         # optionally specify an agent name to use during auto provisioning
+         # hostname will be used if it's not specified here
+         agent_name: my-agent1
+         auto_provision: true
+      api:
+         address: https://orb.live
+         # if auto provisioning, specify API token here (or pass on the command line)
+         token: TOKEN
+      mqtt:
+         address: tls://orb.live:8883
+         # if not auto provisioning, specify agent connection details here
+         id: "AGENT_UUID"
+         key: "AGENT_KEY_UUID"
+         channel_id: "AGENT_CHANNEL_UUID"
+```
+
+You must mount your configuration file into the `orb-agent` container. For example, if your configuration file
+is on the host at `/local/orb/agent.yaml`, you can mount it into the container with this command:
+
+```shell
+docker run -v /local/orb:/usr/local/orb/ --net=host \
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+```
+
 ### Advanced auto-provisioning setup
-Some use-cases require a way to provision agents directly on edge infrstructure. To do so you will need to create an API key
-which can be used by `orb-agent` to provision itself.
+Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. 
+To do so you will need to create an API key which can be used by `orb-agent` to provision itself.
+
+!!! warning
+
+    Auto-provisioning is an advanced use case, most users will find [creating an Agent in the UI](/docs/#create-an-agent) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
@@ -198,40 +324,41 @@ which can be used by `orb-agent` to provision itself.
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
         --header 'Authorization: <SESSION_TOKEN>'
 
-7. Create a config for Orb and pktvisor taps, for example, /`local/orb/agent.yaml`:
+7. Create a config for Orb and pktvisor taps, for example, `/local/orb/agent.yaml`:
+```yaml
+version: "1.0"
 
-        version: "1.0"
+visor:
+   taps:
+      ethernet:
+         input_type: pcap
+         config:
+            iface: "eth0"
 
-        visor:
-          taps:
-            ethernet:
-              input_type: pcap
-              config:
-                iface: "eth0"
-
-        orb:
-          db:
-            file: /usr/local/orb/orb-agent.db
-          tags:
-            region: EU
-            pop: ams02
-            node_type: dns
-          cloud:
-            config:
-              agent_name: myagent1
-            api:
-              address: https://HOST
-            mqtt:
-              address: tls://HOST:8883
+orb:
+   db:
+      file: /usr/local/orb/orb-agent.db
+   tags:
+      region: EU
+      pop: ams02
+      node_type: dns
+   cloud:
+      config:
+         agent_name: myagent1
+      api:
+         address: https://HOST
+      mqtt:
+         address: tls://HOST:8883
+```
 
 8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
-        docker pull ns1labs/orb-agent:develop
-    and:
-
-        docker run -v /local/orb:/usr/local/orb/ --rm --net=host \
-        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-        ns1labs/orb-agent:develop -d -c /usr/local/orb/agent.yaml
+```shell
+docker pull ns1labs/orb-agent
+docker run -v /local/orb:/usr/local/orb/ --net=host \
+       -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+```
 
 ## Working with API Docs
 Follow the links below for API documentation of each respective Orb microservice:
