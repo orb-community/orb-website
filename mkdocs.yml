@@ -36,7 +36,6 @@ nav:
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
-edit_uri: ""
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -50,4 +49,4 @@ extra:
 google_analytics:
   - UA-41778111-9
   - auto
-copyright: Copyright &copy; 2021 <a href="https://ns1.com/labs">NS1</a>
+copyright: Copyright &copy; 2022 <a href="https://ns1.com/labs">NS1</a>
