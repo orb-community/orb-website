@@ -1,4 +1,4 @@
-site_name: Orb Observability Platform
+site_name: Orb Dynamic Edge Observability
 theme:
   name: material
   custom_dir: overrides
