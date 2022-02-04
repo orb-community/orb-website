@@ -34,8 +34,8 @@ nav:
   - Installation: 'install.md'
   - Documentation: 'docs.md'
   - Community: 'contact.md'
-repo_url: https://github.com/ns1labs/orb
-repo_name: ns1labs/orb
+repo_url: https://github.com/ns1labs/orb-website
+edit_uri: edit/main/docs
 extra:
   social:
     - icon: fontawesome/brands/github
