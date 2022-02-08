@@ -34,7 +34,7 @@ nav:
   - Installation: 'install.md'
   - Documentation: 'docs.md'
   - Community: 'contact.md'
-repo_url: https://github.com/ns1labs/orb-website
+repo_url: https://github.com/ns1labs/orb
 edit_uri: edit/main/docs
 extra:
   social:
