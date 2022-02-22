@@ -13,8 +13,7 @@ After registering, you should see the home page with a welcome message.
 
 ### Create an Agent
 
-You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has
-a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
+You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
 
 1. Click **New Agent**.
 ![](./img/new_agent.png)
@@ -32,7 +31,7 @@ the way you will assign the agent to an Agent Group. Reasonable tags might be "l
 5. Your Agent credentials should appear. Copy the Provisioning Command.
 ![](./img/provisioning_command.png)
 
-6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more.
+6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
 
 10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
@@ -127,13 +126,11 @@ Datasets tie all of the previous pieces together: they describe _which Agents_ t
 
 ## Running Orb Agent
 
-An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight
-docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies
-and send its metric output.
+An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies and send its metric output.
 
 To run an agent, you will need:
 
-1. Docker, to run the agent image ([ns1labs/orb-agent](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
+1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an Agent](/docs/#create-an-agent)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
@@ -179,7 +176,7 @@ The Agent credentials include three pieces of information, each of which is a UU
         -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
-        ns1labs/orb-agent
+        ns1labs/orb-agent:develop
         ```
     === "localhost, mock"
         
@@ -194,7 +191,7 @@ The Agent credentials include three pieces of information, each of which is a UU
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         -e ORB_TLS_VERIFY=false
-        ns1labs/orb-agent
+        ns1labs/orb-agent:develop
         ```
 
     === "orb.live, eth0"
@@ -208,7 +205,7 @@ The Agent credentials include three pieces of information, each of which is a UU
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent
+        ns1labs/orb-agent:develop
         ```
 
 !!! question 
@@ -274,12 +271,11 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 
 ```shell
 docker run -v /local/orb:/usr/local/orb/ --net=host \
-      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
 ```
 
 ### Advanced auto-provisioning setup
-Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. 
-To do so you will need to create an API key which can be used by `orb-agent` to provision itself.
+Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. To do so you will need to create an API key which can be used by `orb-agent` to provision itself.
 
 !!! warning
 
@@ -351,13 +347,13 @@ orb:
          address: tls://HOST:8883
 ```
 
-8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
+8. You can now pull and run `ns1labs/orb-agent:develop` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
 ```shell
-docker pull ns1labs/orb-agent
+docker pull ns1labs/orb-agent:develop
 docker run -v /local/orb:/usr/local/orb/ --net=host \
        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
 ```
 
 ## Working with API Docs
