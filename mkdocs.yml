@@ -1,4 +1,4 @@
-site_name: Orb Observability Platform
+site_name: Orb Dynamic Edge Observability
 theme:
   name: material
   custom_dir: overrides
@@ -35,8 +35,7 @@ nav:
   - Documentation: 'docs.md'
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
-repo_name: ns1labs/orb
-edit_uri: ""
+edit_uri: edit/main/docs
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -50,4 +49,4 @@ extra:
 google_analytics:
   - UA-41778111-9
   - auto
-copyright: Copyright &copy; 2021 <a href="https://ns1.com/labs">NS1</a>
+copyright: Copyright &copy; 2022 <a href="https://ns1.com/labs">NS1</a>
