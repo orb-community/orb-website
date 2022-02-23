@@ -1,7 +1,7 @@
 # Contribute
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-**Orb** is an open source project founded at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/ns1labs/orb) and star the project to show your interest!
+**Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/ns1labs/orb) and star the project to show your interest.
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
 
@@ -17,6 +17,7 @@ We are very interested to hear about your use cases, feature requests, and other
 
 # Explore
 ## Articles
+* [Deep Network Traffic Observability with Pktvisor and Prometheus](https://ns1.com/blog/deep-network-traffic-observability-pktvisor-prometheus)
 * [Extracting the Signal: Rethinking Network Observability](https://ns1.com/blog/extracting-the-signal-rethinking-network-observability)
 * [Orb - A New Paradigm for Dynamic Edge Observability](https://ns1.com/blog/orb-a-new-paradigm-for-dynamic-edge-observability)
 * [A Wave of Open Source Innovation at NS1 Labs with Orb and NetBox](https://ns1.com/blog/a-wave-of-open-source-innovation-at-ns1-labs-with-orb-and-netbox)
