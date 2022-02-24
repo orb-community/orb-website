@@ -24,16 +24,16 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 3. Fill in the *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc. 
 ![](./img/new_agent_tag_add.png)
 
-4. Click **Next**.
+4. You should see an icon with your key and value tags appear above the *Key* and *Value* textboxes. Click **Next**.
 ![](./img/new_agent_tag.png)
 
-5. Then click **Save** to confirm your Agent’s name and tags.  
+5. Click **Save** to confirm your Agent’s name and tags.  
 ![](./img/new_agent_tag_save.png)
 
-6. Your Agent credentials should appear. Copy the Provisioning Command.
+6. Your Agent credentials should appear. Copy the *Provisioning Command*.
 ![](./img/provisioning_command.png)
 
-7. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
+7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
 
 8. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
@@ -49,7 +49,7 @@ Agents are organized into groups based on tag matching.
 2. Fill in an *Agent Group Name* and click **Next**.
 ![](./img/new_agent_group_name.png)
 
-3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu.
+3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**, and click the **+** on the right side of the menu. You should see an icon with your key and value tags appear above the *Key* and *Value* textboxes.
 ![](./img/new_agent_group_name_plus.png)
 
 4. Click **Next**. You should see a message about the number of agents matching. Then click **Save**.
@@ -63,8 +63,7 @@ Agents are organized into groups based on tag matching.
 
 ### Create a Sink
 
-A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, future versions will support more options.
-You can use a private Prometheus instance, or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
+A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
 
 1. Click **New Sink**.
 ![](./img/new_sink.png)
@@ -86,7 +85,7 @@ You can use a private Prometheus instance, or use a free [Grafana Cloud](https:/
 
 ### Create a Policy
 
-Agent Policies are the recipes sent to Agents that describe which metrics to collect.
+ Policies are the recipes sent to Agents that describe which metrics to collect.
 
 1. Click **New Policy**.
 ![](./img/new_policy.png)
@@ -123,7 +122,7 @@ Datasets tie all of the previous pieces together: they describe _which Agents_ t
 
 ### Visualize and alert on your metrics
 
-1. Your Agent should now be running the Agent Policy you created. After 1 minute of collection time, the metrics will be sent to your Prometheus sink.
+1. Your Agent should now be running the Policy you created. After 1 minute of collection time, the metrics will be sent to your Prometheus sink.
 2. You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is [Grafana](https://grafana.com).
 3. A pre-made dashboard for visualizing Orb/pktvisor metrics is [available for import here](https://grafana.com/grafana/dashboards/14221).
 ![](./img/grafana_dash.png)
@@ -160,18 +159,18 @@ To run an agent, you will need:
 
 ### Agent credentials 
 
-The Agent credentials include three pieces of information, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
+The Agent credentials include *three pieces of information*, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
 
-1. **Agent ID**, which uniquely identifies the agent
-2. **Agent Channel ID**, which uniquely identifies the agent's communication channel
-3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once, upon creation!
+1. **Agent ID**, which uniquely identifies the agent.
+2. **Agent Channel ID**, which uniquely identifies the agent's communication channel.
+3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once upon creation!
 
 ### Sample provisioning commands
 !!! example  
 
     === "Generic"
 
-        Use this command as a template by substituting in the appropriate values
+        Use this command as a template by substituting in the appropriate values:
 
         ``` shell 
         docker run -d --net=host
@@ -214,7 +213,7 @@ The Agent credentials include three pieces of information, each of which is a UU
 
 !!! question 
 
-    Is the Agent docker image not starting correctly? Have special needs? Found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    Is the Agent docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ### Configuration files
@@ -279,11 +278,11 @@ docker run -v /local/orb:/usr/local/orb/ --net=host \
 ```
 
 ### Advanced auto-provisioning setup
-Some use-cases require a way to provision agents directly on edge infrastructure, without creating an agent manually in the UI or REST API ahead of time. To do so you will need to create an API key which can be used by `orb-agent` to provision itself.
+Some use cases require a way to provision agents directly on edge infrastructure without creating an agent manually in the UI or REST API ahead of time. To do so, you will need to create an API key which can be used by `orb-agent` to provision itself.
 
 !!! warning
 
-    Auto-provisioning is an advanced use case, most users will find [creating an Agent in the UI](/docs/#create-an-agent) easier.
+    Auto-provisioning is an advanced use case. Most users will find [creating an Agent in the UI](/docs/#create-an-agent) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
