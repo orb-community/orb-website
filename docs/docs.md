@@ -69,12 +69,12 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 ![](./img/new_sink.png)
 
 2. Fill in a sink name and click **Next**.
-![](./img/new_sink_grafana.png)
+![](./img/new_sink_test.png)
 
 3. Fill in your sink destination details. This includes the host/username/password from your Prometheus `remote_write` configuration.
-![](./img/new_sink_prometheus.png)
+![](./img/sink_destination.png)
 
-4. Optionally, add sink tags. Click **Next**.
+4. Optionally, add sink tags by filling in the *Key* and *Value* fields. Click **+** after each key-value pair, and them click **Next**.
 ![](./img/sink_tags.png)
 
 5. Review and confirm your sink details and click **Save**.
