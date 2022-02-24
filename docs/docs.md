@@ -21,19 +21,21 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 2. Fill in an *Agent Name* and click **Next**.
 ![](./img/agent_name.png)
 
-3. Fill in the *Key* and *Value* tags. Click the **+** on the right side of the menu, then click **Next**. These tags represent
-the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc.
+3. Fill in the *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc. 
+![](./img/new_agent_tag_add.png)
+
+4. Click **Next**.
 ![](./img/new_agent_tag.png)
 
-4. Then click **Save** to confirm your Agent’s name and tags. 
+5. Then click **Save** to confirm your Agent’s name and tags.  
 ![](./img/new_agent_tag_save.png)
 
-5. Your Agent credentials should appear. Copy the Provisioning Command.
+6. Your Agent credentials should appear. Copy the Provisioning Command.
 ![](./img/provisioning_command.png)
 
-6. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
+7. Paste the Provisioning Command into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
 
-10. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
+8. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
 
 
@@ -45,11 +47,13 @@ Agents are organized into groups based on tag matching.
 ![](./img/new_agent_group.png)
 
 2. Fill in an *Agent Group Name* and click **Next**.
+![](./img/new_agent_group_name.png)
 
-3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu, then click **Next**.
+3. Fill in the *Key* and *Value* tags, **which need to match the tags of the corresponding Agent**. Click the **+** on the right side of the menu.
+![](./img/new_agent_group_name_plus.png)
 
-4. You should see a message about the number of agents matching. Then click **Save**.
-![](./img/new_agent_group_test.png)
+4. Click **Next**. You should see a message about the number of agents matching. Then click **Save**.
+![](./img/new_agent_group_name_next.png)
 
 5. View the newly created group in the *Agent Groups* list.
 ![](./img/agent_group_list.png)
