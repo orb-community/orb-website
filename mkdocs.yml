@@ -46,7 +46,7 @@ extra:
       link: https://join.slack.com/t/ns1labs/shared_invite/zt-p0uzy9zq-ZgD~QkKQ9cWMSiI4DgJSaA
     - icon: octicons/mail-24
       link: "mailto:info@pktvisor.dev"
-google_analytics:
-  - UA-41778111-9
-  - auto
+  analytics:
+    provider: google
+    property: UA-41778111-9
 copyright: Copyright &copy; 2022 <a href="https://ns1.com/labs">NS1</a>
