@@ -90,17 +90,24 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 1. Click **New Policy**.
 ![](./img/new_policy.png)
 
-2. Fill in a policy name and click **Next**.
+2. Fill in a policy name and (optionally) a description. The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click **Next**.
 ![](./img/policy_name.png)
 
-3. Select the “default_pcap” tap from the drop-down. Click **Next**.
-![](./img/policy_pcap.png)
+3. Select the *Tap* (input stream) to analyze. In this example, we use “default_pcap” which is the default for Packet Capture. All of the other options are advanced and may be left as is, so click **Next**.
+![](./img/policy_tap_setup.png)
 
-4. Select which handlers (analyzers) should run in the agent from the drop-down. 
-![](./img/policy_handler.png)
+4. Click **Add Handler** to add a *Stream Handler* to the policy, which specifies how to analyze the input stream selected in the previous step.
+![](./img/policy_data_handlers.png)
 
-5. Add a Handler Label for each handler you add. Click **+** after filling in each label, and then click **Next**.
-![](./img/policy_handler_label.png)
+5. Add a *Handler Label* for each handler you add. In this example, we want to analyze DNS traffic, so we select the “dns” handler. The only required field here is the *Handler Label*, which is automatically generated for you (handler_dns_1 in this case).
+![](./img/policy_handler_config.png)
+
+6. Enter any customization variables. In this example, we customize the analysis by only analyzing domain names ending in “.ua” or “.ru”. This is done with the filter labeled “Include Only QNames With Suffix”. We input a comma delimited list of suffixes, so enter “.ua,.ru”. Click **Save** after entering any customization to save this Handler.
+![](./img/policy_handler_config2.png)
+
+7. You should see your new handler label on the screen. Optionally, add more handlers. Click **Save** to save the policy.
+![](./img/policy_save.png)
+
 
 ### Create a Dataset
 
