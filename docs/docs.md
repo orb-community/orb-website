@@ -93,7 +93,7 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 2. Fill in a policy name and (optionally) a description. The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click **Next**.
 ![](./img/policy_name.png)
 
-3. Select the *Tap* (input stream) to analyze. In this example, we use “default_pcap” which is the default for Packet Capture. All of the other options are advanced and may be left as is, so click **Next**. 
+3. Select the *Tap* (input stream) to analyze. In this example, we use “default_pcap” which is the default for Packet Capture. All of the other options are advanced and may be left as is, so click **Next**.
 ![](./img/policy_tap_setup.png)
 
 4. Click **Add Handler** to add a *Stream Handler* to the policy, which specifies how to analyze the input stream selected in the previous step.
