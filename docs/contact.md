@@ -17,9 +17,9 @@ We are very interested to hear about your use cases, feature requests, and other
 
 # Explore
 ## Articles
-* [Using DNS to minimize Cyber Threat Exposure](https://ns1.com/blog/using-dns-to-minimize-cyber-threat-exposure)
+* [Using DNS to Minimize Cyber Threat Exposure](https://ns1.com/blog/using-dns-to-minimize-cyber-threat-exposure)
 * [Deep Network Traffic Observability with Pktvisor and Prometheus](https://ns1.com/blog/deep-network-traffic-observability-pktvisor-prometheus)
-* [Q4 2021 update on NS1 Labs: pktvisor, Orb, NetBox](https://ns1.com/blog/an-update-on-open-source-innovation-at-ns1-labs)
+* [Q4 2021 Update on NS1 Labs: pktvisor, Orb, NetBox Cloud](https://ns1.com/blog/an-update-on-open-source-innovation-at-ns1-labs)
 * [Extracting the Signal: Rethinking Network Observability](https://ns1.com/blog/extracting-the-signal-rethinking-network-observability)
 * [Orb - A New Paradigm for Dynamic Edge Observability](https://ns1.com/blog/orb-a-new-paradigm-for-dynamic-edge-observability)
 * [A Wave of Open Source Innovation at NS1 Labs with Orb and NetBox](https://ns1.com/blog/a-wave-of-open-source-innovation-at-ns1-labs-with-orb-and-netbox)
