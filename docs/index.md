@@ -6,7 +6,9 @@ hide:
 ---
 <h1></h1>
 <img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
-![Orb Overview](/img/ORB-diagram2.png){ align=right width="450" }
+
+
+[![](https://i.imgur.com/o4tW4dU.png)](https://www.youtube.com/watch?v=XzpSckJzxxs){ align=right width="450" }
 
 # Open source, dynamic edge observability.
 
