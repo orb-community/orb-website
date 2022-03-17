@@ -8,7 +8,7 @@ hide:
 <img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
 
 
-[![orb.live signup]({https://i.imgur.com/o4tW4dU.png})]({https://www.youtube.com/watch?v=XzpSckJzxxs}"orb.live signup")
+[![orb.live signup](https://i.imgur.com/o4tW4dU.png)](https://www.youtube.com/watch?v=XzpSckJzxxs)
 
 # Open source, dynamic edge observability.
 
