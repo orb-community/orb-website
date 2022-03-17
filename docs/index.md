@@ -7,8 +7,8 @@ hide:
 <h1></h1>
 <img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
 
+<iframe align="right" width="500" height="300" src="https://www.youtube.com/embed/XzpSckJzxxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe align="right" width="918" height="546" src="https://www.youtube.com/embed/XzpSckJzxxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Open source, dynamic edge observability.
 
