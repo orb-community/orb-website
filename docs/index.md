@@ -8,7 +8,7 @@ hide:
 <img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
 
 
-[![orb.live signup](https://i.imgur.com/o4tW4dU.png)](https://www.youtube.com/watch?v=XzpSckJzxxs)
+<iframe width="918" height="546" src="https://www.youtube.com/embed/XzpSckJzxxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Open source, dynamic edge observability.
 
