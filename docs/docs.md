@@ -30,7 +30,7 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 5. Click **Save** to confirm your Agent’s name and tags.  
 ![](./img/new_agent_tag_save.png)
 
-6. Your Agent credentials should appear. Copy the *Provisioning Command*.
+6. Your Agent credentials should appear. Copy the *Provisioning Command*. This command contains all the information you need to run the Docker container with the given credentials you now have for the agent you just created.
 ![](./img/provisioning_command.png)
 
 7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
