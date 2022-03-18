@@ -15,13 +15,13 @@ After registering, you should see the home page with a welcome message.
 
 You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
 
-1. Click **New Agent**.
+1. Navigate to **Fleet Management** > **Agents**, and then click **New Agent**.
 ![](./img/new_agent.png)
 
 2. Fill in an *Agent Name* and click **Next**.
 ![](./img/agent_name.png)
 
-3. Fill in the *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc. 
+3. Optionally, fill in *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc. 
 ![](./img/new_agent_tag_add.png)
 
 4. You should see an icon with your key and value tags appear above the *Key* and *Value* textboxes. Click **Next**.
@@ -35,15 +35,18 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 
 7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
 
-8. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
+8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
+
+9. Optionally, click the agent's name to view the *Agent View* screen. This screen will contain more information as you add the agent to an agent group and add corresponding policies and datasets.
+![](./img/agent_view_agent.png)
 
 
 ### Create an Agent Group
 
-Agents are organized into groups based on tag matching.
+Agents are organized into groups based on key-value tag matching.
 
-1. Click **New Agent Group**.
+1. Navigate to **Fleet Management** > **Agent Groups**, and then click **New Agent Group**.
 ![](./img/new_agent_group.png)
 
 2. Fill in an *Agent Group Name* and click **Next**.
@@ -65,7 +68,7 @@ Agents are organized into groups based on tag matching.
 
 A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
 
-1. Click **New Sink**.
+1. Navigate to **Sink Management**, and then click **New Sink**.
 ![](./img/new_sink.png)
 
 2. Fill in a sink name and click **Next**.
@@ -85,9 +88,9 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 
 ### Create a Policy
 
- Policies are the recipes sent to Agents that describe which metrics to collect.
+ Policies tell Agents which metrics to collect and how to collect them.
 
-1. Click **New Policy**.
+1. Navigate to **Dataset Explorer** > **Policy Management**, and then click **New Policy**.
 ![](./img/new_policy.png)
 
 2. Fill in a policy name and (optionally) a description. The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click **Next**.
@@ -111,9 +114,9 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 
 ### Create a Dataset
 
-Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent* or *agent group* and establish a *sink* to receive the resulting metrics.
+Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent* or *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize the data.
 
-1. Click **New Set**.
+1. Navigate to **Dataset Explorer** > **Datasets**, and then click **New Set**.
 ![](./img/new_dataset.png)
 
 2. Fill in a name for the dataset. Click **Next**.
@@ -128,7 +131,7 @@ Datasets essentially connect all of the previous pieces. By creating and definin
 5. Select the desired sink/database from the drop-down. Click **+** after selecting each sink.
 ![](./img/new_dataset_sink.png) 
 
-6. Above the dropdown, you should see an icon with the name of your chosen sink. Then click **Next**.
+6. Above the dropdown, you should see an icon with the name of your chosen sink. Click **Next**.
 ![](./img/new_dataset_sink_add.png)
 
 7. Review the information you just entered. Click **Save** to confirm creation of the dataset.
