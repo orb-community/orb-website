@@ -111,21 +111,34 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 
 ### Create a Dataset
 
-Datasets tie all of the previous pieces together: they describe _which Agents_ to send _which Policy_, and _where to "sink"_ the resulting metrics.
+Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent* or *agent group* and establish a *sink* to receive the resulting metrics.
 
 1. Click **New Set**.
 ![](./img/new_dataset.png)
 
-2. Fill in a label name for the dataset. Click **Next**.
-![](./img/dataset_details.png)
+2. Fill in a name for the dataset. Click **Next**.
+![](./img/new_dataset_name.png)
 
 3. Select an Agent Group from the drop-down. Click **Next**.
+![](./img/new_dataset_group.png)
 
 4. Select the desired policy from the drop-down. Click **Next**.
+![](./img/new_dataset_policy.png)
 
-5. Select the desired sink from the drop-down. Click **+** after selecting each sink. and then click **Next**.
+5. Select the desired sink/database from the drop-down. Click **+** after selecting each sink.
+![](./img/new_dataset_sink.png) 
 
-8. Check your Sink status in UI and confirm it is *Active*.
+6. Above the dropdown, you should see an icon with the name of your chosen sink. Then click **Next**.
+![](./img/new_dataset_sink_add.png)
+
+7. Review the information you just entered. Click **Save** to confirm creation of the dataset.
+![](./img/new_dataset_review.png)
+
+8. View your newly created dataset in the *All Datasets* list.
+![](./img/new_dataset_list.png)
+
+9. Verify your dataset is active via the *Agent View* screen. Navigate to **Fleet Management** > **Agent** and click on the name of the agent you selected in creating the dataset. The *Agent View* screen displays. Under the *Active Policies/Datasets* category, click the **Policy** drop-down (which should accompany a "running" status), and your **Dataset** should display.
+![](./img/agent_view_dataset.png)
 
 ### Visualize and alert on your metrics
 
