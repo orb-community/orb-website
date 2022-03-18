@@ -2,17 +2,17 @@ Orb consists of two major components:
 
 1. The **Control Plane**, which is comprised of microservices, communication systems, databases, etc. and is deployed to a 
 central location (usually a cloud environment on Kubernetes).
-1. The **[Orb Agent](/docs/#running-orb-agent)**, which is a lightweight observability agent deployed to all of the infrastructure you wish to monitor.
+1. The **[Orb Agent](/docs/#running-orb-agent)**, which is a lightweight observability agent deployed to all the infrastructure you wish to monitor.
 
 !!! info
     
     The instructions below are for installing the **Control Plane**. If you just need to install the **Orb Agent** (`orb-agent`), [see these instructions instead](/docs/#running-orb-agent).
 
 The **Control Plane** may be [self-hosted](#self-host), or you may use the free [Orb SaaS](#orblive) service. Self-hosting gives you full privacy and control but is more complex.
-On the other hand, SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
+On the other hand, our SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 ## orb.live 
-The Orb SaaS platform ([orb.live](http://orb.live)) is now in active development. This free-forever service allows you to enjoy the benefits of the Orb platform without having to run your own control plane.
+The Orb SaaS platform ([**orb.live**](http://orb.live)) is now in active development. This free-forever service allows you to enjoy the benefits of the Orb platform without having to run your own control plane.
 
 If you need to install the **Orb Agent** to be used with orb.live, [see these instructions](/docs/#running-orb-agent).
 
