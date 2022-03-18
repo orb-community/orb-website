@@ -1,7 +1,7 @@
 # Documentation
 
 ## Getting started
-Follow the steps below after logging in to your Orb Portal to get an Agent up and running.
+Follow the steps below after logging in to your Orb Portal to get an agent up and running.
 
 ### Register a new account
 
@@ -13,7 +13,7 @@ After registering, you should see the home page with a welcome message.
 
 ### Create an Agent
 
-You create an Agent for each node you want to monitor. Agents are organized by tags. Each Agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup), instead of through the UI.
+You create an agent for each node you want to monitor. Agents are organized by tags. Each agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup) instead of through the UI.
 
 1. Navigate to **Fleet Management** > **Agents**, and then click **New Agent**.
 ![](./img/new_agent.png)
@@ -21,21 +21,21 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 2. Fill in an *Agent Name* and click **Next**.
 ![](./img/agent_name.png)
 
-3. Optionally, fill in *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an Agent Group. Reasonable tags might be "location", "region", "pop", "type", etc. 
+3. Optionally, fill in *Key* and *Value* tags, then click the **+** on the right side of the menu. These tags represent the way you will assign the agent to an agent group. Reasonable tags might be "location", "region", "pop", "type", etc. 
 ![](./img/new_agent_tag_add.png)
 
 4. You should see an icon with your key and value tags appear above the *Key* and *Value* textboxes. Click **Next**.
 ![](./img/new_agent_tag.png)
 
-5. Click **Save** to confirm your Agent’s name and tags.  
+5. Click **Save** to confirm your agent’s name and tags.  
 ![](./img/new_agent_tag_save.png)
 
-6. Your Agent credentials should appear. Copy the *Provisioning Command*. This command contains all the information you need to run the Docker container with the given credentials you now have for the agent you just created.
+6. Your agent credentials should appear. Copy the *Provisioning Command*. This command contains all the information you need to run the Docker container with the given credentials you now have for the agent.
 ![](./img/provisioning_command.png)
 
 7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be real) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
 
-8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The Agent you just created should display an *Online* status.
+8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The agent you just created should display an *Online* status.
 ![](./img/agent_online.png)
 
 9. Optionally, click the agent's name to view the *Agent View* screen. This screen will contain more information as you add the agent to an agent group and add corresponding policies and datasets.
@@ -44,7 +44,7 @@ You create an Agent for each node you want to monitor. Agents are organized by t
 
 ### Create an Agent Group
 
-Agents are organized into groups based on key-value tag matching.
+Agents are organized into agent groups based on key-value tag matching.
 
 1. Navigate to **Fleet Management** > **Agent Groups**, and then click **New Agent Group**.
 ![](./img/new_agent_group.png)
@@ -66,7 +66,7 @@ Agents are organized into groups based on key-value tag matching.
 
 ### Create a Sink
 
-A Sink is a location to send the metrics collected from the Agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a Sink.
+A sink is a location to send the metrics collected from the agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a sink.
 
 1. Navigate to **Sink Management**, and then click **New Sink**.
 ![](./img/new_sink.png)
@@ -83,12 +83,12 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 5. Review and confirm your sink details and click **Save**.
 ![](./img/sink_save.png)
 
-6. View your newly created Sink in the *All Sinks* list.
+6. View your newly created sink in the *All Sinks* list.
 ![](./img/new_sink_list.png)
 
 ### Create a Policy
 
- Policies tell Agents which metrics to collect and how to collect them.
+ Policies tell agents which metrics to collect and how to collect them.
 
 1. Navigate to **Dataset Explorer** > **Policy Management**, and then click **New Policy**.
 ![](./img/new_policy.png)
@@ -105,7 +105,7 @@ A Sink is a location to send the metrics collected from the Agents. The current 
 5. Add a *Handler Label* for each handler you add. In this example, we want to analyze DNS traffic, so we select the “dns” handler. The only required field here is the *Handler Label*, which is automatically generated for you (handler_dns_1 in this case).
 ![](./img/policy_handler_config.png)
 
-6. Enter any customization variables. In this example, we customize the analysis by only analyzing domain names ending in “.ua” or “.ru”. This is done with the filter labeled “Include Only QNames With Suffix”. We input a comma delimited list of suffixes, so enter “.ua,.ru”. Click **Save** after entering any customization to save this Handler.
+6. Enter any customization variables. In this example, we customize the analysis by analyzing only domain names ending in ".ua" or ".ru". This is done with the filter labeled "Include Only QNames With Suffix." We input a comma delimited list of suffixes, so enter ".ua,.ru". Click **Save** after entering any customization to save this Handler.
 ![](./img/policy_handler_config2.png)
 
 7. You should see your new handler label on the screen. Optionally, add more handlers. Click **Save** to save the policy.
@@ -122,16 +122,16 @@ Datasets essentially connect all of the previous pieces. By creating and definin
 2. Fill in a name for the dataset. Click **Next**.
 ![](./img/new_dataset_name.png)
 
-3. Select an Agent Group from the drop-down. Click **Next**.
+3. Select an agent group from the drop-down. Click **Next**.
 ![](./img/new_dataset_group.png)
 
 4. Select the desired policy from the drop-down. Click **Next**.
 ![](./img/new_dataset_policy.png)
 
-5. Select the desired sink/database from the drop-down. Click **+** after selecting each sink.
+5. Select the desired sink from the drop-down. Click **+** after selecting each sink.
 ![](./img/new_dataset_sink.png) 
 
-6. Above the dropdown, you should see an icon with the name of your chosen sink. Click **Next**.
+6. Above the drop-down, you should see an icon with the name of your chosen sink. Click **Next**.
 ![](./img/new_dataset_sink_add.png)
 
 7. Review the information you just entered. Click **Save** to confirm creation of the dataset.
@@ -145,19 +145,19 @@ Datasets essentially connect all of the previous pieces. By creating and definin
 
 ### Visualize and alert on your metrics
 
-1. Your Agent should now be running the Policy you created. After 1 minute of collection time, the metrics will be sent to your Prometheus sink.
+1. Your agent should now be running the policy you created. After one minute of collection time, the metrics will be sent to your Prometheus sink.
 2. You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is [Grafana](https://grafana.com).
 3. A pre-made dashboard for visualizing Orb/pktvisor metrics is [available for import here](https://grafana.com/grafana/dashboards/14221).
 ![](./img/grafana_dash.png)
 
 ## Running Orb Agent
 
-An Orb agent needs to run on all infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies and send its metric output.
+An Orb agent needs to run on all the infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight Docker process with an embedded [pktvisor agent](https://pktvisor.dev) which connects into the Orb control plane to receive policies and send its metric output.
 
 To run an agent, you will need:
 
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
-2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an Agent](/docs/#create-an-agent)
+2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/docs/#create-an-agent)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
 
@@ -182,7 +182,7 @@ To run an agent, you will need:
 
 ### Agent credentials 
 
-The Agent credentials include *three pieces of information*, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
+The agent credentials include *three pieces of information*, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
 
 1. **Agent ID**, which uniquely identifies the agent.
 2. **Agent Channel ID**, which uniquely identifies the agent's communication channel.
@@ -236,7 +236,7 @@ The Agent credentials include *three pieces of information*, each of which is a 
 
 !!! question 
 
-    Is the Agent docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ### Configuration files
@@ -245,9 +245,9 @@ Most configuration options can be passed to the container as environment variabl
 
 You will need to use a configuration file if:
 
-* You want to assign tags to the Agent at the edge
+* You want to assign tags to the agent at the edge
 * You want to setup custom pktvisor Taps
-* You want the Agent to [auto-provision](#advanced-auto-provisioning-setup)
+* You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML. 
 You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
@@ -305,7 +305,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
 
 !!! warning
 
-    Auto-provisioning is an advanced use case. Most users will find [creating an Agent in the UI](/docs/#create-an-agent) easier.
+    Auto-provisioning is an advanced use case. Most users will find [creating an agent in the UI](/docs/#create-an-agent) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
