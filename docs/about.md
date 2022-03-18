@@ -1,6 +1,6 @@
 ---
 hide:
-- navigation
+- tags
 ---
 
 ![](./img/ORB-diagram2.png)
