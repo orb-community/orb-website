@@ -1,5 +1,5 @@
 
-<img src="img/ORB-diagram2.png" width="350" height="300">
+<img src="img/ORB-diagram2.png">
 
 
 ## The story
