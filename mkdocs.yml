@@ -43,7 +43,7 @@ extra:
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
-      link: https://join.slack.com/t/ns1labs/shared_invite/zt-p0uzy9zq-ZgD~QkKQ9cWMSiI4DgJSaA
+      link: https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA
     - icon: octicons/mail-24
       link: "mailto:info@pktvisor.dev"
   analytics:
