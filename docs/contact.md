@@ -18,6 +18,7 @@ We are very interested to hear about your use cases, feature requests, and other
 
 # Explore
 ## Articles
+* [Orb Data Sheet: Actionable Edge Observability](https://ns1.com/writable/resources/orb-actionable-edge-observability/ns1-ds-orb.pdf)
 * [Using DNS to Minimize Cyber Threat Exposure](https://ns1.com/blog/using-dns-to-minimize-cyber-threat-exposure)
 * [Deep Network Traffic Observability with Pktvisor and Prometheus](https://ns1.com/blog/deep-network-traffic-observability-pktvisor-prometheus)
 * [Q4 2021 Update on NS1 Labs: pktvisor, Orb, NetBox Cloud](https://ns1.com/blog/an-update-on-open-source-innovation-at-ns1-labs)
