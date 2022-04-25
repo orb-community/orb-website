@@ -1,15 +1,14 @@
 Orb consists of two major components:
 
-1. The **Control Plane**, which is comprised of microservices, communication systems, databases, etc. and is deployed to a 
+1. The **Control Plane**—comprised of microservices, communication systems, databases, etc.—deploys to a 
 central location (usually a cloud environment on Kubernetes).
-1. The **[Orb Agent](/docs/#running-orb-agent)**, which is a lightweight observability agent deployed to all the infrastructure you wish to monitor.
+1. The **[Orb Agent](/docs/#running-orb-agent)**—a lightweight observability agent—deploys to all the infrastructure you wish to monitor.
 
 !!! info
     
     The instructions below are for installing the **Control Plane**. If you just need to install the **Orb Agent** (`orb-agent`), [see these instructions instead](/docs/#running-orb-agent).
 
-The **Control Plane** may be [self-hosted](#self-host), or you may use the free [Orb SaaS](#orblive) service. Self-hosting gives you full privacy and control but is more complex.
-On the other hand, our SaaS allows you to get up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
+The **Control Plane** can be [self-hosted](#self-host), or you can use our free [Orb SaaS](#orblive) service. Self-hosting gives you full privacy and control but is more complex. On the other hand, our SaaS gets you up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 ## orb.live 
 The Orb SaaS platform ([**orb.live**](http://orb.live)) is now in active development. This free-forever service allows you to enjoy the benefits of the Orb platform without having to run your own control plane.
@@ -18,10 +17,10 @@ If you need to install the **Orb Agent** to be used with orb.live, [see these in
 
 !!! danger
 
-    The Orb SaaS service is still under active development and is not yet production ready! Please use it for non-production, testing purposes only. The service may become unavailable, and your data may be reset without notice.
+    The Orb SaaS service is still under active development and is not yet production ready. Please use it for non-production testing purposes only. The service may become unavailable, and your data may be reset without notice.
 
 ## Self-host
-There are two main deployment methods for those wishing to self-host:
+There are two main deployment methods for those wanting to self-host:
 
 * **Docker Compose** - This option is useful for developer or testing installations, allowing you to run both the Orb Control Plane and the Orb Agent on a single machine.
 * **Helm Chart** - This option is intended for production deployments, requiring access to a Kubernetes cluster.
@@ -35,9 +34,9 @@ Follow the instructions below after choosing a self-host option.
 ### Orb with Docker Compose
 The Orb repo contains a full Docker Compose environment, useful both for developers wishing to contribute and casual users looking to try Orb for the first time.
 
-Running Orb with Docker Compose requires you to have a copy of the Orb repo, although it is not necessary to build any software as the compose file will download appropriate versions of the services from Docker Hub.
+Running Orb with Docker Compose requires you to have a copy of the Orb repo, although it is not necessary to build any software as the Compose file will download appropriate versions of the services from Docker Hub.
 
-If you would like to build the software, or you need to troubleshoot your environment, you can find more detailed instructions on [setting up a development environment here](https://github.com/ns1labs/orb/wiki/Development-Environment-Configuration).
+If you would like to build the software, or if you need to troubleshoot your environment, you can find more detailed instructions on [setting up a development environment here](https://github.com/ns1labs/orb/wiki/Development-Environment-Configuration).
 
 #### Requirements
 
@@ -60,7 +59,7 @@ make run
 
 This will pull Orb’s containers from [Docker Hub](https://hub.docker.com/u/ns1labs) and start all services. You may run `docker ps` to confirm all services started successfully.
 
-If you are running on your local machine, then upon success the Orb UI will be available at [https://localhost/](https://localhost/)
+If you are running on your local machine, upon success the Orb UI will be available at [https://localhost/](https://localhost/)
 
 !!! bug
 
@@ -117,7 +116,7 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
 
         helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.3 --set installCRDs=true
 
-- Create Issuer CRDs (in the `orb` namespace!)
+- Create Issuer CRDs (in the `orb` namespace).
     - `cp issuers/production-issuer-tpt.yaml issuers/production-issuer.yaml`
     - Edit `issuers/production-issuer.yaml` and change `spec.acme.email` to a real email address.
     - `kubectl create -f issuers/production-issuer.yaml -n orb`
