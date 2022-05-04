@@ -1,12 +1,18 @@
-# Contribute
+---
+hide:
+- navigation
+- tags
+---
+
+# Community
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 **Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/ns1labs/orb) and star the project to show your interest.
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
 
-# Contact
-We are very interested to hear about your use cases, feature requests, and other feedback.
+## Contact
+We are very interested to hear about your use cases, feature requests, and contribution ideas.
 
 * Sign up to get Orb [updates](https://resources.ns1.com/get-orb-updates)
 * File an [issue](https://github.com/ns1labs/orb/issues/new)
@@ -16,8 +22,8 @@ We are very interested to hear about your use cases, feature requests, and other
 * Check out the [NS1 Labs YouTube channel](https://www.youtube.com/channel/UCs5FgE5p03tP-8InKVIojdw)
 * Send mail to [info@pktvisor.dev](mailto:info@pktvisor.dev)
 
-# Explore
-## Articles
+## Explore
+### Articles
 * [Orb Data Sheet: Actionable Edge Observability](https://ns1.com/writable/resources/orb-actionable-edge-observability/ns1-ds-orb.pdf)
 * [Using DNS to Minimize Cyber Threat Exposure](https://ns1.com/blog/using-dns-to-minimize-cyber-threat-exposure)
 * [Deep Network Traffic Observability with Pktvisor and Prometheus](https://ns1.com/blog/deep-network-traffic-observability-pktvisor-prometheus)
@@ -27,7 +33,7 @@ We are very interested to hear about your use cases, feature requests, and other
 * [A Wave of Open Source Innovation at NS1 Labs with Orb and NetBox](https://ns1.com/blog/a-wave-of-open-source-innovation-at-ns1-labs-with-orb-and-netbox)
 * [NS1 Launches Innovation Lab to Solve Challenges in Modern Application Delivery and Edge Networking](https://ns1.com/press/ns1-launches-innovation-lab-to-solve-challenges-in-modern-application-delivery-and-edge-networking)
 
-## Conference Presentations
+### Conference Presentations
 
 * [PromCon North America: Deep Network Traffic Observability](https://promconna21.sched.com/event/4240ae066bc0fbe9c8c31530af2e5c96), 2021 - [Recording](https://www.youtube.com/watch?v=2yIY0cCJ6Vs), [Slides](https://static.sched.com/hosted_files/promconna21/5c/pktvisor%20PromCon%202021.pdf)
 * [NS1 INSIGHTS 2021: Build the Better Future](https://resources.ns1.com/ins1ghts-2021-replay), 2021 - [Recording](https://www.youtube.com/watch?v=cyKaGIFhiGk) 
