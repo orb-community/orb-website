@@ -6,6 +6,7 @@ hide:
 # Community
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+## Contribute
 **Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/ns1labs/orb) and star the project to show your interest.
 
 <a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
