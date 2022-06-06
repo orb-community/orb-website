@@ -15,10 +15,6 @@ The Orb SaaS platform ([**orb.live**](http://orb.live)) is now in active develop
 
 If you need to install the **Orb Agent** to be used with orb.live, [see these instructions](/docs/#running-orb-agent).
 
-!!! danger
-
-    The Orb SaaS service is still under active development and is not yet production ready. Please use it for non-production testing purposes only. The service may become unavailable, and your data may be reset without notice.
-
 ## Self-host
 There are two main deployment methods for those wanting to self-host:
 

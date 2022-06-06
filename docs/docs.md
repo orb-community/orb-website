@@ -114,33 +114,15 @@ A sink is a location to send the metrics collected from the agents. The current 
 
 ### Create a Dataset
 
-Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent* or *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize the data.
+Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize and action on the data.
 
-1. Navigate to **Dataset Explorer** > **Datasets**, and then click **New Set**.
-![](./img/new_dataset.png)
+1. Navigate to the Policy you would like to create a Dataset for, then click on New Dataset.
+![](./img/new_dataset_from_policy.png)
 
-2. Fill in a name for the dataset. Click **Next**.
-![](./img/new_dataset_name.png)
+2. Select the Agent Group to send the policy to, the Sink(s) you would like to send the resulting metrics to, and give the Dataset a name.
+3. As soon as you click Save, the policy will be sent in real time to the Agents in the Agent Group and begin running.
 
-3. Select an agent group from the drop-down. Click **Next**.
-![](./img/new_dataset_group.png)
-
-4. Select the desired policy from the drop-down. Click **Next**.
-![](./img/new_dataset_policy.png)
-
-5. Select the desired sink from the drop-down. Click **+** after selecting each sink.
-![](./img/new_dataset_sink.png) 
-
-6. Above the drop-down, you should see an icon with the name of your chosen sink. Click **Next**.
-![](./img/new_dataset_sink_add.png)
-
-7. Review the information you just entered. Click **Save** to confirm creation of the dataset.
-![](./img/new_dataset_review.png)
-
-8. View your newly created dataset in the *All Datasets* list.
-![](./img/new_dataset_list.png)
-
-9. Verify your dataset is active via the *Agent View* screen. Navigate to **Fleet Management** > **Agent** and click on the name of the agent you selected in creating the dataset. The *Agent View* screen displays. Under the *Active Policies/Datasets* category, click the **Policy** drop-down (which should accompany a "running" status), and your **Dataset** should display.
+4. Verify your dataset is active via the *Agent View* screen. Navigate to **Fleet Management** > **Agent** and click on the name of the agent you selected in creating the dataset. The *Agent View* screen displays. Under the *Active Policies/Datasets* category, click the **Policy** drop-down (which should accompany a "running" status), and your **Dataset** should display.
 ![](./img/agent_view_dataset.png)
 
 ### Visualize and alert on your metrics
