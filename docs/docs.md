@@ -272,6 +272,11 @@ orb:
          id: "AGENT_UUID"
          key: "AGENT_KEY_UUID"
          channel_id: "AGENT_CHANNEL_UUID"
+   backends:
+      pktvisor:
+      binary: "/usr/local/sbin/pktvisord"
+      # this example assumes the file is saved as agent.yaml. If your file has another name, you must replace it with the proper name
+      config_file: "/usr/local/orb/etc/agent.yaml"
 ```
 
 You must mount your configuration file into the `orb-agent` container. For example, if your configuration file
