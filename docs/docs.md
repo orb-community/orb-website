@@ -138,13 +138,13 @@ There are 4 expected status for agents: `new`, `online`, `offline` and `stale`
 
 These status are related to the agent's last activity (heartbeat):
 
-🟣 `new` means that the agent never received a heartbeat (never ran).
+🟣 `new` means that the agent never sent a heartbeat (i.e. has never connected to the control plane)
 
-🟢 `online` means that the agent is receiving heartbeats right now (is running and healthy).
+🟢 `online` means that the agent is sending heartbeats right now (is running and healthy).
 
-⚪ `offline` means that the agent received a heartbeat saying it is going offline.
+⚪ `offline` means that the control plane received a heartbeat saying that the agent is going offline.
 
-🟠 `stale` means that the agent has not received a heartbeat for 5 minutes without having received a heartbeat stating that it would go offline
+🟠 `stale` means that the control plane has not received a heartbeat for 5 minutes (without having received a heartbeat stating that it would go offline)
 
 
 #### Policies Status
@@ -153,10 +153,9 @@ The status of each policy can be seen on the preview page of an agent to which i
 
 The policy will be:
 
-<span style="color:green">running</span> if agent policy is being managed from core (policy-related metrics are being requested/scraped by this agent)
-)
+<span style="color:green">running</span> if agent policy is being managed from the control plane (policy-related metrics are being requested/scraped by this agent)
 
-<span style="color:red">failled_to_apply</span> if an error prevents the policy from being sent to the group. By clicking on the expand icon you can see the cause of the error
+<span style="color:red">failed_to_apply</span> if an error prevents the policy from being applied by the agent. By clicking on the expand icon you can see the cause of the error
 
 <span style="color:grey">offline</span> if the policy was stopped by agent request
 
@@ -171,18 +170,18 @@ Once created a dataset can only be `valid` (🟢) or `invalid` (🔴)
 
 ![](./img/datasets_status.png)
 
-The dataset will always be `valid` as long as the policy, the group *AND* the sink linked to it exist in the orb. If the policy, the group *OR* the sink is removed from the orb, the dataset will be `invalid`, indicating this lack. Note, in the image above, that the invalid dataset does not contain a group listed (as this has been removed from the orb)
+The dataset will always be `valid` as long as the policy, the group *AND* the sink linked to it exist in Orb. If the policy, the group *OR* the sink is removed from Orb, the dataset will become `invalid`. Note, in the image above, that the invalid dataset does not contain the group listed, as it has been removed from the Orb.
 
 
 #### Sinks Status
 
-🟠 `Unknown` - No metrics have ever been scraped and published by this sink
+🟠 `Unknown` - No metrics have ever been published to this sink
 
-🟢 `Active` - Metrics are being scraped and published by this sink
+🟢 `Active` - Metrics are actively being published to this sink
 
-⚪ `Idle` - The last metrics scraped and published by this sink were more than 1 minutes ago (metrics are no longer being scraped/published in this sink)
+⚪ `Idle` - The last metrics published to this sink were more than 5 minutes ago
 
-🔴 `Error`  - The sink tried to scrape and publish the metrics but failed. **Attention: you will not be able to see your data in Grafana. In this case, check that the Grafana credentials were passed correctly.**
+🔴 `Error`  - The sink tried to publish the metrics but failed. **Attention: In this case, check that the sink credentials are configured correctly.**
 
 ![](./img/sink_status.png)
 
@@ -277,7 +276,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         ns1labs/orb-agent:develop
         ```
 
-    === "You may want to run more than one agent on the same network and for that you must specify different ports for them, since only one agent is allowed to run per port. By default, the agent container runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`"
+    === "You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`"
 
 
         ``` shell 
