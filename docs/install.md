@@ -127,4 +127,4 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 
-Upon successful installation, visit our [Getting Started](https://getorb.io/docs/#getting-started) section to keep moving forward with Orb.
+Upon successful installation, visit our [Getting Started](https://orb.community/docs/#getting-started) section to keep moving forward with Orb.

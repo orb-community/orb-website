@@ -463,6 +463,6 @@ docker run -v /local/orb:/usr/local/orb/ --net=host \
 ## Working with API Docs
 Follow the links below for API documentation of each respective Orb microservice:
 
-* [Fleet](https://getorb.io/api/fleet.html)
-* [Policies](https://getorb.io/api/policies.html)
-* [Sinks](https://getorb.io/api/sinks.html)
+* [Fleet](https://orb.community/api/fleet.html)
+* [Policies](https://orb.community/api/policies.html)
+* [Sinks](https://orb.community/api/sinks.html)
