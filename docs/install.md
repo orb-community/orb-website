@@ -162,8 +162,6 @@ Follow those steps to setup a local k8s cluster and deploy Orb.
     ```
     save the file and you are done.
 
-#### Clone the Orb Helm repository
-
 #### Deploy Orb on Kind
 
 Add `kubernetes.docker.internal` host as `127.0.0.1` address in your hosts file:
