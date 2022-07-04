@@ -128,3 +128,75 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
 
 
 Upon successful installation, visit our [Getting Started](https://orb.community/docs/#getting-started) section to keep moving forward with Orb.
+
+### Orb with Kind
+
+Kind is a tool for running local k8s clusters using docker container as nodes.
+Follow those steps to setup a local k8s cluster and deploy Orb.
+
+#### Requirements
+
+- [Docker Environment](https://docs.docker.com/engine/install/debian/)
+- [Helm 3](https://helm.sh/docs/intro/install/)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+
+!!! bug
+    **Windows WSL users**: WSL is also supported, but for some reason the Orb stack mess up the WSL internal DNS.
+    You can fix that by editing your `/etc/wsl.conf` and adding the following:
+    ```shell
+    [network]
+    generateResolvConf = false
+    ```
+    Restart WSL by executing the following on CMD:
+    ```shell
+    wsl --shutdown
+    ```
+    Open WSL terminal again and remove the symbolic link from `/etc/resolv.conf`:
+    ```shell
+    sudo unlink /etc/resolv.conf
+    ```
+    Create a new `/etc/resolv.conf` file and add the following:
+    ```shell
+    nameserver 8.8.8.8
+    ```
+    save the file and you are done.
+
+#### Clone the Orb Helm repository
+
+#### Deploy Orb on Kind
+
+Add `kubernetes.docker.internal` host as `127.0.0.1` address in your hosts file:
+```shell
+echo "127.0.0.1 kubernetes.docker.internal" | sudo tee -a /etc/hosts
+```
+
+Clone the Orb Helm charts
+```shell
+git clone git@github.com:ns1labs/orb-helm.git
+cd orb-helm
+``` 
+
+Setup **Orb Charts** dependencies repositories:
+```shell
+make prepare-helm
+```
+
+!!! tip
+    You just need to run those steps until here once, even if you delete the cluster afterwards.
+
+Use the following command to create the cluster and deploy **Orb**:
+```shell
+make kind-create-all
+```
+
+Access the **Orb UI** by accessing: https://kubernetes.docker.internal/. The following users are created during the mainflux bootstrap:
+
+| E-mail         | Password   | Role  |
+| :------------- | :--------- | :---- |
+| admin@kind.com | pass123456 | Admin |
+
+Have fun! 🎉 When you are done, you can delete the cluster by running:
+```shell
+make kind-delete-cluster
+```
