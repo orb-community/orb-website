@@ -4,14 +4,10 @@ hide:
 - toc
 - tags
 ---
-<h1></h1>
-<img src="img/ORB-logo-black@3x.png" alt="Orb" width="500"/>
+<h1>Orb Dynamic<br>Edge Observability</h1>
 
-
-# Open source, dynamic edge observability.
 
 [Get Started with Orb](install/){ .md-button .md-button--primary }
-
 
 ***
 

@@ -3,7 +3,7 @@ theme:
   name: material
   custom_dir: overrides
   favicon: img/ORB-logo-ring.png
-  logo: img/ORB-logo-ring.png
+  logo: img/ORB-logo-transparent.png
   features:
     - navigation.tracking
     - navigation.instant
@@ -11,6 +11,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.top
     - search.suggest
+    - announce.dismiss
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -71,3 +72,5 @@ extra:
     provider: google
     property: UA-41778111-9
 copyright: Copyright &copy; 2022 <a href="https://ns1.com/labs">NS1</a>
+extra_css:
+  - stylesheets/extra.css

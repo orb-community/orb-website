@@ -1,0 +1,16 @@
+:root > * {
+    --md-primary-fg-color: #ffffff;
+    --md-primary-bg-color: #000000;
+}
+
+:root > * a.md-button {
+    border-color: #000000;
+}
+
+:root > * div.md-header__title {
+    display: none;
+}
+
+:root > * nav.md-tabs {
+    position: 
+}
