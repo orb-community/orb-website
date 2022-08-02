@@ -1,6 +1,7 @@
 :root > * {
     --md-primary-fg-color: #ffffff;
     --md-primary-bg-color: #000000;
+    --md-primary-text-color: #969fb9;
 }
 
 :root > * a.md-button {
@@ -12,5 +13,21 @@
 }
 
 :root > * nav.md-tabs {
-    position: 
+    text-align: end;
+}
+
+:root > * .md-search__inner>.md-search__form {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-text-color);
+    border-width: 1px;
+    border-style: solid;
+    text-decoration-color: #000000;
+}
+
+:root > * .md-search__icon {
+    color: var(--md-primary-text-color);
+}
+
+:root > * .md-search__input::placeholder {
+    color: var(--md-primary-text-color);
 }
