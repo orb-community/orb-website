@@ -16,6 +16,10 @@
     display: none;
 }
 
+:root > header > nav.md-header__inner, nav.md-grid {
+    max-width: 90rem;
+}
+
 :root > * nav.md-tabs {
     text-align: end;
 }
