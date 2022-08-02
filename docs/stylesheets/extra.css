@@ -4,6 +4,10 @@
     --md-primary-text-color: #969fb9;
 }
 
+:root * div.md-grid {
+    max-width: 90rem;
+}
+
 :root > * a.md-button {
     border-color: #000000;
 }
@@ -30,4 +34,10 @@
 
 :root > * .md-search__input::placeholder {
     color: var(--md-primary-text-color);
+}
+
+:root > * .splash {
+    
+    width: 100%;
+    height: 500px;
 }

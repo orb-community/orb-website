@@ -4,8 +4,11 @@ hide:
 - toc
 - tags
 ---
-<h1>Orb Dynamic<br>Edge Observability</h1>
 
+
+<div class="md-container splash"></div>
+
+<h1>Orb Dynamic<br>Edge Observability</h1>
 
 [Get Started with Orb](install/){ .md-button .md-button--primary }
 
