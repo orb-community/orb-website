@@ -11,6 +11,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.top
     - search.suggest
+    - content.tabs.link
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -26,6 +27,10 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
 plugins:
   - search
 nav:
