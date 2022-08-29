@@ -393,19 +393,19 @@ PublicSuffixList: true
 
 
 
-**Filter Options**: <br>
+**DNS Filter Options**: <br>
 
-|         Filter         |  Type  | Input  |
-|:----------------------:|:------:|:------:|
-|      `only_rcode`      | *int*  |  PCAP  |
-|   `exclude_noerror`    | *bool* |  PCAP  |
-| `only_dnssec_response` | *bool* |  PCAP  |
-|     `answer_count`     | *int*  |  PCAP  |
-|      `only_qtype`      | *str*  |  PCAP  |
-|  `only_qname_suffix`   | *str*  |  PCAP  |
-|   `geoloc_notfound`    | *bool* |  PCAP  |
-|     `asn_notfound`     | *bool* |  PCAP  |
-|   `dnstap_msg_type`    | *str*  | DNSTAP |
+|         Filter         |  Type   | Input  |
+|:----------------------:|:-------:|:------:|
+|      `only_rcode`      |  *int*  |  PCAP  |
+|   `exclude_noerror`    | *bool*  |  PCAP  |
+| `only_dnssec_response` | *bool*  |  PCAP  |
+|     `answer_count`     |  *int*  |  PCAP  |
+|      `only_qtype`      | *str[]* |  PCAP  |
+|  `only_qname_suffix`   | *str[]* |  PCAP  |
+|   `geoloc_notfound`    | *bool*  |  PCAP  |
+|     `asn_notfound`     | *bool*  |  PCAP  |
+|   `dnstap_msg_type`    | *str[]* | DNSTAP |
 
 
 
@@ -481,7 +481,7 @@ In this case, to have in the results only the cases of `NODATA`, that is, the re
 
 Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers;
 
-####  only_qtype: *str* <br>
+####  only_qtype: *str[]* <br>
 
 Input: PCAP <br>
 
@@ -513,7 +513,7 @@ only_qtype:
   - 2 
 ```
 
-####  only_qname_suffix: *str* <br>
+####  only_qname_suffix: *str[]* <br>
 
 Input: PCAP <br>
 
@@ -562,7 +562,7 @@ The `asn_notfound` filter usage syntax is:<br>
 asn_notfound: true
 ```
 
-####  dnstap_msg_type: *str* <br>
+####  dnstap_msg_type: *str[]* <br>
 
 Input: DNSTAP <br>
 
@@ -646,14 +646,14 @@ dnstap_msg_type:
 
 **Configuration**: <br>
 - Abstract configurations. <br><br>
-**Filter Options**: <br>
+**NET Filter Options**: <br>
 
-|        Filter        |  Type  |    Input     |
-|:--------------------:|:------:|:------------:|
-|  `geoloc_notfound`   | *bool* | PCAP, DNSTAP |
-|    `asn_notfound`    | *bool* | PCAP, DNSTAP |
-| `only_geoloc_prefix` | *str*  | PCAP, DNSTAP |
-|  `only_asn_number`   | *str*  | PCAP, DNSTAP |
+|        Filter        |  Type   |    Input     |
+|:--------------------:|:-------:|:------------:|
+|  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
+|    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
+| `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
+|  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
 
 
 ####  geoloc_notfound: *bool* <br>
@@ -678,7 +678,7 @@ The `asn_notfound` filter usage syntax is:<br>
 asn_notfound: true
 ```
 
-####  only_geoloc_prefix: *bool* <br>
+####  only_geoloc_prefix: *str[]* <br>
 
 Input: PCAP <br>
 
@@ -696,7 +696,7 @@ only_geoloc_prefix:
   - US/CA
 ```
 
-####  only_asn_number: *bool* <br>
+####  only_asn_number: *str[]* <br>
 
 Input: PCAP <br>
 
@@ -774,20 +774,20 @@ The `sample_rate_scaling` filter usage syntax is:<br>
 sample_rate_scaling: false
 ```
 
-**Filter Options**: <br>
+**Flow Filter Options**: <br>
 
 
-|      Filter       |  Type  | Input |
-|:-----------------:|:------:|:-----:|
-|  `only_devices`   | *str*  | FLOW  |
-|    `only_ips`     | *str*  | FLOW  |
-|   `only_ports`    | *str*  | FLOW  |
-| `only_interfaces` | *str*  | FLOW  |
-| `geoloc_notfound` | *bool* | FLOW  |
-|  `asn_notfound`   | *bool* | FLOW  |
+|      Filter       |  Type   | Input |
+|:-----------------:|:-------:|:-----:|
+|  `only_devices`   | *str[]* | FLOW  |
+|    `only_ips`     | *str[]* | FLOW  |
+|   `only_ports`    | *str[]* | FLOW  |
+| `only_interfaces` | *str[]* | FLOW  |
+| `geoloc_notfound` | *bool*  | FLOW  |
+|  `asn_notfound`   | *bool*  | FLOW  |
 
 
-#### only_devices: *str* <br>
+#### only_devices: *str[]* <br>
 
 Input: FLOW <br>
 
@@ -806,7 +806,7 @@ only_devices:
   - 192.158.1.38/32
 ```
 
-#### only_ips: *str* <br>
+#### only_ips: *str[]* <br>
 
 Input: FLOW <br>
 
@@ -824,7 +824,7 @@ only_ips:
   - 192.158.1.38/32
 ```
 
-#### only_ports: *str* <br>
+#### only_ports: *str[]* <br>
 
 Input: FLOW <br>
 
