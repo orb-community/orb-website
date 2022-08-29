@@ -19,46 +19,329 @@ An Orb policy can be written in either JSON or YAML, and has three top level sec
 The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the agent level. <br>
 3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
 **Required fields:** <br>
-`input_type` - the type of input <br>
-`tap` - the name given to this input in the agent configuration  <br><br>
+`input_type` - the type of input.  This field will be validated with the type of tap indicated by the `tap` parameter or by the `tap selector` . If the types are incompatible, the policy will fail.<br>
+
+`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing taps.
+If `tap_selector` is used, it can be chosen whether taps with any of the tags or with all tags will be attached.
+
+
 **Optional fields**: <br>
 `filter` - to specify what data to include from the input <br>
-`config` - ? <br><br>
+`config` -  how the input will be used <br><br>
 
-#tap selector?
+Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
 
-=== "PCAP"
-pcap_file: *str* <br> config. tem q ter bpf
-debug: *str* <br> qqr coisa
-pcap_source: *str* <br> default: libpcap. options: af_packet (linux)
-iface: *str* <br>
-bpf: *str* <br> filter. ""
-host_spec: *str* <br><br>
+Default input structure:
 
-=== "FLOW"
-pcap_file: *str* <br>
-flow_type: *str* <br> Default: sflow. options: sflow, netflow; (ipfix vs 9) config.
-port: *int* <br> and bind: *str* <br><br> config.
+```yaml
+input:
+  tap: tap_name
+  input_type: type_of_input
+  filter:
+    bpf: ...
+  config:
+    ...
+```
 
-=== "DNSTAP"
-dnstap_file: *str* <br> config - maisa importante
-socket: *str* <br> config
-tcp: *str* <br><br> config ip:port
-sao excludentes entre si
-filters:
-only_hosts
+or
+
+```yaml
+input:
+  tap_selector:
+    any:
+      key1: value1
+      key2: value2
+  input_type: type_of_input
+  filter:
+    bpf: ...
+  config:
+    ...
+```
+
+or
+
+```yaml
+input:
+  tap_selector:
+    all:
+      key1: value1
+      key2: value2
+  input_type: type_of_input
+  filter:
+    bpf: ...
+  config:
+    ...
+```
+
+#### "PCAP"
+`pcap_file`: *str* <br>
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+When this variable exists, the bpf filter must also be informed. Otherwise, the execution will fail.
+
+```yaml
+ pcap_file: "path/to/file"
+ ```
+
+`debug`: *bool* <br>
+
+When `true` activate debug logs
+
+```yaml
+debug: true
+```
+
+`pcap_source`: *str* <br>
+
+`pcap_source` specifies the type of library to use. Default: libpcap. Options: libpcap or af_packet (linux).
+
+```yaml
+pcap_source: "af_packet"
+```
+
+`iface`: *str* <br>
+
+Name of the interface to bind. If the interface name does not exist, the policy will fail.
+
+```yaml
+iface: str
+```
+
+Example:
+
+```yaml
+iface: "eth0"
+```
+
+
+`host_spec`: *str* <br>
+The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
+
+```yaml
+host_spec: str
+```
+
+Example:
+
+```yaml
+host_spec: "192.168.0.1/24"
+```
+
+
+
+**filter**:
+
+`bpf`: *str* <br>
+
+filter data based on Berkeley Packet Filters (BPF).
+
+```yaml
+bpf: str
+```
+
+Example:
+
+```yaml
+bpf: "port 53"
+```
+
+
+#### "FLOW"
+
+`pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+
+
+`pcap_file`: *str* <br>
+
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+ 
+```yaml
+ pcap_file: "path/to/file"
+ ```
+
+`port`: *int* and `bind`: *str* <br>
+
+The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
+
+```yaml
+port: int
+bind: str
+```
+
+Example:
+
+```yaml
+port: 6343
+bind: "192.168.1.1"
+```
+
+`flow_type`: *str* <br>
+
+Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><br>
+
+```yaml
+flow_type: str
+```
+
+Example:
+
+```yaml
+flow_type: netflow
+```
+
+#### "DNSTAP"
+The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
+
+
+
+`dnstap_file`: *str* <br>
+
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+
+ ```yaml
+ dnstap_file: "path/to/file"
+ ```
+
+`socket`: *str* <br> config
+
+Path to socket file containing port and ip to bind
+
+
+```yaml
+socket: "path/to/file.sock"
+```
+
+`tcp`: *str* <br><br>
+
+The other way to inform the ip and port to be monitored is through the 'tcp' configuration. Usage syntax is a string with port:ip (only ipv4 is supported for now). <br>
+
+ ```yaml
+ tcp: "ip:port"
+ ```
+
+Example:
+
+ ```yaml
+ tcp: "192.168.8.2:235"
+ ```
+
+
+**filters**:
+
+`only_hosts`:
+
+`only_hosts` filters data from a specific host.
+
+ ```yaml
+
+ only_hosts: "str"
+ ```
+Example:
+
+ ```yaml
+ only_hosts: "192.168.1.4/32"
+ ```
+
 
 ## Handlers section
 
-Handlers are the modules responsible for extracting metrics from inputs and 5 types of handler are supported: `DNS`, `NET`, `DHCP`, `PCAP`, `FLOW`. For each handler type, specific configuration, filters and group metrics can be defined.<br>
-There are settings that can be applied to all handlers: <br><br>
+Handlers are the modules responsible for extracting metrics from inputs and 5 types of handler are supported: `DNS`, `NET`, `DHCP`, `PCAP`, `FLOW`. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
 **Abstract Configurations**: <br>
-- deep_sample_rate: *int [0,100]. Default: 100 (per second)*. <br>
-- num_periods: *int [2,10]. Default: 5*. <br>
-- topn_count: *int.  Default: 10*. <br>
+
+There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
+
+| Abstract Configuration | Type  |     Default      |
+|:----------------------:|:-----:|:----------------:|
+|   `deep_sample_rate`   | *int* | 100 (per second) |
+|     `num_periods`      | *int* |        5         |
+|      `topn_count`      | *int* |        10        |
+
+
+#### deep_sample_rate <br>
+
+`deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
+* If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
+
+
+The `deep_sample_rate` filter usage syntax is:<br>
+```yaml
+num_periods: int
+```
+
+
+#### num_periods <br>
+
+`num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
+
+The `num_periods` filter usage syntax is:<br>
+```yaml
+num_periods: int
+```
+
+
+#### topn_count <br>
+
+`topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
+
+The `topn_count` filter usage syntax is:<br>
+```yaml
+num_periods: int
+```
+
+
+Default handler structure:
+
+```yaml
+handlers:
+  config:
+    deep_sample_rate: 100
+    num_periods: 5
+    topn_count: 10
+  modules:
+    tap_name:
+      type: ...
+      config: ...
+      filter: ...
+      metric_groups:
+        enable:
+          - ...
+        disable:
+          - ...
+ 
+ ```
+
+To enable any metric group use the syntax:
+
+```yaml
+metric_groups:
+  enable:
+    - group_to_enable
+```
+
+In order to disable any metric group use the syntax:
+
+```yaml
+metric_groups:
+  disable:
+    - group_to_disable
+```
+
+* Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
 ### "DNS"
+**Handler Type**: "dns" <br>
+
+**Metrics Group**: <br>
+
+|   Metric Group    | Default  | 
+|:-----------------:|:--------:|
+|     `top_ecs`     | disabled |
+|   `cardinality`   | enabled  |
+|    `counters`     | enabled  |
+| `dns_transaction` | enabled  |
+|   `top_qnames`    | enabled  |
+<br>
+
 **Configuration**: <br>
 - PublicSuffixList: *bool*. <br>
 - Abstract configurations. <br><br>
@@ -272,16 +555,6 @@ dnstap_msg_type:
   - "resolver"
 ```
 
-**Metrics Group**: <br>
-
-- top_ecs <br> nao habilitada por default
-- cardinality <br>
-- counters <br>
-- dns_transaction <br>
-- top_qnames <br><br>
-
-**Handler Type**: "dns" <br>
-
 
     !!! example "DNS handler section example"
         === "JSON"
@@ -332,6 +605,18 @@ dnstap_msg_type:
 
 
 ### "NET"
+**Handler Type**: "net" <br>
+
+**Metrics Group**: <br>
+
+| Metric Group  | Default | 
+|:-------------:|:-------:|
+| `cardinality` | enabled |
+|  `counters`   | enabled |
+|   `top_geo`   | enabled |
+|   `top_ips`   | enabled |
+<br>
+
 **Configuration**: <br>
 - Abstract configurations. <br><br>
 **Filter Options**: <br>
@@ -402,45 +687,52 @@ only_asn_number:
   - 16136
 ```
 
-**Metrics Group**: <br>
-- counters <br>
-- cardinality <br>
-- top_geo <br>
-- top_ips <br><br>
-**Handler Type**: "net" <br>
 !!! example "NET handler section example"
 #todo Insert examples
 
 ### "DHCP"
+**Handler Type**: "dhcp" <br>
+
+**Metrics Group**: No metrics group available<br>
 
 **Configuration**: <br>
 - Only abstract configurations. <br><br>
 
 **Filter Options**: No filters available. <br><br>
 
-**Metrics Group**: No metrics group available<br><br>
-
-**Handler Type**: "dhcp" <br>
 
 !!! example "DHCP handler section example"
 #todo Insert examples
 
 ### "PCAP"
+**Handler Type**: "pcap" <br>
+
+**Metrics Group**: No metrics group available<br>
 
 **Configuration**: <br>
 - Abstract configurations. <br><br>
 
 **Filter Options**: No filters available. <br><br>
 
-**Metrics Group**: No metrics group available<br><br>
-
-**Handler Type**: "pcap" <br>
 
 !!! example "PCAP handler section example"
 #todo Insert examples
 
 
 ### "FLOW"
+**Handler Type**: "flow" <br>
+
+**Metrics Group**: <br>
+
+|   Metric Group   | Default | 
+|:----------------:|:-------:|
+|  `cardinality`   | enabled |
+|    `counters`    | enabled |
+|    `top_geo`     | enabled |
+| `top_by_packets` | enabled |
+|  `top_by_bytes`  | enabled |
+<br>
+
 **Configuration**: <br>
 - sample_rate_scaling: *bool* <br>
 - recorded_stream: <br> #todo
@@ -568,13 +860,6 @@ The `asn_notfound` filter usage syntax is:<br>
 asn_notfound: true
 ```
 
-**Metrics Group**: <br>
-- counters <br>
-- cardinality <br>
-- top_geo <br>
-- top_by_packets <br>
-- top_by_bytes <br><br>
-  **Handler Type**: "flow" <br><br>
 
   !!! example "FLOW handler section example"
   #todo Insert examples
