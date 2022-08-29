@@ -74,6 +74,19 @@ input:
 ```
 
 #### "PCAP"
+
+There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
+
+**Configurations**:
+
+|   Config    | Type |
+|:-----------:|:-----|
+|  pcap_file  | str  |
+| pcap_source | str  |
+|    iface    | str  |
+|  host_spec  | str  |
+|    debug    | bool |
+
 `pcap_file`: *str* <br>
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
 When this variable exists, the bpf filter must also be informed. Otherwise, the execution will fail.
@@ -147,7 +160,17 @@ bpf: "port 53"
 
 #### "FLOW"
 
-`pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+**Configurations**:
+
+There are 4 configs for flow inputs: `pcap_file`, `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+
+|  Config   | Type |
+|:---------:|:-----|
+| pcap_file | str  |
+|   port    | int  |
+|   bind    | str  |
+| flow_type | str  |
+
 
 
 `pcap_file`: *str* <br>
@@ -191,7 +214,11 @@ flow_type: netflow
 #### "DNSTAP"
 The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
 
-
+|   Config    | Type |
+|:-----------:|:-----|
+| dnstap_file | str  |
+|   socket    | int  |
+|     tcp     | str  |
 
 `dnstap_file`: *str* <br>
 
