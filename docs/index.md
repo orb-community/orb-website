@@ -34,7 +34,7 @@ designed to support a host of [sinks](about/#sinks) in the future, powered by [O
 is included—there is no need to run additional data collection pipelines for Orb metrics.
 
 ## Portal and REST API out of the box
-Orb includes a modern, responsive user interfacce for managing *agents*, *agent groups*, *policies*, *datasets*, and *sinks*. Orb is API-first, and all platform functionality is available for automation via the [well-documented REST API](docs/#working-with-api-docs).
+Orb includes a modern, responsive user interface for managing *agents*, *agent groups*, *policies*, *datasets*, and *sinks*. Orb is API-first, and all platform functionality is available for automation via the [well-documented REST API](docs/#working-with-api-docs).
 
 ## Open source, vendor neutral, cloud native
 Orb is free, open source software (FOSS) released under Mozilla Public License (MPL). It's a modern microservices application that can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor to function, thus avoiding vendor lock-in. If you prefer not to run your own control plane, you can use the free [https://orb.live](https://orb.live/) community site instead, and get started immediately.
