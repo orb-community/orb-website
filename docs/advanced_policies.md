@@ -291,7 +291,7 @@ There are general configurations, which can be applied to all handlers. These se
 
 The `deep_sample_rate` filter usage syntax is:<br>
 ```yaml
-num_periods: int
+deep_sample_rate: int
 ```
 
 
@@ -311,7 +311,7 @@ num_periods: int
 
 The `topn_count` filter usage syntax is:<br>
 ```yaml
-num_periods: int
+topn_count: int
 ```
 
 
@@ -370,10 +370,10 @@ metric_groups:
 <br>
 
 **Configuration**: <br>
-- PublicSuffixList: *bool*. <br>
+- public_suffix_list: *bool*. <br>
 - Abstract configurations. <br><br>
 
-#### PublicSuffixList <br>
+#### public_suffix_list <br>
 
 Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
 
@@ -386,9 +386,9 @@ The list of suffixes considered public can be accessed [here](https://github.com
 | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
 
 
-The `PublicSuffixList` filter usage syntax is:<br>
+The `public_suffix_list` filter usage syntax is:<br>
 ```yaml
-PublicSuffixList: true
+public_suffix_list: true
 ```
 
 
@@ -405,7 +405,7 @@ PublicSuffixList: true
 |  `only_qname_suffix`   | *str[]* |  PCAP  |
 |   `geoloc_notfound`    | *bool*  |  PCAP  |
 |     `asn_notfound`     | *bool*  |  PCAP  |
-|   `dnstap_msg_type`    | *str[]* | DNSTAP |
+|   `dnstap_msg_type`    |  *str*  | DNSTAP |
 
 
 
@@ -562,73 +562,133 @@ The `asn_notfound` filter usage syntax is:<br>
 asn_notfound: true
 ```
 
-####  dnstap_msg_type: *str[]* <br>
+####  dnstap_msg_type: *str* <br>
 
 Input: DNSTAP <br>
 
 With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
 Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
-Multiple types are also supported and messages that are any of the values in the array will be considered.
 
 The `dnstap_msg_type` filter usage syntax is:<br>
 ```yaml
-dnstap_msg_type: array
+dnstap_msg_type: str
 ```
 Example:
 
 ```yaml
-dnstap_msg_type:
-  - "auth"
-  - "resolver"
+dnstap_msg_type: "auth"
 ```
 
+Example policy pcap dns JSON:
 
-    !!! example "DNS handler section example"
-        === "JSON"
-              ``` json
-                {
-                   "handlers":{
-                      "modules":{
-                         "default_dns":{
-                            "filter":{
-                               "only_qname_suffix":[
-                                  ".orb.live",
-                                  ".google.com"
-                               ],
-                               "only_rcode":3
-                            },
-                            "configs":{
-                               "public_suffix_list":"true"
-                            },
-                            "metric_groups": {
-                                "enable": [
-                                  "top_ecs"
-                                ]
-                              },
-                            "type":"dns"
-                         }
-                      }
-                   }
-                }
-              ```
-        === "YAML"
-            ``` yaml
-            ---
-            handlers:
-              modules:
-                default_dns:
-                  filter:
-                    only_qname_suffix:
-                    - ".orb.live"
-                    - ".google.com"
-                    only_rcode: 3
-                  configs:
-                    public_suffix_list: true
-                  metric_groups:
-                    enable:
-                    - top_ips
-                  type: dns
-            ```
+``` json
+{
+  "handlers": {
+    "config": {
+      "deep_sample_rate": 100,
+      "num_periods": 5,
+      "topn_count": 10
+    },
+    "modules": {
+      "default_dns": {
+        "type": "dns",
+        "config": {
+          "public_suffix_list": true,
+          "deep_sample_rate": 50,
+          "num_periods": 2,
+          "topn_count": 25
+        },
+        "filter": {
+          "only_rcode": 0,
+          "only_dnssec_response": true,
+          "answer_count": 1,
+          "only_qtype": [
+            1,
+            2
+          ],
+          "only_qname_suffix": [
+            ".google.com",
+            ".orb.live"
+          ],
+          "geoloc_notfound": false,
+          "asn_notfound": false,
+          "dnstap_msg_type": "auth"
+        },
+        "metric_groups": {
+          "enable": [
+            "top_ecs"
+          ],
+          "disable": [
+            "cardinality",
+            "counters",
+            "dns_transaction",
+            "top_qnames"
+          ]
+        }
+      }
+    }
+  },
+  "input": {
+    "input_type": "pcap",
+    "tap": "default_pcap",
+    "filter": {
+      "bpf": "udp port 53"
+    },
+    "config": {
+      "iface": "wlo1",
+      "host_spec": "192.168.1.167/24",
+      "pcap_source": "libpcap",
+      "debug": true
+    }
+  },
+  "kind": "collection"
+}
+```
+Example policy pcap dns YAML:
+
+``` yaml
+handlers:
+  config:
+    deep_sample_rate: 100
+    num_periods: 5
+    topn_count: 10
+  modules:
+    default_dns:
+      type: dns
+      config:
+        public_suffix_list: true
+        deep_sample_rate: 50
+        num_periods: 2
+        topn_count: 25
+      filter:
+        only_rcode: 0
+        only_dnssec_response: true
+        answer_count: 1
+        only_qtype: [1, 2]
+        only_qname_suffix: [".google.com", ".orb.live"]
+        geoloc_notfound: false
+        asn_notfound: false
+        dnstap_msg_type: "auth"
+      metric_groups:
+        enable:
+          - top_ecs
+        disable:
+          - cardinality
+          - counters
+          - dns_transaction
+          - top_qnames
+input:
+  input_type: pcap
+  tap: default_pcap
+  filter:
+    bpf: udp port 53
+  config:
+    iface: wlo1
+    host_spec: 192.168.1.167/24
+    pcap_source: libpcap
+    debug: true
+kind: collection
+```
 
 
 ### "NET"
@@ -714,8 +774,106 @@ only_asn_number:
   - 16136
 ```
 
-!!! example "NET handler section example"
-#todo Insert examples
+Example policy pcap dns JSON:
+
+```json
+{
+  "handlers": {
+    "config": {
+      "deep_sample_rate": 100,
+      "num_periods": 5,
+      "topn_count": 10
+    },
+    "modules": {
+      "default_net": {
+        "type": "net",
+        "config": {
+          "deep_sample_rate": 1,
+          "num_periods": 2,
+          "topn_count": 25
+        },
+        "filter": {
+          "geoloc_notfound": true,
+          "asn_notfound": true,
+          "only_geoloc_prefix": [
+            "BR",
+            "US/CA"
+          ],
+          "only_asn_number": [
+            7326,
+            16136
+          ]
+        },
+        "metric_groups": {
+          "disable": [
+            "cardinality",
+            "counters",
+            "top_geo",
+            "top_ips"
+          ]
+        }
+      }
+    }
+  },
+  "input": {
+    "input_type": "pcap",
+    "tap": "default_pcap",
+    "filter": {
+      "bpf": "net 192.168.1.0/24"
+    },
+    "config": {
+      "iface": "wlo1",
+      "host_spec": "192.168.1.0/24",
+      "pcap_source": "libpcap",
+      "debug": true
+    }
+  },
+  "kind": "collection"
+}
+```
+
+Example policy pcap net YAML:
+
+```yaml
+handlers:
+  config:
+    deep_sample_rate: 100
+    num_periods: 5
+    topn_count: 10
+  modules:
+    default_net:
+      type: net
+      config:
+        deep_sample_rate: 1
+        num_periods: 2
+        topn_count: 25
+      filter:
+        geoloc_notfound: true
+        asn_notfound: true
+        only_geoloc_prefix:
+          - BR
+          - US/CA
+        only_asn_number:
+          - 7326
+          - 16136
+      metric_groups:
+        disable:
+          - cardinality
+          - counters
+          - top_geo
+          - top_ips
+input:
+  input_type: pcap
+  tap: default_pcap
+  filter:
+    bpf: net 192.168.1.0/24
+  config:
+    iface: wlo1
+    host_spec: 192.168.1.0/24
+    pcap_source: libpcap
+    debug: true
+kind: collection
+```
 
 ### "DHCP"
 **Handler Type**: "dhcp" <br>
@@ -727,9 +885,71 @@ only_asn_number:
 
 **Filter Options**: No filters available. <br><br>
 
+Example policy pcap dhcp JSON:
 
-!!! example "DHCP handler section example"
-#todo Insert examples
+```json
+{
+  "handlers": {
+    "config": {
+      "deep_sample_rate": 100,
+      "num_periods": 8,
+      "topn_count": 10
+    },
+    "modules": {
+      "default_dhcp": {
+        "type": "dhcp",
+        "config": {
+          "deep_sample_rate": 1,
+          "num_periods": 8,
+          "topn_count": 25
+        }
+      }
+    }
+  },
+  "input": {
+    "input_type": "pcap",
+    "tap": "default_pcap",
+    "filter": {
+      "bpf": "net 192.168.1.0/24"
+    },
+    "config": {
+      "iface": "wlo1",
+      "host_spec": "192.168.1.0/24",
+      "pcap_source": "libpcap",
+      "debug": true
+    }
+  },
+  "kind": "collection"
+}
+```
+
+Example policy pcap dhcp YAML:
+
+```yaml
+handlers:
+  config:
+    deep_sample_rate: 100
+    num_periods: 8
+    topn_count: 10
+  modules:
+    default_dhcp:
+      type: dhcp
+      config:
+        deep_sample_rate: 1
+        num_periods: 8
+        topn_count: 25
+input:
+  input_type: pcap
+  tap: default_pcap
+  filter:
+    bpf: net 192.168.1.0/24
+  config:
+    iface: wlo1
+    host_spec: 192.168.1.0/24
+    pcap_source: libpcap
+    debug: true
+kind: collection
+```
 
 ### "PCAP"
 **Handler Type**: "pcap" <br>
@@ -741,9 +961,71 @@ only_asn_number:
 
 **Filter Options**: No filters available. <br><br>
 
+Example policy pcap pcap json:
 
-!!! example "PCAP handler section example"
-#todo Insert examples
+```json
+{
+  "handlers": {
+    "config": {
+      "deep_sample_rate": 100,
+      "num_periods": 8,
+      "topn_count": 10
+    },
+    "modules": {
+      "default_pcap": {
+        "type": "pcap",
+        "config": {
+          "deep_sample_rate": 6,
+          "num_periods": 3,
+          "topn_count": 25
+        }
+      }
+    }
+  },
+  "input": {
+    "input_type": "pcap",
+    "tap": "default_pcap",
+    "filter": {
+      "bpf": "net 192.168.1.0/24"
+    },
+    "config": {
+      "iface": "wlo1",
+      "host_spec": "192.168.1.0/24",
+      "pcap_source": "libpcap",
+      "debug": true
+    }
+  },
+  "kind": "collection"
+}
+```
+
+Example policy pcap pcap YAML:
+
+```yaml
+handlers:
+  config:
+    deep_sample_rate: 100
+    num_periods: 8
+    topn_count: 10
+  modules:
+    default_pcap:
+      type: pcap
+      config:
+        deep_sample_rate: 6
+        num_periods: 3
+        topn_count: 25
+input:
+  input_type: pcap
+  tap: default_pcap
+  filter:
+    bpf: net 192.168.1.0/24
+  config:
+    iface: wlo1
+    host_spec: 192.168.1.0/24
+    pcap_source: libpcap
+    debug: true
+kind: collection
+```
 
 
 ### "FLOW"
