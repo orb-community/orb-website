@@ -1169,6 +1169,97 @@ The `asn_notfound` filter usage syntax is:<br>
 asn_notfound: true
 ```
 
+Example policy input flow handler flow JSON:
 
-  !!! example "FLOW handler section example"
-  #todo Insert examples
+```json
+{
+  "handlers": {
+    "config": {
+      "deep_sample_rate": 95,
+      "num_periods": 6,
+      "topn_count": 8
+    },
+    "modules": {
+      "my_flow": {
+        "type": "flow",
+        "config": {
+          "sample_rate_scaling": false,
+          "deep_sample_rate": 85,
+          "num_periods": 5,
+          "topn_count": 7
+        },
+        "metric_groups": {
+          "disable": [
+            "cardinality",
+            "counters",
+            "top_geo",
+            "top_by_packets",
+            "top_by_bytes"
+          ]
+        },
+        "filter": {
+          "only_devices": [
+            "216.239.38.10/24",
+            "192.158.1.38/32"
+          ],
+          "only_ports": [
+            10853,
+            "10860-10890"
+          ],
+          "only_interfaces": [
+            "10-16"
+          ],
+          "geoloc_notfound": true,
+          "asn_notfound": true
+        }
+      }
+    }
+  },
+  "input": {
+    "input_type": "flow",
+    "tap": "default_flow"
+  },
+  "kind": "collection"
+}
+```
+
+Example policy input flow handler flow YAML:
+
+```yaml
+handlers:
+    config:
+        deep_sample_rate: 95
+        num_periods: 6
+        topn_count: 8
+    modules:
+        my_flow:
+            type: flow
+            config:
+                sample_rate_scaling: false
+                deep_sample_rate: 85
+                num_periods: 5
+                topn_count: 7
+            metric_groups:
+                disable:
+                    - cardinality
+                    - counters
+                    - top_geo
+                    - top_by_packets
+                    - top_by_bytes
+            filter:
+                only_devices:
+                    - 216.239.38.10/24
+                    - 192.158.1.38/32
+                only_ports:
+                    - 10853
+                    - 10860-10890
+                only_interfaces:
+                    - 10-16
+                geoloc_notfound: true
+                asn_notfound: true
+
+input:
+  input_type: flow
+  tap: default_flow
+kind: collection
+```
