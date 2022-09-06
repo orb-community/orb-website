@@ -5,6 +5,7 @@ hide:
 - tags
 ---
 <div class="splash"></div>
+
 <span class="splash-title">Orb Dynamic<br>Edge Observability</span>
 
 [Get Started with Orb](install/){ .md-button .md-button--primary }

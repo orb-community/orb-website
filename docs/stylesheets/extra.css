@@ -3,6 +3,7 @@
     --md-primary-bg-color: #171c30;
     --md-primary-text-color: #ffffff;
     --md-secondary-text-color: #969fb9;
+    --orb-blue: #3089fc;
 }
 
 :root > * {
@@ -11,7 +12,7 @@
 }
 
 :root * div.md-grid {
-    max-width: 80rem;
+    max-width: 75rem;
 }
 
 :root > * a.md-button {
@@ -25,7 +26,7 @@
 
     /* Orb Blue */
 
-    background: #3089FC;
+    background: var(--orb-blue);
     /* popup shadow */
 
     box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
@@ -41,7 +42,7 @@
 
     /* White */
 
-    color: #FFFFFF;
+    color: var(--md-primary-text-color);
 
     border-color: transparent;
 }
@@ -51,7 +52,7 @@
 }
 
 :root > body > header.md-header {
-    background-color: var(--md-primary-bg-color);
+    background-color: transparent;
 }
 
 :root > header > nav.md-header__inner, nav.md-grid {
@@ -62,11 +63,15 @@
     text-align: end;
     background-color: transparent;
     color: var(--md-primary-text-color);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 :root > * .md-search__inner>.md-search__form {
     background-color: transparent;
-    border-color: var(--md-secondary-text-color);
+    border-color: var(--md-primary-text-color);
     border-width: 1px;
     border-style: solid;
     text-decoration-color: #000000;
@@ -74,11 +79,11 @@
 }
 
 :root > * .md-search__icon {
-    color: var(--md-secondary-text-color);
+    color: var(--md-primary-text-color);
 }
 
 :root > * .md-search__input::placeholder {
-    color: var(--md-secondary-text-color);
+    color: var(--md-primary-text-color);
     background-color: transparent;
 }
 
@@ -94,7 +99,7 @@ div.md-container.splash {
 }
 
 #why-orb {
-    margin-top: 1.25em;
+    margin-top: 2.5em;
 }
 
 .md-typeset h1 {
@@ -110,6 +115,10 @@ div.md-container.splash {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+}
+
+.md-source {
+    color: var(--md-primary-text-color);
 }
 
 .md-typeset h2 {
@@ -140,16 +149,16 @@ div.md-container.splash {
 div.splash {
     position: absolute;
     width: 2623px;
-    height: 700px;
+    height: 1000px;
     left: -447px;
     top: -179px;
     z-index: -1;
     background-image: linear-gradient(
-            90deg,
-            hsl(242deg 63% 28%) 0%,
+            100deg,
+            hsl(242deg 63% 28%) 20%,
             hsl(213deg 87% 43%) 39%,
             hsl(225deg 100% 53%) 61%,
-            hsl(277deg 100% 58%) 100%
+            hsl(277deg 100% 58%) 95%
     );
 }
 
@@ -162,5 +171,12 @@ span.splash-title {
 }
 
 p:has(>span.splash-title) {
+    padding-top: 27vh;
     margin-bottom: 54px !important;
+}
+
+.md-footer__link {
+    border: 1px solid #FFFFFF;
+    filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.15));
+    border-radius: 16px;
 }
