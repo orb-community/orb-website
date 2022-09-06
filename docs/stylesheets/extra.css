@@ -1,19 +1,57 @@
-:root > * {
+:root {
     --md-primary-fg-color: #ffffff;
-    --md-primary-bg-color: #000000;
-    --md-primary-text-color: #969fb9;
+    --md-primary-bg-color: #171c30;
+    --md-primary-text-color: #ffffff;
+    --md-secondary-text-color: #969fb9;
+}
+
+:root > * {
+    background-color: var(--md-primary-bg-color);
+    color: var(--md-primary-text-color);
 }
 
 :root * div.md-grid {
-    max-width: 90rem;
+    max-width: 80rem;
 }
 
 :root > * a.md-button {
-    border-color: #000000;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+
+    width: 374px;
+    height: 56px;
+
+    /* Orb Blue */
+
+    background: #3089FC;
+    /* popup shadow */
+
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 16px;
+    /* identical to box height, or 67% */
+
+    display: flex;
+    align-items: center;
+
+    /* White */
+
+    color: #FFFFFF;
+
+    border-color: transparent;
 }
 
 :root > * div.md-header__title {
     display: none;
+}
+
+:root > body > header.md-header {
+    background-color: var(--md-primary-bg-color);
 }
 
 :root > header > nav.md-header__inner, nav.md-grid {
@@ -22,26 +60,107 @@
 
 :root > * nav.md-tabs {
     text-align: end;
+    background-color: transparent;
+    color: var(--md-primary-text-color);
 }
 
 :root > * .md-search__inner>.md-search__form {
-    background-color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-text-color);
+    background-color: transparent;
+    border-color: var(--md-secondary-text-color);
     border-width: 1px;
     border-style: solid;
     text-decoration-color: #000000;
+
 }
 
 :root > * .md-search__icon {
-    color: var(--md-primary-text-color);
+    color: var(--md-secondary-text-color);
 }
 
 :root > * .md-search__input::placeholder {
-    color: var(--md-primary-text-color);
+    color: var(--md-secondary-text-color);
+    background-color: transparent;
 }
 
-:root > * .splash {
-    
-    width: 100%;
-    height: 500px;
+div.md-search {
+    height: 100% !important;
+}
+
+div.md-container.splash {
+    margin-left: -10%;
+    width: 150%;
+    height: 80vh;
+    background-color: #3089fc !important;
+}
+
+#why-orb {
+    margin-top: 1.25em;
+}
+
+.md-typeset h1 {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 78px;
+    /* identical to box height */
+
+    text-align: center;
+
+    background: radial-gradient(121.79% 1418.34% at 39.98% 0%, #7B61FF 0%, #018BF3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.md-typeset h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
+    /* or 131% */
+
+    text-transform: capitalize;
+
+    /* White */
+
+    color: #FFFFFF;
+}
+
+.md-typeset p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    /* or 178% */
+    /* White */
+
+    color: #FFFFFF;
+}
+
+div.splash {
+    position: absolute;
+    width: 2623px;
+    height: 700px;
+    left: -447px;
+    top: -179px;
+    z-index: -1;
+    background-image: linear-gradient(
+            90deg,
+            hsl(242deg 63% 28%) 0%,
+            hsl(213deg 87% 43%) 39%,
+            hsl(225deg 100% 53%) 61%,
+            hsl(277deg 100% 58%) 100%
+    );
+}
+
+span.splash-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 117px;
+    color: #ffffff;
+}
+
+p:has(>span.splash-title) {
+    margin-bottom: 54px !important;
 }

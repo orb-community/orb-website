@@ -4,15 +4,12 @@ hide:
 - toc
 - tags
 ---
-
-
-<div class="md-container splash"></div>
-
-<h1>Orb Dynamic<br>Edge Observability</h1>
+<div class="splash"></div>
+<span class="splash-title">Orb Dynamic<br>Edge Observability</span>
 
 [Get Started with Orb](install/){ .md-button .md-button--primary }
-
-***
+  
+  
 
 # Why Orb?
 

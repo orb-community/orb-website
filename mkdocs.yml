@@ -4,6 +4,8 @@ theme:
   custom_dir: overrides
   favicon: img/ORB-logo-ring.png
   logo: img/ORB-logo-transparent.png
+  font:
+    text: Montserrat
   features:
     - navigation.tracking
     - navigation.instant
