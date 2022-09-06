@@ -460,7 +460,6 @@ docker run -v /local/orb:/usr/local/orb/ --net=host \
       ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
 ```
 
-
 ## Working with API Docs
 Follow the links below for API documentation of each respective Orb microservice:
 
