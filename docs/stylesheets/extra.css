@@ -53,6 +53,7 @@
 
 :root > body > header.md-header {
     background-color: transparent;
+    box-shadow: none;
 }
 
 :root > header > nav.md-header__inner, nav.md-grid {
