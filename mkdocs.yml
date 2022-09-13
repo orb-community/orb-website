@@ -33,10 +33,7 @@ nav:
   - About: 'about.md'
   - Installation: 'install.md'
   - Getting Started: 'getting_started.md'
-  - Documentation:
-    - Running ORB agent: 'documentation/running_orb_agent.md'
-    - Advanced Policies: 'documentation/advanced_policies.md'
-    - Orb REST API: 'api/orb_rest_api.md'
+  - Documentation: 'docs.md'
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 edit_uri: edit/main/docs
