@@ -50,8 +50,8 @@ input:
 input:
   tap_selector:
     any:
-      key1: value1
-      key2: value2
+      - key1: value1
+      - key2: value2
   input_type: type_of_input
   filter:
     bpf: ...
@@ -65,8 +65,8 @@ input:
 input:
   tap_selector:
     all:
-      key1: value1
-      key2: value2
+      - key1: value1
+      - key2: value2
   input_type: type_of_input
   filter:
     bpf: ...
