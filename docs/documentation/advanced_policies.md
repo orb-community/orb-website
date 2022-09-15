@@ -1,21 +1,22 @@
 # Advanced Policies
 
-An Orb policy for pktvisor can be written in either YAML or JSON, and has three top level sections: “input”, “handlers” and “kind”.
+An Orb policy for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
 
 === "YAML"
     ```yaml
     input: ..
+    config: ...
     handlers: ...
     kind: collection
     ```
 === "JSON"
     ```json
     {
-      "input": {
-       
+      "input": {       
       },
-      "handlers": {
-        
+      "config": {
+    },
+      "handlers": {        
       },
       "kind": "collection"
     }
@@ -469,7 +470,35 @@ The other way to inform the ip and port to be monitored is through the 'tcp' con
       "only_hosts": "192.168.1.4/32"
     }
     ```
+## Configuration section
 
+There is the possibility of defining settings on the policy level. Currently, the only configuration available is the `merge_like_handlers`. 
+
+
+| Policy Configuration  |  Type  | Default |
+|:---------------------:|:------:|:-------:|
+| `merge_like_handlers` | *bool* |  false  |
+
+
+**merge_like_handlers**
+
+When `merge_like_handlers` config is true, metrics from all handlers of the same type are scraped together. This is useful when the [tap_selector](#input-section) is used, as, by default, metrics are generated separately for each tap in the policy and this can be very expensive, depending on the number of taps.
+
+The `merge_like_handlers` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    config:
+      merge_like_handlers: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "config": {
+        "merge_like_handlers": true
+      }
+    }
+    ```
 ## Handlers section (Analysis)
 
 Handlers are the modules responsible for extracting metrics from inputs. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
@@ -478,20 +507,22 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
 
-| Abstract Configuration | Type  |     Default      |
-|:----------------------:|:-----:|:----------------:|
-|   `deep_sample_rate`   | *int* | 100 (per second) |
-|     `num_periods`      | *int* |        5         |
-|      `topn_count`      | *int* |        10        |
+|   Abstract Configuration    | Type  |     Default      |
+|:---------------------------:|:-----:|:----------------:|
+|     `deep_sample_rate`      | *int* | 100 (per second) |
+|        `num_periods`        | *int* |        5         |
+|        `topn_count`         | *int* |        10        |
+ | `topn_percentile_threshold` | *int* |        0         |
 
 
 **deep_sample_rate** <br>
 
 `deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
-* If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
+!!! Note
+    If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
 
 
-The `deep_sample_rate` filter usage syntax is:<br>
+The `deep_sample_rate` usage syntax is:<br>
 
 === "YAML"
     ```yaml
@@ -507,7 +538,7 @@ The `deep_sample_rate` filter usage syntax is:<br>
 
 `num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
 
-The `num_periods` filter usage syntax is:<br>
+The `num_periods` usage syntax is:<br>
 
 === "YAML"
     ```yaml
@@ -524,7 +555,7 @@ The `num_periods` filter usage syntax is:<br>
 
 `topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
 
-The `topn_count` filter usage syntax is:<br>
+The `topn_count` usage syntax is:<br>
 
 === "YAML"
     ```yaml
@@ -537,6 +568,24 @@ The `topn_count` filter usage syntax is:<br>
     }
     ```
 
+**topn_percentile_threshold** <br>
+
+`topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
+The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
+
+The `topn_percentile_threshold` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    topn_percentile_threshold: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_percentile_threshold": int
+    }
+    ```
+<br>
 **Default handler structure:**
 
 === "YAML"
@@ -546,6 +595,7 @@ The `topn_count` filter usage syntax is:<br>
         deep_sample_rate: 100
         num_periods: 5
         topn_count: 10
+        topn_percentile_threshold: 0
       modules:
         tap_name:
           type: ...
@@ -557,8 +607,7 @@ The `topn_count` filter usage syntax is:<br>
               - ....
             disable:
               - .....
-              - ......
-     
+              - ......     
     ```
 
 === "JSON"
@@ -568,7 +617,8 @@ The `topn_count` filter usage syntax is:<br>
         "config": {
           "deep_sample_rate": 100,
           "num_periods": 5,
-          "topn_count": 10
+          "topn_count": 10,
+          "topn_percentile_threshold": 0
         },
         "modules": {
           "tap_name": {
@@ -643,6 +693,7 @@ In order to disable any metric group use the syntax:
 |    `counters`     | enabled  |
 | `dns_transaction` | enabled  |
 |   `top_qnames`    | enabled  |
+ |    `top_ports`    | enabled  |
 
 
 #### Configurations
@@ -813,7 +864,7 @@ Important information is that only one answer_count is possible for each handler
 
 Input: PCAP <br>
 
-DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/ns1labs/pktvisor/blob/develop/src/handlers/dns/dns.h#L30). <br>
+DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/ns1labs/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
 
 The `only_qtype` filter usage syntax is:<br>
 
@@ -1021,6 +1072,7 @@ Example policy pcap DNS:
             deep_sample_rate: 50
             num_periods: 2
             topn_count: 25
+            topn_percentile_threshold: 10
           filter:
             only_rcode: 0
             only_dnssec_response: true
@@ -1038,6 +1090,7 @@ Example policy pcap DNS:
               - counters
               - dns_transaction
               - top_qnames
+              - top_ports
     input:
       input_type: pcap
       tap: default_pcap
@@ -1048,6 +1101,8 @@ Example policy pcap DNS:
         host_spec: 192.168.1.167/24
         pcap_source: libpcap
         debug: true
+    config:
+        merge_like_handlers: true
     kind: collection
     ```
 
@@ -1067,7 +1122,8 @@ Example policy pcap DNS:
               "public_suffix_list": true,
               "deep_sample_rate": 50,
               "num_periods": 2,
-              "topn_count": 25
+              "topn_count": 25,
+              "topn_percentile_threshold": 10
             },
             "filter": {
               "only_rcode": 0,
@@ -1093,7 +1149,8 @@ Example policy pcap DNS:
                 "cardinality",
                 "counters",
                 "dns_transaction",
-                "top_qnames"
+                "top_qnames",
+                "top_ports"
               ]
             }
           }
@@ -1111,6 +1168,9 @@ Example policy pcap DNS:
           "pcap_source": "libpcap",
           "debug": true
         }
+      },
+      "config": {
+        "merge_like_handlers": true
       },
       "kind": "collection"
     }
@@ -1461,6 +1521,106 @@ Example policy pcap DHCP :
       "kind": "collection"
     }
     ```
+
+### BGP Analyzer (bgp)
+**Handler Type**: "bgp" <br>
+
+#### Metrics Group 
+
+- No metrics group available <br>
+
+#### Configurations <br>
+- Abstract configurations. <br><br>
+
+#### Filters
+- No filters available. <br><br>
+
+Example policy pcap bgp JSON:
+
+#### Examples of BGP policy
+
+Example policy pcap BGP :
+
+=== "YAML"
+    ```yaml
+    handlers:
+      config:
+        deep_sample_rate: 100
+        num_periods: 8
+        topn_count: 10
+      modules:
+        default_bgp:
+          type: bgp
+          config:
+            deep_sample_rate: 1
+            num_periods: 8
+            topn_count: 25
+    input:
+      input_type: pcap
+      tap_selector:
+        all:
+          - key1: value1
+          - key2: value
+      filter:
+        bpf: net 192.168.1.0/24
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.0/24
+        pcap_source: libpcap
+        debug: true
+    config:
+      merge_like_handlers: true        
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 8,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_bgp": {
+            "type": "bgp",
+            "config": {
+              "deep_sample_rate": 1,
+              "num_periods": 8,
+              "topn_count": 25
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap_selector": {
+          "all": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value"
+            }
+          ]
+        },
+        "filter": {
+          "bpf": "net 192.168.1.0/24"
+        },
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.0/24",
+          "pcap_source": "libpcap",
+          "debug": true
+        }
+      },
+      "config": {
+        "merge_like_handlers": true
+      },
+      "kind": "collection"
+    }
+    ```
+
 
 ### Packet Capture Analyzer (pcap)
 **Handler Type**: "pcap" <br>
