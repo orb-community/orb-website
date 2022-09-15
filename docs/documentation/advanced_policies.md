@@ -571,7 +571,7 @@ The `topn_count` usage syntax is:<br>
 **topn_percentile_threshold** <br>
 
 `topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
-The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
+The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
 
 The `topn_percentile_threshold` usage syntax is:<br>
 
