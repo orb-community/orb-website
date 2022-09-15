@@ -2,6 +2,7 @@
 hide:
 
 - tags
+- title
 
 ---
 
