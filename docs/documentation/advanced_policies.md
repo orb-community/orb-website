@@ -1,19 +1,26 @@
 # Advanced Policies
 
-An Orb policy for pktvisor can be written in either JSON or YAML, and has three top level sections: “input”, “handlers” and “kind”.
+An Orb policy for pktvisor can be written in either YAML or JSON, and has three top level sections: “input”, “handlers” and “kind”.
 
-```json
-{
-  "input": {
-   
-  },
-  "handlers": {
-    
-  },
-  "kind": "collection"
-}
+=== "YAML"
+    ```yaml
+    input: ..
+    handlers: ...
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "input": {
+       
+      },
+      "handlers": {
+        
+      },
+      "kind": "collection"
+    }
+    ```
 
-```
 ## Input section
 
 The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the agent level. <br>
@@ -31,48 +38,110 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
 
 Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
 
-**Default input structure:**
+### Default input structure
 
-*Using specific tap:*
-```yaml
-input:
-  tap: tap_name
-  input_type: type_of_input
-  filter:
-    bpf: ...
-  config:
-    ...
-```
+*Using specific tap ([check the application in a policy here](#examples-of-dns-policy)):*
 
-*or using tap selector matching any:*
+=== "YAML"
+    ```yaml
+    input:
+      tap: tap_name
+      input_type: type_of_input
+      filter:
+        bpf: ...
+      config:
+        ...
+    ```
+=== "JSON"
+    ```json
+    {
+      "input": {
+        "tap": "tap_name",
+        "input_type": "type_of_input",
+        "filter": {
+          "bpf": "..."
+        },
+        "config": "..."
+      }
+    }
+    ```
 
-```yaml
-input:
-  tap_selector:
-    any:
-      - key1: value1
-      - key2: value2
-  input_type: type_of_input
-  filter:
-    bpf: ...
-  config:
-    ...
-```
+*or using tap selector matching any ([check the application in a policy here](#examples-of-net-policy)):*
 
-*or using tap selector matching all:*
+=== "YAML"
+    ```yaml
+    input:
+      tap_selector:
+        any:
+          - key1: value1
+          - key2: value2
+      input_type: type_of_input
+      filter:
+        bpf: ...
+      config:
+        ...
+    ```
 
-```yaml
-input:
-  tap_selector:
-    all:
-      - key1: value1
-      - key2: value2
-  input_type: type_of_input
-  filter:
-    bpf: ...
-  config:
-    ...
-```
+=== "JSON"
+    ```json
+    {
+      "input": {
+        "tap_selector": {
+          "any": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value2"
+            }
+          ]
+        },
+        "input_type": "type_of_input",
+        "filter": {
+          "bpf": "..."
+        },
+        "config": "..."
+      }
+    }
+    ```
+*or using tap selector matching all ([check the application in a policy here](#examples-of-dhcp-policy)):*
+
+=== "YAML"
+    ```yaml
+    input:
+      tap_selector:
+        all:
+          - key1: value1
+          - key2: value2
+      input_type: type_of_input
+      filter:
+        bpf: ...
+      config:
+        ...
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "input": {
+        "tap_selector": {
+          "all": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value2"
+            }
+          ]
+        },
+        "input_type": "type_of_input",
+        "filter": {
+          "bpf": "..."
+        },
+        "config": "..."
+      }
+    }
+    ```
 
 ### Packet Capture (pcap) 
 
@@ -90,77 +159,131 @@ There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, 
 
 `pcap_file`: *str* <br>
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
-When this variable exists, the bpf filter must also be informed. Otherwise, the execution will fail.
 
-```yaml
- pcap_file: "path/to/file"
- ```
+=== "YAML"
+    ```yaml
+     pcap_file: "path/to/file"
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "pcap_file": "path/to/file"
+    }
+    ```
+<br>
 `debug`: *bool* <br>
 
 When `true` activate debug logs
 
-```yaml
-debug: true
-```
+=== "YAML"
+    ```yaml
+    debug: true
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "debug": true
+    }
+    ```
+<br>
 `pcap_source`: *str* <br>
 
 `pcap_source` specifies the type of library to use. Default: libpcap. Options: libpcap or af_packet (linux).
 
-```yaml
-pcap_source: "af_packet"
-```
+=== "YAML"
+    ```yaml
+    pcap_source: "af_packet"
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "pcap_source": "af_packet"
+    }
+    ```
+<br>
 `iface`: *str* <br>
 
 Name of the interface to bind. If the interface name does not exist, the policy will fail.
 
-```yaml
-iface: str
-```
+=== "YAML"
+    ```yaml
+    iface: str
+    ```    
+    Example:    
+    ```yaml
+    iface: eth0
+    ```
 
-Example:
-
-```yaml
-iface: "eth0"
-```
-
-
+=== "JSON"
+    ```json
+    {
+      "iface": "str"
+    }
+    ```
+    Example:    
+    ```json
+    {
+      "iface": "eth0"
+    }
+    ```
+<br>
 `host_spec`: *str* <br>
 The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
 
-```yaml
-host_spec: str
-```
+=== "YAML"
+    ```yaml
+    host_spec: str
+    ```
+    Example:
+    ```yaml
+    host_spec: "192.168.0.1/24"
+    ```
 
-Example:
-
-```yaml
-host_spec: "192.168.0.1/24"
-```
-
-
+=== "JSON"
+    ```json
+    {
+      "host_spec": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "host_spec": "192.168.0.1/24"
+    }
+    ```
 
 #### Filters
 
 There is only one filter referring to the input PCAP: `bpf`.
 
-
+<br>
 `bpf`: *str* <br>
 
 filter data based on Berkeley Packet Filters (BPF).
 
-```yaml
-bpf: str
-```
-
-Example:
-
-```yaml
-bpf: "port 53"
-```
-
+=== "YAML"
+    ```yaml
+    bpf: str
+    ```
+    Example:
+    ```yaml
+    bpf: "port 53"
+    ```
+=== "JSON"
+    ```json
+    {
+      "bpf": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "bpf": "port 53"
+    }
+    ```
 
 ### Sflow/Netflow (flow)
 
@@ -181,39 +304,71 @@ There are 4 configs for flow inputs: `pcap_file`, `port`, `bind` and `flow_type`
 
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
 
-```yaml
- pcap_file: "path/to/file"
- ```
-
+=== "YAML"
+    ```yaml
+     pcap_file: path/to/file
+    ```
+=== "JSON"
+    ```json
+    {
+      "pcap_file": "path/to/file"
+    }
+    ```
+<br>
 `port`: *int* and `bind`: *str* <br>
 
 The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
 
-```yaml
-port: int
-bind: str
-```
+=== "YAML"
+    ```yaml
+    port: int
+    bind: str
+    ```    
+    Example:    
+    ```yaml
+    port: 6343
+    bind: 192.168.1.1
+    ```
 
-Example:
-
-```yaml
-port: 6343
-bind: "192.168.1.1"
-```
-
+=== "JSON"
+    ```json
+    {
+      "port": "int",
+      "bind": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "port": 6343,
+      "bind": "192.168.1.1"
+    }
+    ```
+<br>
 `flow_type`: *str* <br>
 
 Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><br>
 
-```yaml
-flow_type: str
-```
-
-Example:
-
-```yaml
-flow_type: netflow
-```
+=== "YAML"
+    ```yaml
+    flow_type: str
+    ```
+    Example:
+    ```yaml
+    flow_type: netflow
+    ```
+=== "JSON"
+    ```json
+    {
+      "flow_type": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "flow_type": "netflow"
+    }
+    ```
 
 #### Filters
 
@@ -235,50 +390,85 @@ The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mut
 
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
 
- ```yaml
- dnstap_file: "path/to/file"
- ```
-
-`socket`: *str* <br> config
+=== "YAML"
+     ```yaml
+     dnstap_file: path/to/file
+     ```
+=== "JSON"
+    ```json
+    {
+      "dnstap_file": "path/to/file"
+    }
+    ```
+<br>
+`socket`: *str* <br>
 
 Path to socket file containing port and ip to bind
 
-
-```yaml
-socket: "path/to/file.sock"
-```
-
-`tcp`: *str* <br><br>
+=== "YAML"
+    ```yaml
+    socket: path/to/file.sock
+    ```
+=== "JSON"
+    ```json
+    {
+      "socket": "path/to/file.sock"
+    }
+    ```
+<br>
+`tcp`: *str* <br>
 
 The other way to inform the ip and port to be monitored is through the 'tcp' configuration. Usage syntax is a string with port:ip (only ipv4 is supported for now). <br>
 
- ```yaml
- tcp: "ip:port"
- ```
+=== "YAML"
+     ```yaml
+     tcp: ip:port
+     ```
+    Example:
+     ```yaml
+     tcp: 192.168.8.2:235
+     ```
 
-Example:
-
- ```yaml
- tcp: "192.168.8.2:235"
- ```
-
-
+=== "JSON"
+    ```json
+    {
+      "tcp": "ip:port"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "tcp": "192.168.8.2:235"
+    }
+    ```
+<br>
 #### Filters
 
-`only_hosts`:
+`only_hosts`: *str* <br>
 
 `only_hosts` filters data from a specific host.
 
- ```yaml
+=== "YAML"
+     ```yaml    
+     only_hosts: str
+     ```
+    Example:
+     ```yaml
+     only_hosts: 192.168.1.4/32
+     ```
 
- only_hosts: "str"
- ```
-Example:
-
- ```yaml
- only_hosts: "192.168.1.4/32"
- ```
-
+=== "JSON"
+    ```json
+    {
+      "only_hosts": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_hosts": "192.168.1.4/32"
+    }
+    ```
 
 ## Handlers section (Analysis)
 
@@ -302,67 +492,142 @@ There are general configurations, which can be applied to all handlers. These se
 
 
 The `deep_sample_rate` filter usage syntax is:<br>
-```yaml
-deep_sample_rate: int
-```
 
-
+=== "YAML"
+    ```yaml
+    deep_sample_rate: int
+    ```
+=== "JSON"
+    ```json
+    {
+      "deep_sample_rate": int
+    }
+    ```
 **num_periods** <br>
 
 `num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
 
 The `num_periods` filter usage syntax is:<br>
-```yaml
-num_periods: int
-```
 
+=== "YAML"
+    ```yaml
+    num_periods: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "num_periods": int
+    }
+    ```
 
 **topn_count** <br>
 
 `topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
 
 The `topn_count` filter usage syntax is:<br>
-```yaml
-topn_count: int
-```
+
+=== "YAML"
+    ```yaml
+    topn_count: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_count": int
+    }
+    ```
 
 **Default handler structure:**
 
-```yaml
-handlers:
-  config:
-    deep_sample_rate: 100
-    num_periods: 5
-    topn_count: 10
-  modules:
-    tap_name:
-      type: ...
-      config: ...
-      filter: ...
-      metric_groups:
-        enable:
-          - ...
-        disable:
-          - ...
- 
-```
+=== "YAML"
+    ```yaml
+    handlers:
+      config:
+        deep_sample_rate: 100
+        num_periods: 5
+        topn_count: 10
+      modules:
+        tap_name:
+          type: ...
+          config: ...
+          filter: ...
+          metric_groups:
+            enable:
+              - ...
+              - ....
+            disable:
+              - .....
+              - ......
+     
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 5,
+          "topn_count": 10
+        },
+        "modules": {
+          "tap_name": {
+            "type": "...",
+            "config": "...",
+            "filter": "...",
+            "metric_groups": {
+              "enable": [
+                "...",
+                "...."
+              ],
+              "disable": [
+                ".....",
+                "......"
+              ]
+            }
+          }
+        }
+      }
+    }
+    ```
 To enable any metric group use the syntax:
 
-```yaml
-metric_groups:
-  enable:
-    - group_to_enable
-```
+=== "YAML"
+    ```yaml
+    metric_groups:
+      enable:
+        - group_to_enable
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "enable": [
+          "group_to_enable"
+        ]
+      }
+    }
+    ```
 In order to disable any metric group use the syntax:
 
-```yaml
-metric_groups:
-  disable:
-    - group_to_disable
-```
+=== "YAML"
+    ```yaml
+    metric_groups:
+      disable:
+        - group_to_disable
+    ```
 
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "disable": [
+          "group_to_disable"
+        ]
+      }
+    }
+    ```
 * Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
@@ -378,9 +643,9 @@ metric_groups:
 |    `counters`     | enabled  |
 | `dns_transaction` | enabled  |
 |   `top_qnames`    | enabled  |
-<br>
 
-#### Configurations <br>
+
+#### Configurations
 - public_suffix_list: *bool*. <br>
 - Abstract configurations. <br><br>
 
@@ -398,10 +663,18 @@ The list of suffixes considered public can be accessed [here](https://github.com
 
 
 The `public_suffix_list` filter usage syntax is:<br>
-```yaml
-public_suffix_list: true
-```
 
+=== "YAML"
+    ```yaml
+    public_suffix_list: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "public_suffix_list": true
+    }
+    ```
 
 #### Filters <br>
 
@@ -422,6 +695,7 @@ public_suffix_list: true
 **only_rcode:** *int*. <br>
 
 Input: PCAP <br>
+
 When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
 Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
 There are several possible return codes for a DNS server response, which you can access [here](https://help.dnsfilter.com/hc/en-us/articles/4408415850003-DNS-Return-Codes), but currently the policies support 4 return types as filters (if you use any other code that is not in the table below, your policy will fail): <br>
@@ -434,17 +708,34 @@ There are several possible return codes for a DNS server response, which you can
 |       `5`       |      REFUSED       |         Function not implemented          |
 
 The `only_rcode` filter usage syntax is:<br>
-```yaml
-only_rcode: int
-```
+
+=== "YAML"
+    ```yaml
+    only_rcode: int
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "only_rcode": int
+    }
+    ```
 with the `int` referring to the return code to be filtered. <br>
 
-Example <br>
+Example: <br>
 If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
-```yaml
-only_rcode: 0
-```
-Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type;
+=== "YAML"
+    ```yaml
+    only_rcode: 0
+    ```
+
+=== "JSON"
+    ```json
+    {
+    "only_rcode": 0
+    }
+    ```
+Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
 
 **exclude_noerror:** *bool* <br>
 
@@ -452,9 +743,18 @@ Input: PCAP <br>
 
 You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
 The `exclude_noerror` filter usage syntax is:<br>
-```yaml
-exclude_noerror: true
-```
+
+=== "YAML"
+    ```yaml
+    exclude_noerror: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "exclude_noerror": true
+    }
+    ```
 
 Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
 
@@ -465,10 +765,19 @@ Input: PCAP <br>
 When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
 To filter only responses signed by an authorized sender, use:
 The `only_dnssec_response` filter usage syntax is:<br>
-```yaml
-only_dnssec_response: true
-```
 
+=== "YAML"
+    ```yaml
+    only_dnssec_response: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+    "only_dnssec_response": true
+    }
+    ```
+<br>
 **answer_count:** *int* <br>
 
 Input: PCAP <br>
@@ -477,9 +786,18 @@ One of the properties present in the query message structure is `Answer RRs`, wh
 The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
 
 The `answer_count` filter usage syntax is:<br>
-```yaml
-answer_count: int
-```
+
+=== "YAML"
+    ```yaml
+    answer_count: int
+    ```
+=== "JSON"
+    ```json
+    {
+      "answer_count": int
+    }
+    ```
+
 with the `int` referring to the desired amount of answer. <br>
 Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
 As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
@@ -489,7 +807,7 @@ A special case is the concept of `NODATA`, which is one of the possible returns 
 In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
 
 
-Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers;
+Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
 
 **only_qtype:** *str[]* <br>
 
@@ -498,31 +816,69 @@ Input: PCAP <br>
 DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/ns1labs/pktvisor/blob/develop/src/handlers/dns/dns.h#L30). <br>
 
 The `only_qtype` filter usage syntax is:<br>
-```yaml
-only_qtype: array
-```
 
+=== "YAML"
+    ```yaml
+    only_qtype: 
+      - array
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qtype": [
+        "array"
+      ]
+    }
+    ```
 If you want to filter only IPV4 record types, for example, you should use: <br>
 
-```yaml
-only_qtype:
-  - "A"
-```
+=== "YAML"
+    ```yaml
+    only_qtype:
+      - "A"
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qtype": [
+        "A"
+      ]
+    }
+    ```
 or
 
-```yaml
-only_qtype:
-  - 1
-```
-
+=== "YAML"
+    ```yaml
+    only_qtype:
+      - 1
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qtype": [
+        1
+      ]
+    }
+    ```
 Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
 
-```yaml
-only_qtype:
-  - 1
-  - 2 
-```
-
+=== "YAML"
+    ```yaml
+    only_qtype:
+      - 1
+      - 2
+      - "A"
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qtype": [
+        1,
+        2,
+        "A"
+      ]
+    }
+    ```
 **only_qname_suffix:** *str[]* <br>
 
 Input: PCAP <br>
@@ -530,23 +886,53 @@ Input: PCAP <br>
 
 The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
 The `only_qname_suffix` filter usage syntax is:<br>
-```yaml
-only_qname_suffix:array
-```
-Examples:
-```yaml
-only_qname_suffix:
-  - .google.com
-```
 
+=== "YAML"
+    ```yaml
+    only_qname_suffix:
+      - array
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qname_suffix": [
+        "array"
+      ]
+    }
+    ```
+Examples:
+
+=== "YAML"
+    ```yaml
+    only_qname_suffix:
+      - .google.com
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qname_suffix": [
+        ".google.com"
+      ]
+    }
+    ```
 or
 
-```yaml
-only_qname_suffix:
-  - google.com
-  - .nsone.net
-```
-
+=== "YAML"
+    ```yaml
+    only_qname_suffix:
+      - google.com
+      - .nsone.net
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_qname_suffix": [
+        "google.com",
+        ".nsone.net"
+      ]
+    }
+    ```
+<br>
 **geoloc_notfound:** *bool* <br>
 
 Input: PCAP <br>
@@ -555,11 +941,18 @@ Input: PCAP <br>
 Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
 The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
 The `geoloc_notfound` filter usage syntax is:<br>
-```yaml
-geoloc_notfound: true
-```
 
-
+=== "YAML"
+    ```yaml
+    geoloc_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "geoloc_notfound": true
+    }
+    ```
+<br>
 **asn_notfound:** *bool* <br>
 
 Input: PCAP <br>
@@ -568,10 +961,18 @@ Input: PCAP <br>
 Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
 The `asn_notfound` filter only keeps responses whose asn were not found. <br>
 The `asn_notfound` filter usage syntax is:<br>
-```yaml
-asn_notfound: true
-```
 
+=== "YAML"
+    ```yaml
+    asn_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "asn_notfound": true
+    }
+    ```
+<br>
 **dnstap_msg_type:** *str* <br>
 
 Input: DNSTAP <br>
@@ -580,127 +981,140 @@ With a dnstap protocol it is possible to know the type of message that must be r
 Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
 
 The `dnstap_msg_type` filter usage syntax is:<br>
-```yaml
-dnstap_msg_type: str
-```
-Example:
 
-```yaml
-dnstap_msg_type: "auth"
-```
-
+=== "YAML"
+    ```yaml
+    dnstap_msg_type: str
+    ```
+    Example:
+    ```yaml
+    dnstap_msg_type: auth
+    ```
+=== "JSON"
+    ```json
+    {
+      "dnstap_msg_type": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "dnstap_msg_type": "auth"
+    }
+    ```
+<br>
 #### Examples of DNS policy
 
-Example policy pcap dns JSON:
-
-``` json
-{
-  "handlers": {
-    "config": {
-      "deep_sample_rate": 100,
-      "num_periods": 5,
-      "topn_count": 10
-    },
-    "modules": {
-      "default_dns": {
-        "type": "dns",
-        "config": {
-          "public_suffix_list": true,
-          "deep_sample_rate": 50,
-          "num_periods": 2,
-          "topn_count": 25
-        },
-        "filter": {
-          "only_rcode": 0,
-          "only_dnssec_response": true,
-          "answer_count": 1,
-          "only_qtype": [
-            1,
-            2
-          ],
-          "only_qname_suffix": [
-            ".google.com",
-            ".orb.live"
-          ],
-          "geoloc_notfound": false,
-          "asn_notfound": false,
-          "dnstap_msg_type": "auth"
-        },
-        "metric_groups": {
-          "enable": [
-            "top_ecs"
-          ],
-          "disable": [
-            "cardinality",
-            "counters",
-            "dns_transaction",
-            "top_qnames"
-          ]
-        }
-      }
-    }
-  },
-  "input": {
-    "input_type": "pcap",
-    "tap": "default_pcap",
-    "filter": {
-      "bpf": "udp port 53"
-    },
-    "config": {
-      "iface": "wlo1",
-      "host_spec": "192.168.1.167/24",
-      "pcap_source": "libpcap",
-      "debug": true
-    }
-  },
-  "kind": "collection"
-}
-```
-Example policy pcap dns YAML:
-
-``` yaml
-handlers:
-  config:
-    deep_sample_rate: 100
-    num_periods: 5
-    topn_count: 10
-  modules:
-    default_dns:
-      type: dns
+Example policy pcap DNS:
+=== "YAML"
+    ``` yaml
+    handlers:
       config:
-        public_suffix_list: true
-        deep_sample_rate: 50
-        num_periods: 2
-        topn_count: 25
+        deep_sample_rate: 100
+        num_periods: 5
+        topn_count: 10
+      modules:
+        default_dns:
+          type: dns
+          config:
+            public_suffix_list: true
+            deep_sample_rate: 50
+            num_periods: 2
+            topn_count: 25
+          filter:
+            only_rcode: 0
+            only_dnssec_response: true
+            answer_count: 1
+            only_qtype: [1, 2]
+            only_qname_suffix: [".google.com", ".orb.live"]
+            geoloc_notfound: false
+            asn_notfound: false
+            dnstap_msg_type: "auth"
+          metric_groups:
+            enable:
+              - top_ecs
+            disable:
+              - cardinality
+              - counters
+              - dns_transaction
+              - top_qnames
+    input:
+      input_type: pcap
+      tap: default_pcap
       filter:
-        only_rcode: 0
-        only_dnssec_response: true
-        answer_count: 1
-        only_qtype: [1, 2]
-        only_qname_suffix: [".google.com", ".orb.live"]
-        geoloc_notfound: false
-        asn_notfound: false
-        dnstap_msg_type: "auth"
-      metric_groups:
-        enable:
-          - top_ecs
-        disable:
-          - cardinality
-          - counters
-          - dns_transaction
-          - top_qnames
-input:
-  input_type: pcap
-  tap: default_pcap
-  filter:
-    bpf: udp port 53
-  config:
-    iface: wlo1
-    host_spec: 192.168.1.167/24
-    pcap_source: libpcap
-    debug: true
-kind: collection
-```
+        bpf: udp port 53
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.167/24
+        pcap_source: libpcap
+        debug: true
+    kind: collection
+    ```
+
+=== "JSON"
+    ``` json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 5,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_dns": {
+            "type": "dns",
+            "config": {
+              "public_suffix_list": true,
+              "deep_sample_rate": 50,
+              "num_periods": 2,
+              "topn_count": 25
+            },
+            "filter": {
+              "only_rcode": 0,
+              "only_dnssec_response": true,
+              "answer_count": 1,
+              "only_qtype": [
+                1,
+                2
+              ],
+              "only_qname_suffix": [
+                ".google.com",
+                ".orb.live"
+              ],
+              "geoloc_notfound": false,
+              "asn_notfound": false,
+              "dnstap_msg_type": "auth"
+            },
+            "metric_groups": {
+              "enable": [
+                "top_ecs"
+              ],
+              "disable": [
+                "cardinality",
+                "counters",
+                "dns_transaction",
+                "top_qnames"
+              ]
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap": "default_pcap",
+        "filter": {
+          "bpf": "udp port 53"
+        },
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.167/24",
+          "pcap_source": "libpcap",
+          "debug": true
+        }
+      },
+      "kind": "collection"
+    }
+    ```
 
 
 ### Network (L2-L3) Analyzer (net)
@@ -735,10 +1149,18 @@ Input: PCAP <br>
 The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
 
 The `geoloc_notfound` filter usage syntax is:<br>
-```yaml
-geoloc_notfound: true
-```
 
+=== "YAML"
+    ```yaml
+    geoloc_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "geoloc_notfound": true
+    }
+    ```
+<br>
 **asn_notfound:** *bool* <br>
 
 Input: PCAP <br>
@@ -746,10 +1168,18 @@ Input: PCAP <br>
 Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
 
 The `asn_notfound` filter usage syntax is:<br>
-```yaml
-asn_notfound: true
-```
 
+=== "YAML"
+    ```yaml
+    asn_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "asn_notfound": true
+    }
+    ```
+<br>
 **only_geoloc_prefix:** *str[]* <br>
 
 Input: PCAP <br>
@@ -757,17 +1187,36 @@ Input: PCAP <br>
 Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
 
 The `only_geoloc_prefix` filter usage syntax is:<br>
-```yaml
-only_geoloc_prefix: array
-```
-Example:
 
-```yaml
-only_geoloc_prefix:
-  - BR
-  - US/CA
-```
-
+=== "YAML"
+    ```yaml
+    only_geoloc_prefix: 
+      - array
+    ```
+    Example:
+    ```yaml
+    only_geoloc_prefix:
+      - BR
+      - US/CA
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_geoloc_prefix": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_geoloc_prefix": [
+        "BR",
+        "US/CA"
+      ]
+    }
+    ```
+<br>
 **only_asn_number:** *str[]* <br>
 
 Input: PCAP <br>
@@ -775,119 +1224,149 @@ Input: PCAP <br>
 Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
 
 The `only_asn_number` filter usage syntax is:<br>
-```yaml
-only_asn_number: array
-```
-Example:
 
-```yaml
-only_asn_number:
-  - 7326
-  - 16136
-```
-
+=== "YAML"
+    ```yaml
+    only_asn_number:
+      - array
+    ```
+    Example:    
+    ```yaml
+    only_asn_number:
+      - 7326
+      - 16136
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_asn_number": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_asn_number": [
+        7326,
+        16136
+      ]
+    }
+    ```
 #### Examples of NET policy
 
-Example policy pcap dns JSON:
+Example policy pcap NET :
 
-```json
-{
-  "handlers": {
-    "config": {
-      "deep_sample_rate": 100,
-      "num_periods": 5,
-      "topn_count": 10
-    },
-    "modules": {
-      "default_net": {
-        "type": "net",
+=== "YAML"
+    ```yaml
+    handlers:
+      config:
+        deep_sample_rate: 100
+        num_periods: 5
+        topn_count: 10
+      modules:
+        default_net:
+          type: net
+          config:
+            deep_sample_rate: 1
+            num_periods: 2
+            topn_count: 25
+          filter:
+            geoloc_notfound: true
+            asn_notfound: true
+            only_geoloc_prefix:
+              - BR
+              - US/CA
+            only_asn_number:
+              - 7326
+              - 16136
+          metric_groups:
+            disable:
+              - cardinality
+              - counters
+              - top_geo
+              - top_ips
+    input:
+      input_type: pcap
+      tap_selector:
+        any:
+          - key1: value1
+          - key2: value2
+      filter:
+        bpf: net 192.168.1.0/24
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.0/24
+        pcap_source: libpcap
+        debug: true
+    kind: collection
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "handlers": {
         "config": {
-          "deep_sample_rate": 1,
-          "num_periods": 2,
-          "topn_count": 25
+          "deep_sample_rate": 100,
+          "num_periods": 5,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_net": {
+            "type": "net",
+            "config": {
+              "deep_sample_rate": 1,
+              "num_periods": 2,
+              "topn_count": 25
+            },
+            "filter": {
+              "geoloc_notfound": true,
+              "asn_notfound": true,
+              "only_geoloc_prefix": [
+                "BR",
+                "US/CA"
+              ],
+              "only_asn_number": [
+                7326,
+                16136
+              ]
+            },
+            "metric_groups": {
+              "disable": [
+                "cardinality",
+                "counters",
+                "top_geo",
+                "top_ips"
+              ]
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap_selector": {
+          "any": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value2"
+            }
+          ]
         },
         "filter": {
-          "geoloc_notfound": true,
-          "asn_notfound": true,
-          "only_geoloc_prefix": [
-            "BR",
-            "US/CA"
-          ],
-          "only_asn_number": [
-            7326,
-            16136
-          ]
+          "bpf": "net 192.168.1.0/24"
         },
-        "metric_groups": {
-          "disable": [
-            "cardinality",
-            "counters",
-            "top_geo",
-            "top_ips"
-          ]
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.0/24",
+          "pcap_source": "libpcap",
+          "debug": true
         }
-      }
+      },
+      "kind": "collection"
     }
-  },
-  "input": {
-    "input_type": "pcap",
-    "tap": "default_pcap",
-    "filter": {
-      "bpf": "net 192.168.1.0/24"
-    },
-    "config": {
-      "iface": "wlo1",
-      "host_spec": "192.168.1.0/24",
-      "pcap_source": "libpcap",
-      "debug": true
-    }
-  },
-  "kind": "collection"
-}
-```
-
-Example policy pcap net YAML:
-
-```yaml
-handlers:
-  config:
-    deep_sample_rate: 100
-    num_periods: 5
-    topn_count: 10
-  modules:
-    default_net:
-      type: net
-      config:
-        deep_sample_rate: 1
-        num_periods: 2
-        topn_count: 25
-      filter:
-        geoloc_notfound: true
-        asn_notfound: true
-        only_geoloc_prefix:
-          - BR
-          - US/CA
-        only_asn_number:
-          - 7326
-          - 16136
-      metric_groups:
-        disable:
-          - cardinality
-          - counters
-          - top_geo
-          - top_ips
-input:
-  input_type: pcap
-  tap: default_pcap
-  filter:
-    bpf: net 192.168.1.0/24
-  config:
-    iface: wlo1
-    host_spec: 192.168.1.0/24
-    pcap_source: libpcap
-    debug: true
-kind: collection
-```
+    ```
 
 ### DHCP Analyzer (dhcp)
 **Handler Type**: "dhcp" <br>
@@ -906,69 +1385,82 @@ Example policy pcap dhcp JSON:
 
 #### Examples of DHCP policy
 
-```json
-{
-  "handlers": {
-    "config": {
-      "deep_sample_rate": 100,
-      "num_periods": 8,
-      "topn_count": 10
-    },
-    "modules": {
-      "default_dhcp": {
-        "type": "dhcp",
-        "config": {
-          "deep_sample_rate": 1,
-          "num_periods": 8,
-          "topn_count": 25
-        }
-      }
-    }
-  },
-  "input": {
-    "input_type": "pcap",
-    "tap": "default_pcap",
-    "filter": {
-      "bpf": "net 192.168.1.0/24"
-    },
-    "config": {
-      "iface": "wlo1",
-      "host_spec": "192.168.1.0/24",
-      "pcap_source": "libpcap",
-      "debug": true
-    }
-  },
-  "kind": "collection"
-}
-```
+Example policy pcap DHCP :
 
-Example policy pcap dhcp YAML:
-
-```yaml
-handlers:
-  config:
-    deep_sample_rate: 100
-    num_periods: 8
-    topn_count: 10
-  modules:
-    default_dhcp:
-      type: dhcp
+=== "YAML"
+    ```yaml
+    handlers:
       config:
-        deep_sample_rate: 1
+        deep_sample_rate: 100
         num_periods: 8
-        topn_count: 25
-input:
-  input_type: pcap
-  tap: default_pcap
-  filter:
-    bpf: net 192.168.1.0/24
-  config:
-    iface: wlo1
-    host_spec: 192.168.1.0/24
-    pcap_source: libpcap
-    debug: true
-kind: collection
-```
+        topn_count: 10
+      modules:
+        default_dhcp:
+          type: dhcp
+          config:
+            deep_sample_rate: 1
+            num_periods: 8
+            topn_count: 25
+    input:
+      input_type: pcap
+      tap_selector:
+        all:
+          - key1: value1
+          - key2: value
+      filter:
+        bpf: net 192.168.1.0/24
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.0/24
+        pcap_source: libpcap
+        debug: true
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 8,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_dhcp": {
+            "type": "dhcp",
+            "config": {
+              "deep_sample_rate": 1,
+              "num_periods": 8,
+              "topn_count": 25
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap_selector": {
+          "all": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value"
+            }
+          ]
+        },
+        "filter": {
+          "bpf": "net 192.168.1.0/24"
+        },
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.0/24",
+          "pcap_source": "libpcap",
+          "debug": true
+        }
+      },
+      "kind": "collection"
+    }
+    ```
 
 ### Packet Capture Analyzer (pcap)
 **Handler Type**: "pcap" <br>
@@ -984,71 +1476,70 @@ kind: collection
 
 #### Examples of PCAP policy
 
-Example policy pcap pcap json:
+Example policy pcap PCAP:
 
-```json
-{
-  "handlers": {
-    "config": {
-      "deep_sample_rate": 100,
-      "num_periods": 8,
-      "topn_count": 10
-    },
-    "modules": {
-      "default_pcap": {
-        "type": "pcap",
-        "config": {
-          "deep_sample_rate": 6,
-          "num_periods": 3,
-          "topn_count": 25
-        }
-      }
-    }
-  },
-  "input": {
-    "input_type": "pcap",
-    "tap": "default_pcap",
-    "filter": {
-      "bpf": "net 192.168.1.0/24"
-    },
-    "config": {
-      "iface": "wlo1",
-      "host_spec": "192.168.1.0/24",
-      "pcap_source": "libpcap",
-      "debug": true
-    }
-  },
-  "kind": "collection"
-}
-```
-
-Example policy pcap pcap YAML:
-
-```yaml
-handlers:
-  config:
-    deep_sample_rate: 100
-    num_periods: 8
-    topn_count: 10
-  modules:
-    default_pcap:
-      type: pcap
+=== "YAML"
+    ```yaml
+    handlers:
       config:
-        deep_sample_rate: 6
-        num_periods: 3
-        topn_count: 25
-input:
-  input_type: pcap
-  tap: default_pcap
-  filter:
-    bpf: net 192.168.1.0/24
-  config:
-    iface: wlo1
-    host_spec: 192.168.1.0/24
-    pcap_source: libpcap
-    debug: true
-kind: collection
-```
+        deep_sample_rate: 100
+        num_periods: 8
+        topn_count: 10
+      modules:
+        default_pcap:
+          type: pcap
+          config:
+            deep_sample_rate: 6
+            num_periods: 3
+            topn_count: 25
+    input:
+      input_type: pcap
+      tap: default_pcap
+      filter:
+        bpf: net 192.168.1.0/24
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.0/24
+        pcap_source: libpcap
+        debug: true
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 8,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_pcap": {
+            "type": "pcap",
+            "config": {
+              "deep_sample_rate": 6,
+              "num_periods": 3,
+              "topn_count": 25
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap": "default_pcap",
+        "filter": {
+          "bpf": "net 192.168.1.0/24"
+        },
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.0/24",
+          "pcap_source": "libpcap",
+          "debug": true
+        }
+      },
+      "kind": "collection"
+    }
+    ```
 
 
 ### Flow Analyzer (flow)
@@ -1067,7 +1558,7 @@ kind: collection
 
 #### Configurations <br>
 - sample_rate_scaling: *bool* <br>
-- recorded_stream: <br> #todo
+- recorded_stream: #todo<br>
 - Abstract configurations. <br><br>
 
 **sample_rate_scaling**
@@ -1075,10 +1566,17 @@ kind: collection
 By default, flow metrics are generated by an approximation based on sampling the data. 1 packet every N is analyzed and the prediction of the entire population is made from the sample. If you want to see exactly all the exact data, you can disable `sample_rate_scaling`. <br>
 
 The `sample_rate_scaling` filter usage syntax is:<br>
-```yaml
-sample_rate_scaling: false
-```
 
+=== "YAML"
+    ```yaml
+    sample_rate_scaling: false
+    ```
+=== "JSON"
+    ```json
+    {
+      "sample_rate_scaling": false
+    }
+    ```
 #### Filters <br>
 
 
@@ -1100,17 +1598,36 @@ Considering a flow traffic, the same port can be monitoring data from different 
 The difference between `only_devices` and `only_ips` is that while this one filters the ids of the device that is sending the data, the other filters the ips that are communicating with each other (source or destination). <br>
 
 The `only_devices` filter usage syntax is:<br>
-```yaml
-only_devices: array
-```
 
-Example:
-```yaml
-only_devices:
-  - 216.239.38.10/24
-  - 192.158.1.38/32
-```
-
+=== "YAML"
+    ```yaml
+    only_devices:
+      - array
+    ```
+    Example:
+    ```yaml
+    only_devices:
+      - 216.239.38.10/24
+      - 192.158.1.38/32
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_devices": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_devices": [
+        "216.239.38.10/24",
+        "192.158.1.38/32"
+      ]
+    }
+    ```
+<br>
 **only_ips:** *str[]* <br>
 
 Input: FLOW <br>
@@ -1118,17 +1635,36 @@ Input: FLOW <br>
 To filter data only from certain source OR destination, you can use `only_ips` filter, for which CIDR (Inter-Domain Routing Classes) ranges are supported. <br>
 
 The `only_ips` filter usage syntax is:<br>
-```yaml
-only_ips: array
-```
 
-Example:
-```yaml
-only_ips:
-  - 192.168.1.1/24
-  - 192.158.1.38/32
-```
-
+=== "YAML"
+    ```yaml
+    only_ips:
+      - array
+    ```
+    Example:
+    ```yaml
+    only_ips:
+      - 192.168.1.1/24
+      - 192.158.1.38/32
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_ips": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_ips": [
+        "192.168.1.1/24",
+        "192.158.1.38/32"
+      ]
+    }
+    ```
+<br>
 **only_ports:** *str[]* <br>
 
 Input: FLOW <br>
@@ -1136,19 +1672,38 @@ Input: FLOW <br>
 `only_ports` filter only filters data being sent to or received on one of the selected IP ports (or range of ports). <br>
 
 The `only_ports` filter usage syntax is:<br>
-```yaml
-only_ports: array
-```
 
-Example:
-```yaml
-only_devices:
-  - 10853 #port can be passed as int
-  - "10854" #port can be passed as str
-  - 10860-10890 #range from 10860 to 10890. All ports in this interval will be accepted
-
-```
-
+=== "YAML"
+    ```yaml
+    only_ports:
+      - array
+    ```
+    Example:
+    ```yaml
+    only_devices:
+      - 10853 #port can be passed as int
+      - "10854" #port can be passed as str
+      - 10860-10890 #range from 10860 to 10890. All ports in this interval will be accepted
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_ports": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_devices": [
+        10853,
+        "10854",
+        "10860-10890"
+      ]
+    }
+    ```
+<br>
 **only_interfaces:** *str* <br>
 
 Input: FLOW <br>
@@ -1156,19 +1711,38 @@ Input: FLOW <br>
 `only_interfaces` filters data by device ports (not IP ports). In this way, it is possible to filter data referring to a specific type of network connected to the corresponding device port. <br>
 
 The `only_interfaces` filter usage syntax is:<br>
-```yaml
-only_interfaces: array
-```
 
-Example:
-```yaml
-only_interfaces:
-  - 10 #port can be passed as int
-  - "11" #port can be passed as str
-  - 12-16 #range from 12 to 16. All ports in this interval will be accepted
-
-```
-
+=== "YAML"
+    ```yaml
+    only_interfaces:
+      - array
+    ```
+    Example:
+    ```yaml
+    only_interfaces:
+      - 10 #port can be passed as int
+      - "11" #port can be passed as str
+      - 12-16 #range from 12 to 16. All ports in this interval will be accepted
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_interfaces": [
+        "array"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_interfaces": [
+        10,
+        "11",
+        "12-16"
+      ]
+    }
+    ```
+<br>
 **geoloc_notfound:** *bool* <br>
 
 Input: FLOW <br>
@@ -1176,115 +1750,128 @@ Input: FLOW <br>
 The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
 
 The `geoloc_notfound` filter usage syntax is:<br>
-```yaml
-geoloc_notfound: true
-```
 
+=== "YAML"
+    ```yaml
+    geoloc_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "geoloc_notfound": true
+    }
+    ```
+<br>
 **asn_notfound:** *bool* <br>
 
 Input: FLOW <br>
 
-
 Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
 
 The `asn_notfound` filter usage syntax is:<br>
-```yaml
-asn_notfound: true
-```
 
+=== "YAML"
+    ```yaml
+    asn_notfound: true
+    ```
+=== "JSON"
+    ```json
+    {
+      "asn_notfound": true
+    }
+    ```
 #### Examples of FLOW policy
 
-Example policy input flow handler flow JSON:
+Example policy input flow handler FLOW:
 
-```json
-{
-  "handlers": {
-    "config": {
-      "deep_sample_rate": 95,
-      "num_periods": 6,
-      "topn_count": 8
-    },
-    "modules": {
-      "my_flow": {
-        "type": "flow",
+=== "YAML"
+    ```yaml
+    handlers:
+        config:
+            deep_sample_rate: 95
+            num_periods: 6
+            topn_count: 8
+        modules:
+            my_flow:
+                type: flow
+                config:
+                    sample_rate_scaling: false
+                    deep_sample_rate: 85
+                    num_periods: 5
+                    topn_count: 7
+                metric_groups:
+                    disable:
+                        - cardinality
+                        - counters
+                        - top_geo
+                        - top_by_packets
+                        - top_by_bytes
+                filter:
+                    only_devices:
+                        - 216.239.38.10/24
+                        - 192.158.1.38/32
+                    only_ports:
+                        - 10853
+                        - 10860-10890
+                    only_interfaces:
+                        - 10-16
+                    geoloc_notfound: true
+                    asn_notfound: true
+    
+    input:
+      input_type: flow
+      tap: default_flow
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
         "config": {
-          "sample_rate_scaling": false,
-          "deep_sample_rate": 85,
-          "num_periods": 5,
-          "topn_count": 7
+          "deep_sample_rate": 95,
+          "num_periods": 6,
+          "topn_count": 8
         },
-        "metric_groups": {
-          "disable": [
-            "cardinality",
-            "counters",
-            "top_geo",
-            "top_by_packets",
-            "top_by_bytes"
-          ]
-        },
-        "filter": {
-          "only_devices": [
-            "216.239.38.10/24",
-            "192.158.1.38/32"
-          ],
-          "only_ports": [
-            10853,
-            "10860-10890"
-          ],
-          "only_interfaces": [
-            "10-16"
-          ],
-          "geoloc_notfound": true,
-          "asn_notfound": true
+        "modules": {
+          "my_flow": {
+            "type": "flow",
+            "config": {
+              "sample_rate_scaling": false,
+              "deep_sample_rate": 85,
+              "num_periods": 5,
+              "topn_count": 7
+            },
+            "metric_groups": {
+              "disable": [
+                "cardinality",
+                "counters",
+                "top_geo",
+                "top_by_packets",
+                "top_by_bytes"
+              ]
+            },
+            "filter": {
+              "only_devices": [
+                "216.239.38.10/24",
+                "192.158.1.38/32"
+              ],
+              "only_ports": [
+                10853,
+                "10860-10890"
+              ],
+              "only_interfaces": [
+                "10-16"
+              ],
+              "geoloc_notfound": true,
+              "asn_notfound": true
+            }
+          }
         }
-      }
+      },
+      "input": {
+        "input_type": "flow",
+        "tap": "default_flow"
+      },
+      "kind": "collection"
     }
-  },
-  "input": {
-    "input_type": "flow",
-    "tap": "default_flow"
-  },
-  "kind": "collection"
-}
-```
-
-Example policy input flow handler flow YAML:
-
-```yaml
-handlers:
-    config:
-        deep_sample_rate: 95
-        num_periods: 6
-        topn_count: 8
-    modules:
-        my_flow:
-            type: flow
-            config:
-                sample_rate_scaling: false
-                deep_sample_rate: 85
-                num_periods: 5
-                topn_count: 7
-            metric_groups:
-                disable:
-                    - cardinality
-                    - counters
-                    - top_geo
-                    - top_by_packets
-                    - top_by_bytes
-            filter:
-                only_devices:
-                    - 216.239.38.10/24
-                    - 192.158.1.38/32
-                only_ports:
-                    - 10853
-                    - 10860-10890
-                only_interfaces:
-                    - 10-16
-                geoloc_notfound: true
-                asn_notfound: true
-
-input:
-  input_type: flow
-  tap: default_flow
-kind: collection
-```
+    ```
