@@ -15,7 +15,8 @@ theme:
     repo: fontawesome/brands/github
 markdown_extensions:
   - abbr
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.snippets
   - pymdownx.highlight
   - pymdownx.inlinehilite
