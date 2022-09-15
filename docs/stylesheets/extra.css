@@ -12,7 +12,7 @@
 }
 
 :root * div.md-grid {
-    max-width: 75rem;
+    max-width: 65rem;
 }
 
 :root > * a.md-button {
@@ -92,51 +92,42 @@ div.md-search {
     height: 100% !important;
 }
 
-div.md-container.splash {
-    margin-left: -10%;
-    width: 150%;
-    height: 80vh;
-    background-color: #3089fc !important;
+.md-typeset h1, h1 {
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 117px;
+    /* identical to box height */    
+    color: #FFFFFF;
 }
 
-#why-orb {
-    margin-top: 2.5em;
-}
-
-.md-typeset h1 {
+.md-typeset h2, h2 {
     font-weight: 400;
     font-size: 64px;
     line-height: 78px;
     /* identical to box height */
 
-    text-align: center;
-
     background: radial-gradient(121.79% 1418.34% at 39.98% 0%, #7B61FF 0%, #018BF3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    
 }
 
-.md-source {
-    color: var(--md-primary-text-color);
-}
-
-.md-typeset h2 {
-    font-style: normal;
+.md-typeset h3, h3 {
     font-weight: 600;
     font-size: 32px;
     line-height: 42px;
     /* or 131% */
 
+    display: flex;
+    align-items: center;
     text-transform: capitalize;
 
     /* White */
-
     color: #FFFFFF;
 }
 
-.md-typeset p {
+.md-typeset p, p {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -147,33 +138,82 @@ div.md-container.splash {
     color: #FFFFFF;
 }
 
-div.splash {
-    position: absolute;
-    width: 2623px;
-    height: 1000px;
-    left: -447px;
-    top: -179px;
-    z-index: -1;
-    background-image: linear-gradient(
-            100deg,
-            hsl(242deg 63% 28%) 20%,
-            hsl(213deg 87% 43%) 39%,
-            hsl(225deg 100% 53%) 61%,
-            hsl(277deg 100% 58%) 95%
-    );
+.md-source {
+    color: var(--md-primary-text-color);
 }
 
-span.splash-title {
+.splash {
+    position: absolute;
+    width: 135vw;
+    
+    max-width: none !important;
+    left: -25vw;
+    top: -18vh;
+    z-index: -1;
+}
+
+.cta {
+    width: 125vw;
+    position: absolute;
+    max-width: none !important;
+    left: -20vw;
+    bottom: 0;
+    z-index: -1;
+}
+
+span.splash-title, p.splash-title {
     font-style: normal;
     font-weight: 400;
     font-size: 96px;
     line-height: 117px;
+    display: inline-block;
+    margin-top: 41vh;
     color: #ffffff;
 }
 
-p:has(>span.splash-title) {
-    padding-top: 27vh;
-    margin-bottom: 54px !important;
+.splash-cta {
+    margin-top: 72px;
+}
+
+.button-cta {
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    background: radial-gradient(85.37% 1691.2% at 12.66% -16.25%, #7B61FF 0%, #018BF3 100%) !important/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border-radius: 4px;
+    margin-bottom: 72px;
+}
+
+.home {
+    margin-top: 20vh;
+}
+
+.cta-title {
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 96px !important;
+    line-height: 117px !important;
+    color: #ffffff;
+    margin-top: 128px;
+}
+
+.cta-container {
+    display: grid;
+    text-align: center;
+    justify-content: space-around;
+    justify-items: center;
+}
+
+.cta-content {
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    line-height: 36px !important;
+    white-space: pre-line !important;
+    color: #ffffff;
+    margin-top: 48px;
+    margin-bottom: 48px;
 }
 
 .md-footer__link {
