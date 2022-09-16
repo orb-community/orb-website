@@ -146,9 +146,16 @@ p {
   font-size: 18px;
   line-height: 32px;
   /* or 178% */
-  /* White */
+}
 
-  
+.md-typeset a {
+  color: #df316f;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+strong {
+  color: #3089fc
 }
 
 p > a {
