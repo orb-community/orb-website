@@ -22,6 +22,7 @@
   .md-typeset h2,
   h2 {
     text-align: center;
+    line-break: auto;
   }
   :root {
     --md-primary-fg-color: #ffffff;
@@ -37,7 +38,7 @@
   }
 
   :root * div.md-grid {
-    max-width: 65rem;
+    max-width: 70rem;
   }
 
   :root > * a.md-button {
@@ -94,6 +95,7 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
+    width: 75%;
   }
 
   :root > * .md-search__inner > .md-search__form {
@@ -253,6 +255,10 @@
     margin-bottom: 48px;
   }
 
+  .md-footer, .md-footer-meta {
+    background-color: transparent;
+  }
+
   .md-footer__link {
     border: 1px solid #ffffff;
     filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.15));
@@ -285,6 +291,7 @@
 </section>
 
 <section class="mdx-container home">
+  <h2>Powerful analysis that's easy to<br>use and integrate</h2>
   <div class="md-grid md-typeset">
     {% block content %} {{page.content}} {% endblock %}
   </div>

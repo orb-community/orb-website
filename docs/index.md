@@ -9,8 +9,6 @@ hide:
 
 ---
 
-## Powerful analysis that's easy to use and integrate
-
 ### Distributed deep network observability
 
 Orb manages a [fleet](about/#fleet) of **[agents](about/#agent)** deployed across distributed, hybrid infrastructure: *containers*, *VMs*, *servers*, *routers*, and *switches*.

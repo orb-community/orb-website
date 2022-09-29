@@ -1,8 +1,10 @@
 :root {
+  --md-primary-bg-color: #ffffff;
   --md-primary-fg-color: #ffffff;
   --md-primary-text-color: #000000;
   --md-secondary-text-color: #969fb9;
   --orb-blue: #3089fc;
+  --orb-pink: #df316f;
 }
 
 :root > * {
@@ -11,7 +13,7 @@
 }
 
 :root * div.md-grid {
-  max-width: 65rem;
+  max-width: 70rem;
 }
 
 :root > * a.md-button {
@@ -51,7 +53,7 @@
 }
 
 :root > body > header.md-header {
-  background-color: transparent;
+  background-color: white;
   box-shadow: none;
 }
 
@@ -72,6 +74,7 @@ nav.md-grid {
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
+  width: 75%;
   line-height: 17px;
 }
 
@@ -148,6 +151,10 @@ p {
   
 }
 
+p > a {
+  color: var(--orb-pink);
+}
+
 .md-source {
   color: var(--md-primary-text-color);
 }
@@ -156,4 +163,17 @@ p {
   border: 1px solid #ffffff;
   filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.15));
   border-radius: 16px;
+}
+
+.md-footer__direction {
+  display: none;
+}
+
+.md-footer__link {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.md-footer-meta__inner {
+  max-width: 100% !important;
 }
