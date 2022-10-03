@@ -1188,7 +1188,8 @@ Example policy pcap DNS:
             },
             "metric_groups": {
               "enable": [
-                "top_ecs"
+                "top_ecs",
+                "top_qname_details"
               ],
               "disable": [
                 "cardinality",
