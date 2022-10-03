@@ -729,15 +729,15 @@ To disable all metric groups use the syntax:
 
 #### Metrics Group <br>
 
-|    Metric Group    | Default  | 
-|:------------------:|:--------:|
-|     `top_ecs`      | disabled |
-| `TopQnamesDetails` | disabled |
-|   `cardinality`    | enabled  |
-|     `counters`     | enabled  |
-| `dns_transaction`  | enabled  |
-|    `top_qnames`    | enabled  |
- |    `top_ports`     | enabled  |
+|    Metric Group     | Default  | 
+|:-------------------:|:--------:|
+|      `top_ecs`      | disabled |
+|    `cardinality`    | enabled  |
+|     `counters`      | enabled  |
+|  `dns_transaction`  | enabled  |
+|    `top_qnames`     | enabled  |
+ |     `top_ports`     | enabled  |
+| `top_qname_details` | disabled |
 
 
 #### Configurations
@@ -1129,6 +1129,7 @@ Example policy pcap DNS:
           metric_groups:
             enable:
               - top_ecs
+              - top_qname_details
             disable:
               - cardinality
               - counters
@@ -1813,19 +1814,13 @@ The `device_map` filter usage syntax is:<br>
 === "YAML"
     ```yaml
     device_map:
-      - device_custom_name
-      - device_ip
-      - interface_custom_name
-      - interface_index
+      - device_custom_name, device_ip, interface_custom_name, interface_index
     ```
 === "JSON"
     ```json
     {
       "device_map": [
-        "device_custom_name",
-        "device_ip",
-        "interface_custom_name",
-        "interface_index"
+        "device_custom_name, device_ip, interface_custom_name,interface_index"
       ]
     }
     ```
@@ -2055,10 +2050,7 @@ Example policy input flow handler FLOW:
                     topn_count: 7
                     first_filter_if_as_label: true
                     device_map:
-                        - router01
-                        - 192.168.0.127
-                        - eth0
-                        - 5
+                        - router01,192.168.0.127,eth0,5
                 metric_groups:
                     disable:
                         - cardinality
@@ -2101,10 +2093,7 @@ Example policy input flow handler FLOW:
               "topn_count": 7,
               "first_filter_if_as_label": true,
               "device_map": [
-                "router01",
-                "192.168.0.127",
-                "eth0",
-                5
+                "router01,192.168.0.127,eth0,5"
               ]
             },
             "metric_groups": {
