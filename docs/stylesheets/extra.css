@@ -99,6 +99,11 @@ div.md-search {
   height: 100% !important;
 }
 
+
+.md-main {
+  margin-top: 6em;
+}
+
 .md-typeset h1,
 h1 {
   font-weight: 400;
@@ -113,6 +118,7 @@ h2 {
   font-weight: 400;
   font-size: 64px;
   line-height: 78px;
+  padding-bottom: 54px;
   /* identical to box height */
 
   background: radial-gradient(
@@ -125,6 +131,10 @@ h2 {
   background-clip: text;
 }
 
+h2:first-of-type {
+  margin-top: 0px;
+}
+
 .md-typeset h3,
 h3 {
   font-weight: 600;
@@ -132,11 +142,9 @@ h3 {
   line-height: 42px;
   /* or 131% */
 
-  display: flex;
   align-items: center;
   text-transform: capitalize;
-
-  
+  padding-bottom: 16px;
 }
 
 .md-typeset p,
