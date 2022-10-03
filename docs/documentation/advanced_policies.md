@@ -729,15 +729,15 @@ To disable all metric groups use the syntax:
 
 #### Metrics Group <br>
 
-|    Metric Group     | Default  | 
-|:-------------------:|:--------:|
-|      `top_ecs`      | disabled |
-|    `cardinality`    | enabled  |
-|     `counters`      | enabled  |
-|  `dns_transaction`  | enabled  |
-|    `top_qnames`     | enabled  |
- |     `top_ports`     | enabled  |
-| `top_qname_details` | disabled |
+|     Metric Group     | Default  | 
+|:--------------------:|:--------:|
+|      `top_ecs`       | disabled |
+| `top_qnames_details` | disabled |
+|    `cardinality`     | enabled  |
+|      `counters`      | enabled  |
+|  `dns_transaction`   | enabled  |
+|     `top_qnames`     | enabled  |
+ |     `top_ports`      | enabled  |
 
 
 #### Configurations
@@ -1129,7 +1129,7 @@ Example policy pcap DNS:
           metric_groups:
             enable:
               - top_ecs
-              - top_qname_details
+              - top_qnames_details
             disable:
               - cardinality
               - counters
@@ -1189,7 +1189,7 @@ Example policy pcap DNS:
             "metric_groups": {
               "enable": [
                 "top_ecs",
-                "top_qname_details"
+                "top_qnames_details"
               ],
               "disable": [
                 "cardinality",
@@ -1807,7 +1807,7 @@ The `first_filter_if_as_label` filter usage syntax is:<br>
 **device_map**
 
 This configuration allows the user to assign a custom name to devices and/or interfaces.
-You can also set only the device or only the interface, as long as the pair [custom_name, default_identifier] is passed.
+You can also set only the device, as long as the pair [custom_name, default_identifier] is passed.
 
 
 The `device_map` filter usage syntax is:<br>
@@ -1815,13 +1815,13 @@ The `device_map` filter usage syntax is:<br>
 === "YAML"
     ```yaml
     device_map:
-      - device_custom_name, device_ip, interface_custom_name, interface_index
+      - device_custom_name,device_ip,interface_custom_name,interface_index
     ```
 === "JSON"
     ```json
     {
       "device_map": [
-        "device_custom_name, device_ip, interface_custom_name,interface_index"
+        "device_custom_name,device_ip,interface_custom_name,interface_index"
       ]
     }
     ```
@@ -2052,6 +2052,7 @@ Example policy input flow handler FLOW:
                     first_filter_if_as_label: true
                     device_map:
                         - router01,192.168.0.127,eth0,5
+                        - router01,192.168.0.127,eth1,6
                 metric_groups:
                     disable:
                         - cardinality
@@ -2094,7 +2095,8 @@ Example policy input flow handler FLOW:
               "topn_count": 7,
               "first_filter_if_as_label": true,
               "device_map": [
-                "router01,192.168.0.127,eth0,5"
+                "router01,192.168.0.127,eth0,5",
+                "router01,192.168.0.127,eth1,6"
               ]
             },
             "metric_groups": {
