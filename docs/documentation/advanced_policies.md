@@ -659,6 +659,27 @@ To enable any metric group use the syntax:
       }
     }
     ```
+
+To enable all available metric groups use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      enable:
+        - all
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "enable": [
+          "all"
+        ]
+      }
+    }
+    ```
+
 In order to disable any metric group use the syntax:
 
 === "YAML"
@@ -678,6 +699,28 @@ In order to disable any metric group use the syntax:
       }
     }
     ```
+
+To disable all metric groups use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      disable:
+        - all
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "disable": [
+          "all"
+        ]
+      }
+    }
+    ```
+
+
 * Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
@@ -686,14 +729,15 @@ In order to disable any metric group use the syntax:
 
 #### Metrics Group <br>
 
-|   Metric Group    | Default  | 
-|:-----------------:|:--------:|
-|     `top_ecs`     | disabled |
-|   `cardinality`   | enabled  |
-|    `counters`     | enabled  |
-| `dns_transaction` | enabled  |
-|   `top_qnames`    | enabled  |
- |    `top_ports`    | enabled  |
+|     Metric Group     | Default  | 
+|:--------------------:|:--------:|
+|      `top_ecs`       | disabled |
+| `top_qnames_details` | disabled |
+|    `cardinality`     | enabled  |
+|      `counters`      | enabled  |
+|  `dns_transaction`   | enabled  |
+|     `top_qnames`     | enabled  |
+ |     `top_ports`      | enabled  |
 
 
 #### Configurations
@@ -1085,6 +1129,7 @@ Example policy pcap DNS:
           metric_groups:
             enable:
               - top_ecs
+              - top_qnames_details
             disable:
               - cardinality
               - counters
@@ -1143,7 +1188,8 @@ Example policy pcap DNS:
             },
             "metric_groups": {
               "enable": [
-                "top_ecs"
+                "top_ecs",
+                "top_qnames_details"
               ],
               "disable": [
                 "cardinality",
@@ -1707,17 +1753,20 @@ Example policy pcap PCAP:
 
 #### Metrics Group <br>
 
-|   Metric Group   | Default | 
-|:----------------:|:-------:|
-|  `cardinality`   | enabled |
-|    `counters`    | enabled |
-|    `top_geo`     | enabled |
-| `top_by_packets` | enabled |
-|  `top_by_bytes`  | enabled |
+|   Metric Group   | Default  | 
+|:----------------:|:--------:|
+|  `cardinality`   | enabled  |
+|    `counters`    | enabled  |
+| `top_by_packets` | enabled  |
+|  `top_by_bytes`  | enabled  |
+|    `top_geo`     | disabled |
+| `conversations`  | disabled |
 <br>
 
 #### Configurations <br>
 - sample_rate_scaling: *bool* <br>
+- first_filter_if_as_label: *bool* <br>
+- device_map: *str[]*
 - recorded_stream: #todo<br>
 - Abstract configurations. <br><br>
 
@@ -1737,6 +1786,47 @@ The `sample_rate_scaling` filter usage syntax is:<br>
       "sample_rate_scaling": false
     }
     ```
+
+**first_filter_if_as_label**
+
+This configuration requires the `only_interfaces` filter to be active (true). If this setting is `true`, the interfaces will be used as labels for the metrics.
+
+The `first_filter_if_as_label` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    first_filter_if_as_label: true
+    ```
+=== "JSON"
+    ```json
+    {
+    "first_filter_if_as_label": true
+    }
+    ```
+
+**device_map**
+
+This configuration allows the user to assign a custom name to devices and/or interfaces.
+You can also set only the device, as long as the pair [custom_name, default_identifier] is passed.
+
+
+The `device_map` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    device_map:
+      - device_custom_name,device_ip,interface_custom_name,interface_index
+    ```
+=== "JSON"
+    ```json
+    {
+      "device_map": [
+        "device_custom_name,device_ip,interface_custom_name,interface_index"
+      ]
+    }
+    ```
+
+
 #### Filters <br>
 
 
@@ -1840,7 +1930,7 @@ The `only_ports` filter usage syntax is:<br>
     ```
     Example:
     ```yaml
-    only_devices:
+    only_ports:
       - 10853 #port can be passed as int
       - "10854" #port can be passed as str
       - 10860-10890 #range from 10860 to 10890. All ports in this interval will be accepted
@@ -1856,7 +1946,7 @@ The `only_ports` filter usage syntax is:<br>
     Example:
     ```json
     {
-      "only_devices": [
+      "only_ports": [
         10853,
         "10854",
         "10860-10890"
@@ -1959,6 +2049,10 @@ Example policy input flow handler FLOW:
                     deep_sample_rate: 85
                     num_periods: 5
                     topn_count: 7
+                    first_filter_if_as_label: true
+                    device_map:
+                        - router01,192.168.0.127,eth0,5
+                        - router01,192.168.0.127,eth1,6
                 metric_groups:
                     disable:
                         - cardinality
@@ -1977,7 +2071,6 @@ Example policy input flow handler FLOW:
                         - 10-16
                     geoloc_notfound: true
                     asn_notfound: true
-    
     input:
       input_type: flow
       tap: default_flow
@@ -1999,7 +2092,12 @@ Example policy input flow handler FLOW:
               "sample_rate_scaling": false,
               "deep_sample_rate": 85,
               "num_periods": 5,
-              "topn_count": 7
+              "topn_count": 7,
+              "first_filter_if_as_label": true,
+              "device_map": [
+                "router01,192.168.0.127,eth0,5",
+                "router01,192.168.0.127,eth1,6"
+              ]
             },
             "metric_groups": {
               "disable": [
