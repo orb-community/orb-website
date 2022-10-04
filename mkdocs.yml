@@ -36,21 +36,8 @@ markdown_extensions:
 plugins:
   - search
 nav:
-  - Home: 'index.md'
   - About: 'about.md'
-  - Getting Started: 
-    - Register a new account: 'getting_started.md'
-    - Deploy your first agent: 'deploy_orb_agent.md'
-    - Configure what to monitor: 'configure_monitoring.md'
-    - Check the health status: 'checking_health.md'
-    - Visualize your metrics: 'visualizing_metrics.md'
-  - Guides:
-    - Overview: 'guides.md'
-    - Authoritative DNS: 'authoritative_dns.md'
-    - Recursive DNS: 'recursive_dns.md'
-    - DHCP Services: 'dhcp_services.md'
-    - Network Traffic (Flow): 'flow.md'
-    - Response Testing: 'response_testing.md'
+  - Installation: 'install.md'
   - Documentation:
     - Orb Documentation:
       - Running ORB agent: 'documentation/running_orb_agent.md'
