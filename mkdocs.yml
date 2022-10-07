@@ -32,11 +32,24 @@ plugins:
 nav:
   - Home: 'index.md'
   - About: 'about.md'
-  - Installation: 'install.md'
-  - Getting Started: 'getting_started.md'
+  - Getting Started: 
+    - Register a new account: 'getting_started.md'
+    - Configure monitoring: 'setting_up_your_account.md'
+    - Deploy your first agent: 'deploying_orb_agent.md'
+    - Check health status: 'health_checks.md'
+    - Visualize your metrics: 'visualizing_metrics.md'
+    - Use Cases: 'use_cases.md'
+    - SaaS: 'saas.md'
+  - Use Cases:
+    - Authoritative DNS Services: 'use_cases.md'
+    - Recursive DNS Services: 'stub.md'
+    - DHCP Services: 'stub.md'
+    - Network Traffic: 'stub.md'
+    - Active Response Time Testing: 'stub.md'
   - Documentation:
     - Running ORB agent: 'documentation/running_orb_agent.md'
     - Advanced Policies: 'documentation/advanced_policies.md'
+    - Installation: 'install.md'
     - Orb REST API: 'api/orb_rest_api.md'
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
