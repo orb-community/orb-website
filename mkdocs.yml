@@ -3,7 +3,7 @@ theme:
   name: material
   custom_dir: overrides
   favicon: img/ORB-logo-ring.png
-  logo: img/ORB-logo-transparent.png
+  logo: img/orb_logo_original.png
   font:
     text: Montserrat
   features:
