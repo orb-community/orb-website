@@ -1,6 +1,79 @@
 # Advanced Policies
 
-An Orb policy for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
+An Orb policy must be written in json and has sevem top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
+
+=== "JSON"
+    ```json
+    {
+        "name": "",
+        "description" : "",
+        "tags": {},
+        "backend": "",
+        "schema_version": "",
+        "format": "",
+        "policy": {}
+    }
+    ```
+
+| Policy Required Sections |  
+|:------------------------:|
+|          `name`          |
+|        `backend`         |
+|         `policy`         |
+
+| Policy Optional Sections | Default |
+|:------------------------:|:-------:|
+|      `description`       | *None*  |
+|          `tags`          | *None*  |
+|     `schema_version`     |  *1.0*  |
+|         `format`         | *json*  |
+
+
+## Name
+Policy name must be unique, must start with a letter and contain only letters, numbers, `"-"` or `"_"`.
+
+!!! example "Examples"
+
+    !!! success
+
+        "name": "my_policy" <br>
+        "name": "MY-policy_2
+    
+    !!! failure
+        "name": "1_policy" <br>
+        "name": "MY-policy/2
+
+## Description
+Policy description is a free string. You can describe using spaces, letters, numbers and special characters.
+
+
+## Tags
+Tags are intended to facilitate organization and are a dict type. 
+
+The `tags` usage syntax is:<br>
+
+=== "JSON"
+    ```json
+        "tags": {"key1":"value1", "key2":"value2", "key3":"value3"}
+    ```
+
+## Backend
+Backend determine to which backend the policy will be attached.
+The only option nowadays is `pktvisor`.
+
+## Schema version
+
+Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Currently, the version used by pktvisor (and the default one) is "1.0"
+
+## Format
+
+The `format` specifies in which format the policy data will be written. The options are `json` and `yaml`. Json is the default value.
+
+## Policy
+Currently, the only backend supported by Orb is `pktvisor`. For that reason, the policy must have pktvisor's format.
+
+### Pktvisor policy
+The policy data for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
 
 === "YAML"
     ```yaml
@@ -21,15 +94,14 @@ An Orb policy for pktvisor can be written in either YAML or JSON, and has four t
       "kind": "collection"
     }
     ```
-
-## Input section
+#### Input section
 
 The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the agent level. <br>
 3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
 **Required fields:** <br>
 `input_type` - the type of input.  This field will be validated with the type of tap indicated by the `tap` parameter or by the `tap selector` . If the types are incompatible, the policy will fail.<br>
 
-`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing taps.
+`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](../running_orb_agent/#taps).
 If `tap_selector` is used, it can be chosen whether taps with any of the tags or with all tags will be attached.
 
 
@@ -39,7 +111,7 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
 
 Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
 
-### Default input structure
+##### Default input structure
 
 *Using specific tap ([check the application in a policy here](#examples-of-dns-policy)):*
 
@@ -144,333 +216,8 @@ Every configuration set at the input can be reset at the tap level, with the one
     }
     ```
 
-### Packet Capture (pcap) 
 
-#### Configurations
-
-There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
-
-|   Config    | Type |
-|:-----------:|:-----|
-|  pcap_file  | str  |
-| pcap_source | str  |
-|    iface    | str  |
-|  host_spec  | str  |
-|    debug    | bool |
-
-`pcap_file`: *str* <br>
-One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
-
-=== "YAML"
-    ```yaml
-     pcap_file: "path/to/file"
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "pcap_file": "path/to/file"
-    }
-    ```
-<br>
-`debug`: *bool* <br>
-
-When `true` activate debug logs
-
-=== "YAML"
-    ```yaml
-    debug: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "debug": true
-    }
-    ```
-<br>
-`pcap_source`: *str* <br>
-
-`pcap_source` specifies the type of library to use. Default: libpcap. Options: libpcap or af_packet (linux).
-
-=== "YAML"
-    ```yaml
-    pcap_source: "af_packet"
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "pcap_source": "af_packet"
-    }
-    ```
-<br>
-`iface`: *str* <br>
-
-Name of the interface to bind. If the interface name does not exist, the policy will fail.
-
-=== "YAML"
-    ```yaml
-    iface: str
-    ```    
-    Example:    
-    ```yaml
-    iface: eth0
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "iface": "str"
-    }
-    ```
-    Example:    
-    ```json
-    {
-      "iface": "eth0"
-    }
-    ```
-<br>
-`host_spec`: *str* <br>
-The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
-
-=== "YAML"
-    ```yaml
-    host_spec: str
-    ```
-    Example:
-    ```yaml
-    host_spec: "192.168.0.1/24"
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "host_spec": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "host_spec": "192.168.0.1/24"
-    }
-    ```
-
-#### Filters
-
-There is only one filter referring to the input PCAP: `bpf`.
-
-<br>
-`bpf`: *str* <br>
-
-filter data based on Berkeley Packet Filters (BPF).
-
-=== "YAML"
-    ```yaml
-    bpf: str
-    ```
-    Example:
-    ```yaml
-    bpf: "port 53"
-    ```
-=== "JSON"
-    ```json
-    {
-      "bpf": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "bpf": "port 53"
-    }
-    ```
-
-### Sflow/Netflow (flow)
-
-#### Configurations
-
-There are 4 configs for flow inputs: `pcap_file`, `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
-
-|  Config   | Type |
-|:---------:|:-----|
-| pcap_file | str  |
-|   port    | int  |
-|   bind    | str  |
-| flow_type | str  |
-
-
-
-`pcap_file`: *str* <br>
-
-One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
-
-=== "YAML"
-    ```yaml
-     pcap_file: path/to/file
-    ```
-=== "JSON"
-    ```json
-    {
-      "pcap_file": "path/to/file"
-    }
-    ```
-<br>
-`port`: *int* and `bind`: *str* <br>
-
-The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
-
-=== "YAML"
-    ```yaml
-    port: int
-    bind: str
-    ```    
-    Example:    
-    ```yaml
-    port: 6343
-    bind: 192.168.1.1
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "port": "int",
-      "bind": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "port": 6343,
-      "bind": "192.168.1.1"
-    }
-    ```
-<br>
-`flow_type`: *str* <br>
-
-Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><br>
-
-=== "YAML"
-    ```yaml
-    flow_type: str
-    ```
-    Example:
-    ```yaml
-    flow_type: netflow
-    ```
-=== "JSON"
-    ```json
-    {
-      "flow_type": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "flow_type": "netflow"
-    }
-    ```
-
-#### Filters
-
-There are no specific filters for the FLOW input.
-
-###  Dnstap
-
-#### Configurations
-
-The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
-
-|   Config    | Type |
-|:-----------:|:-----|
-| dnstap_file | str  |
-|   socket    | int  |
-|     tcp     | str  |
-
-`dnstap_file`: *str* <br>
-
-One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
-
-=== "YAML"
-     ```yaml
-     dnstap_file: path/to/file
-     ```
-=== "JSON"
-    ```json
-    {
-      "dnstap_file": "path/to/file"
-    }
-    ```
-<br>
-`socket`: *str* <br>
-
-Path to socket file containing port and ip to bind
-
-=== "YAML"
-    ```yaml
-    socket: path/to/file.sock
-    ```
-=== "JSON"
-    ```json
-    {
-      "socket": "path/to/file.sock"
-    }
-    ```
-<br>
-`tcp`: *str* <br>
-
-The other way to inform the ip and port to be monitored is through the 'tcp' configuration. Usage syntax is a string with port:ip (only ipv4 is supported for now). <br>
-
-=== "YAML"
-     ```yaml
-     tcp: ip:port
-     ```
-    Example:
-     ```yaml
-     tcp: 192.168.8.2:235
-     ```
-
-=== "JSON"
-    ```json
-    {
-      "tcp": "ip:port"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "tcp": "192.168.8.2:235"
-    }
-    ```
-<br>
-#### Filters
-
-`only_hosts`: *str* <br>
-
-`only_hosts` filters data from a specific host.
-
-=== "YAML"
-     ```yaml    
-     only_hosts: str
-     ```
-    Example:
-     ```yaml
-     only_hosts: 192.168.1.4/32
-     ```
-
-=== "JSON"
-    ```json
-    {
-      "only_hosts": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_hosts": "192.168.1.4/32"
-    }
-    ```
-## Configuration section
+#### Configuration section
 
 There is the possibility of defining settings on the policy level. Currently, the only configuration available is the `merge_like_handlers`. 
 
@@ -499,11 +246,17 @@ The `merge_like_handlers` filter usage syntax is:<br>
       }
     }
     ```
-## Handlers section (Analysis)
+
+#### Kind section
+
+What kind of object you want to create
+The only option for now is `"collection"`.
+
+#### Handlers section (Analysis)
 
 Handlers are the modules responsible for extracting metrics from inputs. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
 
-### Abstract Configurations
+##### Abstract Configurations
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
 
@@ -724,10 +477,10 @@ To disable all metric groups use the syntax:
 * Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
-### DNS Analyzer (dns)
+##### DNS Analyzer (dns)
 **Handler Type**: "dns" <br>
 
-#### Metrics Group <br>
+###### Metrics Group <br>
 
 |     Metric Group     | Default  | 
 |:--------------------:|:--------:|
@@ -740,7 +493,7 @@ To disable all metric groups use the syntax:
  |     `top_ports`      | enabled  |
 
 
-#### Configurations
+###### Configurations
 - public_suffix_list: *bool*. <br>
 - Abstract configurations. <br><br>
 
@@ -771,7 +524,7 @@ The `public_suffix_list` filter usage syntax is:<br>
     }
     ```
 
-#### Filters <br>
+###### Filters <br>
 
 |         Filter         |  Type   | Input  |
 |:----------------------:|:-------:|:------:|
@@ -1098,7 +851,7 @@ The `dnstap_msg_type` filter usage syntax is:<br>
     }
     ```
 <br>
-#### Examples of DNS policy
+###### Examples of DNS policy
 
 Example policy pcap DNS:
 === "YAML"
@@ -1223,10 +976,10 @@ Example policy pcap DNS:
     ```
 
 
-### Network (L2-L3) Analyzer (net)
+##### Network (L2-L3) Analyzer (net)
 **Handler Type**: "net" <br>
 
-#### Metrics Group <br>
+###### Metrics Group <br>
 
 | Metric Group  | Default | 
 |:-------------:|:-------:|
@@ -1236,10 +989,10 @@ Example policy pcap DNS:
 |   `top_ips`   | enabled |
 <br>
 
-#### Configurations <br>
+###### Configurations <br>
 - Abstract configurations. <br><br>
 
-#### Filters <br>
+###### Filters <br>
 
 |        Filter        |  Type   |    Input     |
 |:--------------------:|:-------:|:------------:|
@@ -1359,7 +1112,7 @@ The `only_asn_number` filter usage syntax is:<br>
       ]
     }
     ```
-#### Examples of NET policy
+###### Examples of NET policy
 
 Example policy pcap NET :
 
@@ -1474,22 +1227,22 @@ Example policy pcap NET :
     }
     ```
 
-### DHCP Analyzer (dhcp)
+##### DHCP Analyzer (dhcp)
 **Handler Type**: "dhcp" <br>
 
-#### Metrics Group 
+###### Metrics Group 
 
 - No metrics group available <br>
 
-#### Configurations <br>
+###### Configurations <br>
 - Abstract configurations. <br><br>
 
-#### Filters
+###### Filters
 - No filters available. <br><br>
 
 Example policy pcap dhcp JSON:
 
-#### Examples of DHCP policy
+###### Examples of DHCP policy
 
 Example policy pcap DHCP :
 
@@ -1568,22 +1321,22 @@ Example policy pcap DHCP :
     }
     ```
 
-### BGP Analyzer (bgp)
+##### BGP Analyzer (bgp)
 **Handler Type**: "bgp" <br>
 
-#### Metrics Group 
+###### Metrics Group 
 
 - No metrics group available <br>
 
-#### Configurations <br>
+###### Configurations <br>
 - Abstract configurations. <br><br>
 
-#### Filters
+###### Filters
 - No filters available. <br><br>
 
 Example policy pcap bgp JSON:
 
-#### Examples of BGP policy
+###### Examples of BGP policy
 
 Example policy pcap BGP :
 
@@ -1668,19 +1421,19 @@ Example policy pcap BGP :
     ```
 
 
-### Packet Capture Analyzer (pcap)
+##### Packet Capture Analyzer (pcap)
 **Handler Type**: "pcap" <br>
 
-#### Metrics Group
+###### Metrics Group
 - No metrics group available. <br>
 
-#### Configurations
+###### Configurations
 - Abstract configurations. <br>
 
-#### Filters
+###### Filters
 - No filters available. <br>
 
-#### Examples of PCAP policy
+###### Examples of PCAP policy
 
 Example policy pcap PCAP:
 
@@ -1748,10 +1501,10 @@ Example policy pcap PCAP:
     ```
 
 
-### Flow Analyzer (flow)
+##### Flow Analyzer (flow)
 **Handler Type**: "flow" <br>
 
-#### Metrics Group <br>
+###### Metrics Group <br>
 
 |   Metric Group   | Default  | 
 |:----------------:|:--------:|
@@ -1763,7 +1516,7 @@ Example policy pcap PCAP:
 | `conversations`  | disabled |
 <br>
 
-#### Configurations <br>
+###### Configurations <br>
 - sample_rate_scaling: *bool* <br>
 - first_filter_if_as_label: *bool* <br>
 - device_map: *str[]*
@@ -1827,7 +1580,7 @@ The `device_map` filter usage syntax is:<br>
     ```
 
 
-#### Filters <br>
+###### Filters <br>
 
 
 |      Filter       |  Type   | Input |
@@ -2030,7 +1783,7 @@ The `asn_notfound` filter usage syntax is:<br>
       "asn_notfound": true
     }
     ```
-#### Examples of FLOW policy
+###### Examples of FLOW policy
 
 Example policy input flow handler FLOW:
 

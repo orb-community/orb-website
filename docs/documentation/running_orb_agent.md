@@ -121,7 +121,7 @@ Most configuration options can be passed to the container as environment variabl
 You will need to use a configuration file if:
 
 * You want to assign tags to the agent at the edge
-* You want to setup custom pktvisor Taps
+* You want to set up custom pktvisor Taps
 * You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML.
@@ -141,7 +141,7 @@ visor:
             iface: "eth0"
             host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
 
-# this section is used orb-agent
+# this section is used by orb-agent
 # most sections and keys are optional
 orb:
    # these are arbitrary key value pairs used for organization in the control plane and UI
@@ -179,6 +179,338 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 docker run -v /local/orb:/usr/local/orb/ --net=host \
       ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
 ```
+
+### Taps
+
+The tap section specifies what data the agent should be listening in on. <br>
+3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
+
+#### Packet Capture (pcap) 
+
+##### Configurations
+
+There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
+
+|   Config    | Type |
+|:-----------:|:-----|
+|  pcap_file  | str  |
+| pcap_source | str  |
+|    iface    | str  |
+|  host_spec  | str  |
+|    debug    | bool |
+
+`pcap_file`: *str* <br>
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+
+=== "YAML"
+    ```yaml
+     pcap_file: "path/to/file"
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "pcap_file": "path/to/file"
+    }
+    ```
+<br>
+`debug`: *bool* <br>
+
+When `true` activate debug logs
+
+=== "YAML"
+    ```yaml
+    debug: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "debug": true
+    }
+    ```
+<br>
+`pcap_source`: *str* <br>
+
+`pcap_source` specifies the type of library to use. Default: libpcap. Options: libpcap or af_packet (linux).
+
+=== "YAML"
+    ```yaml
+    pcap_source: "af_packet"
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "pcap_source": "af_packet"
+    }
+    ```
+<br>
+`iface`: *str* <br>
+
+Name of the interface to bind.
+
+=== "YAML"
+    ```yaml
+    iface: str
+    ```    
+    Example:    
+    ```yaml
+    iface: eth0
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "iface": "str"
+    }
+    ```
+    Example:    
+    ```json
+    {
+      "iface": "eth0"
+    }
+    ```
+<br>
+`host_spec`: *str* <br>
+The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
+
+=== "YAML"
+    ```yaml
+    host_spec: str
+    ```
+    Example:
+    ```yaml
+    host_spec: "192.168.0.1/24"
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "host_spec": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "host_spec": "192.168.0.1/24"
+    }
+    ```
+
+##### Filters
+
+There is only one filter referring to the input PCAP: `bpf`.
+
+<br>
+`bpf`: *str* <br>
+
+filter data based on Berkeley Packet Filters (BPF).
+
+=== "YAML"
+    ```yaml
+    bpf: str
+    ```
+    Example:
+    ```yaml
+    bpf: "port 53"
+    ```
+=== "JSON"
+    ```json
+    {
+      "bpf": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "bpf": "port 53"
+    }
+    ```
+
+#### Sflow/Netflow (flow)
+
+##### Configurations
+
+There are 4 configs for flow inputs: `pcap_file`, `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+
+|  Config   | Type |
+|:---------:|:-----|
+| pcap_file | str  |
+|   port    | int  |
+|   bind    | str  |
+| flow_type | str  |
+
+
+
+`pcap_file`: *str* <br>
+
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+
+=== "YAML"
+    ```yaml
+     pcap_file: path/to/file
+    ```
+=== "JSON"
+    ```json
+    {
+      "pcap_file": "path/to/file"
+    }
+    ```
+<br>
+`port`: *int* and `bind`: *str* <br>
+
+The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
+
+=== "YAML"
+    ```yaml
+    port: int
+    bind: str
+    ```    
+    Example:    
+    ```yaml
+    port: 6343
+    bind: 192.168.1.1
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "port": "int",
+      "bind": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "port": 6343,
+      "bind": "192.168.1.1"
+    }
+    ```
+<br>
+`flow_type`: *str* <br>
+
+Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><br>
+
+=== "YAML"
+    ```yaml
+    flow_type: str
+    ```
+    Example:
+    ```yaml
+    flow_type: netflow
+    ```
+=== "JSON"
+    ```json
+    {
+      "flow_type": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "flow_type": "netflow"
+    }
+    ```
+
+##### Filters
+
+There are no specific filters for the FLOW input.
+
+####  Dnstap
+
+##### Configurations
+
+The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
+
+|   Config    | Type |
+|:-----------:|:-----|
+| dnstap_file | str  |
+|   socket    | int  |
+|     tcp     | str  |
+
+`dnstap_file`: *str* <br>
+
+One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
+
+=== "YAML"
+     ```yaml
+     dnstap_file: path/to/file
+     ```
+=== "JSON"
+    ```json
+    {
+      "dnstap_file": "path/to/file"
+    }
+    ```
+<br>
+`socket`: *str* <br>
+
+Path to socket file containing port and ip to bind
+
+=== "YAML"
+    ```yaml
+    socket: path/to/file.sock
+    ```
+=== "JSON"
+    ```json
+    {
+      "socket": "path/to/file.sock"
+    }
+    ```
+<br>
+`tcp`: *str* <br>
+
+The other way to inform the ip and port to be monitored is through the 'tcp' configuration. Usage syntax is a string with port:ip (only ipv4 is supported for now). <br>
+
+=== "YAML"
+     ```yaml
+     tcp: ip:port
+     ```
+    Example:
+     ```yaml
+     tcp: 192.168.8.2:235
+     ```
+
+=== "JSON"
+    ```json
+    {
+      "tcp": "ip:port"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "tcp": "192.168.8.2:235"
+    }
+    ```
+<br>
+##### Filters
+
+`only_hosts`: *str* <br>
+
+`only_hosts` filters data from a specific host.
+
+=== "YAML"
+     ```yaml    
+     only_hosts: str
+     ```
+    Example:
+     ```yaml
+     only_hosts: 192.168.1.4/32
+     ```
+
+=== "JSON"
+    ```json
+    {
+      "only_hosts": "str"
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_hosts": "192.168.1.4/32"
+    }
+    ```
 
 ## Advanced auto-provisioning setup
 Some use cases require a way to provision agents directly on edge infrastructure without creating an agent manually in the UI or REST API ahead of time. To do so, you will need to create an API key which can be used by `orb-agent` to provision itself.
