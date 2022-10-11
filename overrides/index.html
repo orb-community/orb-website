@@ -9,6 +9,10 @@
   .md-content {
     display: none;
   }
+
+  .md-header .md-icon {
+    color: #ffffff;
+  }
   @media screen and (min-width: 60em) {
     .md-sidebar--secondary {
       display: none;
@@ -17,6 +21,7 @@
   @media screen and (min-width: 76.25em) {
     .md-sidebar--primary {
       display: none;
+      background-color: transparent;
     }
   }
   
@@ -34,7 +39,7 @@
   }
 
   :root * div.md-grid {
-    max-width: 70rem;
+    max-width: 75%;
     margin-left: auto !important;
   }
 
@@ -176,14 +181,34 @@
     color: var(--md-primary-text-color);
   }
 
-  .splash {
-    position: absolute;
-    width: 135vw;
+  .mdx-hero {
+    background-image: url('assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 200px;
+    padding-bottom: 400px;
+    margin-top: -55px;
+    width: auto;
+    height: 100%;
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    background-clip: border-box;
+  }
 
-    max-width: none !important;
-    left: -25vw;
-    top: -18vh;
-    z-index: -1;
+  .mdx-hero-bottom {
+    background-image: url('assets/images/bottom-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    margin-bottom: -200px;
+    width: auto;
+    height: 100%;
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    background-clip: content-box;
   }
 
   .cta {
@@ -202,7 +227,6 @@
     font-size: 96px;
     line-height: 117px;
     display: inline-block;
-    margin-top: 41vh;
     color: #ffffff;
   }
 
@@ -267,28 +291,19 @@
     border-radius: 16px;
   }
 </style>
-<section class="mdx-container">
+<section class="mdx-container mdx-hero">
   <div class="md-grid md-typeset">
-    <div class="mdx-hero">
-      <div class="mdx-hero__image">
-        <img
-          src="assets/images/background@2x.png"
-          alt=""
-          class="splash"
-          draggable="false"
-        />
-      </div>
-      <div class="mdx-hero__content">
-        <span class="splash-title">Orb Dynamic<br />Edge Observability</span>
-        <a
-          href="{{ page.next_page.url | url }}"
-          title="{{ page.next_page.title | e }}"
-          class="md-button md-button--primary splash-cta"
-        >
-          Get Started with Orb
-        </a>
-      </div>
+    <div class="mdx-hero__content">
+      <span class="splash-title">Orb Dynamic<br />Edge Observability</span>
+      <a
+        href="{{ page.next_page.url | url }}"
+        title="{{ page.next_page.title | e }}"
+        class="md-button md-button--primary splash-cta"
+      >
+        Get Started with Orb
+      </a>
     </div>
+
   </div>
 </section>
 
@@ -299,17 +314,8 @@
   </div>
 </section>
 
-<section class="mdx-container">
-  <div class="md-grid md-typeset">
-    <div class="mdx-hero">
-      <div class="mdx-hero__image">
-        <img
-          src="assets/images/bottom-background@2x.png"
-          alt=""
-          class="cta"
-          draggable="false"
-        />
-      </div>
+<section class="mdx-container mdx-hero-bottom">
+  <div class="md-grid md-typeset">     
       <div class="cta-container">
         <span class="cta-title">Backed by NS1</span>
         <span class="cta-content"
@@ -324,7 +330,7 @@
           Get Started with Orb
         </a>
       </div>
-    </div>
+    
   </div>
 </section>
 {% endblock %}
