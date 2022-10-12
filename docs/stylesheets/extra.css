@@ -53,6 +53,10 @@
   display: none;
 }
 
+.md-header {
+  color: var(--md-primary-text-color) !important;
+}
+
 :root > body > header.md-header {
   background-color: white;
   box-shadow: none;
