@@ -10,6 +10,7 @@ theme:
     - navigation.tracking
     - navigation.instant
     - navigation.tabs
+    - navigation.sections
     - navigation.tabs.sticky
     - navigation.top
     - toc.integrate
@@ -39,14 +40,13 @@ nav:
   - About: 'about.md'
   - Installation: 'install.md'
   - Documentation:
-    - Orb Documentation:
-      - Running ORB agent: 'documentation/running_orb_agent.md'
-      - Advanced Policies: 'documentation/advanced_policies.md'
-      - Installing Orb: 'install.md'
-      - Orb REST API: 'api/orb_rest_api.md'
-    - pktvisor Documentation:
-      - Testing: 'pktvisor.md'
-  - Community: 'contact.md'
+    - Running ORB agent: 'documentation/running_orb_agent.md'
+    - Advanced Policies: 'documentation/advanced_policies.md'
+    - Installation: 'install.md'
+    - Orb REST API: 'api/orb_rest_api.md'
+  - Community: 
+    - ORB: 'contact.md'
+    - pktVisor: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
 edit_uri: edit/main/docs
