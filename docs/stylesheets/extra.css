@@ -87,6 +87,11 @@ nav.md-grid {
   text-decoration-color: #000000;
 }
 
+.md-tabs__inner {
+  margin-right: 32px !important;
+}
+
+
 :root > * .md-search__icon {
   color: var(--md-primary-text-color);
 }
@@ -98,6 +103,7 @@ nav.md-grid {
 
 div.md-search {
   height: 100% !important;
+  margin-right: 12px;
 }
 
 .md-main {
@@ -192,3 +198,30 @@ p > a {
 .md-footer-meta__inner {
   max-width: 100% !important;
 }
+
+a.login {
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 12px;
+  width: 180px !important;
+  height: fit-content !important;
+
+  /* Orb Blue */
+  color: #ffffff !important;
+  background: var(--orb-blue);
+  /* popup shadow */
+
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  line-height: 16px;
+  /* identical to box height, or 67% */
+
+  align-items: center;
+
+  border-color: transparent;
+}
+
