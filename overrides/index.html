@@ -43,6 +43,10 @@
     margin-left: auto !important;
   }
 
+  .md-tabs__inner {
+    margin-right: 32px !important;
+  }
+
   :root > * a.md-button {
     justify-content: center;
     align-items: center;
@@ -84,11 +88,6 @@
     box-shadow: none;
   }
 
-  :root > header > nav.md-header__inner,
-  nav.md-grid {
-    max-width: 90rem;
-  }
-
   :root > * nav.md-tabs {
     text-align: end;
     background-color: transparent;
@@ -119,6 +118,7 @@
 
   div.md-search {
     height: 100% !important;
+    margin-right: 12px;
   }
 
   .md-typeset h1,
@@ -169,7 +169,7 @@
   p {
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 32px;
     /* or 178% */
     /* White */
@@ -247,6 +247,37 @@
     border-radius: 4px;
     margin-bottom: 72px;
     text-decoration: none;
+  }
+
+  a.login {
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 12px;
+    width: 180px !important;
+    height: fit-content !important;
+
+    /* Orb Blue */
+
+    background: var(--orb-blue);
+    /* popup shadow */
+
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 16px;
+    /* identical to box height, or 67% */
+
+    display: flex;
+    align-items: center;
+
+    /* White */
+
+    color: var(--md-primary-text-color);
+
+    border-color: transparent;
   }
 
   .home {
