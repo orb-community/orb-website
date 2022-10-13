@@ -1,11 +1,11 @@
-# Use Cases
+# Solution Guides
 
-## Providing Observability for Authoritative DNS Services
+### Observability for Authoritative DNS Services
 
-## Providing Observability for Recursive DNS Services
+### Observability for Recursive DNS Services
 
-## Providing Observability for DHCP Services
+### Observability for DHCP Services
 
-## Providing Network Traffic Observability
+### Network Traffic Observability
 
-## Providing Active Response Time Observability
+### Active Response Time Observability
