@@ -40,8 +40,8 @@ nav:
     - Visualize your metrics: 'visualizing_metrics.md'
     - Use Cases: 'use_cases.md'
     - SaaS: 'saas.md'
-  - Use Cases:
-    - Authoritative DNS Services: 'use_cases.md'
+  - Guides:
+    - Authoritative DNS Services: 'guides.md'
     - Recursive DNS Services: 'stub.md'
     - DHCP Services: 'stub.md'
     - Network Traffic: 'stub.md'
