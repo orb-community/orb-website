@@ -36,21 +36,26 @@ nav:
     - Register a new account: 'getting_started.md'
     - Deploy your first agent: 'deploy_orb_agent.md'
     - Configure what to monitor: 'configure_monitoring.md'
-    - Check health status: 'checking_health.md'
+    - Check the health status: 'checking_health.md'
     - Visualize your metrics: 'visualizing_metrics.md'
   - Guides:
-    - Authoritative DNS: 'guides.md'
-    - Recursive DNS: 'stub.md'
-    - DHCP Services: 'stub.md'
-    - Network Traffic: 'stub.md'
-    - Response Time Testing: 'stub.md'
+    - Overview: 'guides.md'
+    - Authoritative DNS: 'authoritative_dns.md'
+    - Recursive DNS: 'recursive_dns.md'
+    - DHCP Services: 'dhcp_services.md'
+    - Network Traffic (Flow): 'flow.md'
+    - Response Testing: 'response_testing.md'
   - Documentation:
-    - Running ORB agent: 'documentation/running_orb_agent.md'
-    - Advanced Policies: 'documentation/advanced_policies.md'
-    - Installing Orb: 'install.md'
-    - Orb REST API: 'api/orb_rest_api.md'
+    - Orb Documentation:
+      - Running ORB agent: 'documentation/running_orb_agent.md'
+      - Advanced Policies: 'documentation/advanced_policies.md'
+      - Installing Orb: 'install.md'
+      - Orb REST API: 'api/orb_rest_api.md'
+    - pktvisor Documentation:
+      - Testing: 'pktvisor.md'
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
+repo_name: ns1labs/orb
 edit_uri: edit/main/docs
 extra:
   social:

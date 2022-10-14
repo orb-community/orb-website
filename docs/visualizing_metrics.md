@@ -6,5 +6,3 @@
 2. You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is [Grafana](https://grafana.com).
 3. A pre-made dashboard for visualizing Orb/pktvisor metrics is [available for import here](https://grafana.com/grafana/dashboards/14221).
    ![](./img/grafana_dash.png)
-
-prom exporter
