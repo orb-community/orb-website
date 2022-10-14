@@ -54,6 +54,8 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ns1labs/orb
+    - icon: fontawesome/brands/github
+      link: https://github.com/ns1labs/pktvisor
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
