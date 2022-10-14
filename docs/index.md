@@ -32,7 +32,7 @@ Save time and effort by streamlining your data pipeline, all with a tool that ta
 
 ## Where Orb fits
 
-The worl is awaish in observability tools. Orb is different because it focuses on the network edge - dynamic, distributed environments where resources are at a premium but the impact on end user experiences is high.
+The world is awash in observability tools. Orb is different because it focuses on the network edge - dynamic, distributed environments where resources are at a premium but the impact on end user experiences is high.
 
 Orb is designed to integrate seamlessly with modren observability stacks. It minimizes the grunt work of building a data pipeline while producing the real-time, actionable intelligence you need from the network edge.
 
