@@ -37,16 +37,16 @@ markdown_extensions:
 plugins:
   - search
 nav:
-  - About: 'about.md'
-  - Installation: 'install.md'
+  - About: "about.md"
+  - Installation: "install.md"
   - Documentation:
-    - Running ORB agent: 'documentation/running_orb_agent.md'
-    - Advanced Policies: 'documentation/advanced_policies.md'
-    - Installation: 'install.md'
-    - Orb REST API: 'api/orb_rest_api.md'
-  - Community: 
-    - ORB: 'contact.md'
-    - pktVisor: 'contact.md'
+      - Running ORB agent: "documentation/running_orb_agent.md"
+      - Advanced Policies: "documentation/advanced_policies.md"
+      - Installation: "install.md"
+      - Orb REST API: "api/orb_rest_api.md"
+  - Community:
+      - ORB: "contact.md"
+      - pktVisor: "contact.md"
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
 edit_uri: edit/main/docs
