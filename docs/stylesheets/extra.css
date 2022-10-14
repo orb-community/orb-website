@@ -180,8 +180,9 @@ p > a {
   color: var(--orb-pink);
 }
 
-.md-source {
-  color: var(--md-primary-text-color);
+.md-nav__source {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .md-footer__link {
@@ -227,4 +228,19 @@ a.login {
   align-items: center;
 
   border-color: transparent;
+}
+
+.md-nav__title {
+  line-height: unset !important;
+  height: unset !important;
+  white-space: unset !important;
+  padding-top: 4rem !important;
+}
+
+.md-sidebar {
+  color: var(--md-primary-text-color) !important;
+}
+
+.md-nav__link, .md-nav__item .md-nav__link--active {
+  color: var(--md-primary-text-color) !important;
 }
