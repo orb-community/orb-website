@@ -14,7 +14,12 @@
 
 :root * div.md-grid {
   max-width: 70rem;
+  width: 80%;
   margin-left: 12px;
+}
+
+.md-content {
+  margin-left: 4rem;
 }
 
 :root > * a.md-button {

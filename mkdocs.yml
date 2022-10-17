@@ -10,7 +10,6 @@ theme:
     - navigation.tracking
     - navigation.instant
     - navigation.tabs
-    - navigation.sections
     - navigation.tabs.sticky
     - navigation.top
     - toc.integrate
