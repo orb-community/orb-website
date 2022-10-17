@@ -205,8 +205,8 @@ p > a {
   padding-bottom: 1em;
 }
 
-.md-footer-meta__inner {
-  max-width: 100% !important;
+div > .md-footer-meta__inner.md-grid{
+  width: 100% !important;
 }
 
 a.login {
