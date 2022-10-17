@@ -194,6 +194,10 @@ article > p:first-of-type {
   margin-top: 0px;
 }
 
+.admonition {
+  margin: 3rem 0px !important;
+}
+
 .md-footer__link {
   border: 1px solid #ffffff;
   filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.15));
