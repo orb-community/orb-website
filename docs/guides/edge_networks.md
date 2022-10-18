@@ -1,4 +1,4 @@
-# Configuring Observability for the Edge Networks
+# Configuring Observability for Edge Networks
 
 !!! info
     This is a general purpose monitoring configuration for Orb agents that can be used wherever observability of the network is required.

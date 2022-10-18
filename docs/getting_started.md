@@ -1,7 +1,7 @@
 
 # Getting started
 
-To get started, we suggest registering for a free account on our SaaS Orb platform, which can be found at <a href="https://orb.live" target="_blank">Orb.live</a>. For those who prefer self hosting Orb, you can find detailed installation instructions in the Documentation section of this site ([Installation](install.md)).
+To get started, we suggest registering for a free account on our SaaS Orb platform, which can be found at <a href="https://orb.live" target="_blank">Orb.live</a>. For those who prefer self hosting Orb, you can find detailed installation instructions in the Documentation section of this site ([Installation](documentation/orb/install.md)).
 
 ## Register a new account
 
