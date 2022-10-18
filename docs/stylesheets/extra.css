@@ -264,3 +264,7 @@ a.login {
 div > .md-banner {
   width: 100%;
 }
+
+.md-typeset img {
+  margin: 1rem 0;
+}

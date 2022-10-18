@@ -61,7 +61,7 @@ Agents are organized into agent groups based on key-value tag matching.
 ![Agent Group Tags](./img/new_agent_group_name_plus.png)
 
 4. Click **Next**. You should see a message about the number of agents matching. Then click **Save**.  
-![Review Agent Group](./img/new_agent_group_name_next.png)
+![Review Agent Group](./img/new_agent_group_name_next.png)  
 By clicking in **EXPAND** you can see the agents that are matching with the group (This is optional).  
 ![Group Matching Agents](./img/new_agent_group_expand_matching.png)
 
