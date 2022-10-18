@@ -11,6 +11,9 @@ theme:
     - navigation.tabs.sticky
     - navigation.top
     - search.suggest
+    - toc.integrate
+    - navigation.indexes
+    - navigation.sections
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -25,34 +28,30 @@ markdown_extensions:
   - pymdownx.details
   - attr_list
   - md_in_html
-  - toc:
-      permalink: true
 plugins:
   - search
 nav:
-  - Home: 'index.md'
-  - About: 'about.md'
-  - Getting Started: 
-    - Register a new account: 'getting_started.md'
-    - Deploy your first agent: 'deploy_orb_agent.md'
-    - Configure what to monitor: 'configure_monitoring.md'
-    - Check the health status: 'checking_health.md'
-    - Visualize your metrics: 'visualizing_metrics.md'
+  - Home: index.md
+  - About: about.md
+  - Getting Started: getting_started.md
   - Guides:
-    - Overview: 'guides.md'
-    - Authoritative DNS: 'authoritative_dns.md'
-    - Recursive DNS: 'recursive_dns.md'
-    - DHCP Services: 'dhcp_services.md'
-    - Network Traffic (Flow): 'flow.md'
-    - Response Testing: 'response_testing.md'
+    - guides/index.md
+    - Edge Networks: guides/edge_networks.md
+    - Authoritative DNS: guides/authoritative_dns.md
+    - Recursive DNS: guides/recursive_dns.md
+    - DHCP Services: guides/dhcp_services.md
+    - Network Traffic (Flow): guides/flow.md
+    - Response Testing: guides/response_testing.md
   - Documentation:
-    - Orb Documentation:
-      - Running ORB agent: 'documentation/running_orb_agent.md'
-      - Advanced Policies: 'documentation/advanced_policies.md'
-      - Installing Orb: 'install.md'
-      - Orb REST API: 'api/orb_rest_api.md'
-    - pktvisor Documentation:
-      - Testing: 'pktvisor.md'
+    - Orb:
+      - Running ORB agent: documentation/orb/running_orb_agent.md
+      - Policy Guide for pktvisor: documentation/orb/advanced_policies.md
+      - Installing Orb control plane: documentation/orb/install.md
+      - Orb REST API: api/orb_rest_api.md
+    - pktvisor:
+      - About: documentation/pktvisor/about.md
+      - Running pktkvisor: documentation/pktvisor/install.md      
+      - Documentation: documentation/pktvisor/docs.md
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
