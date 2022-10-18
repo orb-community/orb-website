@@ -40,8 +40,8 @@
   border-radius: 4px;
 
   font-weight: 600;
-  font-size: 24px;
-  line-height: 16px;
+  font-size: 1rem;
+  line-height: 0.75rem;
   /* identical to box height, or 67% */
 
   display: flex;
@@ -73,8 +73,8 @@ nav.md-grid {
 }
 
 .md-nav__item .md-nav__link--active {
-    color: #000000;
-    font-weight: 600;
+  color: #000000;
+  font-weight: 600;
 }
 
 :root > * nav.md-tabs {
@@ -100,7 +100,6 @@ nav.md-grid {
   margin-right: 1.5rem !important;
 }
 
-
 :root > * .md-search__icon {
   color: var(--md-primary-text-color);
 }
@@ -122,8 +121,8 @@ div.md-search {
 .md-typeset h1,
 h1 {
   font-weight: 400;
-  font-size: 4.5rem;
-  line-height: 5.3rem;
+  font-size: 4rem;
+  line-height: 4.75rem;
   /* identical to box height */
   display: none;
 }
@@ -131,9 +130,9 @@ h1 {
 .md-typeset h2,
 h2 {
   font-weight: 400;
-  font-size: 3rem;
-  line-height: 3.75rem;
-  padding-bottom: 54px;
+  font-size: 2.5rem;
+  line-height: 3.25rem;
+  margin-bottom: 2rem;
   /* identical to box height */
 
   background: radial-gradient(
@@ -153,8 +152,8 @@ h2:first-of-type {
 .md-typeset h3,
 h3 {
   font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   /* or 131% */
 
   align-items: center;
@@ -166,8 +165,8 @@ h3 {
 p {
   font-style: normal;
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
   /* or 178% */
 }
 
@@ -257,10 +256,11 @@ a.login {
   color: var(--md-primary-text-color) !important;
 }
 
-.md-nav__link, .md-nav__item .md-nav__link--active {
+.md-nav__link,
+.md-nav__item .md-nav__link--active {
   color: var(--md-primary-text-color) !important;
 }
 
-div>.md-banner {
+div > .md-banner {
   width: 100%;
 }
