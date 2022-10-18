@@ -1,6 +1,4 @@
-## Installation
-
-**Orb consists of two major components:**
+Orb consists of two major components:
 
 1. The **Control Plane**—comprised of microservices, communication systems, databases, etc.—deploys to a 
 central location (usually a cloud environment on Kubernetes).
