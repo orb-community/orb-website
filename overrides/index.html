@@ -1,11 +1,11 @@
 {% extends "partials/main.html" %} {% block tabs %} {{ super() }}
 <style>
   .orb-logo {
-    content: url('img/orb_logo_original.png') !important;
+    content: url("img/orb_logo_original.png") !important;
     background-repeat: no-repeat;
     background-size: contain;
   }
-  
+
   .md-header {
     position: initial;
   }
@@ -30,7 +30,7 @@
       background-color: transparent;
     }
   }
-  
+
   :root {
     --md-primary-fg-color: #ffffff;
     --md-primary-bg-color: #171c30;
@@ -92,7 +92,7 @@
   }
 
   .mdx-hero {
-    background-image: url('assets/images/background.png');
+    background-image: url("assets/images/background.png");
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 30vh;
@@ -107,7 +107,7 @@
   }
 
   .mdx-hero-bottom {
-    background-image: url('assets/images/bottom-background.png');
+    background-image: url("assets/images/bottom-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 200px;
@@ -187,7 +187,8 @@
     margin-bottom: 48px;
   }
 
-  .md-footer, .md-footer-meta {
+  .md-footer,
+  .md-footer-meta {
     background-color: transparent;
   }
 
@@ -201,12 +202,13 @@
     color: #000000 !important;
   }
 
-  .md-nav__link, .md-nav__item .md-nav__link--active {
+  .md-nav__link,
+  .md-nav__item .md-nav__link--active {
     color: #000000 !important;
   }
-  
-  nav.md-nav > label > a >  img.orb-logo {
-    content: url('img/ORB-logo-transparent.png') !important;
+
+  nav.md-nav > label > a > img.orb-logo {
+    content: url("img/ORB-logo-transparent.png") !important;
     background-repeat: no-repeat;
     background-size: contain;
   }
@@ -223,7 +225,6 @@
         Get Started with Orb
       </a>
     </div>
-
   </div>
 </section>
 
@@ -235,22 +236,21 @@
 </section>
 
 <section class="mdx-container mdx-hero-bottom">
-  <div class="md-grid md-typeset">     
-      <div class="cta-container">
-        <span class="cta-title">Backed by NS1</span>
-        <span class="cta-content"
-          >Orb was born at NS1 Labs, where we're commited to making open source,
-          dynamic edge observabilty a reality</span
-        >
-        <a
-          href="./getting_started"
-          title="{{ page.next_page.title | e }}"
-          class="md-button md-button--primary button-cta"
-        >
-          Get Started with Orb
-        </a>
-      </div>
-    
+  <div class="md-grid md-typeset">
+    <div class="cta-container">
+      <span class="cta-title">Backed by NS1</span>
+      <span class="cta-content"
+        >Orb was born at NS1 Labs, where we're commited to making open source,
+        dynamic edge observabilty a reality</span
+      >
+      <a
+        href="./getting_started"
+        title="{{ page.next_page.title | e }}"
+        class="md-button md-button--primary button-cta"
+      >
+        Get Started with Orb
+      </a>
+    </div>
   </div>
 </section>
 {% endblock %}
