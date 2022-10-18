@@ -213,8 +213,11 @@ article > p:first-of-type {
   padding-bottom: 1em;
 }
 
-div > .md-footer-meta__inner.md-grid{
+div.md-footer-meta__inner.md-grid {
   width: 100% !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  max-width: unset;
 }
 
 a.login {
@@ -256,4 +259,8 @@ a.login {
 
 .md-nav__link, .md-nav__item .md-nav__link--active {
   color: var(--md-primary-text-color) !important;
+}
+
+div>.md-banner {
+  width: 100%;
 }
