@@ -83,9 +83,9 @@ nav.md-grid {
   color: var(--md-primary-text-color);
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 0.75rem;
   width: 75%;
-  line-height: 17px;
+  line-height: 1rem;
 }
 
 :root > * .md-search__inner > .md-search__form {
@@ -97,7 +97,7 @@ nav.md-grid {
 }
 
 .md-tabs__inner {
-  margin-right: 32px !important;
+  margin-right: 1.5rem !important;
 }
 
 
@@ -112,18 +112,18 @@ nav.md-grid {
 
 div.md-search {
   height: 100% !important;
-  margin-right: 12px;
+  margin-right: 0.5rem;
 }
 
 .md-main {
-  margin-top: 6em;
+  margin-top: 4rem;
 }
 
 .md-typeset h1,
 h1 {
   font-weight: 400;
-  font-size: 96px;
-  line-height: 117px;
+  font-size: 4.5rem;
+  line-height: 5.3rem;
   /* identical to box height */
   display: none;
 }
@@ -131,8 +131,8 @@ h1 {
 .md-typeset h2,
 h2 {
   font-weight: 400;
-  font-size: 64px;
-  line-height: 78px;
+  font-size: 3rem;
+  line-height: 3.75rem;
   padding-bottom: 54px;
   /* identical to box height */
 
@@ -153,8 +153,8 @@ h2:first-of-type {
 .md-typeset h3,
 h3 {
   font-weight: 600;
-  font-size: 32px;
-  line-height: 42px;
+  font-size: 1.5rem;
+  line-height: 2rem;
   /* or 131% */
 
   align-items: center;
@@ -166,19 +166,19 @@ h3 {
 p {
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 32px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   /* or 178% */
 }
 
 .md-typeset a {
-  color: #df316f;
+  color: var(--orb-pink);
   font-weight: 600;
   text-decoration: underline;
 }
 
 strong {
-  color: #3089fc
+  color: var(--orb-blue);
 }
 
 p > a {
@@ -209,8 +209,8 @@ article > p:first-of-type {
 }
 
 .md-footer__link {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 div.md-footer-meta__inner.md-grid {
@@ -225,7 +225,7 @@ a.login {
   align-items: center;
   margin-left: auto;
   margin-right: 12px;
-  width: 180px !important;
+  width: 10rem !important;
   height: fit-content !important;
 
   /* Orb Blue */
@@ -237,8 +237,8 @@ a.login {
   border-radius: 4px;
 
   font-weight: 600 !important;
-  font-size: 18px !important;
-  line-height: 16px;
+  font-size: 0.75rem !important;
+  line-height: 1rem;
   /* identical to box height, or 67% */
 
   align-items: center;
