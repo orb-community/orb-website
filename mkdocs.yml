@@ -12,6 +12,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
+    - navigation.sections
     - toc.integrate
     - toc.expand
     - toc.follow
@@ -50,7 +51,7 @@ nav:
   - Documentation:
     - Orb:
       - Running ORB agent: documentation/orb/running_orb_agent.md
-      - Policy Guide for pktvisor: documentation/orb/advanced_policies.md
+      - Policy Reference Guide: documentation/orb/advanced_policies.md
       - Installing Orb control plane: documentation/orb/install.md
       - Orb REST API: api/orb_rest_api.md
     - pktvisor:

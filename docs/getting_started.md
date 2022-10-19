@@ -1,11 +1,10 @@
-
 # Getting started
 
-To get started, we suggest registering for a free account on our SaaS Orb platform, which can be found at [Orb.live](https://orb.live). For those who prefer self hosting Orb, you can find detailed installation instructions in the Documentation section of this site ([Installation](documentation/orb/install.md)).
+To get started, we suggest registering for a free account on our SaaS Orb platform, which can be found at <a href="https://orb.live" target="_blank">Orb.live</a>. For those who would prefer to self host the Orb control plane, you can find detailed installation instructions in the Documentation section ([Installation](documentation/orb/install.md#self-host)).
 
 ## Register a new account
 
-Register for a free Orb.live account here [Orb.live](https://orb.live/auth/register)  
+Register for a free Orb.live account here <a href="https://orb.live" target="_blank">Orb.live</a>  
 ![Register](./img/register.png)
 
 After registering, you should see the home page with a welcome message.  
@@ -17,7 +16,7 @@ Follow the steps below after logging in to your Orb Portal to get an agent up an
 
 ### Create an Agent
 
-You create an agent for each node you want to monitor. Agents are organized by tags. Each agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](#advanced-auto-provisioning-setup) instead of through the UI.
+You create an agent for each node you want to monitor. Agents are organized by tags. Each agent has a set of corresponding credentials used during provisioning. You may also [provision agents directly at the edge](documentation/orb/running_orb_agent.md#advanced-auto-provisioning-setup) instead of through the UI.
 
 1. Navigate to **Agents**, and then click **New Agent**.  
 ![Agent List View](./img/new_agent.png)
@@ -37,7 +36,7 @@ You create an agent for each node you want to monitor. Agents are organized by t
 6. Your agent credentials should appear. Copy the *Provisioning Command*. This command contains all the information you need to run the Docker container with the given credentials you now have for the agent.  
 ![Provisioning Command](./img/provisioning_command.png)
 
-7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be the real interface name) and run the command. See [Running Orb Agent](/docs/#running-orb-agent) for more details.
+7. Paste the *Provisioning Command* into your terminal (optionally edit "mock" to be the real interface name) and run the command. See [Running Orb Agent](documentation/orb/running_orb_agent.md) for more details.
 
 8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The agent you just created should display an *Online* status.  
 ![Agent List: agent online](./img/agent_online.png)

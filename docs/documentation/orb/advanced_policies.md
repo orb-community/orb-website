@@ -1,4 +1,4 @@
-# Policy Guide for pktvisor
+## Policy Reference Guide
 
 An Orb policy for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
 
@@ -443,6 +443,7 @@ The other way to inform the ip and port to be monitored is through the 'tcp' con
     }
     ```
 <br>
+
 #### Filters
 
 `only_hosts`: *str* <br>
@@ -470,6 +471,7 @@ The other way to inform the ip and port to be monitored is through the 'tcp' con
       "only_hosts": "192.168.1.4/32"
     }
     ```
+
 ## Configuration section
 
 There is the possibility of defining settings on the policy level. Currently, the only configuration available is the `merge_like_handlers`. 
@@ -499,6 +501,7 @@ The `merge_like_handlers` filter usage syntax is:<br>
       }
     }
     ```
+
 ## Handlers section (Analysis)
 
 Handlers are the modules responsible for extracting metrics from inputs. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
@@ -725,6 +728,7 @@ To disable all metric groups use the syntax:
 
 
 ### DNS Analyzer (dns)
+
 **Handler Type**: "dns" <br>
 
 #### Metrics Group <br>
@@ -741,6 +745,7 @@ To disable all metric groups use the syntax:
 
 
 #### Configurations
+
 - public_suffix_list: *bool*. <br>
 - Abstract configurations. <br><br>
 
@@ -1098,6 +1103,7 @@ The `dnstap_msg_type` filter usage syntax is:<br>
     }
     ```
 <br>
+
 #### Examples of DNS policy
 
 Example policy pcap DNS:
@@ -1237,6 +1243,7 @@ Example policy pcap DNS:
 <br>
 
 #### Configurations <br>
+
 - Abstract configurations. <br><br>
 
 #### Filters <br>
@@ -1359,6 +1366,7 @@ The `only_asn_number` filter usage syntax is:<br>
       ]
     }
     ```
+
 #### Examples of NET policy
 
 Example policy pcap NET :
@@ -1475,6 +1483,7 @@ Example policy pcap NET :
     ```
 
 ### DHCP Analyzer (dhcp)
+
 **Handler Type**: "dhcp" <br>
 
 #### Metrics Group 
@@ -1482,9 +1491,11 @@ Example policy pcap NET :
 - No metrics group available <br>
 
 #### Configurations <br>
+
 - Abstract configurations. <br><br>
 
 #### Filters
+
 - No filters available. <br><br>
 
 Example policy pcap dhcp JSON:
@@ -1569,6 +1580,7 @@ Example policy pcap DHCP :
     ```
 
 ### BGP Analyzer (bgp)
+
 **Handler Type**: "bgp" <br>
 
 #### Metrics Group 
@@ -1576,9 +1588,11 @@ Example policy pcap DHCP :
 - No metrics group available <br>
 
 #### Configurations <br>
+
 - Abstract configurations. <br><br>
 
 #### Filters
+
 - No filters available. <br><br>
 
 Example policy pcap bgp JSON:
@@ -1669,15 +1683,19 @@ Example policy pcap BGP :
 
 
 ### Packet Capture Analyzer (pcap)
+
 **Handler Type**: "pcap" <br>
 
 #### Metrics Group
+
 - No metrics group available. <br>
 
 #### Configurations
+
 - Abstract configurations. <br>
 
 #### Filters
+
 - No filters available. <br>
 
 #### Examples of PCAP policy
@@ -1749,6 +1767,7 @@ Example policy pcap PCAP:
 
 
 ### Flow Analyzer (flow)
+
 **Handler Type**: "flow" <br>
 
 #### Metrics Group <br>
@@ -1764,6 +1783,7 @@ Example policy pcap PCAP:
 <br>
 
 #### Configurations <br>
+
 - sample_rate_scaling: *bool* <br>
 - first_filter_if_as_label: *bool* <br>
 - device_map: *str[]*
@@ -2030,6 +2050,7 @@ The `asn_notfound` filter usage syntax is:<br>
       "asn_notfound": true
     }
     ```
+
 #### Examples of FLOW policy
 
 Example policy input flow handler FLOW:
