@@ -11,7 +11,7 @@ hide:
 
 ## Introducing Orb
 
-**Orb** is a free, open source tool developed at [NS1](https://ns1.com/labs) to improve visibility on the network edge.  
+**Orb** is a free, open source tool developed at <a href="https://ns1.com/labs" target="_blank">NS1</a> to improve visibility on the network edge.  
 **Orb**'s unique "small data" approach dramatically lowers the cost of data collection, storage, and analysis across decentralized networks.
 
 ### Understand
