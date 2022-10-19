@@ -266,5 +266,33 @@ div > .md-banner {
 }
 
 .md-typeset img {
-  margin: 1rem 0;
+  margin: 1rem 0 !important;
+}
+
+.md-typeset ol {
+  margin-left: 0 !important;
+}
+
+.md-typeset ol > li {
+  font-weight: 800;
+}
+
+.md-typeset ol > li > img {
+  margin: 1rem 0 1rem -1rem !important;
+}
+
+.md-typeset ol > li > p::first-line {
+  font-weight: 800;
+  line-height: 2rem;
+}
+
+.md-typeset ol > li > ol > li {
+  font-weight: 500;
+  margin-left: 2rem !important;
+  margin-top: 1rem !important;
+  list-style-type: lower-roman;
+}
+
+.md-typeset ol > li > ol > li::marker {
+  font-weight: 800;
 }
