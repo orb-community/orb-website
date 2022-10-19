@@ -49,15 +49,11 @@ nav:
     - Network Traffic (Flow): guides/flow.md
     - Response Testing: guides/response_testing.md
   - Documentation:
-    - Orb:
-      - Running ORB agent: documentation/orb/running_orb_agent.md
-      - Policy Reference Guide: documentation/orb/advanced_policies.md
-      - Installing Orb control plane: documentation/orb/install.md
-      - Orb REST API: api/orb_rest_api.md
-    - pktvisor:
-      - About: documentation/pktvisor/about.md
-      - Running pktkvisor: documentation/pktvisor/install.md      
-      - Documentation: documentation/pktvisor/docs.md
+    - Running Orb Agents: documentation/running_orb_agent.md
+    - Orb Policy Reference: documentation/advanced_policies.md
+    - Orb Metrics: documentation/pktvisor_metrics.md
+    - Installing Orb control plane: documentation/install.md
+    - Orb REST API: api/orb_rest_api.md
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb

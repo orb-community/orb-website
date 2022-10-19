@@ -1,4 +1,4 @@
-## Policy Reference Guide
+## Orb Policy Reference
 
 An Orb policy for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
 
