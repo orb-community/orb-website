@@ -1,5 +1,3 @@
-## Getting started
-
 Follow the steps below after logging in to your Orb Portal to get an agent up and running.  
 
 1. Register a new account  
