@@ -127,8 +127,6 @@ h1 {
   font-weight: 400;
   font-size: 4rem;
   line-height: 4.75rem;
-  /* identical to box height */
-  display: none;
 }
 
 .md-typeset h2,
