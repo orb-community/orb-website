@@ -96,6 +96,10 @@ nav.md-grid {
   text-decoration-color: #000000;
 }
 
+div.md-tabs__inner.md-grid {
+  margin-left: auto !important;
+}
+
 .md-tabs__inner {
   margin-right: 1.5rem !important;
 }
