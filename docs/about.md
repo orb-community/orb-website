@@ -5,9 +5,6 @@ hide:
 - title
 
 ---
-
-## About Orb
-
 Born at [NS1 Labs](https://ns1.com/labs), **Orb** is a new kind of **observability platform** that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. 
 
 Orb integrates with your observability stack, providing dynamic orchestration of observability agents that extract business intelligence at the edge. The platform is completely [open source](https://github.com/ns1labs/orb), extensible, vendor neutral, and cloud native.
