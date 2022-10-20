@@ -9,9 +9,8 @@ hide:
 
 ---
 
-## Introducing Orb
+### Introducing Orb
 
-**Orb** is a free, open source tool developed at <a href="https://ns1.com/labs" target="_blank">NS1</a> to improve visibility on the network edge.  
 The world is awash in observability tools.  **Orb** is a free, open-source tool that focuses on the network edge—dynamic, distributed environments where resources are at a premium, but the end-user impact is high. **Orb** manages a fleet of agents which tap into traffic streams and extract real-time insights on the edge. The result: faster time-to-action at a lower cost.
 
 ### Understand
@@ -30,7 +29,7 @@ Simplify network management with automated deployment, centralized policy enforc
 
 Save time and effort by streamlining your data pipeline, all with a tool that takes just ten minutes to start using. **Orb** is designed to integrate seamlessly with modern observability stacks. It minimizes the grunt work of building a data pipeline while producing the real-time, actionable intelligence you need from the network edge.
 
-## Where Orb fits
+### Where Orb fits
 
 **Orb**’s unique “small data” approach dramatically lowers the cost of data collection, storage, and analysis across decentralized networks. It is a free, open-source software released under Mozilla Public License (MPL). It can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor to function. 
 
