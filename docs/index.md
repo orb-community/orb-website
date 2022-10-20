@@ -33,6 +33,6 @@ Save time and effort by streamlining your data pipeline, all with a tool that ta
 
 **Orb**’s unique “small data” approach dramatically lowers the cost of data collection, storage, and analysis across decentralized networks. It is a free, open-source software released under Mozilla Public License (MPL). It can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor to function. 
 
-You can host **Orb** yourself, or run it through a hosted SaaS platform at orb.live.
+You can host **Orb** yourself, or run it through a hosted SaaS platform at <a href="orb.live" target="_blank">orb.live</a>.
 
 ***
