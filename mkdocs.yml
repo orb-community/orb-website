@@ -12,12 +12,10 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
-    - navigation.sections
-    - toc.integrate
-    - toc.expand
-    - toc.follow
     - search.suggest
-    - announce.dismiss
+    - toc.integrate
+    - navigation.indexes
+    - navigation.sections
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -33,7 +31,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - toc:
-      permalink: true
+      toc_depth: 3
 plugins:
   - search
 nav:
@@ -62,8 +60,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ns1labs/orb
-    - icon: fontawesome/brands/github
-      link: https://github.com/ns1labs/pktvisor
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
