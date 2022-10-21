@@ -175,17 +175,13 @@ p {
 }
 
 .md-typeset a {
-  color: var(--orb-pink);
+  color: var(--orb-blue);
   font-weight: 600;
   text-decoration: underline;
 }
 
-strong {
-  color: var(--orb-blue);
-}
-
 p > a {
-  color: var(--orb-pink);
+  color: var(--orb-blue);
 }
 
 .md-nav__source {
@@ -277,16 +273,11 @@ div > .md-banner {
   margin-left: 0 !important;
 }
 
-.md-typeset ol > li {
-  font-weight: 800;
-}
-
 .md-typeset ol > li > img {
   margin: 1rem 0 1rem -1rem !important;
 }
 
 .md-typeset ol > li > p::first-line {
-  font-weight: 800;
   line-height: 2rem;
 }
 
@@ -297,6 +288,12 @@ div > .md-banner {
   list-style-type: lower-roman;
 }
 
-.md-typeset ol > li > ol > li::marker {
+.md-typeset ol > li::marker, .md-typeset ol > li > ol > li::marker {
   font-weight: 800;
+}
+
+.md-typeset mark {
+  background-color: transparent;
+  font-weight: 800;
+  color: var(--orb-pink);
 }
