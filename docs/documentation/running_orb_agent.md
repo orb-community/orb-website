@@ -32,9 +32,9 @@ To run an agent, you will need:
 
 The agent credentials include *three pieces of information*, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
 
-1. **Agent ID**, which uniquely identifies the agent.
-2. **Agent Channel ID**, which uniquely identifies the agent's communication channel.
-3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once upon creation!
+1. ==Agent ID==, which uniquely identifies the agent.
+2. ==Agent Channel ID==, which uniquely identifies the agent's communication channel.
+3. ==Agent Key==, which is a private access token for the agent. Note you will only be shown the key once upon creation!
 
 ## Sample provisioning commands
 !!! example
@@ -221,7 +221,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
             "issued_at": "2021-09-07T15:29:49.70146088Z"
         }
 
-6. **Currently, the permanent token allows access to all API functionality, not just provisioning.** You can revoke this permanent token at any time with the following call, using the `id` field above:
+6. ==Currently, the permanent token allows access to all API functionality, not just provisioning.== You can revoke this permanent token at any time with the following call, using the `id` field above:
 
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
         --header 'Authorization: <SESSION_TOKEN>'
