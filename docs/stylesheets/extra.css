@@ -5,6 +5,7 @@
   --md-secondary-text-color: #969fb9;
   --orb-blue: #3089fc;
   --orb-pink: #df316f;
+  --orb-purple: #6b6cfd;
 }
 
 :root > * {
@@ -273,6 +274,10 @@ div > .md-banner {
   margin-left: 0 !important;
 }
 
+.md-typeset ol li, ul li {
+  font-size: 0.75rem;
+}
+
 .md-typeset ol > li > img {
   margin: 1rem 0 1rem -1rem !important;
 }
@@ -294,6 +299,6 @@ div > .md-banner {
 
 .md-typeset mark {
   background-color: transparent;
-  font-weight: 800;
-  color: var(--orb-pink);
+  font-weight: 700;
+  color: var(--orb-purple);
 }
