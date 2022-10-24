@@ -124,6 +124,14 @@ h1 {
   font-size: 2.5rem;
   line-height: 2.75rem;
   margin: 0 0 2.75rem 0 !important;
+    background: radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .md-typeset h2,
