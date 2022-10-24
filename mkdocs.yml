@@ -12,10 +12,10 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
-    - search.suggest
-    - toc.integrate
     - navigation.indexes
     - navigation.sections
+    - search.suggest
+    - toc.integrate
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -58,7 +58,7 @@ nav:
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
 repo_name: ns1labs/orb
-edit_uri: edit/main/docs
+edit_uri: ''
 extra:
   social:
     - icon: fontawesome/brands/github
