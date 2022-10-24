@@ -18,7 +18,7 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 
 <div class="orb-home-detail">
 <img src="img/02_Understand.svg" class="orb-home-img"/>
-<div>
+<div class="md-typeset">
 <h3>Understand</h3>
 <p>Improve network performance by quickly pinpointing the source of misconfigurations and malicious activity.</p>
 </div>
@@ -34,17 +34,17 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 
 <div class="orb-home-detail">
 <img src="img/04_Orchestrate.svg" class="orb-home-img"/>
-<div>
+<div class="md-typeset">
 <h3>Orchestrate</h3>
-<p>Simplify network management with automated deployment, centralized policy enforcement, and easily configurable dashboards. **Orb** pushes analysis to the edge, where high-resolution data is analyzed in real time without the need to send raw data to a central location for batch processing.</p>
+<p>Simplify network management with automated deployment, centralized policy enforcement, and easily configurable dashboards. <strong>Orb</strong> pushes analysis to the edge, where high-resolution data is analyzed in real time without the need to send raw data to a central location for batch processing.</p>
 </div>
 </div>
 
 <div class="orb-home-detail">
 <img src="img/05_Integrate.svg" class="orb-home-img"/>
-<div>
+<div class="md-typeset">
 <h3>Integrate</h3>
-<p>Save time and effort by streamlining your data pipeline, all with a tool that takes just ten minutes to start using. **Orb** is designed to integrate seamlessly with modern observability stacks. It minimizes the grunt work of building a data pipeline while producing the real-time, actionable intelligence you need from the network edge.</p>
+<p>Save time and effort by streamlining your data pipeline, all with a tool that takes just ten minutes to start using. <strong>Orb</strong> is designed to integrate seamlessly with modern observability stacks. It minimizes the grunt work of building a data pipeline while producing the real-time, actionable intelligence you need from the network edge.</p>
 </div>
 </div>
 </div>
