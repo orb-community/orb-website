@@ -6,9 +6,6 @@
     background-size: contain;
   }
 
-  .md-header {
-    position: initial;
-  }
   .md-main__inner {
     margin: 0;
   }
@@ -72,6 +69,51 @@
   .md-typeset h2,
   h2 {
     text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h2:first-of-type {
+    margin-bottom: 7rem !important;
+  }
+
+  .md-typeset h3 {
+    font-weight: 600;
+    font-size: 1.0rem;
+    line-height: 1.25rem;
+    margin: 1.0rem 0 1rem 0!important;
+    align-items: center;
+    text-transform: capitalize;
+    padding-bottom: 16px;
+  }
+
+  img.observability {
+    margin: -5rem 0 0 8rem !important;
+    width: 650px;
+    height: auto;
+  }
+
+  img.wherefits {
+    margin: -5rem 8rem 0 0 !important;
+    width: 650px;
+    height: auto;
+  }
+
+  .orb-home-content {
+    display: inline-flex;
+    flex-direction: column;
+    width: 75%;
+  }
+
+  
+  .orb-home-detail {
+    display: inline-flex;
+    align-items: center;
+    max-width: 40rem;
+    align-self: flex-start;
+  }
+
+  .orb-home-detail:nth-child(even) {
+    align-self: flex-end;
   }
 
   .mdx-hero {
