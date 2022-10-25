@@ -1,12 +1,10 @@
-## Configuring Observability for DHCP Services
+This solution guide will walk you through setting up ==Observability for DHCP Services== using Orb agents. This is a monitoring configuration that can be used when monitoring of DHCP services is required.
 
-### Overview
+## Configure Observation
 
-This solution guide will walk you through setting up monitoring for the DHCP services.
+The first step is to configure what data the agents should be observing. This is done by defining and configuring what ==Tap== the agents should be listenining on.
 
-### Agent Configuration
-
-The default **PCAP** tap configuration is all that is necessary for DHCP monitoring. Your agent tap configurations should look something like this:
+The default ==PCAP== (Packet Capture) tap configuration is all that is necessary for DHCP monitoring. Your agent tap configurations should look something like this:
 
 === "YAML"
     ```yaml
@@ -32,11 +30,15 @@ The default **PCAP** tap configuration is all that is necessary for DHCP monitor
     }
     ```
 
-Please be sure that the `iface` and `pcap_source` are configured with the appropriate interface name on the node where the agent is running. If the interface defined is not correct, you will need to re-run the agent provisioning command specifying the correct interface using the [`PKTVISOR_PCAP_IFACE_DEFAULT`](documentation/orb/running_orb_agent.md#sample-provisioning-commands) environment variable.
+If you want to explicitely specify the interface the PCAP tap should be listening on (instead of using the `auto` selection), please ensure that the `iface` is configured with the appropriate interface name. If the interface defined is not correct, you will need to re-run the agent provisioning command specifying the correct interface using the [`PKTVISOR_PCAP_IFACE_DEFAULT`](/documentation/running_orb_agent#sample-provisioning-commands) environment variable.
 
-### Policy
+## Configure Analysis
 
-The default policy created using the [policy wizard](/getting_started/#create-a-policy) should be sufficient for DHCP monitoring. Please be sure to add the **NET** and **DHCP** handlers to the policy. Your policy should look something like this:
+The second step is to configure the agents to analyze for DHCP traffic. This is done by defining and applying a tailored ==Policy== to the agents.
+
+### Create a Policy
+
+The following is a sample policy that includes the ==NET== and ==DHCP== handlers, as well as a BPF filter to restrict analyzed data to DHCP traffic. Your policy should look something like this:
 
 === "YAML"
     ```yaml
@@ -49,6 +51,8 @@ The default policy created using the [policy wizard](/getting_started/#create-a-
     input:
         input_type: pcap
         tap: default_pcap
+        filter:
+            bpf: 'port 67 or port 68'
     kind: collection
     ```
 === "JSON"
@@ -65,13 +69,16 @@ The default policy created using the [policy wizard](/getting_started/#create-a-
     },
     "input": {
         "input_type": "pcap",
-        "tap": "default_pcap"
+        "tap": "default_pcap",
+        "filter": {
+            "bpf": "port 67 or port 68"
+        }
     },
     "kind": "collection"
     ```
 
-For a more tailored DHCP policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](/documentation/orb/advanced_policies/).
+For a more tailored DHCP policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](/documentation/advanced_policies).
 
 ### Applying your policy
 
-The final step is to apply your policy by creating a [dataset](/getting_started/#create-a-dataset), which links your agents (through an [agent group](/getting_started/#create-an-agent-group)) with your policy and the [sink](/getting_started/#create-a-sink) where you want to send your metrics.
+The final step is to apply your policy by creating a [Dataset](/getting_started/#create-a-dataset), which links your agents (through an [Agent Group](/getting_started/#create-an-agent-group)) with your policy and the [Sink](/getting_started/#create-a-sink) where you want to send your metrics.
