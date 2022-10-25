@@ -5,7 +5,10 @@ hide:
 - title
 
 ---
+
 Born at [NS1 Labs](https://ns1.com/labs), ==Orb== is a new kind of ==observability platform== that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. 
+
+![](./img/ORB-diagram2.png)  
 
 Orb integrates with your observability stack, providing dynamic orchestration of observability agents that extract business intelligence at the edge. The platform is completely [open source](https://github.com/ns1labs/orb), extensible, vendor neutral, and cloud native.
 
@@ -57,25 +60,25 @@ To view a Grafana dashboard for visualizing pktvisor Prometheus metrics, look [h
 
 The concepts below comprise Orb’s architecture.
 
-![](./img/concepts.png){ width="700" }
+![](./img/concepts.png)
 
 ### Agent
 
 This is a ==sensor== installed next to a data source at the edge so it can summarize, analyze, and collect information.
 
-![](./img/concept_agent.png){ width="250" }
+![](./img/concept_agent.png){ width="350" }
 
 ### Agent group
 
 This is a ==list of simple key/value pairs that match against agent tags== to dynamically define a group of agents. For example, “region: US” will group all agents in the fleet that have this key/value set in their tags.
 
-![](./img/concept_agent_group.png){ width="250" }
+![](./img/concept_agent_group.png){ width="350" }
 
 ### Fleet
 
 This is a ==collection of agents== that may be widely distributed and number in the tens, hundreds, or thousands—all of which are able to connect and contribute to the same observability system.
 
-![](./img/concept_fleet_manager.png){ width="250" }
+![](./img/concept_fleet_manager.png){ width="350" }
 
 ### Policies
 
