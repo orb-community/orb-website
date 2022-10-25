@@ -13,7 +13,7 @@ The default ==PCAP== (Packet Capture) tap configuration is all that is necessary
             interface: "visor.module.input/1.0"
             input_type: pcap
             config:
-                iface: "eth0"
+                iface: "auto"
     ```
 === "JSON"
     ```json
@@ -21,7 +21,7 @@ The default ==PCAP== (Packet Capture) tap configuration is all that is necessary
         "taps": {
             "default_pcap": {
                 "config": {
-                    "iface": "eth0",
+                    "iface": "auto",
                 },
                 "input_type": "pcap",
                 "interface": "visor.module.input/1.0"
@@ -45,7 +45,7 @@ The following is a sample policy that includes the ==NET== and ==DHCP== handlers
     handlers:
         modules:
             handler_dns_1:
-                type: dns
+                type: dhcp
             handler_net_1:
                 type: net
     input:
