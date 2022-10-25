@@ -55,7 +55,27 @@
 }
 
 .md-header {
-  color: var(--md-primary-text-color) !important;
+  color: var(--md-primary-fg-color);
+  background: -webkit-radial-gradient(
+    85.37% 1691.2% at 12.66% -16.25%,
+    #018bf3 0%,
+    #7b61ff 100%
+  ) !important;
+  background: -moz-radial-gradient(
+    85.37% 1691.2% at 12.66% -16.25%,
+    #018bf3 0%,
+    #7b61ff 100%
+  ) !important;
+  background: -o-radial-gradient(
+    85.37% 1691.2% at 12.66% -16.25%,
+    #018bf3 0%,
+    #7b61ff 100%
+  ) !important;
+  background: radial-gradient(
+    85.37% 1691.2% at 12.66% -16.25%,
+    #018bf3 0%,
+    #7b61ff 100%
+  ) !important;
 }
 
 :root > body > header.md-header {
@@ -73,10 +93,18 @@ nav.md-grid {
   font-weight: 600;
 }
 
+nav>label>a>img.orb-logo {
+    content: url("../img/ORB-logo-transparent.png") !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+  
+}
+  
+
 :root > * nav.md-tabs {
   text-align: end;
   background-color: transparent;
-  color: var(--md-primary-text-color);
+  color: var(--md-primary-fg-color);
   font-style: normal;
   font-weight: 700;
   font-size: 0.75rem;
@@ -86,10 +114,10 @@ nav.md-grid {
 
 :root > * .md-search__inner > .md-search__form {
   background-color: transparent;
-  border-color: var(--md-primary-text-color);
+  border-color: var(--md-primary-fg-color);
   border-width: 1px;
   border-style: solid;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--md-primary-fg-color);
 }
 
 div.md-tabs__inner.md-grid {
@@ -101,11 +129,11 @@ div.md-tabs__inner.md-grid {
 }
 
 :root > * .md-search__icon {
-  color: var(--md-primary-text-color);
+  color: var(--md-primary-fg-color);
 }
 
 :root > * .md-search__input::placeholder {
-  color: var(--md-primary-text-color);
+  color: var(--md-primary-fg-color);
   background-color: transparent;
 }
 
@@ -124,7 +152,22 @@ h1 {
   font-size: 2.5rem;
   line-height: 2.75rem;
   margin: 0 0 2.75rem 0 !important;
-    background: radial-gradient(
+  background: -webkit-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  background: -moz-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  background: -o-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  background: radial-gradient(
     121.79% 1418.34% at 39.98% 0%,
     #7b61ff 0%,
     #018bf3 100%
@@ -143,6 +186,21 @@ h2 {
   margin-bottom: 1.5rem !important;
   /* identical to box height */
 
+  background: -webkit-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  background: -moz-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
+  background: -o-radial-gradient(
+    121.79% 1418.34% at 39.98% 0%,
+    #7b61ff 0%,
+    #018bf3 100%
+  );
   background: radial-gradient(
     121.79% 1418.34% at 39.98% 0%,
     #7b61ff 0%,

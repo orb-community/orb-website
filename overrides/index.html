@@ -1,4 +1,16 @@
 {% extends "partials/main.html" %} {% block tabs %} {{ super() }}
+<script>
+  const menu = document.querySelectorAll('header')[0];
+  console.log(menu);
+  window.onscroll = () => {
+    if(window.scrollY > 900) {
+      console.log(window.scrollY);
+      menu.classList.add('opaque');
+    }else{
+      menu.classList.remove('opaque');
+    }
+  };
+</script>
 <style>
   .orb-logo {
     content: url("img/orb_logo_original.png") !important;
@@ -44,9 +56,34 @@
     display: none;
   }
 
-  :root > body > header.md-header {
-    background-color: transparent;
-    box-shadow: none;
+  header.md-header.opaque {
+    background: -webkit-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%
+    ) !important;
+    background: -moz-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%
+    ) !important;
+    background: -o-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%
+    ) !important;
+    background: radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%
+    ) !important;
+    
+  }
+
+  header.md-header {
+    background: transparent !important;
+    /* opacity: 0; */
+    transition: 2s all ease;
   }
 
   :root > * .md-search__inner > .md-search__form {
@@ -175,6 +212,21 @@
     align-items: center;
     padding: 12px;
     gap: 10px;
+    background: -webkit-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
+    background: -moz-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
+    background: -o-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
     background: radial-gradient(
       85.37% 1691.2% at 12.66% -16.25%,
       #7b61ff 0%,
