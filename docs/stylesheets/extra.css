@@ -252,6 +252,16 @@ p > a {
   color: #000000 !important;
 }
 
+.md-header__source {
+  margin-left: 0 !important;
+  width: 13rem;
+  
+}
+
+.md-source__fact {
+  font-size: 0.5rem !important;
+}
+
 article > p:first-of-type {
   margin-top: 0px;
 }

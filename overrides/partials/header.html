@@ -138,6 +138,7 @@
     {% include "partials/tabs.html" %}
     {% endif %}
     {% endif %}
+
     <!-- Button to open search modal -->
     {% if "search" in config["plugins"] %}
       <label class="md-header__button md-icon" for="__search">
@@ -146,6 +147,13 @@
 
       <!-- Search interface -->
       {% include "partials/search.html" %}
+    {% endif %}
+
+    <!-- Repository information -->
+    {% if config.repo_url %}
+      <div class="md-header__source">
+        {% include "partials/source.html" %}
+      </div>
     {% endif %}
 
     <a
