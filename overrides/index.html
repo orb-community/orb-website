@@ -1,0 +1,341 @@
+{% extends "partials/main.html" %} {% block tabs %} {{ super() }}
+<script>
+  const menu = document.querySelectorAll('header')[0];
+  console.log(menu);
+  window.onscroll = () => {
+    if(window.scrollY > 1000) {
+      console.log(window.scrollY);
+      menu.classList.add('opaque');
+    }else{
+      menu.classList.remove('opaque');
+    }
+  };
+</script>
+<style>
+  .orb-logo {
+    content: url("img/orb_logo_original.png") !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .md-main__inner {
+    margin: 0;
+  }
+  .md-content {
+    display: none;
+  }
+
+  .md-header .md-icon {
+    color: #ffffff;
+  }
+  @media screen and (min-width: 60em) {
+    .md-sidebar--secondary {
+      display: none;
+    }
+  }
+  @media screen and (min-width: 76.25em) {
+    .md-sidebar--primary {
+      display: none;
+      background-color: transparent;
+    }
+  }
+
+  :root {
+    --md-primary-fg-color: #ffffff;
+    --md-primary-bg-color: #171c30;
+    --md-primary-text-color: #ffffff;
+    --md-secondary-text-color: #969fb9;
+    --orb-blue: #3089fc;
+  }
+
+  :root * div.md-grid {
+    margin-left: auto !important;
+  }
+
+  :root > * div.md-header__title {
+    display: none;
+  }
+
+  header.md-header.opaque {
+    background: -webkit-radial-gradient(
+      65.37% 1091.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%,
+      #df316f 200%
+    ) !important;
+    background: -moz-radial-gradient(
+      65.37% 1091.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%,
+      #df316f 200%
+    ) !important;
+    background: -o-radial-gradient(
+      65.37% 1091.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%,
+      #df316f 200%
+    ) !important;
+    background: radial-gradient(
+      65.37% 1091.2% at 12.66% -16.25%,
+      #018bf3 0%,
+      #7b61ff 100%,
+      #df316f 200%
+    ) !important;
+    
+  }
+
+  header.md-header {
+    background: transparent !important;
+    /* opacity: 0; */
+    transition: 2s all ease;
+  }
+
+  :root > * .md-search__inner > .md-search__form {
+    background-color: transparent;
+    border-color: var(--md-primary-text-color);
+    border-width: 1px;
+    border-style: solid;
+    text-decoration-color: #000000;
+  }
+
+  :root > * .md-search__icon {
+    color: var(--md-primary-text-color);
+  }
+
+  :root > * .md-search__input::placeholder {
+    color: var(--md-primary-text-color);
+    background-color: transparent;
+  }
+
+  .md-typeset h2,
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h2:first-of-type {
+    margin-bottom: 7rem !important;
+  }
+
+  .md-typeset h3 {
+    font-weight: 600;
+    font-size: 1.0rem;
+    line-height: 1.25rem;
+    margin: 1.0rem 0 1rem 0!important;
+    align-items: center;
+    text-transform: capitalize;
+    padding-bottom: 16px;
+  }
+
+  img.observability {
+    margin: -5rem 0 0 6rem !important;
+    width: 650px;
+    height: auto;
+  }
+
+  img.wherefits {
+    margin: -5rem 6rem 0 0 !important;
+    width: 650px;
+    height: auto;
+  }
+
+  .orb-home-content {
+    justify-self: center;
+    display: inline-flex;
+    flex-direction: column;
+    margin: 2rem 0.5rem 8rem;
+    width: min(100%, 53rem);
+  }
+
+  img.orb-home-img {
+    margin: 0 0 !important;
+  }
+  
+  .orb-home-detail {
+    display: inline-flex;
+    align-items: center;
+    max-width: 40rem;
+  }
+
+  .orb-home-detail:nth-child(even) {
+    align-self: flex-end;
+  }
+
+  .mdx-hero {
+    background-image: url("assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 30vh;
+    padding-bottom: 31vh;
+    margin-top: -55px;
+    width: auto;
+    height: 100%;
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    background-clip: border-box;
+  }
+
+  .mdx-hero-bottom {
+    background-image: url("assets/images/bottom-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 250px;
+    padding-bottom: 250px;
+    margin-bottom: -250px;
+    width: auto;
+    background-position-x: center;
+  }
+
+  .cta {
+    width: 125vw;
+    position: absolute;
+    max-width: none !important;
+    left: -20vw;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  span.splash-title,
+  p.splash-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 117px;
+    display: inline-block;
+    color: #ffffff;
+  }
+
+  a.splash-cta {
+    margin-top: 144px;
+    text-decoration: none;
+  }
+
+  a.button-cta {
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    background: -webkit-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
+    background: -moz-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
+    background: -o-radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important;
+    background: radial-gradient(
+      85.37% 1691.2% at 12.66% -16.25%,
+      #7b61ff 0%,
+      #018bf3 100%
+    ) !important/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border-radius: 4px;
+    margin-bottom: 72px;
+    text-decoration: none;
+  }
+
+  .home {
+    margin-top: 6vh;
+  }
+
+  .cta-title {
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 96px !important;
+    line-height: 117px !important;
+    color: #ffffff;
+    margin-top: 1rem;
+  }
+
+  .cta-container {
+    display: grid;
+    text-align: center;
+    justify-content: space-around;
+    justify-items: center;
+  }
+
+  .cta-content {
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    line-height: 36px !important;
+    white-space: pre-line !important;
+    color: #ffffff;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .md-footer,
+  .md-footer-meta {
+    background-color: transparent;
+  }
+
+  .md-footer__link {
+    border: 1px solid #ffffff;
+    filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.15));
+    border-radius: 16px;
+  }
+
+  .md-sidebar .md-sidebar--primary {
+    color: #000000 !important;
+  }
+
+  .md-nav__link,
+  .md-nav__item .md-nav__link--active {
+    color: #000000 !important;
+  }
+
+  nav.md-nav > label > a > img.orb-logo {
+    content: url("img/ORB-logo-transparent.png") !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+</style>
+<section class="mdx-container mdx-hero">
+  <div class="md-grid md-typeset">
+    <div class="mdx-hero__content">
+      <span class="splash-title">Orb Dynamic<br />Edge Observability</span>
+      <a
+        href="./getting_started"
+        title="{{ page.next_page.title | e }}"
+        class="md-button md-button--primary splash-cta"
+      >
+        Get Started with Orb
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="mdx-container home">
+  <h2 class="md-grid">Powerful analysis that's easy to use and integrate</h2>
+  <div class="md-grid md-typeset">
+    {% block content %} {{page.content}} {% endblock %}
+  </div>
+</section>
+
+<section class="mdx-container mdx-hero-bottom">
+  <div class="md-grid md-typeset">
+    <div class="cta-container">
+      <span class="cta-title">Backed by NS1</span>
+      <span class="cta-content"
+        >Orb was born at NS1 Labs, where we're commited to making open source,
+        dynamic edge observabilty a reality</span
+      >
+      <a
+        href="./getting_started"
+        title="{{ page.next_page.title | e }}"
+        class="md-button md-button--primary button-cta"
+      >
+        Get Started with Orb
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
