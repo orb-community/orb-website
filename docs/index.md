@@ -12,7 +12,9 @@ hide:
 ![](img/01_Edge-Observability.png){ align=right .observability }
 ### Introducing Orb
 
-The world is awash in observability tools.  **Orb** is a free, open-source tool that focuses on the network edge—dynamic, distributed environments where resources are at a premium, but the end-user impact is high. **Orb** manages a fleet of agents which tap into traffic streams and extract real-time insights on the edge. The result: faster time-to-action at a lower cost.
+**Orb** is a free, open-source tool that focuses on the network edge — dynamic, distributed environments composed of endless data streams rich with valuable information 
+
+**Orb** allows you to dynamically tap into these data streams and extract real-time insights, pipelining the results into modern observability stacks 
 
 <div class="grid orb-home-content">
 
@@ -20,15 +22,17 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 <img src="img/02_Understand.svg" class="orb-home-img"/>
 <div class="md-typeset">
 <h3>Understand</h3>
-<p>Improve network performance by quickly pinpointing the source of misconfigurations and malicious activity.</p>
+<p>Understand traffic patterns, identify malicious activity and anomalies, hunt down misconfigurations, and improve network performance across your ever-changing infrastructure by deeply analysing packets, DNS, flow, connectivity and latency, and more.</p>
 </div>
 </div>
 
 <div class="orb-home-detail">
 <img src="img/03_Troubleshoot.svg" class="orb-home-img"/>
 <div>
-<h3>Troubleshoot</h3>
-<p>Shorten time-to-action and lower costs by analyzing activity and dynamically applying policies right on the network edge</p>
+<h3>Smartly Analyze and Collect</h3>
+<p>Shorten time-to-action and lower costs by dynamically applying composable policies designed
+to filter, aggregate and extract the exact information you need, without having
+to ship raw data to central data warehouses or expensive SaaS services</p>
 </div>
 </div>
 
@@ -36,7 +40,11 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 <img src="img/04_Orchestrate.svg" class="orb-home-img"/>
 <div class="md-typeset">
 <h3>Orchestrate</h3>
-<p>Simplify network management with automated deployment, centralized policy enforcement, and easily configurable dashboards. <strong>Orb</strong> pushes analysis to the edge, where high-resolution data is analyzed in real time without the need to send raw data to a central location for batch processing.</p>
+<p>
+Agents are controlled in real time from the Orb Portal or automated through the REST API, allowing instantaneous policy updates across
+even massive fleets. Compose data pipelines from targeted groups of agents with precise analysis instructions, sending the results
+to modern observability stacks via OpenTelemetry
+</p>
 </div>
 </div>
 
@@ -44,7 +52,10 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 <img src="img/05_Integrate.svg" class="orb-home-img"/>
 <div class="md-typeset">
 <h3>Integrate</h3>
-<p>Save time and effort by streamlining your data pipeline, all with a tool that takes just ten minutes to start using. <strong>Orb</strong> is designed to integrate seamlessly with modern observability stacks. It minimizes the grunt work of building a data pipeline while producing the real-time, actionable intelligence you need from the network edge.</p>
+<p>
+The Orb control plane is a modern, API first microservices application that can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor, avoiding vendor lock-in. Orb is designed to easily integrate into
+the larger Network Automation ecosystem.
+</p>
 </div>
 </div>
 </div>
@@ -52,7 +63,7 @@ The world is awash in observability tools.  **Orb** is a free, open-source tool 
 ![](img/06_WhereOrbFits.png){ align=left .wherefits .small}
 ### Where Orb fits
 
-**Orb**’s unique “small data” approach dramatically lowers the cost of data collection, storage, and analysis across decentralized networks. It is a free, open-source software released under Mozilla Public License (MPL). It can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor to function. 
+**Orb**’s focus is on pushing network analysis to the edge and dynamically defining analysis parameters which can change in real time. It is a free, open-source software released under Mozilla Public License (MPL). 
 
 You can host **Orb** yourself, or run it through a hosted SaaS platform at <a href="orb.live" target="_blank">orb.live</a>.
 
