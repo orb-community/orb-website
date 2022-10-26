@@ -57,24 +57,28 @@
 .md-header {
   color: var(--md-primary-fg-color);
   background: -webkit-radial-gradient(
-    85.37% 1691.2% at 12.66% -16.25%,
+    65.37% 1091.2% at 12.66% -16.25%,
     #018bf3 0%,
-    #7b61ff 100%
+    #7b61ff 100%,
+    #df316f 200%
   ) !important;
   background: -moz-radial-gradient(
-    85.37% 1691.2% at 12.66% -16.25%,
+    65.37% 1091.2% at 12.66% -16.25%,
     #018bf3 0%,
-    #7b61ff 100%
+    #7b61ff 100%,
+    #df316f 200%
   ) !important;
   background: -o-radial-gradient(
-    85.37% 1691.2% at 12.66% -16.25%,
+    65.37% 1091.2% at 12.66% -16.25%,
     #018bf3 0%,
-    #7b61ff 100%
+    #7b61ff 100%,
+    #df316f 200%
   ) !important;
   background: radial-gradient(
-    85.37% 1691.2% at 12.66% -16.25%,
+    65.37% 1091.2% at 12.66% -16.25%,
     #018bf3 0%,
-    #7b61ff 100%
+    #7b61ff 100%,
+    #df316f 200%
   ) !important;
 }
 
