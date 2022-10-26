@@ -1,3 +1,3 @@
-## Configuring Observability for Network Traffic (Flow)
+This solution guide will walk you through setting up ==Observability for Network Traffic (Flow)== using Orb agents. This guide is currently in draft. 
 
-This guide is currently being drafted. Please [contact us](/contact/#contact) to get an early preview.
+Please [contact us](/contact#contact) to get an early preview.
