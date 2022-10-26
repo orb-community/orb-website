@@ -22,7 +22,7 @@ hide:
 <img src="img/02_Understand.svg" class="orb-home-img"/>
 <div class="md-typeset">
 <h3>Understand</h3>
-<p>Understand traffic patterns, identify malicious activity and anomalies, hunt down misconfigurations, and improve network performance across your ever-changing infrastructure by deeply analysing packets, DNS, flow, connectivity and latency, and more.</p>
+<p>Understand traffic patterns, identify malicious activity and anomalies, hunt down misconfigurations, and improve network performance across your ever-changing infrastructure by deeply analysing packets, DNS, flow, connectivity, latency, and more.</p>
 </div>
 </div>
 
