@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     branches:
-      - feat/new-theme
+      - main
 
   repository_dispatch:
       types: [build-docs]      
