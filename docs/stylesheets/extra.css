@@ -126,14 +126,19 @@ nav>label>a>img.orb-logo {
 
 div.md-tabs__inner.md-grid {
   margin-left: auto !important;
+  width: unset;
 }
 
 .md-tabs__inner {
-  margin-right: 1.5rem !important;
+  margin-right: 0.75rem !important;
 }
 
 :root > * .md-search__icon {
   color: var(--md-primary-fg-color);
+}
+
+.md-search__inner {
+  width: 9rem;
 }
 
 :root > * .md-search__input::placeholder {
@@ -143,7 +148,6 @@ div.md-tabs__inner.md-grid {
 
 div.md-search {
   height: 100% !important;
-  margin-right: 0.5rem;
 }
 
 .md-main {
@@ -303,20 +307,15 @@ a.login {
   margin-right: 12px;
   width: 10rem !important;
   height: fit-content !important;
-
-  /* Orb Blue */
   color: #ffffff !important;
   background: var(--orb-blue);
-  /* popup shadow */
-
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 
   font-weight: 600 !important;
   font-size: 0.75rem !important;
   line-height: 1rem;
-  /* identical to box height, or 67% */
-
+  white-space: nowrap;
   align-items: center;
 
   border-color: transparent;
