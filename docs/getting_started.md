@@ -3,7 +3,7 @@
 
 ## Connect to Orb
 
-Register for a free Orb.live account here <a href="https://orb.live/auth/register" target="_blank">Orb.live</a>
+Register for a free Orb.live account <a href="https://orb.live/auth/register" target="_blank">here</a>
 
 1. **Register a new account**  
 ![Register](./img/register.png)
