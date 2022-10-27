@@ -22,7 +22,7 @@ hide:
 <img src="img/02_Understand.svg" class="orb-home-img"/>
 <div class="md-typeset">
 <h3>Understand</h3>
-<p>Understand traffic patterns, identify malicious activity and anomalies, hunt down misconfigurations, and improve network performance across your ever-changing infrastructure by deeply analysing packets, DNS, flow, connectivity, latency, and more.</p>
+<p>Understand traffic patterns, identify malicious activity and anomalies, hunt down misconfigurations, and improve network performance across your ever-changing infrastructure by deeply analyzing packets, DNS, flow, connectivity, latency, and more.</p>
 </div>
 </div>
 
@@ -42,7 +42,7 @@ to ship raw data to central data warehouses or expensive SaaS services</p>
 <h3>Orchestrate</h3>
 <p>
 Agents are controlled in real time from the Orb Portal or automated through the REST API, allowing instantaneous policy updates across
-even massive fleets. Compose data pipelines from targeted groups of agents with precise analysis instructions, sending the results
+even massive fleets. Compose data pipelines from targeted groups of agents with precise instructions, sending the results
 to modern observability stacks via OpenTelemetry
 </p>
 </div>
@@ -53,8 +53,9 @@ to modern observability stacks via OpenTelemetry
 <div class="md-typeset">
 <h3>Integrate</h3>
 <p>
-The Orb control plane is a modern, API first microservices application that can be deployed to any Kubernetes service in a private or public cloud. It does not depend on any single vendor, avoiding vendor lock-in. Orb is designed to easily integrate into
-the larger Network Automation ecosystem.
+The Orb control plane is a modern microservices application with well defined APIs that can be deployed to any Kubernetes service in a private or public cloud, avoiding vendor lock-in. The Orb agent is a lightweight, modular analyzer that can scale down
+to embedded platforms or up to full servers.
+Orb is designed to easily integrate into the larger Network Automation ecosystem.
 </p>
 </div>
 </div>
@@ -63,8 +64,10 @@ the larger Network Automation ecosystem.
 ![](img/06_WhereOrbFits.png){ align=left .wherefits .small}
 ### Where Orb fits
 
-**Orb**’s focus is on pushing network analysis to the edge and dynamically defining analysis parameters which can change in real time. It is a free, open-source software released under Mozilla Public License (MPL). 
+**Orb**’s focus is on providing full network visibility across control and data planes by pushing analysis close to devices and dynamically defining observability parameters which can change in real time via automation.
 
-You can host **Orb** yourself, or run it through a hosted SaaS platform at <a href="orb.live" target="_blank">orb.live</a>.
+It is free, open-source software released under Mozilla Public License (MPL). 
+
+You can host **Orb** yourself, or run it through our hosted SaaS platform at <a href="orb.live" target="_blank">orb.live</a>.
 
 ***
