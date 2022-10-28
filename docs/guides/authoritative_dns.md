@@ -36,7 +36,7 @@ Using ==PCAP== (Packet Capture), your agent tap configurations should look somet
     }
     ```
 
-If you want to explicitely specify the interface the PCAP tap should be listening on (instead of using the `auto` selection), please ensure that the `iface` is configured with the appropriate interface name. If the interface defined is not correct, you will need to re-run the agent provisioning command specifying the correct interface using the [`PKTVISOR_PCAP_IFACE_DEFAULT`](/documentation/running_orb_agent#sample-provisioning-commands) environment variable.
+If you want to explicitly specify the interface the PCAP tap should be listening on (instead of using the `auto` selection), please ensure that the `iface` is configured with the appropriate interface name. If the interface defined is not correct, you will need to re-run the agent provisioning command specifying the correct interface using the [`PKTVISOR_PCAP_IFACE_DEFAULT`](/documentation/running_orb_agent#sample-provisioning-commands) environment variable.
 
 ## Configure Analysis
 

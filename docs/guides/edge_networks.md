@@ -39,7 +39,7 @@ The second step is to configure what analysis the agents should be doing on the 
 
 ### Create a Policy
 
-The default policy created using the [policy wizard](/getting_started/#create-a-policy) is all that is necessary for broad monitoring. Please be sure to add the desired handlers to the policy, such as the ==NET==, ==DNS== and ==DHCP== handlers. Your policy should look something like this:
+The default policy created using the [policy wizard](../../getting_started/#create-a-policy) is all that is necessary for broad monitoring. Please be sure to add the desired handlers to the policy, such as the ==NET==, ==DNS== and ==DHCP== handlers. Your policy should look something like this:
 
 === "YAML"
     ```yaml
@@ -80,8 +80,8 @@ The default policy created using the [policy wizard](/getting_started/#create-a-
     }
     ```
 
-For a more tailored observability policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](/documentation/advanced_policies).
+For a more tailored observability policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](../../documentation/advanced_policies).
 
 ### Apply your policy
 
-The final step is to apply your policy by creating a [Dataset](/getting_started/#create-a-dataset), which links your agents (through an [Agent Group](/getting_started/#create-an-agent-group)) with your policy and the [Sink](/getting_started/#create-a-sink) where you want to send your metrics.
+The final step is to apply your policy by creating a [Dataset](../../getting_started/#create-a-dataset), which links your agents (through an [Agent Group](/getting_started/#create-an-agent-group)) with your policy and the [Sink](../../getting_started/#create-a-sink) where you want to send your metrics.
