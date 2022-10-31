@@ -4,7 +4,7 @@ An Orb agent needs to run on all the infrastructure (computers, servers, switche
 
 To run an agent, you will need:
 
-1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
+1. Docker, to run the agent image ([ns1labs/orb-agent](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/docs/#create-an-agent)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
@@ -50,7 +50,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
-        ns1labs/orb-agent:develop
+        ns1labs/orb-agent
         ```
     === "localhost, mock"
         
@@ -65,7 +65,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         -e ORB_TLS_VERIFY=false
-        ns1labs/orb-agent:develop
+        ns1labs/orb-agent
         ```
 
     === "orb.live, eth0"
@@ -79,7 +79,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent:develop
+        ns1labs/orb-agent
         ```
 
     === "You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`"
@@ -93,7 +93,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
         -e ORB_BACKENDS_PKTVISOR_API_PORT=10854
-        ns1labs/orb-agent:develop
+        ns1labs/orb-agent
         ```
 
     === "🎁 BONUS - you can access agent debug logs by passing the -d command"
@@ -106,7 +106,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent:develop run -d
+        ns1labs/orb-agent run -d
         ```
 
 !!! question
@@ -177,7 +177,7 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 
 ```shell
 docker run -v /local/orb:/usr/local/orb/ --net=host \
-      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
 ```
 
 ## Advanced auto-provisioning setup
@@ -253,11 +253,11 @@ orb:
          address: tls://HOST:8883
 ```
 
-8. You can now pull and run `ns1labs/orb-agent:develop` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
+8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
 ```shell
-docker pull ns1labs/orb-agent:develop
+docker pull ns1labs/orb-agent
 docker run -v /local/orb:/usr/local/orb/ --net=host \
        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
 ```
