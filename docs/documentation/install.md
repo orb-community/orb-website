@@ -59,7 +59,7 @@ If you are running on your local machine, upon success the Orb UI will be availa
 
 !!! bug
 
-    Is the Docker Compose environment not starting correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/), or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    Is the Docker Compose environment not starting correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel, or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ### Orb Helm Chart
 [Helm](https://helm.sh/) is a package manager for Kubernetes. A Helm Chart is a package that allows you to customize your deployment on Kubernetes.
@@ -123,7 +123,7 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
 
 !!! bug
 
-    Is the Helm deployment not working correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/),
+    Is the Helm deployment not working correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 
