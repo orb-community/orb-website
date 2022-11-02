@@ -18,7 +18,7 @@ We are very interested to hear about your use cases, feature requests, and contr
 * File an [issue](https://github.com/ns1labs/orb/issues/new)
 * Follow our [public work board](https://github.com/ns1labs/orb/projects/1)
 * Start a [discussion](https://github.com/ns1labs/orb/discussions)
-* Join us on [Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA)
+* Join us on [Slack](https://netdev.chat/)
 * Check out the [NS1 Labs YouTube channel](https://www.youtube.com/channel/UCs5FgE5p03tP-8InKVIojdw)
 * Send mail to [info@pktvisor.dev](mailto:info@pktvisor.dev)
 
