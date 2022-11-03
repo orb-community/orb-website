@@ -2,7 +2,7 @@ Orb consists of two major components:
 
 1. The **Control Plane**—comprised of microservices, communication systems, databases, etc.—deploys to a 
 central location (usually a cloud environment on Kubernetes).
-1. The **[Orb Agent](../../getting_started/#deploy-your-first-agent)**—a lightweight observability agent—deploys to all the infrastructure you wish to monitor.
+1. The **[Orb Agent](../running_orb_agent)**—a lightweight observability agent—deploys to all the infrastructure you wish to monitor.
 
 !!! info
     
