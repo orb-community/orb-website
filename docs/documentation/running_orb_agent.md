@@ -111,7 +111,7 @@ The agent credentials include *three pieces of information*, each of which is a 
 
 !!! question
 
-    Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ## Configuration files
