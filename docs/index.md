@@ -68,6 +68,6 @@ Orb is designed to easily integrate into the larger Network Automation ecosystem
 
 It is free, open-source software released under Mozilla Public License (MPL). 
 
-You can host **Orb** yourself, or run it through our hosted SaaS platform at <a href="orb.live" target="_blank">orb.live</a>.
+You can host **Orb** yourself, or run it through our hosted SaaS platform at <a href="https://orb.live" target="_blank">orb.live</a>.
 
 ***

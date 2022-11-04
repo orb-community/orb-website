@@ -5,7 +5,7 @@ An Orb agent needs to run on all the infrastructure (computers, servers, switche
 To run an agent, you will need:
 
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
-2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](../../getting_started/#create-agent-credentials)
+2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
 
@@ -185,7 +185,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
 
 !!! warning
 
-    Auto-provisioning is an advanced use case. Most users will find [creating an agent in the UI](/docs/#create-an-agent) easier.
+    Auto-provisioning is an advanced use case. Most users will find [creating an agent in the UI](/getting_started/#create-agent-credentials) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
