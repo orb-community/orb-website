@@ -10,6 +10,17 @@ central location (usually a cloud environment on Kubernetes).
 
 The **Control Plane** can be [self-hosted](#self-host), or you can use our free [Orb SaaS](#orblive) service. Self-hosting gives you full privacy and control but is more complex. On the other hand, our SaaS gets you up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
+!!! tip
+    
+    To run your agent using the self-hosted control plane, disable TLS verification using the enviromental variable below in your provisioning command:
+    
+    ``` shell
+    -e ORB_TLS_VERIFY=false
+    ```
+
+    Check an example [here](/documentation/running_orb_agent/#sample-provisioning-commands).
+
+
 ## orb.live 
 The Orb SaaS platform ([**orb.live**](http://orb.live)) is now in active development. This free service allows you to enjoy the benefits of the Orb platform without having to run your own control plane.
 
