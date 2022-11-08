@@ -42,23 +42,24 @@ The agent credentials include *three pieces of information*, each of which is a 
 
     === "Generic"
 
-        Use this command as a template by substituting in the appropriate values:
+      Use this command as a template by substituting in the appropriate values:
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=<HOST>
         -e ORB_CLOUD_MQTT_ID=<AGENTID>
         -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
-        -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=auto
         ns1labs/orb-agent
-        ```
-    === "localhost, mock"
+      ```
+      
+    === "Localhost, Docker Compose"
         
-        This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/install/#orb-with-docker-compose). 
-        Note that the "mock" interface will generate random traffic rather than observe real traffic.
+      This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/documentation/install/#orb-with-docker-compose). 
+      Note that the "mock" interface will generate random traffic rather than observe real traffic.
 
-        ``` shell 
+      ```  shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=localhost
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
@@ -69,11 +70,11 @@ The agent credentials include *three pieces of information*, each of which is a 
         ns1labs/orb-agent
         ```
 
-    === "orb.live, eth0"
+    === "Orb.live, eth0"
         
-        This command is similar to one you would use on the orb.live SaaS platform
+      This command is similar to one you would use on the orb.live SaaS platform
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
@@ -83,10 +84,11 @@ The agent credentials include *three pieces of information*, each of which is a 
         ns1labs/orb-agent
         ```
 
-    === "You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`"
+    === "Specifying agent port"
+      You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`
 
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
@@ -97,10 +99,11 @@ The agent credentials include *three pieces of information*, each of which is a 
         ns1labs/orb-agent
         ```
 
-    === "🎁 BONUS - you can access agent debug logs by passing the -d command"
+    === "🎁 BONUS - Debug"
+      You can access agent debug logs by passing the `-d` command
 
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
