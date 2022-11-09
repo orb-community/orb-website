@@ -102,9 +102,11 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
 
 <span style="color:blue">Optional fields:</span><br>
 `filter` - to specify what data to include from the input <br>
-`config` -  how the input will be used <br><br>
+`config` -  how the input will be used
 
-Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
+!!! note
+
+    Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
 
 ### Default input structure
 
