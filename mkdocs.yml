@@ -3,14 +3,19 @@ theme:
   name: material
   custom_dir: overrides
   favicon: img/ORB-logo-ring.png
-  logo: img/ORB-logo-ring.png
+  logo: img/orb_logo_original.png
+  font:
+    text: Montserrat
   features:
     - navigation.tracking
     - navigation.instant
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
+    - navigation.indexes
+    - navigation.sections
     - search.suggest
+    - toc.integrate
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
@@ -20,27 +25,40 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight
   - pymdownx.inlinehilite
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.superfences
   - admonition
   - pymdownx.details
   - attr_list
   - md_in_html
   - toc:
-      permalink: true
+      toc_depth: 3
 plugins:
   - search
 nav:
-  - Home: 'index.md'
-  - About: 'about.md'
-  - Installation: 'install.md'
-  - Getting Started: 'getting_started.md'
+  - Home: index.md
+  - About: about.md
+  - Getting Started: getting_started.md
+  - Guides:
+    - guides/index.md
+    - Edge Networks: guides/edge_networks.md
+    - Authoritative DNS: guides/authoritative_dns.md
+    - Recursive DNS: guides/recursive_dns.md
+    - DHCP Services: guides/dhcp_services.md
+    - Network Traffic (Flow): guides/flow.md
+    - Response Testing: guides/response_testing.md
   - Documentation:
-    - Running ORB agent: 'documentation/running_orb_agent.md'
-    - Advanced Policies: 'documentation/advanced_policies.md'
-    - Orb REST API: 'api/orb_rest_api.md'
+    - Running Orb Agents: documentation/running_orb_agent.md
+    - Orb Policy Reference: documentation/advanced_policies.md
+    - Orb Metrics: documentation/pktvisor_metrics.md
+    - Installing Orb control plane: documentation/install.md
+    - Orb REST API: api/orb_rest_api.md
   - Community: 'contact.md'
 repo_url: https://github.com/ns1labs/orb
-edit_uri: edit/main/docs
+repo_name: ns1labs/orb
+edit_uri: ''
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -48,10 +66,12 @@ extra:
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
-      link: https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA
+      link: https://netdev.chat/
     - icon: octicons/mail-24
       link: "mailto:info@pktvisor.dev"
   analytics:
     provider: google
     property: UA-41778111-9
 copyright: Copyright &copy; 2022 <a href="https://ns1.com/labs">NS1</a>
+extra_css:
+  - stylesheets/extra.css

@@ -4,8 +4,9 @@ An Orb agent needs to run on all the infrastructure (computers, servers, switche
 
 To run an agent, you will need:
 
+
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
-2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/docs/#create-an-agent)
+2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 4. The network interface to monitor (e.g. `eth0`)
 
@@ -32,32 +33,33 @@ To run an agent, you will need:
 
 The agent credentials include *three pieces of information*, each of which is a UUID in the form `5dc34ded-6a53-44c0-8d15-7e9c8c95391a`.
 
-1. **Agent ID**, which uniquely identifies the agent.
-2. **Agent Channel ID**, which uniquely identifies the agent's communication channel.
-3. **Agent Key**, which is a private access token for the agent. Note you will only be shown the key once upon creation!
+1. ==Agent ID==, which uniquely identifies the agent.
+2. ==Agent Channel ID==, which uniquely identifies the agent's communication channel.
+3. ==Agent Key==, which is a private access token for the agent. Note you will only be shown the key once upon creation!
 
 ## Sample provisioning commands
 !!! example
 
     === "Generic"
 
-        Use this command as a template by substituting in the appropriate values:
+      Use this command as a template by substituting in the appropriate values:
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=<HOST>
         -e ORB_CLOUD_MQTT_ID=<AGENTID>
         -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
-        -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
-        ns1labs/orb-agent:develop
-        ```
-    === "localhost, mock"
+        -e PKTVISOR_PCAP_IFACE_DEFAULT=auto
+        ns1labs/orb-agent
+      ```
+      
+    === "Localhost, Docker Compose"
         
-        This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/install/#orb-with-docker-compose). 
-        Note that the "mock" interface will generate random traffic rather than observe real traffic.
+      This command is useful for connecting to a local develop environment, perhaps running on [Docker compose](/documentation/install/#orb-with-docker-compose). 
+      Note that the "mock" interface will generate random traffic rather than observe real traffic.
 
-        ``` shell 
+      ```  shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=localhost
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
@@ -65,27 +67,28 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         -e ORB_TLS_VERIFY=false
-        ns1labs/orb-agent:develop
-        ```
+        ns1labs/orb-agent
+      ```
 
-    === "orb.live, eth0"
+    === "Orb.live, eth0"
         
-        This command is similar to one you would use on the orb.live SaaS platform
+      This command is similar to one you would use on the orb.live SaaS platform
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent:develop
-        ```
+        ns1labs/orb-agent
+      ```
 
-    === "You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`"
+    === "Specifying agent port"
+      You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port *10853*, but this value can be set through the environment variable `ORB_BACKENDS_PKTVISOR_API_PORT`
 
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
@@ -93,25 +96,26 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
         -e ORB_BACKENDS_PKTVISOR_API_PORT=10854
-        ns1labs/orb-agent:develop
-        ```
+        ns1labs/orb-agent
+      ```
 
-    === "🎁 BONUS - you can access agent debug logs by passing the -d command"
+    === "🎁 BONUS - Debug"
+      You can access agent debug logs by passing the `-d` command
 
 
-        ``` shell 
+      ``` shell 
         docker run -d --net=host
         -e ORB_CLOUD_ADDRESS=orb.live
         -e ORB_CLOUD_MQTT_ID=7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent:develop run -d
-        ```
+        ns1labs/orb-agent run -d
+      ```
 
 !!! question
 
-    Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://join.slack.com/t/ns1labs/shared_invite/zt-qqsm5cb4-9fsq1xa~R3h~nX6W0sJzmA),
+    Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
     or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
 
 ## Configuration files
@@ -167,9 +171,9 @@ orb:
          channel_id: "AGENT_CHANNEL_UUID"
    backends:
       pktvisor:
-      binary: "/usr/local/sbin/pktvisord"
-      # this example assumes the file is saved as agent.yaml. If your file has another name, you must replace it with the proper name
-      config_file: "/usr/local/orb/etc/agent.yaml"
+         binary: "/usr/local/sbin/pktvisord"
+         # this example assumes the file is saved as agent.yaml. If your file has another name, you must replace it with the proper name
+         config_file: "/usr/local/orb/etc/agent.yaml"
 ```
 
 You must mount your configuration file into the `orb-agent` container. For example, if your configuration file
@@ -177,17 +181,17 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 
 ```shell
 docker run -v /local/orb:/usr/local/orb/ --net=host \
-      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
 ```
 
-### Taps
+## Agent Taps
 
 The tap section specifies what data the agent should be listening in on. <br>
 3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
 
-#### Packet Capture (pcap) 
+### Packet Capture (pcap) 
 
-##### Configurations
+#### Configurations
 
 There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
 
@@ -297,7 +301,7 @@ The `host_spec` setting is useful to determine the direction of observed packets
     }
     ```
 
-##### Filters
+#### Filters
 
 There is only one filter referring to the input PCAP: `bpf`.
 
@@ -327,36 +331,20 @@ filter data based on Berkeley Packet Filters (BPF).
     }
     ```
 
-#### Sflow/Netflow (flow)
+### Sflow/Netflow (flow)
 
-##### Configurations
+#### Configurations
 
-There are 4 configs for flow inputs: `pcap_file`, `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+There are 4 configs for flow inputs: `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
 
 |  Config   | Type |
 |:---------:|:-----|
-| pcap_file | str  |
 |   port    | int  |
 |   bind    | str  |
 | flow_type | str  |
 
 
 
-`pcap_file`: *str* <br>
-
-One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
-
-=== "YAML"
-    ```yaml
-     pcap_file: path/to/file
-    ```
-=== "JSON"
-    ```json
-    {
-      "pcap_file": "path/to/file"
-    }
-    ```
-<br>
 `port`: *int* and `bind`: *str* <br>
 
 The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
@@ -412,13 +400,13 @@ Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><
     }
     ```
 
-##### Filters
+#### Filters
 
 There are no specific filters for the FLOW input.
 
-####  Dnstap
+###  Dnstap
 
-##### Configurations
+#### Configurations
 
 The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
 
@@ -484,7 +472,7 @@ The other way to inform the ip and port to be monitored is through the 'tcp' con
     }
     ```
 <br>
-##### Filters
+#### Filters
 
 `only_hosts`: *str* <br>
 
@@ -517,7 +505,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
 
 !!! warning
 
-    Auto-provisioning is an advanced use case. Most users will find [creating an agent in the UI](/docs/#create-an-agent) easier.
+    Auto-provisioning is an advanced use case. Most users will find [creating an agent in the UI](/getting_started/#create-agent-credentials) easier.
 
 1. If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.
 
@@ -553,7 +541,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
             "issued_at": "2021-09-07T15:29:49.70146088Z"
         }
 
-6. **Currently, the permanent token allows access to all API functionality, not just provisioning.** You can revoke this permanent token at any time with the following call, using the `id` field above:
+6. ==Currently, the permanent token allows access to all API functionality, not just provisioning.== You can revoke this permanent token at any time with the following call, using the `id` field above:
 
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
         --header 'Authorization: <SESSION_TOKEN>'
@@ -585,11 +573,11 @@ orb:
          address: tls://HOST:8883
 ```
 
-8. You can now pull and run `ns1labs/orb-agent:develop` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
+8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
 ```shell
-docker pull ns1labs/orb-agent:develop
+docker pull ns1labs/orb-agent
 docker run -v /local/orb:/usr/local/orb/ --net=host \
        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-      ns1labs/orb-agent:develop run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
 ```

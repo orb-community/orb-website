@@ -1,4 +1,4 @@
-# Advanced Policies
+# Orb Policy Reference
 
 An Orb policy must be written in json and has sevem top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
 
@@ -15,21 +15,18 @@ An Orb policy must be written in json and has sevem top level sections: `name`, 
     }
     ```
 
-| Policy Required Sections |  
-|:------------------------:|
-|          `name`          |
-|        `backend`         |
-|         `policy`         |
-
-| Policy Optional Sections | Default |
-|:------------------------:|:-------:|
-|      `description`       | *None*  |
-|          `tags`          | *None*  |
-|     `schema_version`     |  *1.0*  |
-|         `format`         | *json*  |
+| Policy Sections  | Default | Required |
+|:----------------:|:-------:|:--------:|
+|      `name`      |    -    |    ✅     |
+|    `backend`     |    -    |    ✅     |
+|     `policy`     |    -    |    ✅     |
+|  `description`   | *None*  |    ❌     |
+|      `tags`      | *None*  |    ❌     |
+| `schema_version` |  *1.0*  |    ❌     |
+|     `format`     | *json*  |    ❌     |
 
 
-## Name
+- **Name**<br><br>
 Policy name must be unique, must start with a letter and contain only letters, numbers, `"-"` or `"_"`.
 
 !!! example "Examples"
@@ -43,11 +40,11 @@ Policy name must be unique, must start with a letter and contain only letters, n
         "name": "1_policy" <br>
         "name": "MY-policy/2
 
-## Description
-Policy description is a free string. You can describe using spaces, letters, numbers and special characters.
+- **Description**<br><br>
+Policy description is a free string. You can describe using spaces, letters, numbers and special characters.<br><br>
 
 
-## Tags
+- **Tags**<br><br>
 Tags are intended to facilitate organization and are a dict type. 
 
 The `tags` usage syntax is:<br>
@@ -57,61 +54,59 @@ The `tags` usage syntax is:<br>
         "tags": {"key1":"value1", "key2":"value2", "key3":"value3"}
     ```
 
-## Backend
+- **Backend**<br><br>
 Backend determine to which backend the policy will be attached.
-The only option nowadays is `pktvisor`.
+The only option nowadays is `pktvisor`.<br><br>
 
-## Schema version
+- **Schema version**<br><br>
+Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Currently, the version used by pktvisor (and the default one) is "1.0".<br><br>
 
-Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Currently, the version used by pktvisor (and the default one) is "1.0"
+- **Format**<br><br>
+The `format` specifies in which format the policy data will be written. The options are `json` and `yaml`. Json is the default value.<br><br>
 
-## Format
+- **Policy**<br><br>
+Currently, the only backend supported by Orb is `pktvisor`. For that reason, the policy must have pktvisor's format.<br><br>
 
-The `format` specifies in which format the policy data will be written. The options are `json` and `yaml`. Json is the default value.
-
-## Policy
-Currently, the only backend supported by Orb is `pktvisor`. For that reason, the policy must have pktvisor's format.
-
-### Pktvisor policy
+## Pktvisor policy
 The policy data for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
 
 === "YAML"
     ```yaml
     input: ..
     config: ...
-    handlers: ...
     kind: collection
+    handlers: ...
     ```
 === "JSON"
     ```json
     {
       "input": {       
-      },
+       },
       "config": {
-    },
-      "handlers": {        
-      },
+       },
       "kind": "collection"
+       },
+      "handlers": {        
     }
     ```
-#### Input section
+## Input section
 
 The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the agent level. <br>
 3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
-**Required fields:** <br>
+<span style="color:blue">Required fields:</span><br>
 `input_type` - the type of input.  This field will be validated with the type of tap indicated by the `tap` parameter or by the `tap selector` . If the types are incompatible, the policy will fail.<br>
 
-`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](../running_orb_agent/#taps).
+`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](../running_orb_agent/#agent-taps).
 If `tap_selector` is used, it can be chosen whether taps with any of the tags or with all tags will be attached.
 
 
-**Optional fields**: <br>
+<span style="color:blue">Optional fields:</span><br>
 `filter` - to specify what data to include from the input <br>
 `config` -  how the input will be used <br><br>
 
 Every configuration set at the input can be reset at the tap level, with the one set on the tap dominant over the one set on the input.<br>
 
-##### Default input structure
+### Default input structure
 
 *Using specific tap ([check the application in a policy here](#examples-of-dns-policy)):*
 
@@ -217,7 +212,7 @@ Every configuration set at the input can be reset at the tap level, with the one
     ```
 
 
-#### Configuration section
+## Config section
 
 There is the possibility of defining settings on the policy level. Currently, the only configuration available is the `merge_like_handlers`. 
 
@@ -227,7 +222,7 @@ There is the possibility of defining settings on the policy level. Currently, th
 | `merge_like_handlers` | *bool* |  false  |
 
 
-**merge_like_handlers**
+#### merge_like_handlers
 
 When `merge_like_handlers` config is true, metrics from all handlers of the same type are scraped together. This is useful when the [tap_selector](#input-section) is used, as, by default, metrics are generated separately for each tap in the policy and this can be very expensive, depending on the number of taps.
 
@@ -247,16 +242,16 @@ The `merge_like_handlers` filter usage syntax is:<br>
     }
     ```
 
-#### Kind section
+## Kind section
 
 What kind of object you want to create
 The only option for now is `"collection"`.
 
-#### Handlers section (Analysis)
+## Handlers section (Analysis)
 
 Handlers are the modules responsible for extracting metrics from inputs. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
 
-##### Abstract Configurations
+### Abstract Configurations
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
 
@@ -477,7 +472,7 @@ To disable all metric groups use the syntax:
 * Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
-##### DNS Analyzer (dns)
+### DNS Analyzer (dns)
 **Handler Type**: "dns" <br>
 
 ###### Metrics Group <br>
@@ -502,7 +497,7 @@ To disable all metric groups use the syntax:
 Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
 
 The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
-The list of suffixes considered public can be accessed [here](https://github.com/ns1labs/pktvisor/blob/develop/src/handlers/dns/PublicSuffixList.h). <br>
+The list of suffixes considered public can be accessed [here](https://github.com/ns1labs/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
 
 |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
 |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
@@ -976,7 +971,7 @@ Example policy pcap DNS:
     ```
 
 
-##### Network (L2-L3) Analyzer (net)
+### Network (L2-L3) Analyzer (net)
 **Handler Type**: "net" <br>
 
 ###### Metrics Group <br>
@@ -1227,7 +1222,7 @@ Example policy pcap NET :
     }
     ```
 
-##### DHCP Analyzer (dhcp)
+### DHCP Analyzer (dhcp)
 **Handler Type**: "dhcp" <br>
 
 ###### Metrics Group 
@@ -1321,7 +1316,7 @@ Example policy pcap DHCP :
     }
     ```
 
-##### BGP Analyzer (bgp)
+### BGP Analyzer (bgp)
 **Handler Type**: "bgp" <br>
 
 ###### Metrics Group 
@@ -1421,7 +1416,7 @@ Example policy pcap BGP :
     ```
 
 
-##### Packet Capture Analyzer (pcap)
+### Packet Capture Analyzer (pcap)
 **Handler Type**: "pcap" <br>
 
 ###### Metrics Group
@@ -1501,7 +1496,7 @@ Example policy pcap PCAP:
     ```
 
 
-##### Flow Analyzer (flow)
+### Flow Analyzer (flow)
 **Handler Type**: "flow" <br>
 
 ###### Metrics Group <br>
@@ -1514,6 +1509,7 @@ Example policy pcap PCAP:
 |  `top_by_bytes`  | enabled  |
 |    `top_geo`     | disabled |
 | `conversations`  | disabled |
+
 <br>
 
 ###### Configurations <br>
