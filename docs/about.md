@@ -6,6 +6,7 @@ hide:
 
 ---
 
+
 Born at [NS1 Labs](https://ns1.com/labs), ==Orb== is a new kind of ==observability platform== that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. 
 
 ![](./img/ORB-diagram2.png)  
