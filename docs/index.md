@@ -12,6 +12,7 @@ hide:
 ![](img/01_Edge-Observability.png){ align=right .observability }
 ### Introducing Orb
 
+
 **Orb** is a free, open-source tool that focuses on the network edge — dynamic, distributed environments composed of endless data streams rich with valuable information 
 
 **Orb** allows you to dynamically tap into these data streams and extract real-time insights, pipelining the results into modern observability stacks 
