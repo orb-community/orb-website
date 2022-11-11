@@ -16,21 +16,28 @@ jobs:
       - name: redoc-cli fleet
         uses: seeebiii/redoc-cli-github-action@v10
         with:
-          args: 'build https://raw.githubusercontent.com/ns1labs/orb/develop/fleet/api/http/openapi.yaml -o docs/api/fleet.html'
+          args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/fleet/api/http/openapi.yaml -o docs/api/fleet.html'
 
       - name: redoc-cli sinks
         uses: seeebiii/redoc-cli-github-action@v10
         with:
-          args: 'build https://raw.githubusercontent.com/ns1labs/orb/develop/sinks/api/http/openapi.yaml -o docs/api/sinks.html'
+          args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/sinks/api/http/openapi.yaml -o docs/api/sinks.html'
 
       - name: redoc-cli policies
         uses: seeebiii/redoc-cli-github-action@v10
         with:
-          args: 'build https://raw.githubusercontent.com/ns1labs/orb/develop/policies/api/openapi.yaml -o docs/api/policies.html'
+          args: 'bundle https://raw.githubusercontent.com/ns1labs/orb/develop/policies/api/openapi.yaml -o docs/api/policies.html'
 
       - name: list redoc files
         run: |
            ls -lh
+           
+      - name: list redoc files
+        run: |
+           ls -lh ..
+           
+      - name: list redoc files
+        run: |
            ls -lh docs/api/
            pwd
 
