@@ -28,6 +28,12 @@ jobs:
         with:
           args: 'build https://raw.githubusercontent.com/ns1labs/orb/develop/policies/api/openapi.yaml -o docs/api/policies.html'
 
+      - name: list redoc files
+        run: |
+           ls -lh
+           ls -lh docs/api/
+           pwd
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
