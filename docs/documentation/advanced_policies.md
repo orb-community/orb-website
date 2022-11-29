@@ -1,6 +1,6 @@
 # Orb Policy Reference
 
-An Orb policy must be written in json and has sevem top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
+An Orb policy must be written in json and has seven top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
 
 === "JSON"
     ```json
@@ -55,17 +55,17 @@ The `tags` usage syntax is:<br>
     ```
 
 - **Backend**<br><br>
-Backend determine to which backend the policy will be attached.
-The only option nowadays is `pktvisor`.<br><br>
+Backend determine to which backend the policy will be attached. Check the available backends [here](/documentation/orb_agent_backend). <br><br>
 
 - **Schema version**<br><br>
-Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Currently, the version used by pktvisor (and the default one) is "1.0".<br><br>
+Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Default should be "1.0".<br><br>
 
 - **Format**<br><br>
-The `format` specifies in which format the policy data will be written. The options are `json` and `yaml`. Json is the default value.<br><br>
+The `format` specifies in which format the policy data will be written. The options are `json` and `yaml`. `json` is the default value.<br><br>
 
 - **Policy**<br><br>
-Currently, the only backend supported by Orb is `pktvisor`. For that reason, the policy must have pktvisor's format.<br><br>
+Each supported backend has specific structures for its policy data. Check the available options below.
+
 
 ## Pktvisor policy
 The policy data for pktvisor can be written in either YAML or JSON, and has four top level sections: “input”, “handlers”, "config" and “kind”.
@@ -91,12 +91,11 @@ The policy data for pktvisor can be written in either YAML or JSON, and has four
     ```
 ## Input section
 
-The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the agent level. <br>
-3 types of input are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
+The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the [agent level](/documentation/orb_agent_backend/#pktvisor-configuration). <br><br>
 <span style="color:blue">Required fields:</span><br>
 `input_type` - the type of input.  This field will be validated with the type of tap indicated by the `tap` parameter or by the `tap selector` . If the types are incompatible, the policy will fail.<br>
 
-`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](../running_orb_agent/#agent-taps).
+`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](/documentation/orb_agent_backend/#pktvisor-configuration).
 If `tap_selector` is used, it can be chosen whether taps with any of the tags or with all tags will be attached.
 
 

@@ -51,6 +51,7 @@ nav:
     - Response Testing: guides/response_testing.md
   - Documentation:
     - Running Orb Agents: documentation/running_orb_agent.md
+    - Configuring Orb Agents Backend (Advanced): documentation/orb_agent_backend.md
     - Orb Policy Reference: documentation/advanced_policies.md
     - Orb Metrics: documentation/pktvisor_metrics.md
     - Installing Orb control plane: documentation/install.md
