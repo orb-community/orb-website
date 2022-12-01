@@ -1,5 +1,5 @@
 An orb agent can have its backend customized with advanced configuration using [configuration files](/documentation/running_orb_agent/#configuration-files).<br>
-It is worth emphasizing that no extra installation is necessary, since the agent itself already has native support for its backends.
+It is worth emphasizing that no extra installation is necessary, since the `orb-agent` docker container already includes the available backends.
 See below for configuration options for each backend supported by Orb agents.
 
 

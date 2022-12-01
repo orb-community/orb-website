@@ -1,6 +1,6 @@
 # Orb Policy Reference
 
-An Orb policy must be written in json and has seven top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
+The policy model has seven top level sections: `name`, `desciption`, `tags`, `backend`, `schema_version`, `policy` and `format`.
 
 === "JSON"
     ```json
