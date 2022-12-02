@@ -125,7 +125,7 @@ Most configuration options can be passed to the container as environment variabl
 You will need to use a configuration file if:
 
 * You want to assign tags to the agent at the edge
-* You want to setup custom pktvisor Taps
+* You want to set up custom pktvisor Taps
 * You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML.
@@ -145,7 +145,7 @@ visor:
             iface: "eth0"
             host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
 
-# this section is used orb-agent
+# this section is used by orb-agent
 # most sections and keys are optional
 orb:
    # these are arbitrary key value pairs used for organization in the control plane and UI
@@ -183,6 +183,7 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 docker run -v /local/orb:/usr/local/orb/ --net=host \
       ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
 ```
+
 
 ## Advanced auto-provisioning setup
 Some use cases require a way to provision agents directly on edge infrastructure without creating an agent manually in the UI or REST API ahead of time. To do so, you will need to create an API key which can be used by `orb-agent` to provision itself.
