@@ -29,7 +29,7 @@ visor:
         key3: value3
 ```
 
-The following inputs are supported: `pcap`, `flow` and `dnstap`. For each input type, specific configuration, filters and tags can be defined.<br><br>
+The following inputs are supported: `pcap`, `flow`, `dnstap` and `netprobe`. For each input type, specific configuration, filters and tags can be defined.<br><br>
 
 ### Packet Capture (pcap)
 
@@ -278,4 +278,167 @@ DNSTAP tap example:
             only_hosts: 192.168.1.4/32
           tags:
             dnstap: true
+    ```
+
+
+### Netprobe
+
+#### Configurations
+
+The following configs are available for netprobe inputs: `test_type`, `interval_msec`, `timeout_msec`, `packets_per_test`, `packets_interval_msec`, `packet_payload_size`. 
+
+|        Config         | Type | Required | Default |
+|:---------------------:|:----:|:--------:|:-------:|
+|       test_type       | str  |    ✅     |    -    |
+|     interval_msec     | int  |    ❌     |  5000   |
+|     timeout_msec      | int  |    ❌     |  2000   |
+|   packets_per_test    | int  |    ❌     |    1    |
+| packets_interval_msec | int  |    ❌     |   25    |
+|  packet_payload_size  | int  |    ❌     |   48    |
+|        targets        | map  |    ✅     |    -    |
+
+
+
+`test_type`: *str*<br>
+
+Defines the type of the test to be performed. Type options are listed below:
+
+- ping: implements a ping prober that can probe multiple targets. The test will run against the targets to verify if the systems are working fine.
+
+=== "YAML"
+```yaml
+test_type: str
+```    
+Example:
+```yaml
+test_type: ping
+```
+
+<br>
+
+`interval_msec`: *int* <br>
+
+How often to run the probe (in milliseconds). <br><br>
+
+=== "YAML"
+```yaml
+interval_msec: int
+```
+Example:
+```yaml
+interval_msec: 5000
+```
+
+<br>
+
+`timeout_msec`: *int* <br>
+
+Probe timeout (in milliseconds). <br><br>
+
+=== "YAML"
+```yaml
+timeout_msec: int
+```
+Example:
+```yaml
+timeout_msec: 2000
+```
+
+<br>
+
+`packets_per_test`: *int* <br>
+
+Number of packets to be sent in each test.
+
+=== "YAML"
+```yaml
+packets_per_test: int
+```
+Example:
+```yaml
+packets_per_test: 1
+```
+
+<br>
+
+`packets_interval_msec`: *int* <br>
+
+Time interval between packets per test (in milliseconds).
+
+
+=== "YAML"
+```yaml
+packets_interval_msec: int
+```
+Example:
+```yaml
+packets_interval_msec: 25
+```
+
+<br>
+
+`packet_payload_size`: *int* <br>
+
+Defines the payload of the packets sent in the tests.
+
+
+=== "YAML"
+```yaml
+packet_payload_size: int
+```
+Example:
+```yaml
+packet_payload_size: 48
+```
+
+<br>
+
+`targets`: *map* <br>
+
+Here, the targets against which the probe will run are defined.
+For each target is required to specify the target name and the address to be tested.
+
+=== "YAML"
+```yaml
+targets: map
+```
+Example:
+```yaml
+targets:
+  target_name:
+    target: ipv4 address to test
+```
+Generic Example:
+```yaml
+targets:
+  google:
+    target: www.google.com
+```
+
+#### Filters
+
+There are no specific filters for Netprobe input.<br><br>
+
+Netprobe tap example:
+
+!!! Example "Example: Pktvisor Netprobe Tap Configuration"
+    ```yaml
+    visor:
+      taps:
+        default_netprobe:
+          input_type: netprobe
+          config:
+            test_type: ping
+            interval_msec: 2000
+            timeout_msec: 1000
+            packets_per_test: 10
+            packets_interval_msec: 25
+            packet_payload_size: 56
+            targets:
+              www.google.com:
+                target: www.google.com
+              orb_community:
+                target: orb.community
+          tags:
+            netprobe: true
     ```
