@@ -1883,3 +1883,95 @@ Example policy input flow handler FLOW:
       "kind": "collection"
     }
     ```
+
+### Netprobe
+**Handler Type**: "netprobe" <br>
+
+###### Metrics Group <br>
+
+
+| Metric Group | Default  | 
+|:------------:|:--------:|
+| `quantiles`  | disabled |
+|  `counters`  | enabled  |
+
+
+###### Configurations <br>
+- Abstract configurations. <br><br>
+- In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_backend/#netprobe) the available configurations for netprobe.
+
+
+###### Filters
+- No filters available. <br><br>
+
+Example policy netprobe JSON:
+
+###### Examples of Netprobe policy
+
+
+=== "YAML"
+    ```yaml
+    handlers:
+      modules:
+        default_netprobe:
+          type: netprobe
+          metric_groups:
+            enable:
+              - counters
+              - quantiles
+    input:
+      input_type: netprobe
+      tap: default_netprobe
+      config:
+        test_type: ping
+        interval_msec: 2000
+        timeout_msec: 1000
+        packets_per_test: 10
+        packets_interval_msec: 25
+        packet_payload_size: 56
+        targets:
+          www.google.com:
+            target: www.google.com
+          orb_community:
+            target: orb.community 
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "modules": {
+          "default_netprobe": {
+            "type": "netprobe",
+            "metric_groups": {
+              "enable": [
+                "counters",
+                "quantiles"
+              ]
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "netprobe",
+        "tap": "default_netprobe",
+        "config": {
+          "test_type": "ping",
+          "interval_msec": 2000,
+          "timeout_msec": 1000,
+          "packets_per_test": 10,
+          "packets_interval_msec": 25,
+          "packet_payload_size": 56,
+          "targets": {
+            "www.google.com": {
+              "target": "www.google.com"
+            },
+            "orb_community": {
+              "target": "orb.community"
+            }
+          }
+        }
+      },
+      "kind": "collection"
+    }
+    ```
