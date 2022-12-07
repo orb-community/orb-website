@@ -558,7 +558,7 @@ There are several possible return codes for a DNS server response, which you can
 |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
 |      `10`       |      NOTZONE       |             Name not contained in zone              |
 |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
-|      `16`       | BADVERS and BADSIG |      Bad OPT Version or TSIG Signature Failure      |
+|      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
 |      `17`       |       BADKEY       |                 Key not recognized                  |
 |      `18`       |      BADTIME       |            Signature out of time window             |
 |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
