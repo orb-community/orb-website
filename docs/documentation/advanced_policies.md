@@ -542,14 +542,30 @@ Input: PCAP <br>
 
 When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
 Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
-There are several possible return codes for a DNS server response, which you can access [here](https://help.dnsfilter.com/hc/en-us/articles/4408415850003-DNS-Return-Codes), but currently the policies support 4 return types as filters (if you use any other code that is not in the table below, your policy will fail): <br>
+There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
 
-| DNS Return Code | DNS Return Message |                Description                |
-|:---------------:|:------------------:|:-----------------------------------------:|
-|       `0`       |      NOERROR       |     DNS Query completed successfully      |
-|       `2`       |      SERVFAIL      | Server failed to complete the DNS request |
-|       `3`       |      NXDOMAIN      |        Domain name does not exist         |
-|       `5`       |      REFUSED       |         Function not implemented          |
+| DNS Return Code | DNS Return Message |                     Description                     |
+|:---------------:|:------------------:|:---------------------------------------------------:|
+|       `0`       |      NOERROR       |          DNS Query completed successfully           |
+|       `1`       |      FORMERR       |               DNS Query Format Error                |
+|       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+|       `3`       |      NXDOMAIN      |             Domain name does not exist              |
+|       `4`       |       NOTIMP       |              Function not implemented               |
+|       `5`       |      REFUSED       |     The server refused to answer for the query      |
+|       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
+|       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
+|       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
+|       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
+|      `10`       |      NOTZONE       |             Name not contained in zone              |
+|      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
+|      `16`       | BADVERS and BADSIG |      Bad OPT Version or TSIG Signature Failure      |
+|      `17`       |       BADKEY       |                 Key not recognized                  |
+|      `18`       |      BADTIME       |            Signature out of time window             |
+|      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
+|      `20`       |      BADNAME       |                 Duplicate key name                  |
+|      `21`       |       BADALG       |               Algorithm not supported               |
+|      `22`       |      BADTRUNC      |                   Bad Truncation                    |
+|      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
 
 The `only_rcode` filter usage syntax is:<br>
 
