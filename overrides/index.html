@@ -1,11 +1,11 @@
 {% extends "partials/main.html" %} {% block tabs %} {{ super() }}
 <script>
-  const menu = document.querySelectorAll('header')[0];
+  const menu = document.querySelectorAll("header")[0];
   window.onscroll = () => {
-    if(window.scrollY > 1000) {
-      menu.classList.add('opaque');
-    }else{
-      menu.classList.remove('opaque');
+    if (window.scrollY > 1000) {
+      menu.classList.add("opaque");
+    } else {
+      menu.classList.remove("opaque");
     }
   };
 </script>
@@ -79,7 +79,6 @@
       #7b61ff 100%,
       #df316f 200%
     ) !important;
-    
   }
 
   header.md-header {
@@ -100,22 +99,22 @@
 
   .md-typeset h3 {
     font-weight: 600;
-    font-size: 1.0rem;
+    font-size: 1rem;
     line-height: 1.25rem;
-    margin: 1.0rem 0 1rem 0!important;
+    margin: 1rem 0 1rem 0 !important;
     align-items: center;
     text-transform: capitalize;
     padding-bottom: 16px;
   }
 
   img.observability {
-    margin: -5rem 0 0 6rem !important;
+    margin: -5rem 0 2vh 6rem !important;
     width: 650px;
     height: auto;
   }
 
   img.wherefits {
-    margin: -5rem 6rem 0 0 !important;
+    margin: -5rem 6rem 2vh 0 !important;
     width: 650px;
     height: auto;
   }
@@ -131,7 +130,7 @@
   img.orb-home-img {
     margin: 0 0 !important;
   }
-  
+
   .orb-home-detail {
     display: inline-flex;
     align-items: center;
@@ -161,9 +160,9 @@
     background-image: url("assets/images/bottom-background.png");
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 250px;
-    padding-bottom: 250px;
-    margin-bottom: -250px;
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+    margin-bottom: -8vh;
     width: auto;
     background-position-x: center;
   }
@@ -181,14 +180,14 @@
   p.splash-title {
     font-style: normal;
     font-weight: 400;
-    font-size: 96px;
-    line-height: 117px;
+    font-size: 4.33rem;
+    line-height: 5.33rem;
     display: inline-block;
     color: #ffffff;
   }
 
   a.splash-cta {
-    margin-top: 144px;
+    margin-top: 6rem;
     text-decoration: none;
   }
 
@@ -229,8 +228,8 @@
   .cta-title {
     font-style: normal;
     font-weight: 400 !important;
-    font-size: 96px !important;
-    line-height: 117px !important;
+    font-size: 4.33rem !important;
+    line-height: 5.33rem !important;
     color: #ffffff;
     margin-top: 1rem;
   }
@@ -245,12 +244,14 @@
   .cta-content {
     font-style: normal;
     font-weight: 500 !important;
-    font-size: 24px !important;
-    line-height: 36px !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5rem !important;
     white-space: pre-line !important;
     color: #ffffff;
-    margin-top: 48px;
-    margin-bottom: 48px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+   
   }
 
   .md-footer,
@@ -295,7 +296,9 @@
 </section>
 
 <section class="mdx-container home">
-  <h2 class="md-grid">Open source, distributed network visibility that's easy to use</h2>
+  <h2 class="md-grid">
+    Open source, distributed network visibility that's easy to use
+  </h2>
   <div class="md-grid md-typeset">
     {% block content %} {{page.content}} {% endblock %}
   </div>
@@ -306,7 +309,10 @@
     <div class="cta-container">
       <span class="cta-title">Open Ecosystem</span>
       <span class="cta-content">
-        <img src="img/prometheusio-icon.svg" width="120"/> <img src="img/grafana-logo.png" width="120"/> <img src="img/opentelemetry-icon-color.png" width="120"/> <img src="img/netbox_logo.svg" width="400"/>
+        <img src="img/prometheusio-icon.svg" width="120" />
+        <img src="img/grafana-logo.png" width="120" />
+        <img src="img/opentelemetry-icon-color.png" width="120" />
+        <img src="img/netbox_logo.svg" width="400" />
       </span>
       <span class="cta-title">Backed by NS1</span>
       <span class="cta-content"
