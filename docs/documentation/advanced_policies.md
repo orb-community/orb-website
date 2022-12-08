@@ -1497,7 +1497,12 @@ Example policy pcap PCAP:
     ```
 
 
-### Flow Analyzer (flow)
+### Flow Analyzer (flow) [BETA]
+
+!!! warning
+
+    Status: `Beta`. The metric names and configuration options may still change
+
 **Handler Type**: "flow" <br>
 
 ###### Metrics Group <br>
@@ -1884,7 +1889,12 @@ Example policy input flow handler FLOW:
     }
     ```
 
-### Netprobe
+### Netprobe [BETA]
+
+!!! warning
+
+    Status: `Beta`. The metric names and configuration options may still change
+
 **Handler Type**: "netprobe" <br>
 
 ###### Metrics Group <br>
