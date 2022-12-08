@@ -87,6 +87,16 @@ Example:
 iface: eth0
 ```
 
+
+!!! tip
+
+    You can use `auto` as iface. In this way, the network with the highest data flow will be analyzed.
+    === "YAML"
+    ```yaml
+    iface: auto
+    ```
+
+
 <br>
 `host_spec`: *str* <br>
 The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
