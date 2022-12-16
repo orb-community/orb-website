@@ -1,3 +1,8 @@
+@media screen and (min-width: 76.25em) {
+  .md-header--lifted ~ .md-container .md-typeset :target {
+  --md-scroll-margin: 3.5rem;
+}
+
 @media all and (max-width: 1366px) {
   html {
     font-size: 18px !important;
@@ -113,13 +118,11 @@ nav.md-grid {
   font-weight: 600;
 }
 
-nav>label>a>img.orb-logo {
-    content: url("../img/ORB-logo-transparent.png") !important;
-    background-repeat: no-repeat;
-    background-size: contain;
-  
+nav > label > a > img.orb-logo {
+  content: url("../img/ORB-logo-transparent.png") !important;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-  
 
 :root > * nav.md-tabs {
   text-align: end;
@@ -242,10 +245,10 @@ h2:first-of-type {
 .md-typeset h3,
 h3 {
   font-weight: 600;
-  font-size: 1.0rem;
+  font-size: 1rem;
   line-height: 1.25rem;
   /* or 131% */
-  margin: 2.25rem 0 1rem 0!important;
+  margin: 2.25rem 0 1rem 0 !important;
   align-items: center;
   text-transform: capitalize;
   padding-bottom: 16px;
@@ -258,7 +261,6 @@ p {
   font-size: 0.75rem;
   line-height: 1rem;
   max-width: unset;
-
 }
 
 .md-typeset a {
@@ -279,7 +281,6 @@ p > a {
 .md-header__source {
   margin-left: 0 !important;
   width: 13rem;
-  
 }
 
 .md-source__fact {
@@ -365,7 +366,8 @@ div > .md-banner {
   margin-left: 0 !important;
 }
 
-.md-typeset ol li, ul li {
+.md-typeset ol li,
+ul li {
   font-size: 0.75rem;
 }
 
@@ -384,7 +386,8 @@ div > .md-banner {
   list-style-type: lower-roman;
 }
 
-.md-typeset ol > li::marker, .md-typeset ol > li > ol > li::marker {
+.md-typeset ol > li::marker,
+.md-typeset ol > li > ol > li::marker {
   font-weight: 800;
 }
 
