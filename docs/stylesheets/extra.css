@@ -1,8 +1,8 @@
 @media screen and (min-width: 76.25em) {
   .md-header--lifted ~ .md-container .md-typeset :target {
-  --md-scroll-margin: 3.5rem;
+    --md-scroll-margin: 3.5rem;
+  }
 }
-
 @media all and (max-width: 1366px) {
   html {
     font-size: 18px !important;
