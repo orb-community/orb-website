@@ -252,6 +252,61 @@ The only option for now is `"collection"`.
 
 Handlers are the modules responsible for extracting metrics from inputs. For each handler type, specific configuration, filters and group of metrics can be defined, and there are also configs (abstract configuration) that can be applied to all handlers: <br><br>
 
+**Default handler structure:**
+
+=== "YAML"
+    ```yaml
+    handlers:
+      config:
+        deep_sample_rate: 100
+        num_periods: 5
+        topn_count: 10
+        topn_percentile_threshold: 0
+      modules:
+        tap_name:
+          type: ...
+          config: ...
+          filter: ...
+          metric_groups:
+            enable:
+              - ...
+              - ....
+            disable:
+              - .....
+              - ......     
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 5,
+          "topn_count": 10,
+          "topn_percentile_threshold": 0
+        },
+        "modules": {
+          "tap_name": {
+            "type": "...",
+            "config": "...",
+            "filter": "...",
+            "metric_groups": {
+              "enable": [
+                "...",
+                "...."
+              ],
+              "disable": [
+                ".....",
+                "......"
+              ]
+            }
+          }
+        }
+      }
+    }
+    ```
+
 ### Abstract Configurations
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
@@ -335,60 +390,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     }
     ```
 <br>
-**Default handler structure:**
 
-=== "YAML"
-    ```yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-        topn_percentile_threshold: 0
-      modules:
-        tap_name:
-          type: ...
-          config: ...
-          filter: ...
-          metric_groups:
-            enable:
-              - ...
-              - ....
-            disable:
-              - .....
-              - ......     
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10,
-          "topn_percentile_threshold": 0
-        },
-        "modules": {
-          "tap_name": {
-            "type": "...",
-            "config": "...",
-            "filter": "...",
-            "metric_groups": {
-              "enable": [
-                "...",
-                "...."
-              ],
-              "disable": [
-                ".....",
-                "......"
-              ]
-            }
-          }
-        }
-      }
-    }
-    ```
 To enable any metric group use the syntax:
 
 === "YAML"
@@ -474,6 +476,131 @@ To disable all metric groups use the syntax:
 
 
 ### DNS Analyzer (dns)
+
+###### Example of policy with input pcap and handler DNS
+
+=== "YAML"
+    ``` yaml
+    handlers:
+      config:
+        deep_sample_rate: 100
+        num_periods: 5
+        topn_count: 10
+      modules:
+        default_dns:
+          type: dns
+          config:
+            public_suffix_list: true
+            deep_sample_rate: 50
+            num_periods: 2
+            topn_count: 25
+            topn_percentile_threshold: 10
+          filter:
+            only_rcode: 0
+            only_dnssec_response: true
+            answer_count: 1
+            only_qtype: [1, 2]
+            only_qname_suffix: [".google.com", ".orb.live"]
+            geoloc_notfound: false
+            asn_notfound: false
+            dnstap_msg_type: "auth"
+          metric_groups:
+            enable:
+              - top_ecs
+              - top_qnames_details
+            disable:
+              - cardinality
+              - counters
+              - dns_transaction
+              - top_qnames
+              - top_ports
+    input:
+      input_type: pcap
+      tap: default_pcap
+      filter:
+        bpf: udp port 53
+      config:
+        iface: wlo1
+        host_spec: 192.168.1.167/24
+        pcap_source: libpcap
+        debug: true
+    config:
+        merge_like_handlers: true
+    kind: collection
+    ```
+
+=== "JSON"
+    ``` json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 100,
+          "num_periods": 5,
+          "topn_count": 10
+        },
+        "modules": {
+          "default_dns": {
+            "type": "dns",
+            "config": {
+              "public_suffix_list": true,
+              "deep_sample_rate": 50,
+              "num_periods": 2,
+              "topn_count": 25,
+              "topn_percentile_threshold": 10
+            },
+            "filter": {
+              "only_rcode": 0,
+              "only_dnssec_response": true,
+              "answer_count": 1,
+              "only_qtype": [
+                1,
+                2
+              ],
+              "only_qname_suffix": [
+                ".google.com",
+                ".orb.live"
+              ],
+              "geoloc_notfound": false,
+              "asn_notfound": false,
+              "dnstap_msg_type": "auth"
+            },
+            "metric_groups": {
+              "enable": [
+                "top_ecs",
+                "top_qnames_details"
+              ],
+              "disable": [
+                "cardinality",
+                "counters",
+                "dns_transaction",
+                "top_qnames",
+                "top_ports"
+              ]
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "pcap",
+        "tap": "default_pcap",
+        "filter": {
+          "bpf": "udp port 53"
+        },
+        "config": {
+          "iface": "wlo1",
+          "host_spec": "192.168.1.167/24",
+          "pcap_source": "libpcap",
+          "debug": true
+        }
+      },
+      "config": {
+        "merge_like_handlers": true
+      },
+      "kind": "collection"
+    }
+    ```
+<br>
+
 **Handler Type**: "dns" <br>
 
 ###### Metrics Group <br>
@@ -863,61 +990,58 @@ The `dnstap_msg_type` filter usage syntax is:<br>
     }
     ```
 <br>
-###### Examples of DNS policy
 
-Example policy pcap DNS:
+### Network (L2-L3) Analyzer (net)
+
+###### Example of policy with input pcap and handler NET
+
 === "YAML"
-    ``` yaml
+    ```yaml
     handlers:
       config:
         deep_sample_rate: 100
         num_periods: 5
         topn_count: 10
       modules:
-        default_dns:
-          type: dns
+        default_net:
+          type: net
           config:
-            public_suffix_list: true
-            deep_sample_rate: 50
+            deep_sample_rate: 1
             num_periods: 2
             topn_count: 25
-            topn_percentile_threshold: 10
           filter:
-            only_rcode: 0
-            only_dnssec_response: true
-            answer_count: 1
-            only_qtype: [1, 2]
-            only_qname_suffix: [".google.com", ".orb.live"]
-            geoloc_notfound: false
-            asn_notfound: false
-            dnstap_msg_type: "auth"
+            geoloc_notfound: true
+            asn_notfound: true
+            only_geoloc_prefix:
+              - BR
+              - US/CA
+            only_asn_number:
+              - 7326
+              - 16136
           metric_groups:
-            enable:
-              - top_ecs
-              - top_qnames_details
             disable:
               - cardinality
               - counters
-              - dns_transaction
-              - top_qnames
-              - top_ports
+              - top_geo
+              - top_ips
     input:
       input_type: pcap
-      tap: default_pcap
+      tap_selector:
+        any:
+          - key1: value1
+          - key2: value2
       filter:
-        bpf: udp port 53
+        bpf: net 192.168.1.0/24
       config:
         iface: wlo1
-        host_spec: 192.168.1.167/24
+        host_spec: 192.168.1.0/24
         pcap_source: libpcap
         debug: true
-    config:
-        merge_like_handlers: true
     kind: collection
     ```
 
 === "JSON"
-    ``` json
+    ```json
     {
       "handlers": {
         "config": {
@@ -926,42 +1050,31 @@ Example policy pcap DNS:
           "topn_count": 10
         },
         "modules": {
-          "default_dns": {
-            "type": "dns",
+          "default_net": {
+            "type": "net",
             "config": {
-              "public_suffix_list": true,
-              "deep_sample_rate": 50,
+              "deep_sample_rate": 1,
               "num_periods": 2,
-              "topn_count": 25,
-              "topn_percentile_threshold": 10
+              "topn_count": 25
             },
             "filter": {
-              "only_rcode": 0,
-              "only_dnssec_response": true,
-              "answer_count": 1,
-              "only_qtype": [
-                1,
-                2
+              "geoloc_notfound": true,
+              "asn_notfound": true,
+              "only_geoloc_prefix": [
+                "BR",
+                "US/CA"
               ],
-              "only_qname_suffix": [
-                ".google.com",
-                ".orb.live"
-              ],
-              "geoloc_notfound": false,
-              "asn_notfound": false,
-              "dnstap_msg_type": "auth"
+              "only_asn_number": [
+                7326,
+                16136
+              ]
             },
             "metric_groups": {
-              "enable": [
-                "top_ecs",
-                "top_qnames_details"
-              ],
               "disable": [
                 "cardinality",
                 "counters",
-                "dns_transaction",
-                "top_qnames",
-                "top_ports"
+                "top_geo",
+                "top_ips"
               ]
             }
           }
@@ -969,26 +1082,31 @@ Example policy pcap DNS:
       },
       "input": {
         "input_type": "pcap",
-        "tap": "default_pcap",
+        "tap_selector": {
+          "any": [
+            {
+              "key1": "value1"
+            },
+            {
+              "key2": "value2"
+            }
+          ]
+        },
         "filter": {
-          "bpf": "udp port 53"
+          "bpf": "net 192.168.1.0/24"
         },
         "config": {
           "iface": "wlo1",
-          "host_spec": "192.168.1.167/24",
+          "host_spec": "192.168.1.0/24",
           "pcap_source": "libpcap",
           "debug": true
         }
       },
-      "config": {
-        "merge_like_handlers": true
-      },
       "kind": "collection"
     }
     ```
+<br>
 
-
-### Network (L2-L3) Analyzer (net)
 **Handler Type**: "net" <br>
 
 ###### Metrics Group <br>
@@ -999,6 +1117,7 @@ Example policy pcap DNS:
 |  `counters`   | enabled |
 |   `top_geo`   | enabled |
 |   `top_ips`   | enabled |
+
 <br>
 
 ###### Configurations <br>
@@ -1124,139 +1243,10 @@ The `only_asn_number` filter usage syntax is:<br>
       ]
     }
     ```
-###### Examples of NET policy
-
-Example policy pcap NET :
-
-=== "YAML"
-    ```yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-      modules:
-        default_net:
-          type: net
-          config:
-            deep_sample_rate: 1
-            num_periods: 2
-            topn_count: 25
-          filter:
-            geoloc_notfound: true
-            asn_notfound: true
-            only_geoloc_prefix:
-              - BR
-              - US/CA
-            only_asn_number:
-              - 7326
-              - 16136
-          metric_groups:
-            disable:
-              - cardinality
-              - counters
-              - top_geo
-              - top_ips
-    input:
-      input_type: pcap
-      tap_selector:
-        any:
-          - key1: value1
-          - key2: value2
-      filter:
-        bpf: net 192.168.1.0/24
-      config:
-        iface: wlo1
-        host_spec: 192.168.1.0/24
-        pcap_source: libpcap
-        debug: true
-    kind: collection
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10
-        },
-        "modules": {
-          "default_net": {
-            "type": "net",
-            "config": {
-              "deep_sample_rate": 1,
-              "num_periods": 2,
-              "topn_count": 25
-            },
-            "filter": {
-              "geoloc_notfound": true,
-              "asn_notfound": true,
-              "only_geoloc_prefix": [
-                "BR",
-                "US/CA"
-              ],
-              "only_asn_number": [
-                7326,
-                16136
-              ]
-            },
-            "metric_groups": {
-              "disable": [
-                "cardinality",
-                "counters",
-                "top_geo",
-                "top_ips"
-              ]
-            }
-          }
-        }
-      },
-      "input": {
-        "input_type": "pcap",
-        "tap_selector": {
-          "any": [
-            {
-              "key1": "value1"
-            },
-            {
-              "key2": "value2"
-            }
-          ]
-        },
-        "filter": {
-          "bpf": "net 192.168.1.0/24"
-        },
-        "config": {
-          "iface": "wlo1",
-          "host_spec": "192.168.1.0/24",
-          "pcap_source": "libpcap",
-          "debug": true
-        }
-      },
-      "kind": "collection"
-    }
-    ```
 
 ### DHCP Analyzer (dhcp)
-**Handler Type**: "dhcp" <br>
 
-###### Metrics Group 
-
-- No metrics group available <br>
-
-###### Configurations <br>
-- Abstract configurations. <br><br>
-
-###### Filters
-- No filters available. <br><br>
-
-Example policy pcap dhcp JSON:
-
-###### Examples of DHCP policy
-
-Example policy pcap DHCP :
+###### Example of policy with input pcap and handler DHCP
 
 === "YAML"
     ```yaml
@@ -1332,9 +1322,9 @@ Example policy pcap DHCP :
       "kind": "collection"
     }
     ```
+<br>
 
-### BGP Analyzer (bgp)
-**Handler Type**: "bgp" <br>
+**Handler Type**: "dhcp" <br>
 
 ###### Metrics Group 
 
@@ -1346,11 +1336,11 @@ Example policy pcap DHCP :
 ###### Filters
 - No filters available. <br><br>
 
-Example policy pcap bgp JSON:
 
-###### Examples of BGP policy
+### BGP Analyzer (bgp)
 
-Example policy pcap BGP :
+###### Example of policy with input pcap and handler BGP
+
 
 === "YAML"
     ```yaml
@@ -1431,23 +1421,24 @@ Example policy pcap BGP :
       "kind": "collection"
     }
     ```
+<br>
+
+**Handler Type**: "bgp" <br>
+
+###### Metrics Group 
+
+- No metrics group available <br>
+
+###### Configurations <br>
+- Abstract configurations. <br><br>
+
+###### Filters
+- No filters available. <br><br>
 
 
 ### Packet Capture Analyzer (pcap)
-**Handler Type**: "pcap" <br>
 
-###### Metrics Group
-- No metrics group available. <br>
-
-###### Configurations
-- Abstract configurations. <br>
-
-###### Filters
-- No filters available. <br>
-
-###### Examples of PCAP policy
-
-Example policy pcap PCAP:
+###### Example of policy with input pcap and handler PCAP
 
 === "YAML"
     ```yaml
@@ -1511,6 +1502,19 @@ Example policy pcap PCAP:
       "kind": "collection"
     }
     ```
+<br>
+
+**Handler Type**: "pcap" <br>
+
+###### Metrics Group
+- No metrics group available. <br>
+
+###### Configurations
+- Abstract configurations. <br>
+
+###### Filters
+- No filters available. <br>
+
 
 
 ### Flow Analyzer (flow) [BETA]
@@ -1518,6 +1522,109 @@ Example policy pcap PCAP:
 !!! warning
 
     Status: `Beta`. The metric names and configuration options may still change
+
+###### Example of policy with input flow and handler FLOW
+
+=== "YAML"
+    ```yaml
+    handlers:
+        config:
+            deep_sample_rate: 95
+            num_periods: 6
+            topn_count: 8
+        modules:
+            my_flow:
+                type: flow
+                config:
+                    sample_rate_scaling: false
+                    deep_sample_rate: 85
+                    num_periods: 5
+                    topn_count: 7
+                    first_filter_if_as_label: true
+                    device_map:
+                        - router01,192.168.0.127,eth0,5
+                        - router01,192.168.0.127,eth1,6
+                metric_groups:
+                    disable:
+                        - cardinality
+                        - counters
+                        - top_geo
+                        - top_by_packets
+                        - top_by_bytes
+                filter:
+                    only_devices:
+                        - 216.239.38.10/24
+                        - 192.158.1.38/32
+                    only_ports:
+                        - 10853
+                        - 10860-10890
+                    only_interfaces:
+                        - 10-16
+                    geoloc_notfound: true
+                    asn_notfound: true
+    input:
+      input_type: flow
+      tap: default_flow
+    kind: collection
+    ```
+=== "JSON"
+    ```json
+    {
+      "handlers": {
+        "config": {
+          "deep_sample_rate": 95,
+          "num_periods": 6,
+          "topn_count": 8
+        },
+        "modules": {
+          "my_flow": {
+            "type": "flow",
+            "config": {
+              "sample_rate_scaling": false,
+              "deep_sample_rate": 85,
+              "num_periods": 5,
+              "topn_count": 7,
+              "first_filter_if_as_label": true,
+              "device_map": [
+                "router01,192.168.0.127,eth0,5",
+                "router01,192.168.0.127,eth1,6"
+              ]
+            },
+            "metric_groups": {
+              "disable": [
+                "cardinality",
+                "counters",
+                "top_geo",
+                "top_by_packets",
+                "top_by_bytes"
+              ]
+            },
+            "filter": {
+              "only_devices": [
+                "216.239.38.10/24",
+                "192.158.1.38/32"
+              ],
+              "only_ports": [
+                10853,
+                "10860-10890"
+              ],
+              "only_interfaces": [
+                "10-16"
+              ],
+              "geoloc_notfound": true,
+              "asn_notfound": true
+            }
+          }
+        }
+      },
+      "input": {
+        "input_type": "flow",
+        "tap": "default_flow"
+      },
+      "kind": "collection"
+    }
+    ```
+<br>
 
 **Handler Type**: "flow" <br>
 
@@ -1801,109 +1908,7 @@ The `asn_notfound` filter usage syntax is:<br>
       "asn_notfound": true
     }
     ```
-###### Examples of FLOW policy
 
-Example policy input flow handler FLOW:
-
-=== "YAML"
-    ```yaml
-    handlers:
-        config:
-            deep_sample_rate: 95
-            num_periods: 6
-            topn_count: 8
-        modules:
-            my_flow:
-                type: flow
-                config:
-                    sample_rate_scaling: false
-                    deep_sample_rate: 85
-                    num_periods: 5
-                    topn_count: 7
-                    first_filter_if_as_label: true
-                    device_map:
-                        - router01,192.168.0.127,eth0,5
-                        - router01,192.168.0.127,eth1,6
-                metric_groups:
-                    disable:
-                        - cardinality
-                        - counters
-                        - top_geo
-                        - top_by_packets
-                        - top_by_bytes
-                filter:
-                    only_devices:
-                        - 216.239.38.10/24
-                        - 192.158.1.38/32
-                    only_ports:
-                        - 10853
-                        - 10860-10890
-                    only_interfaces:
-                        - 10-16
-                    geoloc_notfound: true
-                    asn_notfound: true
-    input:
-      input_type: flow
-      tap: default_flow
-    kind: collection
-    ```
-=== "JSON"
-    ```json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 95,
-          "num_periods": 6,
-          "topn_count": 8
-        },
-        "modules": {
-          "my_flow": {
-            "type": "flow",
-            "config": {
-              "sample_rate_scaling": false,
-              "deep_sample_rate": 85,
-              "num_periods": 5,
-              "topn_count": 7,
-              "first_filter_if_as_label": true,
-              "device_map": [
-                "router01,192.168.0.127,eth0,5",
-                "router01,192.168.0.127,eth1,6"
-              ]
-            },
-            "metric_groups": {
-              "disable": [
-                "cardinality",
-                "counters",
-                "top_geo",
-                "top_by_packets",
-                "top_by_bytes"
-              ]
-            },
-            "filter": {
-              "only_devices": [
-                "216.239.38.10/24",
-                "192.158.1.38/32"
-              ],
-              "only_ports": [
-                10853,
-                "10860-10890"
-              ],
-              "only_interfaces": [
-                "10-16"
-              ],
-              "geoloc_notfound": true,
-              "asn_notfound": true
-            }
-          }
-        }
-      },
-      "input": {
-        "input_type": "flow",
-        "tap": "default_flow"
-      },
-      "kind": "collection"
-    }
-    ```
 
 ### Netprobe [BETA]
 
@@ -1911,28 +1916,7 @@ Example policy input flow handler FLOW:
 
     Status: `Beta`. The metric names and configuration options may still change
 
-**Handler Type**: "netprobe" <br>
-
-###### Metrics Group <br>
-
-
-| Metric Group | Default  | 
-|:------------:|:--------:|
-| `quantiles`  | disabled |
-|  `counters`  | enabled  |
-
-
-###### Configurations <br>
-- Abstract configurations. <br><br>
-- In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_backend/#netprobe) the available configurations for netprobe.
-
-
-###### Filters
-- No filters available. <br><br>
-
-Example policy netprobe JSON:
-
-###### Examples of Netprobe policy
+###### Example of policy with input netprobe and handler NETPROBE
 
 
 === "YAML"
@@ -2001,3 +1985,24 @@ Example policy netprobe JSON:
       "kind": "collection"
     }
     ```
+<br>
+
+**Handler Type**: "netprobe" <br>
+
+###### Metrics Group <br>
+
+
+| Metric Group | Default  | 
+|:------------:|:--------:|
+| `quantiles`  | disabled |
+|  `counters`  | enabled  |
+
+
+###### Configurations <br>
+- Abstract configurations. <br><br>
+- In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_backend/#netprobe) the available configurations for netprobe.
+
+
+###### Filters
+- No filters available. <br><br>
+
