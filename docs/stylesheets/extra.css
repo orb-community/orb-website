@@ -253,10 +253,14 @@ h3 {
 .md-typeset p,
 p {
   font-style: normal;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-weight: 500;
+  font-size: 0.825rem;
+  line-height: 1.125rem;
   max-width: unset;
+}
+
+.md-typeset code {
+  font-size: 0.625rem;
 }
 
 .md-typeset a {
