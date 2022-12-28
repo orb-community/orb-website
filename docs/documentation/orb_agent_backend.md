@@ -33,6 +33,24 @@ The following inputs are supported: `pcap`, `flow`, `dnstap` and `netprobe`. For
 
 ### Packet Capture (pcap)
 
+!!! Example "Example: Pktvisor PCAP Tap Configuration"
+    ```yaml
+    visor:
+      taps:
+        my_pcap_tap:
+          input_type: pcap
+          config:
+            pcap_source: "libpcap"
+            debug: true
+            iface: auto
+            host_spec: "192.168.0.1/24"
+          filter:
+            bpf: "port 53"
+          tags:
+            pcap: true
+    ```
+<br>
+
 #### Configurations
 
 There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
@@ -127,28 +145,23 @@ Example:
 ```yaml
 bpf: "port 53"
 ```
-<br>
 
-PCAP tap example:
+### Sflow/Netflow (flow)
 
-!!! Example "Example: Pktvisor PCAP Tap Configuration"
+!!! Example "Example: Pktvisor FLOW Tap Configuration"
     ```yaml
     visor:
       taps:
-        my_pcap_tap:
-          input_type: pcap
+        my_flow_tap:
+          input_type: flow
           config:
-            pcap_source: "libpcap"
-            debug: true
-            iface: auto
-            host_spec: "192.168.0.1/24"
-          filter:
-            bpf: "port 53"
+            port: 6343
+            bind: 192.168.1.1
+            flow_type: sflow
           tags:
-            pcap: true
+            flow: true
     ```
-
-### Sflow/Netflow (flow)
+<br>
 
 #### Configurations
 
@@ -195,23 +208,23 @@ flow_type: netflow
 
 There are no specific filters for the FLOW input.<br><br>
 
-FLOW tap example:
+###  Dnstap
 
-!!! Example "Example: Pktvisor FLOW Tap Configuration"
+!!! Example "Example: Pktvisor DNSTAP Tap Configuration"
     ```yaml
     visor:
       taps:
-        my_flow_tap:
-          input_type: flow
+        my_dnstap_tap:
+          input_type: dnstap
           config:
-            port: 6343
-            bind: 192.168.1.1
-            flow_type: sflow
+            socket: path/to/file.sock
+            tcp: 192.168.8.2:235
+          filter:
+            only_hosts: 192.168.1.4/32
           tags:
-            flow: true
+            dnstap: true
     ```
-
-###  Dnstap
+<br>
 
 #### Configurations
 
@@ -271,27 +284,32 @@ Example:
 ```yaml
 only_hosts: 192.168.1.4/32
 ```
-<br><br>
-
-DNSTAP tap example:
-
-!!! Example "Example: Pktvisor DNSTAP Tap Configuration"
-    ```yaml
-    visor:
-      taps:
-        my_dnstap_tap:
-          input_type: dnstap
-          config:
-            socket: path/to/file.sock
-            tcp: 192.168.8.2:235
-          filter:
-            only_hosts: 192.168.1.4/32
-          tags:
-            dnstap: true
-    ```
 
 
 ### Netprobe
+
+!!! Example "Example: Pktvisor Netprobe Tap Configuration"
+    ```yaml
+    visor:
+      taps:
+        default_netprobe:
+          input_type: netprobe
+          config:
+            test_type: ping
+            interval_msec: 2000
+            timeout_msec: 1000
+            packets_per_test: 10
+            packets_interval_msec: 25
+            packet_payload_size: 56
+            targets:
+              www.google.com:
+                target: www.google.com
+              orb_community:
+                target: orb.community
+          tags:
+            netprobe: true
+    ```
+<br>
 
 #### Configurations
 
@@ -428,27 +446,3 @@ targets:
 #### Filters
 
 There are no specific filters for Netprobe input.<br><br>
-
-Netprobe tap example:
-
-!!! Example "Example: Pktvisor Netprobe Tap Configuration"
-    ```yaml
-    visor:
-      taps:
-        default_netprobe:
-          input_type: netprobe
-          config:
-            test_type: ping
-            interval_msec: 2000
-            timeout_msec: 1000
-            packets_per_test: 10
-            packets_interval_msec: 25
-            packet_payload_size: 56
-            targets:
-              www.google.com:
-                target: www.google.com
-              orb_community:
-                target: orb.community
-          tags:
-            netprobe: true
-    ```
