@@ -35,13 +35,8 @@
 }
 
 :root * div.md-grid {
-  max-width: 70rem;
-  width: 80%;
+  max-width: unset !important;
   margin-left: 12px;
-}
-
-.md-content {
-  margin-left: 4rem;
 }
 
 :root > * a.md-button {
@@ -338,12 +333,7 @@ a.login {
   border-color: transparent;
 }
 
-.md-nav__title {
-  line-height: unset !important;
-  height: unset !important;
-  white-space: unset !important;
-  padding-top: 4rem !important;
-}
+
 
 .md-sidebar {
   color: var(--md-primary-text-color) !important;

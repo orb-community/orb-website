@@ -14,8 +14,9 @@ theme:
     - navigation.top
     - navigation.indexes
     - navigation.sections
+    - navigation.prune
     - search.suggest
-    - toc.integrate
+    # - toc.integrate
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
