@@ -1549,8 +1549,13 @@ The `only_asn_number` filter usage syntax is:<br>
                         - cardinality
                         - counters
                         - top_geo
-                        - top_by_packets
-                        - top_by_bytes
+                        - by_packets
+                        - by_bytes
+                        - conversations
+                        - top_ports
+                        - top_ips
+                        - top_interfaces
+                        - top_ips_ports
                 filter:
                     only_devices:
                         - 216.239.38.10/24
@@ -1595,8 +1600,13 @@ The `only_asn_number` filter usage syntax is:<br>
                 "cardinality",
                 "counters",
                 "top_geo",
-                "top_by_packets",
-                "top_by_bytes"
+                "by_packets",
+                "by_bytes",
+                "conversations",
+                "top_ports",
+                "top_ips",
+                "top_interfaces",
+                "top_ips_ports"
               ]
             },
             "filter": {
@@ -1634,10 +1644,14 @@ The `only_asn_number` filter usage syntax is:<br>
 |:----------------:|:--------:|
 |  `cardinality`   | enabled  |
 |    `counters`    | enabled  |
-| `top_by_packets` | enabled  |
-|  `top_by_bytes`  | enabled  |
+|   `by_packets`   | enabled  |
+|    `by_bytes`    | enabled  |
+|    `top_ips`     | enabled  |
+|   `top_ports`    | enabled  |
+| `top_ips_ports`  | enabled  |
 |    `top_geo`     | disabled |
 | `conversations`  | disabled |
+| `top_interfaces` | disabled |
 
 <br>
 
@@ -1929,6 +1943,7 @@ The `asn_notfound` filter usage syntax is:<br>
             enable:
               - counters
               - quantiles
+              - histograms
     input:
       input_type: netprobe
       tap: default_netprobe
@@ -1956,7 +1971,8 @@ The `asn_notfound` filter usage syntax is:<br>
             "metric_groups": {
               "enable": [
                 "counters",
-                "quantiles"
+                "quantiles",
+                "histograms"
               ]
             }
           }
@@ -1996,6 +2012,7 @@ The `asn_notfound` filter usage syntax is:<br>
 |:------------:|:--------:|
 | `quantiles`  | disabled |
 |  `counters`  | enabled  |
+| `histograms` | enabled  |
 
 
 ###### Configurations <br>
