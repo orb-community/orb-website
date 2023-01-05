@@ -12,10 +12,9 @@ hide:
 ![](img/01_Edge-Observability.png){ align=right .observability }
 ### Introducing Orb
 
+**Orb** is a modern network observability platform built to provide critical visibility into increasingly complex and distributed networks. It can analyze network traffic, run synthetic network probes, and connect the resulting telemetry directly to your existing observability stacks with OpenTelemetry.
 
-**Orb** is a free, open-source tool that focuses on the network edge — dynamic, distributed environments composed of endless data streams rich with valuable information 
-
-**Orb** allows you to dynamically tap into these data streams and extract real-time insights, pipelining the results into modern observability stacks 
+**Orb** differentiates from other solutions by pushing analysis close to the traffic sources (reducing inactionable metrics and processing costs), and allows for dynamic reconfiguration of remote agents in real time.
 
 <div class="grid orb-home-content">
 
