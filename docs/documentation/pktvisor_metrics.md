@@ -249,8 +249,8 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 | Metric                                                                                 | Prometheus Name                           | Metric Groups                        |
 |----------------------------------------------------------------------------------------|-------------------------------------------|--------------------------------------|
-| Quantiles of Net Probe histogram in microseconds                                       | netprobe\_response\_quantiles\_us         | quantiles                            |
-| Total sum of Net Probe histogram in microseconds                                       | netprobe\_response\_quantiles\_us\_sum    | quantiles                            |
+| Quantiles of Net Probe quantile in microseconds                                        | netprobe\_response\_quantiles\_us         | quantiles                            |
+| Total sum of Net Probe quantile in microseconds                                        | netprobe\_response\_quantiles\_us\_sum    | quantiles                            |
 | Count of Net Probe histogram in microseconds                                           | netprobe\_response\_quantiles\_us\_count  | quantiles                            |
 | Total Net Probe attempts                                                               | netprobe\_attempts                        | counters                             |
 | Total Net Probe failures when performed DNS lookup                                     | netprobe\_dns\_lookup\_failure            | counters                             |
