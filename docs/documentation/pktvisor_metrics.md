@@ -39,7 +39,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Total sum of all DNS wire packets before filtering per second                                | dns\_rates\_events\_sum              | any group*                      |
 | Count of all DNS wire packets before filtering per second                                    | dns\_rates\_events\_count            | any group*                      |
 | Top ECS ASNs                                                                                 | dns\_top\_asn\_ecs                   | top_ecs                         |
-| Top ECS GeoIP locations                                                                      | dns\_top\_geo\_loc\_ecs              | top_ecs                         |
+| Top ECS GeoIP locations                                                                      | dns\_top\_geoLoc\_ecs                | top_ecs                         |
 | Top QNAMES with response code NOERROR and no data in the response (NODATA)                   | dns\_top\_nodata                     | top_qnames                      |
 | Top QNAMES with response code NXDOMAIN                                                       | dns\_top\_nxdomain                   | top_qnames                      |
 | Top QNAMES by response volume                                                                | dns\_top\_qname\_by\_resp\_bytes     | top_qnames_details + top_qnames |
@@ -247,15 +247,15 @@ For handlers that have metric groups, the metric groups that must be enabled for
     Status: `Beta`. The metric names and configuration options may still change
 
 
-| Metric                                                                                 | Prometheus Name                           | Metric Groups                        |
-|----------------------------------------------------------------------------------------|-------------------------------------------|--------------------------------------|
-| Quantiles of Net Probe quantile in microseconds                                        | netprobe\_response\_quantiles\_us         | quantiles                            |
-| Total sum of Net Probe quantile in microseconds                                        | netprobe\_response\_quantiles\_us\_sum    | quantiles                            |
-| Count of Net Probe histogram in microseconds                                           | netprobe\_response\_quantiles\_us\_count  | quantiles                            |
-| Total Net Probe attempts                                                               | netprobe\_attempts                        | counters                             |
-| Total Net Probe failures when performed DNS lookup                                     | netprobe\_dns\_lookup\_failure            | counters                             |
-| Maximum response time measured in the reporting interval                               | netprobe\_response\_max\_us               | counters + (quantiles or histograms) |
-| Minimum response time measured in the reporting interval                               | netprobe\_response\_min\_us               | counters + (quantiles or histograms) |
-| Total Net Probe successes                                                              | netprobe\_successes                       | counters                             |
-| Cumulative counters for the observation buckets of Net Probe histogram in microseconds | netprobe\_response\_histogram\_us\_bucket | histograms                           |
-| Count of events of Net Probe histogram in microseconds                                 | netprobe\_response\_histogram\_us\_count  | histograms                           |
+| Metric                                                                     | Prometheus Name                           | Metric Groups                        |
+|----------------------------------------------------------------------------|-------------------------------------------|--------------------------------------|
+| Quantiles of Net Probe quantile in microseconds                            | netprobe\_response\_quantiles\_us         | quantiles                            |
+| Total sum of Net Probe quantile in microseconds                            | netprobe\_response\_quantiles\_us\_sum    | quantiles                            |
+| Count of Net Probe quantile in microseconds                                | netprobe\_response\_quantiles\_us\_count  | quantiles                            |
+| Total Net Probe attempts                                                   | netprobe\_attempts                        | counters                             |
+| Total Net Probe failures when performed DNS lookup                         | netprobe\_dns\_lookup\_failure            | counters                             |
+| Maximum response time measured in the reporting interval                   | netprobe\_response\_max\_us               | counters + (quantiles or histograms) |
+| Minimum response time measured in the reporting interval                   | netprobe\_response\_min\_us               | counters + (quantiles or histograms) |
+| Total Net Probe successes                                                  | netprobe\_successes                       | counters                             |
+| Cumulative counters for the buckets of Net Probe histogram in microseconds | netprobe\_response\_histogram\_us\_bucket | histograms                           |
+| Count of events of Net Probe histogram in microseconds                     | netprobe\_response\_histogram\_us\_count  | histograms                           |
