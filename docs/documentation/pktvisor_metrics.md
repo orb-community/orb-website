@@ -92,39 +92,39 @@ For handlers that have metric groups, the metric groups that must be enabled for
 |-----------------------------------------------------------------|-------------------------------------|---------------|
 | Destination IP cardinality                                      | packets\_cardinality\_dst\_ips\_out | cardinality   |
 | Source IP cardinality                                           | packets\_cardinality\_src\_ips\_in  | cardinality   |
-| Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*     |
-| Count of packets sent to policy                                 | packets\_events                     | any group*     |
+| Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*    |
+| Count of packets sent to policy                                 | packets\_events                     | any group*    |
 | Count of packets filtered out by policy                         | packets\_filtered                   | counters      |
 | Count of ingress packets                                        | packets\_in                         | counters      |
 | Count of IPv4 packets                                           | packets\_ipv4                       | counters      |
 | Count of IPv6 packets                                           | packets\_ipv6                       | counters      |
 | Count of packets not UDP or TCP                                 | packets\_other\_l4                  | counters      |
 | Count of egress packets                                         | packets\_out                        | counters      |
-| Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*     |
-| Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*     |
-| Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*     |
+| Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*    |
+| Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
+| Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
 | Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
-| Quantiles of ingress data rates                                 | packets\_rates\_bytes\_in           | any group*     |
-| Total sum of ingress data rates                                 | packets\_rates\_bytes\_in\_sum      | any group*     |
-| Count of ingress data rates                                     | packets\_rates\_bytes\_in\_count    | any group*     |
-| Quantiles of egress data rates                                  | packets\_rates\_bytes\_out          | any group*     |
-| Total sum of egress data rates                                  | packets\_rates\_bytes\_out\_sum     | any group*     |
-| Count of egress data rates                                      | packets\_rates\_bytes\_out\_count   | any group*     |
-| Quantiles of total data rates                                   | packets\_rates\_bytes\_total        | any group*     |
-| Total sum of total data rates                                   | packets\_rates\_bytes\_total\_sum   | any group*     |
-| Count of total data rates                                       | packets\_rates\_bytes\_total\_count | any group*     |
-| Quantiles of all packets before filtering in packets per second | packets\_rates\_pps\_events         | any group*     |
-| Total sum of all packets before filtering in packets per second | packets\_rates\_pps\_events\_sum    | any group*     |
-| Count of all packets before filtering in packets per second     | packets\_rates\_pps\_events\_count  | any group*     |
-| Quantiles of ingress packet rates                               | packets\_rates\_pps\_in             | any group*     |
-| Total sum of ingress packet rates                               | packets\_rates\_pps\_in\_sum        | any group*     |
-| Count of ingress packet rates                                   | packets\_rates\_pps\_in\_count      | any group*     |
-| Quantiles of egress packet rates                                | packets\_rates\_pps\_out            | any group*     |
-| Total sum of egress packet rates                                | packets\_rates\_pps\_out\_sum       | any group*     |
-| Count of egress packet rates                                    | packets\_rates\_pps\_out\_count     | any group*     |
-| Quantiles of total packet rates                                 | packets\_rates\_pps\_total          | any group*     |
-| Total sum of total packet rates                                 | packets\_rates\_pps\_total\_sum     | any group*     |
-| Count of total packet rates                                     | packets\_rates\_pps\_total\_count   | any group*     |
+| Quantiles of ingress data rates                                 | packets\_rates\_bytes\_in           | any group*    |
+| Total sum of ingress data rates                                 | packets\_rates\_bytes\_in\_sum      | any group*    |
+| Count of ingress data rates                                     | packets\_rates\_bytes\_in\_count    | any group*    |
+| Quantiles of egress data rates                                  | packets\_rates\_bytes\_out          | any group*    |
+| Total sum of egress data rates                                  | packets\_rates\_bytes\_out\_sum     | any group*    |
+| Count of egress data rates                                      | packets\_rates\_bytes\_out\_count   | any group*    |
+| Quantiles of total data rates                                   | packets\_rates\_bytes\_total        | any group*    |
+| Total sum of total data rates                                   | packets\_rates\_bytes\_total\_sum   | any group*    |
+| Count of total data rates                                       | packets\_rates\_bytes\_total\_count | any group*    |
+| Quantiles of all packets before filtering in packets per second | packets\_rates\_pps\_events         | any group*    |
+| Total sum of all packets before filtering in packets per second | packets\_rates\_pps\_events\_sum    | any group*    |
+| Count of all packets before filtering in packets per second     | packets\_rates\_pps\_events\_count  | any group*    |
+| Quantiles of ingress packet rates                               | packets\_rates\_pps\_in             | any group*    |
+| Total sum of ingress packet rates                               | packets\_rates\_pps\_in\_sum        | any group*    |
+| Count of ingress packet rates                                   | packets\_rates\_pps\_in\_count      | any group*    |
+| Quantiles of egress packet rates                                | packets\_rates\_pps\_out            | any group*    |
+| Total sum of egress packet rates                                | packets\_rates\_pps\_out\_sum       | any group*    |
+| Count of egress packet rates                                    | packets\_rates\_pps\_out\_count     | any group*    |
+| Quantiles of total packet rates                                 | packets\_rates\_pps\_total          | any group*    |
+| Total sum of total packet rates                                 | packets\_rates\_pps\_total\_sum     | any group*    |
+| Count of total packet rates                                     | packets\_rates\_pps\_total\_count   | any group*    |
 | Count of TCP packets                                            | packets\_tcp                        | counters      |
 | Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
 | Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
@@ -191,12 +191,12 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Count of in UDP by bytes                                                               | flow\_in\_udp\_bytes                         | counters + by_bytes         |
 | Count of in UDP by packets                                                             | flow\_in\_udp\_packets                       | counters + by_packets       |
 | Count of out by bytes                                                                  | flow\_out\_bytes                             | counters + by_bytes         |
-| Count of out IPV4 by bytes                                                             | flow\_out\_ipv4\_bytes                                                                 | counters + by_bytes                          |
-| Count of out IPV4 by packets                                                           | flow\_out\_ipv4\_packets                                                               | counters + by_packets                        |
-| Count of out IPV6 by bytes                                                             | flow\_out\_ipv6\_bytes                                                                 | counters + by_bytes                          |
-| Count of out IPV6 by packets                                                           | flow\_out\_ipv6\_packets                                                               | counters + by_packets                        |
-| Count of out by bytes which are not UDP or TCP                                         | flow\_out\_other\_l4\_bytes                                                            | counters + by_bytes                          |
-| Count of out by packets which are not UDP or TCP                                       | flow\_out\_other\_l4\_packets                                                          | counters + by_packets                        |
+| Count of out IPV4 by bytes                                                             | flow\_out\_ipv4\_bytes                       | counters + by_bytes         |
+| Count of out IPV4 by packets                                                           | flow\_out\_ipv4\_packets                     | counters + by_packets       |
+| Count of out IPV6 by bytes                                                             | flow\_out\_ipv6\_bytes                       | counters + by_bytes         |
+| Count of out IPV6 by packets                                                           | flow\_out\_ipv6\_packets                     | counters + by_packets       |
+| Count of out by bytes which are not UDP or TCP                                         | flow\_out\_other\_l4\_bytes                  | counters + by_bytes         |
+| Count of out by packets which are not UDP or TCP                                       | flow\_out\_other\_l4\_packets                | counters + by_packets       |
 | Count of out by packets                                                                | flow\_out\_packets                           | counters + by_packets       |
 | Count of out TCP by bytes                                                              | flow\_out\_tcp\_bytes                        | counters + by_bytes         |
 | Count of out TCP by packets                                                            | flow\_out\_tcp\_packets                      | counters + by_packets       |
