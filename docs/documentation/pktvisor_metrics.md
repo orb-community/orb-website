@@ -158,7 +158,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Total BGP wire packets seen that did not match the configured filter(s) (if any)      | bgp\_wire\_packets\_filtered      |
 | Total BGP packets with message type KEEPALIVE                                         | bgp\_wire\_packets\_keepalive     |
 | Total BGP packets with message type NOTIFICATION                                      | bgp\_wire\_packets\_notification  |
-| Total BGP packets with message type OFFER                                             | bgp\_wire\_packets\_offer         |
+| Total BGP packets with message type UPDATE                                            | bgp\_wire\_packets\_update        |
 | Total BGP packets with message type OPEN                                              | bgp\_wire\_packets\_open          |
 | Total BGP packets with message type ROUTEREFRESH                                      | bgp\_wire\_packets\_routerefresh  |
 | Total BGP wire packets matching the configured filter(s)                              | bgp\_wire\_packets\_total         |
