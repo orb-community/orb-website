@@ -206,8 +206,8 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Count of out UDP by packets                                                            | flow\_out\_udp\_packets                      | counters + by_packets       |
 | Count of total flows records seen that did not match the configured filter(s) (if any) | flow\_records\_filtered                      | counters                    |
 | Count of total flows records that match the configured filter(s) (if any)              | flow\_records\_flows                         | counters                    |
-| Top ASNs by IP by bytes                                                                | flow\_top\_ASN\_bytes                        | top_geo + by_bytes          |
-| Top ASNs by IP by packets                                                              | flow\_top\_ASN\_packets                      | top_geo + by_packets        |
+| Top ASNs by IP by bytes                                                                | flow\_top\_asn\_bytes                        | top_geo + by_bytes          |
+| Top ASNs by IP by packets                                                              | flow\_top\_asn\_packets                      | top_geo + by_packets        |
 | Top source IP addresses and port by bytes                                              | flow\_top\_conversations\_bytes              | conversations + by_bytes    |
 | Top source IP addresses and port by packets                                            | flow\_top\_conversations\_packets            | conversations + by_packets  |
 | Top GeoIP locations by bytes                                                           | flow\_top\_geo\_loc\_bytes                   | top_geo + by_bytes          |
