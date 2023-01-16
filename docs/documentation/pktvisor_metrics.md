@@ -14,6 +14,8 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Quantiles of all DHCP wire packets before filtering per second                           | dhcp\_rates\_events                |
 | Total sum of all DHCP wire packets before filtering per second                           | dhcp\_rates\_events\_sum           |
 | Count of all DHCP wire packets before filtering per second                               | dhcp\_rates\_events\_count         |
+| Top DHCP servers                                                                         | dhcp\_top\_servers                 |
+| Top DHCP clients                                                                         | dhcp\_top\_clients                 |
 | Total DHCP packets with message type ACK                                                 | dhcp\_wire\_packets\_ack           |
 | Total DHCPv6 packets with message type ADVERTISE                                         | dhcp\_wire\_packets\_advertise     |
 | Total DHCP wire packets that were sampled for deep inspection                            | dhcp\_wire\_packets\_deep\_samples |
@@ -104,27 +106,27 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
 | Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
 | Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
-| Quantiles of ingress data rates                                 | packets\_rates\_bytes\_in           | any group*    |
-| Total sum of ingress data rates                                 | packets\_rates\_bytes\_in\_sum      | any group*    |
-| Count of ingress data rates                                     | packets\_rates\_bytes\_in\_count    | any group*    |
-| Quantiles of egress data rates                                  | packets\_rates\_bytes\_out          | any group*    |
-| Total sum of egress data rates                                  | packets\_rates\_bytes\_out\_sum     | any group*    |
-| Count of egress data rates                                      | packets\_rates\_bytes\_out\_count   | any group*    |
-| Quantiles of total data rates                                   | packets\_rates\_bytes\_total        | any group*    |
-| Total sum of total data rates                                   | packets\_rates\_bytes\_total\_sum   | any group*    |
-| Count of total data rates                                       | packets\_rates\_bytes\_total\_count | any group*    |
-| Quantiles of all packets before filtering in packets per second | packets\_rates\_pps\_events         | any group*    |
-| Total sum of all packets before filtering in packets per second | packets\_rates\_pps\_events\_sum    | any group*    |
-| Count of all packets before filtering in packets per second     | packets\_rates\_pps\_events\_count  | any group*    |
-| Quantiles of ingress packet rates                               | packets\_rates\_pps\_in             | any group*    |
-| Total sum of ingress packet rates                               | packets\_rates\_pps\_in\_sum        | any group*    |
-| Count of ingress packet rates                                   | packets\_rates\_pps\_in\_count      | any group*    |
-| Quantiles of egress packet rates                                | packets\_rates\_pps\_out            | any group*    |
-| Total sum of egress packet rates                                | packets\_rates\_pps\_out\_sum       | any group*    |
-| Count of egress packet rates                                    | packets\_rates\_pps\_out\_count     | any group*    |
-| Quantiles of total packet rates                                 | packets\_rates\_pps\_total          | any group*    |
-| Total sum of total packet rates                                 | packets\_rates\_pps\_total\_sum     | any group*    |
-| Count of total packet rates                                     | packets\_rates\_pps\_total\_count   | any group*    |
+| Quantiles of ingress data rates                                 | payload\_rates\_bytes\_in           | any group*    |
+| Total sum of ingress data rates                                 | payload\_rates\_bytes\_in\_sum      | any group*    |
+| Count of ingress data rates                                     | payload\_rates\_bytes\_in\_count    | any group*    |
+| Quantiles of egress data rates                                  | payload\_rates\_bytes\_out          | any group*    |
+| Total sum of egress data rates                                  | payload\_rates\_bytes\_out\_sum     | any group*    |
+| Count of egress data rates                                      | payload\_rates\_bytes\_out\_count   | any group*    |
+| Quantiles of total data rates                                   | payload\_rates\_bytes\_total        | any group*    |
+| Total sum of total data rates                                   | payload\_rates\_bytes\_total\_sum   | any group*    |
+| Count of total data rates                                       | payload\_rates\_bytes\_total\_count | any group*    |
+| Quantiles of all packets before filtering in packets per second | payload\_rates\_pps\_events         | any group*    |
+| Total sum of all packets before filtering in packets per second | payload\_rates\_pps\_events\_sum    | any group*    |
+| Count of all packets before filtering in packets per second     | payload\_rates\_pps\_events\_count  | any group*    |
+| Quantiles of ingress packet rates                               | payload\_rates\_pps\_in             | any group*    |
+| Total sum of ingress packet rates                               | payload\_rates\_pps\_in\_sum        | any group*    |
+| Count of ingress packet rates                                   | payload\_rates\_pps\_in\_count      | any group*    |
+| Quantiles of egress packet rates                                | payload\_rates\_pps\_out            | any group*    |
+| Total sum of egress packet rates                                | payload\_rates\_pps\_out\_sum       | any group*    |
+| Count of egress packet rates                                    | payload\_rates\_pps\_out\_count     | any group*    |
+| Quantiles of total packet rates                                 | payload\_rates\_pps\_total          | any group*    |
+| Total sum of total packet rates                                 | payload\_rates\_pps\_total\_sum     | any group*    |
+| Count of total packet rates                                     | payload\_rates\_pps\_total\_count   | any group*    |
 | Count of TCP packets                                            | packets\_tcp                        | counters      |
 | Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
 | Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
@@ -253,7 +255,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Total sum of Net Probe quantile in microseconds                            | netprobe\_response\_quantiles\_us\_sum    | quantiles                            |
 | Count of Net Probe quantile in microseconds                                | netprobe\_response\_quantiles\_us\_count  | quantiles                            |
 | Total Net Probe attempts                                                   | netprobe\_attempts                        | counters                             |
-| Total Net Probe failures when performed DNS lookup                         | netprobe\_dns\_lookup\_failure            | counters                             |
+| Total Net Probe failures when performed DNS lookup                         | netprobe\_dns\_lookup\_failures           | counters                             |
 | Total Net Probe timeout transactions                                       | netprobe\_packets\_timeout                | counters                             |
 | Maximum response time measured in the reporting interval                   | netprobe\_response\_max\_us               | counters + (quantiles or histograms) |
 | Minimum response time measured in the reporting interval                   | netprobe\_response\_min\_us               | counters + (quantiles or histograms) |
