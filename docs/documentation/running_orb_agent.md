@@ -152,7 +152,7 @@ orb:
          # if auto provisioning, specify API token here (or pass on the command line)
          token: TOKEN
       mqtt:
-         address: tls://orb.live:8883
+         address: tls://agents.orb.live:8883
          # if not auto provisioning, specify agent connection details here
          id: "AGENT_UUID"
          key: "AGENT_KEY_UUID"
