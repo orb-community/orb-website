@@ -8,7 +8,6 @@ To run an agent, you will need:
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
-4. The network interface to monitor (e.g. `eth0`)
 
 !!! tip
 

@@ -146,7 +146,7 @@ Example:
 bpf: "port 53"
 ```
 
-### Sflow/Netflow (flow)
+### sFlow/Netflow (flow)
 
 !!! Example "Example: Pktvisor FLOW Tap Configuration"
     ```yaml
@@ -208,7 +208,7 @@ flow_type: netflow
 
 There are no specific filters for the FLOW input.<br><br>
 
-###  Dnstap
+###  dnstap
 
 !!! Example "Example: Pktvisor DNSTAP Tap Configuration"
     ```yaml
