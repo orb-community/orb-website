@@ -43,7 +43,7 @@ The Orb repo contains a full Docker Compose environment, useful both for develop
 
 Running Orb with Docker Compose requires you to have a copy of the Orb repo, although it is not necessary to build any software as the Compose file will download appropriate versions of the services from Docker Hub.
 
-If you would like to build the software, or if you need to troubleshoot your environment, you can find more detailed instructions on [setting up a development environment here](https://github.com/ns1labs/orb/wiki/Development-Environment-Configuration).
+If you would like to build the software, or if you need to troubleshoot your environment, you can find more detailed instructions on [setting up a development environment here](https://github.com/orb-community/orb/wiki/Development-Environment-Configuration).
 
 #### Requirements
 
@@ -55,7 +55,7 @@ If you would like to build the software, or if you need to troubleshoot your env
 #### Instructions
 
 ```shell
-git clone https://github.com/ns1labs/orb.git
+git clone https://github.com/orb-community/orb.git
 ```
 ```shell
 cd orb
@@ -70,7 +70,7 @@ If you are running on your local machine, upon success the Orb UI will be availa
 
 !!! bug
 
-    Is the Docker Compose environment not starting correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel, or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    Is the Docker Compose environment not starting correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel, or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
 
 ### Orb Helm Chart
 [Helm](https://helm.sh/) is a package manager for Kubernetes. A Helm Chart is a package that allows you to customize your deployment on Kubernetes.
@@ -135,7 +135,7 @@ This guide assumes installation into namespace `orb`. It requires a HOSTNAME ove
 !!! bug
 
     Is the Helm deployment not working correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
-    or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
 
 
 Upon successful installation, visit our [Getting Started](https://orb.community/getting_started) section to keep moving forward with Orb.

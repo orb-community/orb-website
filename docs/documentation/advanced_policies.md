@@ -625,7 +625,7 @@ To disable all metric groups use the syntax:
 Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
 
 The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
-The list of suffixes considered public can be accessed [here](https://github.com/ns1labs/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
+The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
 
 |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
 |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
@@ -800,7 +800,7 @@ Important information is that only one answer_count is possible for each handler
 
 Input: PCAP <br>
 
-DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/ns1labs/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
+DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
 
 The `only_qtype` filter usage syntax is:<br>
 

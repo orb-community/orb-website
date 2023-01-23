@@ -7,17 +7,17 @@ hide:
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 ## Contribute
-**Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/ns1labs/orb) and star the project to show your interest.
+**Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/orb-community/orb) and star the project to show your interest.
 
-<a class="github-button" href="https://github.com/ns1labs/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
+<a class="github-button" href="https://github.com/orb-community/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
 
 ## Contact
 We are very interested to hear about your use cases, feature requests, and contribution ideas.
 
 * Sign up to get Orb [updates](https://resources.ns1.com/get-orb-updates)
-* File an [issue](https://github.com/ns1labs/orb/issues/new)
-* Follow our [public work board](https://github.com/ns1labs/orb/projects/1)
-* Start a [discussion](https://github.com/ns1labs/orb/discussions)
+* File an [issue](https://github.com/orb-community/orb/issues/new)
+* Follow our [public work board](https://github.com/orb-community/orb/projects/1)
+* Start a [discussion](https://github.com/orb-community/orb/discussions)
 * Join us on [Slack](https://netdev.chat/) in the `#orb` channel
 * Check out the [NS1 Labs YouTube channel](https://www.youtube.com/channel/UCs5FgE5p03tP-8InKVIojdw)
 * Send mail to [info@pktvisor.dev](mailto:info@pktvisor.dev)

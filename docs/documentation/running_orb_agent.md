@@ -116,7 +116,7 @@ The agent credentials include *three pieces of information*, each of which is a 
 !!! question
 
     Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
-    or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
 
 ## Configuration files
 
@@ -136,7 +136,7 @@ start here:
 version: "1.0"
 
 # this section is used by pktvisor
-# see https://github.com/ns1labs/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
+# see https://github.com/orb-community/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
 visor:
    taps:
       default_pcap:
