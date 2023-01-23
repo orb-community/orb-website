@@ -182,7 +182,7 @@ echo "127.0.0.1 kubernetes.docker.internal" | sudo tee -a /etc/hosts
 
 Clone the Orb Helm charts
 ```shell
-git clone git@github.com:ns1labs/orb-helm.git
+git clone git@github.com:orb-community/orb-helm.git
 cd orb-helm
 ``` 
 

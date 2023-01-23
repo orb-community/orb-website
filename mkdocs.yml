@@ -59,7 +59,7 @@ nav:
       - Orb REST API: api/orb_rest_api.md
   - Community: "contact.md"
 repo_url: https://github.com/orb-community/orb
-repo_name: ns1labs/orb
+repo_name: orb-community/orb
 edit_uri: ""
 extra:
   social:

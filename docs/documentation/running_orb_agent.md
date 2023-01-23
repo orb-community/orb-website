@@ -129,7 +129,7 @@ You will need to use a configuration file if:
 * You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML.
-You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
+You can use the latest [template configuration file](https://raw.githubusercontent.com/orb-community/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
 start here:
 
 ```yaml

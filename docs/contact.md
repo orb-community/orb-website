@@ -7,9 +7,9 @@ hide:
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 ## Contribute
-**Orb** is an open source project born at [NS1 Labs](https://ns1.com/labs). Work with us on [GitHub](https://github.com/orb-community/orb) and star the project to show your interest.
+**Orb** is an open source project! Work with us on [GitHub](https://github.com/orb-community/orb) and star the project to show your interest.
 
-<a class="github-button" href="https://github.com/orb-community/orb" data-size="large" aria-label="Star ns1labs/orb on GitHub">Star</a>
+<a class="github-button" href="https://github.com/orb-community/orb" data-size="large" aria-label="Star orb-community/orb on GitHub">Star</a>
 
 ## Contact
 We are very interested to hear about your use cases, feature requests, and contribution ideas.
