@@ -143,7 +143,7 @@ Upon successful installation, visit our [Getting Started](https://orb.community/
 ### Orb with Kind
 
 Kind is a tool for running local k8s clusters using docker container as nodes.
-Follow those steps to setup a local k8s cluster and deploy Orb.
+Follow those steps to set up a local k8s cluster and deploy Orb.
 
 #### Requirements
 
