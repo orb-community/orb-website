@@ -31,62 +31,65 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 ## DNS Metrics
 
-| Metric                                                                                       | Prometheus Name                      | Metric Groups                   |
-|----------------------------------------------------------------------------------------------|--------------------------------------|---------------------------------|
-| Cardinality of unique QNAMES, both ingress and egress                                        | dns\_cardinality\_qname              | cardinality                     |
-| Quantiles of rates for DNS packets processed by policy                                       | dns\_rates\_total                    | any group*                      |
-| Total sum of rates for DNS packets processed by policy                                       | dns\_rates\_total\_sum               | any group*                      |
-| Count of rates for DNS packets processed by policy                                           | dns\_rates\_total\_count             | any group*                      |
-| Quantiles of all DNS wire packets before filtering per second                                | dns\_rates\_events                   | any group*                      |
-| Total sum of all DNS wire packets before filtering per second                                | dns\_rates\_events\_sum              | any group*                      |
-| Count of all DNS wire packets before filtering per second                                    | dns\_rates\_events\_count            | any group*                      |
-| Top ECS ASNs                                                                                 | dns\_top\_asn\_ecs                   | top_ecs                         |
-| Top ECS GeoIP locations                                                                      | dns\_top\_geoLoc\_ecs                | top_ecs                         |
-| Top QNAMES with response code NOERROR and no data in the response (NODATA)                   | dns\_top\_nodata                     | top_qnames                      |
-| Top QNAMES with response code NXDOMAIN                                                       | dns\_top\_nxdomain                   | top_qnames                      |
-| Top QNAMES by response volume                                                                | dns\_top\_qname\_by\_resp\_bytes     | top_qnames_details + top_qnames |
-| Top QNAMES with result code NOERROR                                                          | dns\_top\_noerror                    | top_qname_details + top_qnames  |
-| Top QNAMES aggregated at a depth of two labels                                               | dns\_top\_qname2                     | top_qnames                      |
-| Top QNAMES aggregated at a depth of three labels                                             | dns\_top\_qname3                     | top_qnames                      |
-| Top QTYPEs                                                                                   | dns\_top\_qtype                      | any group*                      |
-| Top EDNS Client Subnets (ECS)                                                                | dns\_top\_query\_ecs                 | top_ecs                         |
-| Top RCODEs                                                                                   | dns\_top\_rcode                      | any group*                      |
-| Top QNAMES with response code REFUSED                                                        | dns\_top\_refused                    | top_qnames                      |
-| Top QNAMES with response code SRVFAIL                                                        | dns\_top\_srvfail                    | top_qnames                      |
-| Top UDP source ports of DNS queries                                                          | dns\_top\_udp\_ports                 | top_ports                       |
-| Total DNS wire packets sampled for deep inspection                                           | dns\_wire\_packets\_deep\_samples    | any group*                      |
-| Count of DNS packets sent to policy                                                          | dns\_wire\_packets\_events           | any group*                      |
-| Count of DNS packets filtered out by policy                                                  | dns\_wire\_packets\_filtered         | counters                        |
-| Count of DNS packets received over IPv4                                                      | dns\_wire\_packets\_ipv4             | counters                        |
-| Count of DNS packets received over IPv6                                                      | dns\_wire\_packets\_ipv6             | counters                        |
-| Count of DNS packets flagged as reply and identified as NODATA                               | dns\_wire\_packets\_nodata           | counters                        |
-| Count of DNS packets flagged as reply with response code NOERROR                             | dns\_wire\_packets\_noerror          | counters                        |
-| Count of DNS packets flagged as reply with response code NXDOMAIN                            | dns\_wire\_packets\_nxdomain         | counters                        |
-| Count of DNS packets flagged as query                                                        | dns\_wire\_packets\_queries          | counters                        |
-| Count of DNS packets with EDNS Client Subnet (ECS) option set                                | dns\_wire\_packets\_query\_ecs       | counters + top_ecs              |
-| Count of DNS packets flagged as reply with response code REFUSED                             | dns\_wire\_packets\_refused          | counters                        |
-| Count of DNS packets flagged as reply                                                        | dns\_wire\_packets\_replies          | counters                        |
-| Count of DNS packets flagged as reply with response code SRVFAIL                             | dns\_wire\_packets\_srvfail          | counters                        |
-| Count of DNS packets received over TCP                                                       | dns\_wire\_packets\_tcp              | counters                        |
-| Count of DNS packets matched by policy                                                       | dns\_wire\_packets\_total            | counters                        |
-| Count of DNS packets received over UDP                                                       | dns\_wire\_packets\_udp              | counters                        |
-| Total DNS wire packets received over DNS over HTTPS                                          | dns\_wire\_packets\_doh              | counters (dnstap)               |
-| Total DNS wire packets received over DNS over TLS                                            | dns\_wire\_packets\_dot              | counters (dnstap)               |
-| Total number of DNS transactions that timed out                                              | dns\_xact\_counts\_timed\_out        | dns_transaction                 |
-| Total DNS transactions (query/reply pairs)                                                   | dns\_xact\_counts\_total             | dns_transaction                 |
-| Quantiles of transaction timing (query/reply pairs) when host is server, in microseconds     | dns\_xact\_in\_quantiles\_us         | dns_transaction                 |
-| Total sum of transaction timing (query/reply pairs) when host is server, in microseconds     | dns\_xact\_in\_quantiles\_us\_sum    | dns_transaction                 |
-| Count of transaction timing (query/reply pairs) when host is server, in microseconds         | dns\_xact\_in\_quantiles\_us\_count  | dns_transaction                 |
-| Top QNAMES in transactions where host is the server and transaction speed is slower than p90 | dns\_xact\_in\_top\_slow             | dns_transaction                 |
-| Total ingress DNS transactions (host is server)                                              | dns\_xact\_in\_total                 | dns_transaction                 |
-| Quantiles of transaction timing (query/reply pairs) when host is client, in microseconds     | dns\_xact\_out\_quantiles\_us        | dns_transaction                 |
-| Total sum of transaction timing (query/reply pairs) when host is client, in microseconds     | dns\_xact\_out\_quantiles\_us\_sum   | dns_transaction                 |
-| Count of transaction timing (query/reply pairs) when host is client, in microseconds         | dns\_xact\_out\_quantiles\_us\_count | dns_transaction                 |
-| Top QNAMES in transactions where host is the client and transaction speed is slower than p90 | dns\_xact\_out\_top\_slow            | dns_transaction                 |
-| Total egress DNS transactions (host is client)                                               | dns\_xact\_out\_total                | dns_transaction                 |
-| Distribution of response/query size ratios                                                   | dns\_xact\_ratio\_quantiles          | dns_transaction                 |
-| Total sum of response/query size ratios                                                      | dns\_xact\_ratio\_quantiles\_sum     | dns_transaction                 |
-| Count of response/query size ratios                                                          | dns\_xact\_ratio\_quantiles\_count   | dns_transaction                 |
+
+=== "v1"
+    
+    | Metric                                                                                       | Prometheus Name                      | Metric Groups                   |
+    |----------------------------------------------------------------------------------------------|--------------------------------------|---------------------------------|
+    | Cardinality of unique QNAMES, both ingress and egress                                        | dns\_cardinality\_qname              | cardinality                     |
+    | Quantiles of rates for DNS packets processed by policy                                       | dns\_rates\_total                    | any group*                      |
+    | Total sum of rates for DNS packets processed by policy                                       | dns\_rates\_total\_sum               | any group*                      |
+    | Count of rates for DNS packets processed by policy                                           | dns\_rates\_total\_count             | any group*                      |
+    | Quantiles of all DNS wire packets before filtering per second                                | dns\_rates\_events                   | any group*                      |
+    | Total sum of all DNS wire packets before filtering per second                                | dns\_rates\_events\_sum              | any group*                      |
+    | Count of all DNS wire packets before filtering per second                                    | dns\_rates\_events\_count            | any group*                      |
+    | Top ECS ASNs                                                                                 | dns\_top\_asn\_ecs                   | top_ecs                         |
+    | Top ECS GeoIP locations                                                                      | dns\_top\_geoLoc\_ecs                | top_ecs                         |
+    | Top QNAMES with response code NOERROR and no data in the response (NODATA)                   | dns\_top\_nodata                     | top_qnames                      |
+    | Top QNAMES with response code NXDOMAIN                                                       | dns\_top\_nxdomain                   | top_qnames                      |
+    | Top QNAMES by response volume                                                                | dns\_top\_qname\_by\_resp\_bytes     | top_qnames_details + top_qnames |
+    | Top QNAMES with result code NOERROR                                                          | dns\_top\_noerror                    | top_qname_details + top_qnames  |
+    | Top QNAMES aggregated at a depth of two labels                                               | dns\_top\_qname2                     | top_qnames                      |
+    | Top QNAMES aggregated at a depth of three labels                                             | dns\_top\_qname3                     | top_qnames                      |
+    | Top QTYPEs                                                                                   | dns\_top\_qtype                      | any group*                      |
+    | Top EDNS Client Subnets (ECS)                                                                | dns\_top\_query\_ecs                 | top_ecs                         |
+    | Top RCODEs                                                                                   | dns\_top\_rcode                      | any group*                      |
+    | Top QNAMES with response code REFUSED                                                        | dns\_top\_refused                    | top_qnames                      |
+    | Top QNAMES with response code SRVFAIL                                                        | dns\_top\_srvfail                    | top_qnames                      |
+    | Top UDP source ports of DNS queries                                                          | dns\_top\_udp\_ports                 | top_ports                       |
+    | Total DNS wire packets sampled for deep inspection                                           | dns\_wire\_packets\_deep\_samples    | any group*                      |
+    | Count of DNS packets sent to policy                                                          | dns\_wire\_packets\_events           | any group*                      |
+    | Count of DNS packets filtered out by policy                                                  | dns\_wire\_packets\_filtered         | counters                        |
+    | Count of DNS packets received over IPv4                                                      | dns\_wire\_packets\_ipv4             | counters                        |
+    | Count of DNS packets received over IPv6                                                      | dns\_wire\_packets\_ipv6             | counters                        |
+    | Count of DNS packets flagged as reply and identified as NODATA                               | dns\_wire\_packets\_nodata           | counters                        |
+    | Count of DNS packets flagged as reply with response code NOERROR                             | dns\_wire\_packets\_noerror          | counters                        |
+    | Count of DNS packets flagged as reply with response code NXDOMAIN                            | dns\_wire\_packets\_nxdomain         | counters                        |
+    | Count of DNS packets flagged as query                                                        | dns\_wire\_packets\_queries          | counters                        |
+    | Count of DNS packets with EDNS Client Subnet (ECS) option set                                | dns\_wire\_packets\_query\_ecs       | counters + top_ecs              |
+    | Count of DNS packets flagged as reply with response code REFUSED                             | dns\_wire\_packets\_refused          | counters                        |
+    | Count of DNS packets flagged as reply                                                        | dns\_wire\_packets\_replies          | counters                        |
+    | Count of DNS packets flagged as reply with response code SRVFAIL                             | dns\_wire\_packets\_srvfail          | counters                        |
+    | Count of DNS packets received over TCP                                                       | dns\_wire\_packets\_tcp              | counters                        |
+    | Count of DNS packets matched by policy                                                       | dns\_wire\_packets\_total            | counters                        |
+    | Count of DNS packets received over UDP                                                       | dns\_wire\_packets\_udp              | counters                        |
+    | Total DNS wire packets received over DNS over HTTPS                                          | dns\_wire\_packets\_doh              | counters (dnstap)               |
+    | Total DNS wire packets received over DNS over TLS                                            | dns\_wire\_packets\_dot              | counters (dnstap)               |
+    | Total number of DNS transactions that timed out                                              | dns\_xact\_counts\_timed\_out        | dns_transaction                 |
+    | Total DNS transactions (query/reply pairs)                                                   | dns\_xact\_counts\_total             | dns_transaction                 |
+    | Quantiles of transaction timing (query/reply pairs) when host is server, in microseconds     | dns\_xact\_in\_quantiles\_us         | dns_transaction                 |
+    | Total sum of transaction timing (query/reply pairs) when host is server, in microseconds     | dns\_xact\_in\_quantiles\_us\_sum    | dns_transaction                 |
+    | Count of transaction timing (query/reply pairs) when host is server, in microseconds         | dns\_xact\_in\_quantiles\_us\_count  | dns_transaction                 |
+    | Top QNAMES in transactions where host is the server and transaction speed is slower than p90 | dns\_xact\_in\_top\_slow             | dns_transaction                 |
+    | Total ingress DNS transactions (host is server)                                              | dns\_xact\_in\_total                 | dns_transaction                 |
+    | Quantiles of transaction timing (query/reply pairs) when host is client, in microseconds     | dns\_xact\_out\_quantiles\_us        | dns_transaction                 |
+    | Total sum of transaction timing (query/reply pairs) when host is client, in microseconds     | dns\_xact\_out\_quantiles\_us\_sum   | dns_transaction                 |
+    | Count of transaction timing (query/reply pairs) when host is client, in microseconds         | dns\_xact\_out\_quantiles\_us\_count | dns_transaction                 |
+    | Top QNAMES in transactions where host is the client and transaction speed is slower than p90 | dns\_xact\_out\_top\_slow            | dns_transaction                 |
+    | Total egress DNS transactions (host is client)                                               | dns\_xact\_out\_total                | dns_transaction                 |
+    | Distribution of response/query size ratios                                                   | dns\_xact\_ratio\_quantiles          | dns_transaction                 |
+    | Total sum of response/query size ratios                                                      | dns\_xact\_ratio\_quantiles\_sum     | dns_transaction                 |
+    | Count of response/query size ratios                                                          | dns\_xact\_ratio\_quantiles\_count   | dns_transaction                 |
 
 ## Network Metrics
 
