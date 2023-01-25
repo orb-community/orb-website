@@ -7,11 +7,11 @@ hide:
 ---
 
 
-Born at [NS1 Labs](https://ns1.com/labs), ==Orb== is a new kind of ==observability platform== that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. 
+==Orb== is a new kind of ==observability platform== that makes it easier for operators and developers to gain a deeper understanding of their networks, distributed applications, and traffic flows in real time. 
 
 ![](./img/ORB-diagram2.png)  
 
-Orb integrates with your observability stack, providing dynamic orchestration of observability agents that extract business intelligence at the edge. The platform is completely [open source](https://github.com/ns1labs/orb), extensible, vendor neutral, and cloud native.
+Orb integrates with your observability stack, providing dynamic orchestration of observability agents that extract business intelligence at the edge. The platform is completely [open source](https://github.com/orb-community/orb), extensible, vendor neutral, and cloud native.
 
 ## The components
 
@@ -25,7 +25,7 @@ While ingesting a high volume of information-dense data streams, the agents tran
 
 Orb combines concepts from edge computing, the Internet of Things (IoT), and high-throughput stream processing.
 
-As an IoT-inspired cloud ==control plane==, Orb connects a fleet of distributed ==observability agents== (such as the [open source pktvisor](https://github.com/ns1labs/pktvisor/)) deployed at the edge and gives you command over that fleet. In operating the control plane, you issue instructions to the agents, dynamically programming and re-programming them with data-collection policies to build different datasets in real time.
+As an IoT-inspired cloud ==control plane==, Orb connects a fleet of distributed ==observability agents== (such as the [open source pktvisor](https://github.com/orb-community/pktvisor/)) deployed at the edge and gives you command over that fleet. In operating the control plane, you issue instructions to the agents, dynamically programming and re-programming them with data-collection policies to build different datasets in real time.
 
 ## The features
 
@@ -43,7 +43,7 @@ Orb focuses on edge analysis, preferring “small data”-style, actionable metr
 
 ## Orb + pktvisor
 
-Via ==Orb's user interface==, you decide *what data* to extract from *which agents*. The resource-efficient, side-car style ==[pktvisor](https://github.com/ns1/pktvisor) observability agent== performs edge analysis on network data streams.
+Via ==Orb's user interface==, you decide *what data* to extract from *which agents*. The resource-efficient, side-car style ==[pktvisor](https://github.com/orb-community/pktvisor) observability agent== performs edge analysis on network data streams.
 
 This combination allows you to:
 
@@ -53,7 +53,7 @@ This combination allows you to:
 
 In terms of metrics, pktvisor can capture DNS, DHCP, and L2/L3 network data via packet capture, `dnstap`, `sflow`, among other input methods.
 
-For a complete list of metrics currently collected by pktvisor, look [here](https://github.com/ns1labs/pktvisor/wiki/Current-Metrics).
+For a complete list of metrics currently collected by pktvisor, look [here](https://github.com/orb-community/pktvisor/wiki/Current-Metrics).
 
 To view a Grafana dashboard for visualizing pktvisor Prometheus metrics, look [here](https://grafana.com/grafana/dashboards/14221).
 

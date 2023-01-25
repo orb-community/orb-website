@@ -58,13 +58,13 @@ nav:
       - Installing Orb control plane: documentation/install.md
       - Orb REST API: api/orb_rest_api.md
   - Community: "contact.md"
-repo_url: https://github.com/ns1labs/orb
-repo_name: ns1labs/orb
+repo_url: https://github.com/orb-community/orb
+repo_name: orb-community/orb
 edit_uri: ""
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/ns1labs/orb
+      link: https://github.com/orb-community/orb
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
