@@ -1,6 +1,127 @@
-An orb agent can have its backend customized with advanced configuration using [configuration files](/documentation/running_orb_agent/#configuration-files).<br>
+# Configure an Orb Agent Using Configuration File
+
+## Orb Agent Configuration
+
+As you can see [here](/documentation/running_orb_agent/#configuration-files) configuration files are needed if you want to customize your orb agent. Follow the lines below to understand how to use them and make Orb more versatile and powerful to your needs.
+The configuration file is written in YAML and can be used to make Orb agent to auto-provision or to configure an already connected Orb agent. 
+
+
+=== "Configuration File to Orb agent to auto-provision"
+    ```yaml
+    orb:
+      cloud:
+        api:
+          address: https://orb.live
+          token: TOKEN
+        config:
+          agent_name: agent_name
+          auto_provision: true
+        mqtt:
+          address: tls://agents.orb.live:8883
+      backends:
+        pktvisor:
+          api_port: 10853
+          binary: /usr/local/sbin/pktvisord
+          config_file: "/path/pktvisor.yaml"
+      tags:
+        key_1: value_1
+        key_2: value_2
+      tls:
+        verify: true
+      db:
+        file: "/orb-agent.db"
+      debug:
+        enable: true
+    visor:
+      # this section is used by pktvisor. Check Pktvisor configuration to more information.
+    ```
+=== "Configuration File to Orb agents already connected"
+    ```yaml
+    orb:
+      cloud:
+        api:
+          address: https://orb.live
+        config:
+          auto_provision: false
+        mqtt:
+          address: tls://agents.orb.live:8883
+          channel_id: "AGENT_KEY_UUID"
+          id: "AGENT_UUID"
+          key: "AGENT_KEY_UUID"
+      backends:
+        pktvisor:
+          api_port: 10853
+          binary: /usr/local/sbin/pktvisord
+          config_file: "/path/pktvisor.yaml"
+      tags:
+        key_1: value_1
+        key_2: value_2
+      tls:
+        verify: true
+      db:
+        file: "/orb-agent.db"
+      debug:
+        enable: true
+    visor:
+     # this section is used by pktvisor. Check Pktvisor configuration to more information.
+    ```
+
+### Cloud
+
+Cloud section has three subsections: `api`, `config` and `mqtt` and it establishes all the necessary configurations for the agent connection.
+
+
+| Subsection |          Configurations           |  Type  |                           Required                            |          Default           |                                                   Extra                                                   |
+|:----------:|:---------------------------------:|:------:|:-------------------------------------------------------------:|:--------------------------:|:---------------------------------------------------------------------------------------------------------:|
+|    api     |             `address`             | *str*  |                               ❌                               |      https://orb.live      |                                                     -                                                     |
+|    api     |              `token`              | *str*  |     It's required if you want the agent to auto provision     |            None            | Check [here](/documentation/running_orb_agent/#advanced-auto-provisioning-setup) to how to create a token |
+|   config   |           `agent_name`            | *str*  |                               ❌                               |          hostname          |                               It will only be used if auto_provision: True                                |
+|   config   | <nobr>  `auto_provision`  </nobr> | *Bool* |                               ❌                               |            True            |                                                     -                                                     |
+|    mqtt    |             `address`             | *str*  |                               ❌                               | tls://agents.orb.live:8883 |                                                     -                                                     |
+|    mqtt    |               `id`                | *UUID* | It's required if you *DON'T* want the agent to auto provision |            None            |       Check [here](/getting_started/#create-agent-credentials) to understand how to get an agent id       |
+|    mqtt    |           `channel_id`            | *UUID* | It's required if you *DON'T* want the agent to auto provision |            None            |       Check [here](/getting_started/#create-agent-credentials) to understand how to get an agent id       |
+|    mqtt    |               `key`               | *UUID* | It's required if you *DON'T* want the agent to auto provision |            None            |       Check [here](/getting_started/#create-agent-credentials) to understand how to get an agent id       |
+
+
+### Backends
+
 It is worth emphasizing that no extra installation is necessary, since the `orb-agent` docker container already includes the available backends.
-See below for configuration options for each backend supported by Orb agents.
+The subsections here are related to each backend supported by Orb agents. See below for configuration options:
+
+***Pktvisor:***<br>
+
+Check [pktvisor configurations](/documentation/orb_agent_configs/#pktvisor-configuration) for more information on available options to this backend.
+
+| Subsection | Configurations | Type  | Required |          Default          |                                                                                                                                       <div style="width:500px">Meaning</div>                                                                                                                                       |
+|:----------:|:--------------:|:-----:|:--------:|:-------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|  pktvisor  |    `binary`    | *str* |    ❌     | /usr/local/sbin/pktvisord |                                                                                                                    It specifies the path on orb container where the pktvisor binary is located                                                                                                                     |
+|  pktvisor  | `config_file`  | *str* |    ❌     |    /opt/orb/agent.yaml    | It specifies the path in orb container where the pktvisor configuration file is located and assumes that you are using the same agent file, named agent.yaml, to configure both the agent itself and pktvisor. If your pktvisor configuration file has another name/path, you must replace it with the proper one. |
+|  pktvisor  |   `api_host`   | *str* |    ❌     |         localhost         |                                                                                                                                      Host where pktvisor web server will run.                                                                                                                                      |
+|  pktvisor  |   `api_port`   | *int* |    ❌     |           10853           |                                                                                                                                    Port in which pktvisor web server will run.                                                                                                                                     |
+
+
+### Tags
+- Tags are intended to dynamically define a group of agents by matching against agent group tags and are a dict type.
+  - !!! warning
+    Agent tags defined on the edge (configuration files) *CAN NOT* be removed/edited through API or orb-website and they are not required.
+
+### TLS verification
+
+It verifies the identity of the server and must be set to False if you want to use self-hosted versions.
+
+- *Not Required* <br>
+
+- *Default:* True <br>
+- *Type:* Bool
+
+### Debug
+
+If `True`, this will cause more agent logs (debug type) to be provided.
+
+- *Not Required* <br>
+
+- *Default:* False <br>
+- *Type:* Bool
 
 
 ## Pktvisor Configuration

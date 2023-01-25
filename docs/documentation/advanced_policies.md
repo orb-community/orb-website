@@ -55,7 +55,7 @@ The `tags` usage syntax is:<br>
     ```
 
 - **Backend**<br><br>
-Backend determine to which backend the policy will be attached. Check the available backends [here](/documentation/orb_agent_backend). <br><br>
+Backend determine to which backend the policy will be attached. Check the available backends [here](/documentation/orb_agent_configs). <br><br>
 
 - **Schema version**<br><br>
 Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Default should be "1.0".<br><br>
@@ -91,11 +91,11 @@ The policy data for pktvisor can be written in either YAML or JSON, and has four
     ```
 ## Input section
 
-The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the [agent level](/documentation/orb_agent_backend/#pktvisor-configuration). <br><br>
+The input section specifies what data streams the policy will be using for analysis, in other words, this specifies what data the agent should be listening in on, and is defined at the [agent level](/documentation/orb_agent_configs/#pktvisor-configuration). <br><br>
 <span style="color:blue">Required fields:</span><br>
 `input_type` - the type of input.  This field will be validated with the type of tap indicated by the `tap` parameter or by the `tap selector` . If the types are incompatible, the policy will fail.<br>
 
-`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](/documentation/orb_agent_backend/#pktvisor-configuration).
+`tap` - the name given to this input in the tap/agent configuration  or `tap_selector` -  tags to match existing agent [taps](/documentation/orb_agent_configs/#pktvisor-configuration).
 If `tap_selector` is used, it can be chosen whether taps with any of the tags or with all tags will be attached.
 
 
@@ -2017,7 +2017,7 @@ The `asn_notfound` filter usage syntax is:<br>
 
 ###### Configurations <br>
 - Abstract configurations. <br><br>
-- In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_backend/#netprobe) the available configurations for netprobe.
+- In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_configs/#netprobe) the available configurations for netprobe.
 
 
 ###### Filters
