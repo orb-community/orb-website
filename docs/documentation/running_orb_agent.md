@@ -8,7 +8,6 @@ To run an agent, you will need:
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
-4. The network interface to monitor (e.g. `eth0`)
 
 !!! tip
 
@@ -116,7 +115,7 @@ The agent credentials include *three pieces of information*, each of which is a 
 !!! question
 
     Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
-    or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
 
 ## Configuration files
 
@@ -129,7 +128,7 @@ You will need to use a configuration file if:
 * You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML.
-You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point and check more information in [Configuring Orb Agent](/documentation/orb_agent_configs/#orb-agent-configuration), or
+You can use the latest [template configuration file](https://raw.githubusercontent.com/orb-community/orb/develop/cmd/agent/agent.example.yaml) as a starting point and check more information in [Configuring Orb Agent](/documentation/orb_agent_configs/#orb-agent-configuration), or
 start here:
 
 ```yaml
