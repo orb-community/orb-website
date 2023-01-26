@@ -28,6 +28,13 @@ If you need to install the **Orb Agent** to be used with orb.live, [see these in
 
 ## self-host
 
+Start by cloning the orb project in your local environment using the following command:
+
+```
+git clone git@github.com:orb-community/orb.git
+```
+
+<br>
 For local/test/development control plane installs or for production deployments, it's required a Kubernetes cluster, which is implemented with helm chart and kind. Follow the steps from [orb/kind](https://github.com/orb-community/orb/edit/develop/kind/README.md) to set up a local k8s cluster and deploy Orb.
 
 
