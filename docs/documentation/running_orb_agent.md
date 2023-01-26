@@ -211,7 +211,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
 4. Because session tokens expire after 24 hours, you can create a permanent API token for agent provisioning by using the `SESSION_TOKEN` above:
 
         curl --location --request POST 'https://HOST/api/v1/keys' \
-        --header 'Authorization: <SESSION_TOKEN>' \
+        --header 'Authorization: Bearer <SESSION_TOKEN>' \
         --header 'Content-Type: application/json' \
         --data-raw '{
         "type": 2
