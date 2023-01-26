@@ -26,7 +26,20 @@ git clone git@github.com:orb-community/orb.git
 
 <br>
 For local/test/development control plane installs or for production deployments, it's required a Kubernetes cluster, which is implemented with helm chart and kind.<br>
-<br>
+
+### Port Requirements
+
+In order to make agent able to communicate with the control plane, the MQTT ports must be permitted:
+
+| Connection Type | Protocol | Port number |
+|:---------------:|:--------:|:-----------:|
+|   `Nonsecure`   |   HTTP   |     80      |
+| `Secure (TLS)`  |   HTTP   |    4443     |
+| `Secure (TLS)`  |   MQTT   |    8883     |
+
+
+
+<br><br>
 **Follow the steps from [orb/kind](https://github.com/orb-community/orb/blob/develop/kind/README.md) to set up a local k8s cluster and deploy Orb.**
 
 
