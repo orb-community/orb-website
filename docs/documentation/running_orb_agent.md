@@ -8,7 +8,6 @@ To run an agent, you will need:
 1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
-4. The network interface to monitor (e.g. `eth0`)
 
 !!! tip
 
@@ -116,7 +115,7 @@ The agent credentials include *three pieces of information*, each of which is a 
 !!! question
 
     Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
-    or [file a GitHub issue here](https://github.com/ns1labs/orb/issues/new/choose).
+    or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
 
 ## Configuration files
 
@@ -129,26 +128,14 @@ You will need to use a configuration file if:
 * You want the agent to [auto-provision](#advanced-auto-provisioning-setup)
 
 The configuration file is written in YAML.
-You can use the latest [template configuration file](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml) as a starting point, or
+You can use the latest [template configuration file](https://raw.githubusercontent.com/orb-community/orb/develop/cmd/agent/agent.example.yaml) as a starting point and check more information in [Configuring Orb Agent](/documentation/orb_agent_configs/#orb-agent-configuration), or
 start here:
 
 ```yaml
-version: "1.0"
-
-# this section is used by pktvisor
-# see https://github.com/ns1labs/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md
-visor:
-   taps:
-      default_pcap:
-         input_type: pcap
-         config:
-            iface: "eth0"
-            host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
-
 # this section is used by orb-agent
 # most sections and keys are optional
 orb:
-   # these are arbitrary key value pairs used for organization in the control plane and UI
+   # these are arbitrary key value pairs used for dynamically define a group of agents by matching against agent group tags 
    tags:
       region: EU
       pop: ams02
@@ -164,7 +151,7 @@ orb:
          # if auto provisioning, specify API token here (or pass on the command line)
          token: TOKEN
       mqtt:
-         address: tls://orb.live:8883
+         address: tls://agents.orb.live:8883
          # if not auto provisioning, specify agent connection details here
          id: "AGENT_UUID"
          key: "AGENT_KEY_UUID"
@@ -173,15 +160,27 @@ orb:
       pktvisor:
          binary: "/usr/local/sbin/pktvisord"
          # this example assumes the file is saved as agent.yaml. If your file has another name, you must replace it with the proper name
-         config_file: "/usr/local/orb/etc/agent.yaml"
+         config_file: "/opt/orb/agent.yaml"
+
+version: "1.0"
+
+# this section is used by pktvisor
+# see https://orb.community/documentation/orb_agent_configs/#pktvisor-configuration
+visor:
+   taps:
+      default_pcap:
+         input_type: pcap
+         config:
+            iface: "eth0"
+            host_spec: "192.168.0.54/32,192.168.0.55/32,127.0.0.1/32"
 ```
 
 You must mount your configuration file into the `orb-agent` container. For example, if your configuration file
 is on the host at `/local/orb/agent.yaml`, you can mount it into the container with this command:
 
 ```shell
-docker run -v /local/orb:/usr/local/orb/ --net=host \
-      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+docker run -v /local/orb:/opt/orb/ --net=host \
+      ns1labs/orb-agent run -c /opt/orb/agent.yaml
 ```
 
 
@@ -231,7 +230,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
         --header 'Authorization: <SESSION_TOKEN>'
 
-7. Create a config for Orb and pktvisor taps, for example, `/local/orb/agent.yaml`:
+7. Create a config for Orb and pktvisor taps, for example, `/opt/orb/agent.yaml`:
 ```yaml
 version: "1.0"
 
@@ -262,7 +261,7 @@ orb:
 
 ```shell
 docker pull ns1labs/orb-agent
-docker run -v /local/orb:/usr/local/orb/ --net=host \
+docker run -v /local/orb:/opt/orb/ --net=host \
        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-      ns1labs/orb-agent run -c /usr/local/orb/agent.yaml
+      ns1labs/orb-agent run -c /opt/orb/agent.yaml
 ```

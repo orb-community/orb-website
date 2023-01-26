@@ -52,19 +52,19 @@ nav:
       - Response Testing: guides/response_testing.md
   - Documentation:
       - Running Orb Agents: documentation/running_orb_agent.md
-      - Configuring Orb Agent Backend: documentation/orb_agent_backend.md
+      - Configuring Orb Agent: documentation/orb_agent_configs.md
       - Orb Policy Reference: documentation/advanced_policies.md
       - Orb Metrics: documentation/pktvisor_metrics.md
       - Installing Orb control plane: documentation/install.md
       - Orb REST API: api/orb_rest_api.md
   - Community: "contact.md"
-repo_url: https://github.com/ns1labs/orb
-repo_name: ns1labs/orb
+repo_url: https://github.com/orb-community/orb
+repo_name: orb-community/orb
 edit_uri: ""
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/ns1labs/orb
+      link: https://github.com/orb-community/orb
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/ns1labs
     - icon: fontawesome/brands/slack
@@ -77,3 +77,7 @@ extra:
 copyright: Copyright &copy; 2023
 extra_css:
   - stylesheets/extra.css
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
