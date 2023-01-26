@@ -228,7 +228,7 @@ Some use cases require a way to provision agents directly on edge infrastructure
 6. ==Currently, the permanent token allows access to all API functionality, not just provisioning.== You can revoke this permanent token at any time with the following call, using the `id` field above:
 
         curl --location --request DELETE 'HOST:80/api/v1/keys/<PERMANENT_TOKEN_ID>' \
-        --header 'Authorization: <SESSION_TOKEN>'
+        --header 'Authorization: Bearer <SESSION_TOKEN>'
 
 7. Create a config for Orb and pktvisor taps, for example, `/opt/orb/agent.yaml`:
 ```yaml
