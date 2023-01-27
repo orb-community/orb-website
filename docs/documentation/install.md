@@ -27,7 +27,7 @@ git clone git@github.com:orb-community/orb.git
 <br>
 For local/test/development control plane installs or for production deployments, it's required a Kubernetes cluster, which is implemented with helm chart and kind.<br>
 
-### Port Requirements
+#### Port Requirements
 
 In order to make agent able to communicate with the control plane, the MQTT ports must be permitted:
 
@@ -59,3 +59,50 @@ Upon successful installation, visit our [Getting Started](https://orb.community/
 
     Is the installation/deployment not working correctly? Found a bug? Come talk to us [live on Slack](https://netdev.chat/) in the `#orb` channel,
     or [file a GitHub issue here](https://github.com/orb-community/orb/issues/new/choose).
+
+#### Setting up a prometheus sink
+
+
+If you prefer, in addition to deploying the orb, you can also set up your own prometheus to send data for. Note that this is not strictly related to Orb, but examples of the yaml files for the configuration are available below.
+ 
+=== "prometheus.yml"
+    ```yaml
+    global:
+      scrape_interval: 5m
+      scrape_timeout:  1m        
+    scrape_configs:
+      - job_name: "prometheus"
+        basic_auth:
+          username: 'MYUSER'
+          password: 'MYPASSWORD'
+    ```
+
+=== "web-config.yml"
+    On this case you need to generate password using htpasswd like [as described in the prometheus documentation](https://prometheus.io/docs/guides/basic-auth/)
+    ```yaml
+    basic_auth_users:
+      admin: BASIC-AUTH-PASSWORD
+    ```
+
+=== "docker-compose.yml"
+    ```yaml
+    version: "3"
+    services:
+      prometheus:
+        image: prom/prometheus:latest
+        ports:
+          - 9090:9090
+        volumes:
+          - "/storage-docker/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml"
+          - "/storage-docker/prometheus/web-config.yaml:/etc/prometheus/web-config.yml"
+        command:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--web.config.file=/etc/prometheus/web-config.yml'
+          - '--enable-feature=remote-write-receiver'
+      grafana:
+        image: grafana/grafana:latest
+        ports:
+          - 3000:3000
+        depends_on:
+          - prometheus
+    ```
