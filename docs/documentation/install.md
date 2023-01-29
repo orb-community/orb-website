@@ -11,12 +11,12 @@ central location (usually a cloud environment on Kubernetes).
 The **Control Plane** can be [self-hosted](#self-host), or you can use our free [Orb SaaS](#orblive) service. Self-hosting gives you full privacy and control but is more complex. On the other hand, our SaaS gets you up and running quickly since you only need to create a free account on orb.live and then install the **Orb Agent** to your infrastructure.
 
 
-## orb.live 
+## Orb.live 
 The Orb SaaS platform ([**orb.live**](http://orb.live)) is now in active development. This free service allows you to enjoy the benefits of the Orb platform without having to run your own control plane.
 
 If you need to install the **Orb Agent** to be used with orb.live, [see these instructions](/documentation/running_orb_agent).
 
-## self-host
+## Self-host
 
 Start by cloning the orb project in your local environment using the following command:
 
@@ -25,16 +25,16 @@ git clone git@github.com:orb-community/orb.git
 ```
 
 <br>
-For local/test/development control plane installs or for production deployments, it's required a Kubernetes cluster, which is implemented with helm chart and kind.<br>
+A Kubernetes environment is required for both development environments and production deployment. For development, the [kind tool](https://github.com/orb-community/orb/blob/develop/kind/README.md) is preferred. For production deployments, use [orb-helm](https://github.com/orb-community/orb-helm).<br>
 
 #### Port Requirements
 
-In order to make agent able to communicate with the control plane, the MQTT ports must be permitted:
+In order for the agent to be able to communicate with the control plane, the following outgoing ports must be permitted:
 
 | Connection Type | Protocol | Port number |
 |:---------------:|:--------:|:-----------:|
 |   `Nonsecure`   |   HTTP   |     80      |
-| `Secure (TLS)`  |   HTTP   |    4443     |
+| `Secure (TLS)`  |   HTTP   |     443     |
 | `Secure (TLS)`  |   MQTT   |    8883     |
 
 
@@ -47,13 +47,13 @@ Upon successful installation, visit our [Getting Started](https://orb.community/
 
 !!! warning
     
-    To run your agent using the self-hosted control plane, disable TLS verification using the enviromental variable below in your provisioning command:
+    To connect an agent to the self-hosted development control plane, disable TLS verification using the environmental variable below in your provisioning command:
     
     ``` shell
     -e ORB_TLS_VERIFY=false
     ```
 
-    Check an example [here](/documentation/running_orb_agent/#sample-provisioning-commands).
+    See example [here](/documentation/running_orb_agent/#sample-provisioning-commands).
 
 !!! bug
 
@@ -63,7 +63,7 @@ Upon successful installation, visit our [Getting Started](https://orb.community/
 #### Setting up a prometheus sink
 
 
-If you prefer, in addition to deploying the orb, you can also set up your own prometheus to send data for. Note that this is not strictly related to Orb, but examples of the yaml files for the configuration are available below.
+In addition to deploying Orb, you can optionally set up a Prometheus instance to act as a metrics data Sink. You may wish to do this if you do not already have an existing time series database to send Orb Policy metric output to, and would like to host your own.
  
 === "prometheus.yml"
     ```yaml
@@ -78,7 +78,7 @@ If you prefer, in addition to deploying the orb, you can also set up your own pr
     ```
 
 === "web-config.yml"
-    On this case you need to generate password using htpasswd like [as described in the prometheus documentation](https://prometheus.io/docs/guides/basic-auth/)
+    You will need to generate password using htpasswd [as described in the prometheus documentation](https://prometheus.io/docs/guides/basic-auth/)
     ```yaml
     basic_auth_users:
       admin: BASIC-AUTH-PASSWORD

@@ -35,7 +35,7 @@ You create a set of agent credentials for each node you want to monitor. Agents 
 
 !!! warning
 
-    To run your agent using the [self-hosted control plane](/documentation/install/#self-host), disable TLS verification using the enviromental variable below in your provisioning command:
+    To connect an agent to the [self-hosted development control plane](/documentation/install/#self-host), disable TLS verification using the enviromental variable below in your provisioning command:
     
     ``` shell
     -e ORB_TLS_VERIFY=false
