@@ -265,6 +265,7 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
       modules:
         tap_name:
           type: ...
+          require_version: ...
           config: ...
           filter: ...
           metric_groups:
@@ -289,6 +290,7 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
         "modules": {
           "tap_name": {
             "type": "...",
+            "require_version": "...",
             "config": "...",
             "filter": "...",
             "metric_groups": {
@@ -303,6 +305,87 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
             }
           }
         }
+      }
+    }
+    ```
+<br>
+
+To enable any metric group use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      enable:
+        - group_to_enable
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "enable": [
+          "group_to_enable"
+        ]
+      }
+    }
+    ```
+
+To enable all available metric groups use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      enable:
+        - all
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "enable": [
+          "all"
+        ]
+      }
+    }
+    ```
+
+In order to disable any metric group use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      disable:
+        - group_to_disable
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "disable": [
+          "group_to_disable"
+        ]
+      }
+    }
+    ```
+
+To disable all metric groups use the syntax:
+
+=== "YAML"
+    ```yaml
+    metric_groups:
+      disable:
+        - all
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "metric_groups": {
+        "disable": [
+          "all"
+        ]
       }
     }
     ```
@@ -389,87 +472,6 @@ The `topn_percentile_threshold` usage syntax is:<br>
     "topn_percentile_threshold": int
     }
     ```
-<br>
-
-To enable any metric group use the syntax:
-
-=== "YAML"
-    ```yaml
-    metric_groups:
-      enable:
-        - group_to_enable
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "metric_groups": {
-        "enable": [
-          "group_to_enable"
-        ]
-      }
-    }
-    ```
-
-To enable all available metric groups use the syntax:
-
-=== "YAML"
-    ```yaml
-    metric_groups:
-      enable:
-        - all
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "metric_groups": {
-        "enable": [
-          "all"
-        ]
-      }
-    }
-    ```
-
-In order to disable any metric group use the syntax:
-
-=== "YAML"
-    ```yaml
-    metric_groups:
-      disable:
-        - group_to_disable
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "metric_groups": {
-        "disable": [
-          "group_to_disable"
-        ]
-      }
-    }
-    ```
-
-To disable all metric groups use the syntax:
-
-=== "YAML"
-    ```yaml
-    metric_groups:
-      disable:
-        - all
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "metric_groups": {
-        "disable": [
-          "all"
-        ]
-      }
-    }
-    ```
 
 
 * Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
@@ -479,141 +481,292 @@ To disable all metric groups use the syntax:
 
 ###### Example of policy with input pcap and handler DNS
 
-=== "YAML"
-    ``` yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-      modules:
-        default_dns:
-          type: dns
+=== "Example of policy with input pcap and handler DNS(v1)"
+    
+    === "YAML"
+        ``` yaml
+        handlers:
           config:
-            public_suffix_list: true
-            deep_sample_rate: 50
-            num_periods: 2
-            topn_count: 25
-            topn_percentile_threshold: 10
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_dns:
+              type: dns
+              config:
+                public_suffix_list: true
+                deep_sample_rate: 50
+                num_periods: 2
+                topn_count: 25
+                topn_percentile_threshold: 10
+              filter:
+                only_rcode: 0
+                only_dnssec_response: true
+                answer_count: 1
+                only_qtype: [1, 2]
+                only_qname_suffix: [".google.com", ".orb.live"]
+                geoloc_notfound: false
+                asn_notfound: false
+                dnstap_msg_type: "auth"
+              metric_groups:
+                enable:
+                  - top_ecs
+                  - top_qnames_details
+                disable:
+                  - cardinality
+                  - counters
+                  - dns_transaction
+                  - top_qnames
+                  - top_ports
+        input:
+          input_type: pcap
+          tap: default_pcap
           filter:
-            only_rcode: 0
-            only_dnssec_response: true
-            answer_count: 1
-            only_qtype: [1, 2]
-            only_qname_suffix: [".google.com", ".orb.live"]
-            geoloc_notfound: false
-            asn_notfound: false
-            dnstap_msg_type: "auth"
-          metric_groups:
-            enable:
-              - top_ecs
-              - top_qnames_details
-            disable:
-              - cardinality
-              - counters
-              - dns_transaction
-              - top_qnames
-              - top_ports
-    input:
-      input_type: pcap
-      tap: default_pcap
-      filter:
-        bpf: udp port 53
-      config:
-        iface: wlo1
-        host_spec: 192.168.1.167/24
-        pcap_source: libpcap
-        debug: true
-    config:
-        merge_like_handlers: true
-    kind: collection
-    ```
-
-=== "JSON"
-    ``` json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10
-        },
-        "modules": {
-          "default_dns": {
-            "type": "dns",
+            bpf: udp port 53
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.167/24
+            pcap_source: libpcap
+            debug: true
+        config:
+            merge_like_handlers: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ``` json
+        {
+          "handlers": {
             "config": {
-              "public_suffix_list": true,
-              "deep_sample_rate": 50,
-              "num_periods": 2,
-              "topn_count": 25,
-              "topn_percentile_threshold": 10
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
             },
-            "filter": {
-              "only_rcode": 0,
-              "only_dnssec_response": true,
-              "answer_count": 1,
-              "only_qtype": [
-                1,
-                2
-              ],
-              "only_qname_suffix": [
-                ".google.com",
-                ".orb.live"
-              ],
-              "geoloc_notfound": false,
-              "asn_notfound": false,
-              "dnstap_msg_type": "auth"
-            },
-            "metric_groups": {
-              "enable": [
-                "top_ecs",
-                "top_qnames_details"
-              ],
-              "disable": [
-                "cardinality",
-                "counters",
-                "dns_transaction",
-                "top_qnames",
-                "top_ports"
-              ]
+            "modules": {
+              "default_dns": {
+                "type": "dns",
+                "config": {
+                  "public_suffix_list": true,
+                  "deep_sample_rate": 50,
+                  "num_periods": 2,
+                  "topn_count": 25,
+                  "topn_percentile_threshold": 10
+                },
+                "filter": {
+                  "only_rcode": 0,
+                  "only_dnssec_response": true,
+                  "answer_count": 1,
+                  "only_qtype": [
+                    1,
+                    2
+                  ],
+                  "only_qname_suffix": [
+                    ".google.com",
+                    ".orb.live"
+                  ],
+                  "geoloc_notfound": false,
+                  "asn_notfound": false,
+                  "dnstap_msg_type": "auth"
+                },
+                "metric_groups": {
+                  "enable": [
+                    "top_ecs",
+                    "top_qnames_details"
+                  ],
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "dns_transaction",
+                    "top_qnames",
+                    "top_ports"
+                  ]
+                }
+              }
             }
-          }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap": "default_pcap",
+            "filter": {
+              "bpf": "udp port 53"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.167/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "config": {
+            "merge_like_handlers": true
+          },
+          "kind": "collection"
         }
-      },
-      "input": {
-        "input_type": "pcap",
-        "tap": "default_pcap",
-        "filter": {
-          "bpf": "udp port 53"
-        },
-        "config": {
-          "iface": "wlo1",
-          "host_spec": "192.168.1.167/24",
-          "pcap_source": "libpcap",
-          "debug": true
+        ```
+
+=== "Example of policy with input pcap and handler DNS(v2)"
+    
+    === "YAML"
+        ``` yaml
+        handlers:
+          config:
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_dns:
+              type: dns
+              require_version: "2.0"
+              config:
+                public_suffix_list: true
+                deep_sample_rate: 50
+                num_periods: 2
+                topn_count: 25
+                topn_percentile_threshold: 10
+              filter:
+                only_rcode: 0
+                only_dnssec_response: true
+                answer_count: 1
+                only_qtype: [1, 2]
+                only_qname_suffix: [".google.com", ".orb.live"]
+                geoloc_notfound: false
+                asn_notfound: false
+                dnstap_msg_type: "auth"
+              metric_groups:
+                enable:
+                  - cardinality
+                  - counters
+                  - quantiles
+                  - top_rcodes
+                  - top_qnames
+                  - top_qtypes
+                disable:
+                  - top_size
+                  - top_ports
+                  - xact_times
+                  - top_ecs
+        input:
+          input_type: pcap
+          tap: default_pcap
+          filter:
+            bpf: udp port 53
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.167/24
+            pcap_source: libpcap
+            debug: true
+        config:
+            merge_like_handlers: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ``` json
+        {
+          "handlers": {
+            "config": {
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_dns": {
+                "type": "dns",
+                "require_version": "2.0",
+                "config": {
+                  "public_suffix_list": true,
+                  "deep_sample_rate": 50,
+                  "num_periods": 2,
+                  "topn_count": 25,
+                  "topn_percentile_threshold": 10
+                },
+                "filter": {
+                  "only_rcode": 0,
+                  "only_dnssec_response": true,
+                  "answer_count": 1,
+                  "only_qtype": [
+                    1,
+                    2
+                  ],
+                  "only_qname_suffix": [
+                    ".google.com",
+                    ".orb.live"
+                  ],
+                  "geoloc_notfound": false,
+                  "asn_notfound": false,
+                  "dnstap_msg_type": "auth"
+                },
+                "metric_groups": {
+                  "enable": [
+                    "cardinality",
+                    "counters",
+                    "quantiles",
+                    "top_rcodes",
+                    "top_qnames",
+                    "top_qtypes"
+                  ],
+                  "disable": [
+                    "top_size",
+                    "top_ports",
+                    "xact_times",
+                    "top_ecs"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap": "default_pcap",
+            "filter": {
+              "bpf": "udp port 53"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.167/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "config": {
+            "merge_like_handlers": true
+          },
+          "kind": "collection"
         }
-      },
-      "config": {
-        "merge_like_handlers": true
-      },
-      "kind": "collection"
-    }
-    ```
-<br>
+        ```
+    <br>
 
 **Handler Type**: "dns" <br>
 
 ###### Metrics Group <br>
 
-|     Metric Group     | Default  | 
-|:--------------------:|:--------:|
-|      `top_ecs`       | disabled |
-| `top_qnames_details` | disabled |
-|    `cardinality`     | enabled  |
-|      `counters`      | enabled  |
-|  `dns_transaction`   | enabled  |
-|     `top_qnames`     | enabled  |
- |     `top_ports`      | enabled  |
+=== "DNS(v1)"
+    
+    |     Metric Group     | Default  |
+    |:--------------------:|:--------:|
+    |      `top_ecs`       | disabled |
+    | `top_qnames_details` | disabled |
+    |    `cardinality`     | enabled  |
+    |      `counters`      | enabled  |
+    |  `dns_transaction`   | enabled  |
+    |     `top_qnames`     | enabled  |
+    |     `top_ports`      | enabled  |
+
+
+=== "DNS(v2)"
+        
+    | Metric Group  | Default  |
+    |:-------------:|:--------:|
+    |   `top_ecs`   | disabled |
+    |  `top_ports`  | disabled |
+    |  `top_size`   | disabled |
+    | `xact_times`  | disabled |
+    | `cardinality` | enabled  |
+    |  `counters`   | enabled  |
+    | `top_qnames`  | enabled  |
+    |  `quantiles`  | enabled  |
+    | `top_qtypes`  | enabled  |
+    | `top_rcodes`  | enabled  |
 
 
 ###### Configurations
@@ -649,17 +802,35 @@ The `public_suffix_list` filter usage syntax is:<br>
 
 ###### Filters <br>
 
-|         Filter         |  Type   | Input  |
-|:----------------------:|:-------:|:------:|
-|      `only_rcode`      |  *int*  |  PCAP  |
-|   `exclude_noerror`    | *bool*  |  PCAP  |
-| `only_dnssec_response` | *bool*  |  PCAP  |
-|     `answer_count`     |  *int*  |  PCAP  |
-|      `only_qtype`      | *str[]* |  PCAP  |
-|  `only_qname_suffix`   | *str[]* |  PCAP  |
-|   `geoloc_notfound`    | *bool*  |  PCAP  |
-|     `asn_notfound`     | *bool*  |  PCAP  |
-|   `dnstap_msg_type`    |  *str*  | DNSTAP |
+=== "DNS(v1)"
+    
+    |         Filter         |  Type   | Input  |
+    |:----------------------:|:-------:|:------:|
+    |      `only_rcode`      |  *int*  |  PCAP  |
+    |   `exclude_noerror`    | *bool*  |  PCAP  |
+    | `only_dnssec_response` | *bool*  |  PCAP  |
+    |     `answer_count`     |  *int*  |  PCAP  |
+    |      `only_qtype`      | *str[]* |  PCAP  |
+    |  `only_qname_suffix`   | *str[]* |  PCAP  |
+    |   `geoloc_notfound`    | *bool*  |  PCAP  |
+    |     `asn_notfound`     | *bool*  |  PCAP  |
+    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+
+=== "DNS(v2)"
+    
+    |         Filter         |  Type   | Input  |
+    |:----------------------:|:-------:|:------:|
+    |      `only_rcode`      |  *int*  |  PCAP  |
+    |   `exclude_noerror`    | *bool*  |  PCAP  |
+    | `only_dnssec_response` | *bool*  |  PCAP  |
+    |     `answer_count`     |  *int*  |  PCAP  |
+    |      `only_qtype`      | *str[]* |  PCAP  |
+    |  `only_qname_suffix`   | *str[]* |  PCAP  |
+    |   `geoloc_notfound`    | *bool*  |  PCAP  |
+    |     `asn_notfound`     | *bool*  |  PCAP  |
+    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    | `only_xact_directions` |  *str*  |
+    |      `only_qname`      | *str[]* |
 
 
 
