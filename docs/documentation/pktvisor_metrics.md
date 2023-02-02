@@ -91,6 +91,67 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Total sum of response/query size ratios                                                      | dns\_xact\_ratio\_quantiles\_sum     | dns_transaction                 |
     | Count of response/query size ratios                                                          | dns\_xact\_ratio\_quantiles\_count   | dns_transaction                 |
 
+
+=== "v2"
+    
+    | Metric                                                                                                                 | Prometheus Name                     | Metric Groups |
+    |------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------|
+    | Quantiles of all DNS wire packets before filtering per second	                                                         | dns_rates_events                    | any group*    |
+    | Count of all DNS wire packets before filtering per second		                                                            | dns_rates_events_count              | any group*    |
+    | Total sum of rates for DNS packets processed by policy	                                                                | dns_rates_events_sum                | any group*    |
+    | Total DNS transactions (query/reply pairs) with the AD flag set in the response                                        | dns_authenticated_data_xacts        | counters      |
+    | Total DNS transactions (query/reply pairs) with the AA flag set in the response                                        | dns_authoritative_answer_xacts      | counters      |
+    | Cardinality of unique QNAMES, both ingress and egress	                                                                 | dns_cardinality_qname               | cardinality   |
+    | Total DNS transactions (query/reply pairs) with the CD flag set in the query                                           | dns_checking_disabled_xacts         | counters      |
+    | Total DNS wire packets that were sampled for deep inspection                                                           | dns_deep_sampled_packets            | any group*    |
+    | Total DNS transactions (query/reply pairs) received over DNSCrypt over TCP                                             | dns_dnscrypt_tcp_xacts              | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNSCrypt over UDP                                             | dns_dnscrypt_udp_xacts              | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over HTTPS                                                | dns_doh_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over QUIC                                                 | dns_doq_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over TLS                                                  | dns_dot_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) with the EDNS Client Subnet option set                                      | dns_ecs_xacts                       | counters      |
+    | Total DNS wire packets seen that did not match the configured filter(s) (if any)                                       | dns_filtered_packets                | counters      |
+    | Total DNS transactions (query/reply pairs) received over IPv4                                                          | dns_ipv4_xacts                      | counters      |
+    | Total DNS transactions (query/reply pairs) received over IPv6                                                          | dns_ipv6_xacts                      | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR but with an empty answers section | dns_nodata_xacts                    | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR                                   | dns_noerror_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NXDOMAIN                                  | dns_nxdomain_xacts                  | counters      |
+    | Total DNS wire packets events                                                                                          | dns_observed_packets                | any group*    |
+    | Total number of DNS responses that do not have a corresponding query                                                   | dns_orphan_responses                | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code REFUSED                                   | dns_refused_xacts                   | counters      |
+    | Quantiles of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio       | top_size      |
+    | Count of ratio of packet sizes in a DNS transaction (reply/query)                                                      | dns_response_query_size_ratio_count | top_size      |
+    | Total sum of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio_sum   | top_size      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code SRVFAIL                                   | dns_srvfail_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) received over TCP                                                           | dns_tcp_xacts                       | counters      |
+    | Total number of DNS queries that timed out                                                                             | dns_timeout_queries                 | counters      |
+    | Top ASNs by ECS                                                                                                        | dns_top_asn_ecs_xacts               | top_ecs       |
+    | Top EDNS Client Subnet (ECS) observed in DNS transaction                                                               | dns_top_ecs_xacts                   | top_ecs       |
+    | 	     Top GeoIP ECS locations                                                                                          | dns_top_geo_loc_ecs_xacts           | top_ecs       |
+    | 	  Top QNAMES with result code NOERROR and empty answer section                                                        | dns_top_nodata_xacts                | top_rcodes    |
+    | Top QNAMES with result code NOERROR                                                                                    | dns_top_noerror_xacts               | top_rcodes    |
+    | 	    Top QNAMES with result code NXDOMAIN                                                                              | dns_top_nxdomain_xacts              | top_rcodes    |
+    | 	      Top QNAMES, aggregated at a depth of two labels                                                                 | dns_top_qname2_xacts                | top_qnames    |
+    | Top QNAMES, aggregated at a depth of three labels                                                                      | dns_top_qname3_xacts                | top_qnames    |
+    | Top QNAMES by response volume in bytes                                                                                 | dns_top_response_bytes              | top_size      |
+    | Top query types                                                                                                        | dns_top_qtype_xacts                 | top_qtypes    |
+    | 	    Top result codes                                                                                                  | dns_top_rcode_xacts                 | top_rcodes    |
+    | 	         Top QNAMES with result code REFUSED                                                                          | dns_top_refused_xacts               | top_rcodes    |
+    | Top QNAMES in transactions where host is the server and transaction speed is slower than p90                           | dns_top_slow_xacts                  | xact_times    |
+    | 	    Top QNAMES with result code SRVFAIL                                                                               | dns_top_srvfail_xacts               | top_rcodes    |
+    | 	     Top UDP source port on the query side of a transaction                                                           | dns_top_udp_ports_xacts             | top_ports     |
+    | Total DNS transactions (query/reply pairs) received over UDP                                                           | dns_udp_xacts                       | counters      |
+    | Rate of all DNS transaction (reply/query) per second                                                                   | dns_xact_rates                      | quantiles     |
+    | Count of all DNS transaction (reply/query) per second                                                                  | dns_xact_rates_count                | quantiles     |
+    | Total sum of all DNS transaction (reply/query) per second                                                              | dns_xact_rates_sum                  | quantiles     |
+    | Quantiles of transaction timing (query/reply pairs) in microseconds                                                    | dns_xact_time_us                    | xact_times    |
+    | Count of transaction timing (query/reply pairs) in microseconds                                                        | dns_xact_time_us_count              | xact_times    |
+    | Total sum of transaction timing (query/reply pairs) in microseconds                                                    | dns_xact_time_us_sum                | xact_times    |
+    | Total DNS transactions (query/reply pairs)                                                                             | dns_xacts                           | counters      |
+    
+
+
+
 ## Network Metrics
 
 | Metric                                                          | Prometheus Name                     | Metric Groups |

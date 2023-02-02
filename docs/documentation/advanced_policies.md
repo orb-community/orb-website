@@ -479,10 +479,11 @@ The `topn_percentile_threshold` usage syntax is:<br>
 
 ### DNS Analyzer (dns)
 
-###### Example of policy with input pcap and handler DNS
-
-=== "Example of policy with input pcap and handler DNS(v1)"
+=== " DNS(v1)"
     
+    ###### Example of policy with input pcap and handler DNS
+    
+        
     === "YAML"
         ``` yaml
         handlers:
@@ -603,9 +604,412 @@ The `topn_percentile_threshold` usage syntax is:<br>
           "kind": "collection"
         }
         ```
-
-=== "Example of policy with input pcap and handler DNS(v2)"
     
+    **Handler Type**: "dns" <br>
+    
+    ###### Metrics Group <br>
+        
+    |     Metric Group     | Default  |
+    |:--------------------:|:--------:|
+    |      `top_ecs`       | disabled |
+    | `top_qnames_details` | disabled |
+    |    `cardinality`     | enabled  |
+    |      `counters`      | enabled  |
+    |  `dns_transaction`   | enabled  |
+    |     `top_qnames`     | enabled  |
+    |     `top_ports`      | enabled  |
+    
+    
+    ###### Configurations
+    - public_suffix_list: *bool*. <br>
+    - recorded_stream: 
+    - xact_ttl_secs: 
+    - xact_ttl_ms: 
+    - Abstract configurations. <br><br>
+    
+    **public_suffix_list** <br>
+    
+    Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
+    
+    The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
+    The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
+    
+    |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
+    |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
+    |  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
+    | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
+    
+    
+    The `public_suffix_list` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        public_suffix_list: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "public_suffix_list": true
+        }
+        ```
+    
+    ###### Filters <br>
+    
+            
+    |         Filter         |  Type   | Input  |
+    |:----------------------:|:-------:|:------:|
+    |      `only_rcode`      |  *int*  |  PCAP  |
+    |   `exclude_noerror`    | *bool*  |  PCAP  |
+    | `only_dnssec_response` | *bool*  |  PCAP  |
+    |     `answer_count`     |  *int*  |  PCAP  |
+    |      `only_qtype`      | *str[]* |  PCAP  |
+    |      `only_qname`      | *str[]* |  PCAP  |
+    |  `only_qname_suffix`   | *str[]* |  PCAP  |
+    |   `geoloc_notfound`    | *bool*  |  PCAP  |
+    |     `asn_notfound`     | *bool*  |  PCAP  |
+    |     `only_queries`     | *bool*  |  PCAP  |
+    |    `only_responses`    | *bool*  |  PCAP  |
+    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    
+    
+    **only_rcode:** *int*. <br>
+    
+    Input: PCAP <br>
+    
+    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+    
+    | DNS Return Code | DNS Return Message |                     Description                     |
+    |:---------------:|:------------------:|:---------------------------------------------------:|
+    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
+    |       `1`       |      FORMERR       |               DNS Query Format Error                |
+    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
+    |       `4`       |       NOTIMP       |              Function not implemented               |
+    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
+    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
+    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
+    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
+    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
+    |      `10`       |      NOTZONE       |             Name not contained in zone              |
+    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
+    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
+    |      `17`       |       BADKEY       |                 Key not recognized                  |
+    |      `18`       |      BADTIME       |            Signature out of time window             |
+    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
+    |      `20`       |      BADNAME       |                 Duplicate key name                  |
+    |      `21`       |       BADALG       |               Algorithm not supported               |
+    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
+    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
+    
+    The `only_rcode` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_rcode: int
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "only_rcode": int
+        }
+        ```
+    with the `int` referring to the return code to be filtered. <br>
+    
+    Example: <br>
+    If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
+    === "YAML"
+        ```yaml
+        only_rcode: 0
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_rcode": 0
+        }
+        ```
+    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    
+    **exclude_noerror:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
+    The `exclude_noerror` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        exclude_noerror: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "exclude_noerror": true
+        }
+        ```
+    
+    Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
+    
+    **only_dnssec_response:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
+    To filter only responses signed by an authorized sender, use:
+    The `only_dnssec_response` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_dnssec_response: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_dnssec_response": true
+        }
+        ```
+    <br>
+    **answer_count:** *int* <br>
+    
+    Input: PCAP <br>
+    
+    One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
+    The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
+    
+    The `answer_count` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        answer_count: int
+        ```
+    === "JSON"
+        ```json
+        {
+          "answer_count": int
+        }
+        ```
+    
+    with the `int` referring to the desired amount of answer. <br>
+    Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
+    As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
+    
+    
+    A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
+    In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
+    
+    
+    Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
+    
+    **only_qtype:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
+    
+    The `only_qtype` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype: 
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "array"
+          ]
+        }
+        ```
+    If you want to filter only IPV4 record types, for example, you should use: <br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "A"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1
+          ]
+        }
+        ```
+    Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+          - 2
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1,
+            2,
+            "A"
+          ]
+        }
+        ```
+    **only_qname_suffix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
+    The `only_qname_suffix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - .google.com
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            ".google.com"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
+    The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    The `asn_notfound` filter only keeps responses whose asn were not found. <br>
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **dnstap_msg_type:** *str* <br>
+    
+    Input: DNSTAP <br>
+    
+    With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
+    Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
+    
+    The `dnstap_msg_type` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        dnstap_msg_type: str
+        ```
+        Example:
+        ```yaml
+        dnstap_msg_type: auth
+        ```
+    === "JSON"
+        ```json
+        {
+          "dnstap_msg_type": "str"
+        }
+        ```
+        Example:
+        ```json
+        {
+          "dnstap_msg_type": "auth"
+        }
+        ```
+    <br>
+
+=== " DNS(v2)"
+
+
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
+        
+    ###### Example of policy with input pcap and handler DNS
+        
     === "YAML"
         ``` yaml
         handlers:
@@ -735,26 +1139,11 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-
-**Handler Type**: "dns" <br>
-
-###### Metrics Group <br>
-
-=== "DNS(v1)"
     
-    |     Metric Group     | Default  |
-    |:--------------------:|:--------:|
-    |      `top_ecs`       | disabled |
-    | `top_qnames_details` | disabled |
-    |    `cardinality`     | enabled  |
-    |      `counters`      | enabled  |
-    |  `dns_transaction`   | enabled  |
-    |     `top_qnames`     | enabled  |
-    |     `top_ports`      | enabled  |
-
-
-=== "DNS(v2)"
-        
+    **Handler Type**: "dns" <br>
+    
+    ###### Metrics Group <br>
+    
     | Metric Group  | Default  |
     |:-------------:|:--------:|
     |   `top_ecs`   | disabled |
@@ -767,42 +1156,44 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |  `quantiles`  | enabled  |
     | `top_qtypes`  | enabled  |
     | `top_rcodes`  | enabled  |
-
-
-###### Configurations
-- public_suffix_list: *bool*. <br>
-- Abstract configurations. <br><br>
-
-**public_suffix_list** <br>
-
-Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
-
-The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
-The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
-
-|            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
-|:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
-|  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
-| `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
-
-
-The `public_suffix_list` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    public_suffix_list: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "public_suffix_list": true
-    }
-    ```
-
-###### Filters <br>
-
-=== "DNS(v1)"
+    
+    
+    ###### Configurations
+    - public_suffix_list: *bool*. <br>
+    - recorded_stream:
+    - xact_ttl_secs:
+    - xact_ttl_ms:
+    - Abstract configurations. <br><br>
+    
+    **public_suffix_list** <br>
+    
+    Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
+    
+    The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
+    The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
+    
+    |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
+    |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
+    |  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
+    | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
+    
+    
+    The `public_suffix_list` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        public_suffix_list: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "public_suffix_list": true
+        }
+        ```
+    
+    ###### Filters <br>
+    
     
     |         Filter         |  Type   | Input  |
     |:----------------------:|:-------:|:------:|
@@ -811,356 +1202,343 @@ The `public_suffix_list` filter usage syntax is:<br>
     | `only_dnssec_response` | *bool*  |  PCAP  |
     |     `answer_count`     |  *int*  |  PCAP  |
     |      `only_qtype`      | *str[]* |  PCAP  |
+    |      `only_qname`      | *str[]* | PCAP |
     |  `only_qname_suffix`   | *str[]* |  PCAP  |
     |   `geoloc_notfound`    | *bool*  |  PCAP  |
     |     `asn_notfound`     | *bool*  |  PCAP  |
     |   `dnstap_msg_type`    |  *str*  | DNSTAP |
-
-=== "DNS(v2)"
     
-    |         Filter         |  Type   | Input  |
-    |:----------------------:|:-------:|:------:|
-    |      `only_rcode`      |  *int*  |  PCAP  |
-    |   `exclude_noerror`    | *bool*  |  PCAP  |
-    | `only_dnssec_response` | *bool*  |  PCAP  |
-    |     `answer_count`     |  *int*  |  PCAP  |
-    |      `only_qtype`      | *str[]* |  PCAP  |
-    |  `only_qname_suffix`   | *str[]* |  PCAP  |
-    |   `geoloc_notfound`    | *bool*  |  PCAP  |
-    |     `asn_notfound`     | *bool*  |  PCAP  |
-    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
-    | `only_xact_directions` |  *str*  |
-    |      `only_qname`      | *str[]* |
-
-
-
-**only_rcode:** *int*. <br>
-
-Input: PCAP <br>
-
-When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
-Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
-There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
-
-| DNS Return Code | DNS Return Message |                     Description                     |
-|:---------------:|:------------------:|:---------------------------------------------------:|
-|       `0`       |      NOERROR       |          DNS Query completed successfully           |
-|       `1`       |      FORMERR       |               DNS Query Format Error                |
-|       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
-|       `3`       |      NXDOMAIN      |             Domain name does not exist              |
-|       `4`       |       NOTIMP       |              Function not implemented               |
-|       `5`       |      REFUSED       |     The server refused to answer for the query      |
-|       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
-|       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
-|       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
-|       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
-|      `10`       |      NOTZONE       |             Name not contained in zone              |
-|      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
-|      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
-|      `17`       |       BADKEY       |                 Key not recognized                  |
-|      `18`       |      BADTIME       |            Signature out of time window             |
-|      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
-|      `20`       |      BADNAME       |                 Duplicate key name                  |
-|      `21`       |       BADALG       |               Algorithm not supported               |
-|      `22`       |      BADTRUNC      |                   Bad Truncation                    |
-|      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
-
-The `only_rcode` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_rcode: int
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "only_rcode": int
-    }
-    ```
-with the `int` referring to the return code to be filtered. <br>
-
-Example: <br>
-If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
-=== "YAML"
-    ```yaml
-    only_rcode: 0
-    ```
-
-=== "JSON"
-    ```json
-    {
-    "only_rcode": 0
-    }
-    ```
-Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
-
-**exclude_noerror:** *bool* <br>
-
-Input: PCAP <br>
-
-You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
-The `exclude_noerror` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    exclude_noerror: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "exclude_noerror": true
-    }
-    ```
-
-Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
-
-**only_dnssec_response:** *bool* <br>
-
-Input: PCAP <br>
-
-When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
-To filter only responses signed by an authorized sender, use:
-The `only_dnssec_response` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_dnssec_response: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-    "only_dnssec_response": true
-    }
-    ```
-<br>
-**answer_count:** *int* <br>
-
-Input: PCAP <br>
-
-One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
-The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
-
-The `answer_count` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    answer_count: int
-    ```
-=== "JSON"
-    ```json
-    {
-      "answer_count": int
-    }
-    ```
-
-with the `int` referring to the desired amount of answer. <br>
-Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
-As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
-
-
-A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
-In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
-
-
-Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
-
-**only_qtype:** *str[]* <br>
-
-Input: PCAP <br>
-
-DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
-
-The `only_qtype` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_qtype: 
-      - array
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        "array"
-      ]
-    }
-    ```
-If you want to filter only IPV4 record types, for example, you should use: <br>
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - "A"
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        "A"
-      ]
-    }
-    ```
-or
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - 1
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        1
-      ]
-    }
-    ```
-Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - 1
-      - 2
-      - "A"
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        1,
-        2,
-        "A"
-      ]
-    }
-    ```
-**only_qname_suffix:** *str[]* <br>
-
-Input: PCAP <br>
-
-
-The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
-The `only_qname_suffix` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - array
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        "array"
-      ]
-    }
-    ```
-Examples:
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - .google.com
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        ".google.com"
-      ]
-    }
-    ```
-or
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - google.com
-      - .nsone.net
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        "google.com",
-        ".nsone.net"
-      ]
-    }
-    ```
-<br>
-**geoloc_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-
-Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
-The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
-The `geoloc_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    geoloc_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "geoloc_notfound": true
-    }
-    ```
-<br>
-**asn_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-
-Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
-The `asn_notfound` filter only keeps responses whose asn were not found. <br>
-The `asn_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    asn_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "asn_notfound": true
-    }
-    ```
-<br>
-**dnstap_msg_type:** *str* <br>
-
-Input: DNSTAP <br>
-
-With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
-Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
-
-The `dnstap_msg_type` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    dnstap_msg_type: str
-    ```
-    Example:
-    ```yaml
-    dnstap_msg_type: auth
-    ```
-=== "JSON"
-    ```json
-    {
-      "dnstap_msg_type": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "dnstap_msg_type": "auth"
-    }
-    ```
-<br>
+    
+    **only_rcode:** *int*. <br>
+    
+    Input: PCAP <br>
+    
+    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+    
+    | DNS Return Code | DNS Return Message |                     Description                     |
+    |:---------------:|:------------------:|:---------------------------------------------------:|
+    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
+    |       `1`       |      FORMERR       |               DNS Query Format Error                |
+    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
+    |       `4`       |       NOTIMP       |              Function not implemented               |
+    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
+    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
+    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
+    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
+    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
+    |      `10`       |      NOTZONE       |             Name not contained in zone              |
+    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
+    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
+    |      `17`       |       BADKEY       |                 Key not recognized                  |
+    |      `18`       |      BADTIME       |            Signature out of time window             |
+    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
+    |      `20`       |      BADNAME       |                 Duplicate key name                  |
+    |      `21`       |       BADALG       |               Algorithm not supported               |
+    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
+    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
+    
+    The `only_rcode` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_rcode: int
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "only_rcode": int
+        }
+        ```
+    with the `int` referring to the return code to be filtered. <br>
+    
+    Example: <br>
+    If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
+    === "YAML"
+        ```yaml
+        only_rcode: 0
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_rcode": 0
+        }
+        ```
+    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    
+    **exclude_noerror:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
+    The `exclude_noerror` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        exclude_noerror: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "exclude_noerror": true
+        }
+        ```
+    
+    Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
+    
+    **only_dnssec_response:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
+    To filter only responses signed by an authorized sender, use:
+    The `only_dnssec_response` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_dnssec_response: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_dnssec_response": true
+        }
+        ```
+    <br>
+    **answer_count:** *int* <br>
+    
+    Input: PCAP <br>
+    
+    One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
+    The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
+    
+    The `answer_count` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        answer_count: int
+        ```
+    === "JSON"
+        ```json
+        {
+          "answer_count": int
+        }
+        ```
+    
+    with the `int` referring to the desired amount of answer. <br>
+    Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
+    As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
+    
+    
+    A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
+    In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
+    
+    
+    Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
+    
+    **only_qtype:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
+    
+    The `only_qtype` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype: 
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "array"
+          ]
+        }
+        ```
+    If you want to filter only IPV4 record types, for example, you should use: <br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "A"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1
+          ]
+        }
+        ```
+    Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+          - 2
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1,
+            2,
+            "A"
+          ]
+        }
+        ```
+    **only_qname_suffix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
+    The `only_qname_suffix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - .google.com
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            ".google.com"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
+    The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    The `asn_notfound` filter only keeps responses whose asn were not found. <br>
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **dnstap_msg_type:** *str* <br>
+    
+    Input: DNSTAP <br>
+    
+    With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
+    Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
+    
+    The `dnstap_msg_type` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        dnstap_msg_type: str
+        ```
+        Example:
+        ```yaml
+        dnstap_msg_type: auth
+        ```
+    === "JSON"
+        ```json
+        {
+          "dnstap_msg_type": "str"
+        }
+        ```
+        Example:
+        ```json
+        {
+          "dnstap_msg_type": "auth"
+        }
+        ```
+    <br>
+    
+    
+    
 
 ### Network (L2-L3) Analyzer (net)
 
