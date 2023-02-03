@@ -154,51 +154,85 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 ## Network Metrics
 
-| Metric                                                          | Prometheus Name                     | Metric Groups |
-|-----------------------------------------------------------------|-------------------------------------|---------------|
-| Destination IP cardinality                                      | packets\_cardinality\_dst\_ips\_out | cardinality   |
-| Source IP cardinality                                           | packets\_cardinality\_src\_ips\_in  | cardinality   |
-| Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*    |
-| Count of packets sent to policy                                 | packets\_events                     | any group*    |
-| Count of packets filtered out by policy                         | packets\_filtered                   | counters      |
-| Count of ingress packets                                        | packets\_in                         | counters      |
-| Count of IPv4 packets                                           | packets\_ipv4                       | counters      |
-| Count of IPv6 packets                                           | packets\_ipv6                       | counters      |
-| Count of packets not UDP or TCP                                 | packets\_other\_l4                  | counters      |
-| Count of egress packets                                         | packets\_out                        | counters      |
-| Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*    |
-| Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
-| Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
-| Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
-| Quantiles of ingress data rates                                 | payload\_rates\_bytes\_in           | any group*    |
-| Total sum of ingress data rates                                 | payload\_rates\_bytes\_in\_sum      | any group*    |
-| Count of ingress data rates                                     | payload\_rates\_bytes\_in\_count    | any group*    |
-| Quantiles of egress data rates                                  | payload\_rates\_bytes\_out          | any group*    |
-| Total sum of egress data rates                                  | payload\_rates\_bytes\_out\_sum     | any group*    |
-| Count of egress data rates                                      | payload\_rates\_bytes\_out\_count   | any group*    |
-| Quantiles of total data rates                                   | payload\_rates\_bytes\_total        | any group*    |
-| Total sum of total data rates                                   | payload\_rates\_bytes\_total\_sum   | any group*    |
-| Count of total data rates                                       | payload\_rates\_bytes\_total\_count | any group*    |
-| Quantiles of all packets before filtering in packets per second | payload\_rates\_pps\_events         | any group*    |
-| Total sum of all packets before filtering in packets per second | payload\_rates\_pps\_events\_sum    | any group*    |
-| Count of all packets before filtering in packets per second     | payload\_rates\_pps\_events\_count  | any group*    |
-| Quantiles of ingress packet rates                               | payload\_rates\_pps\_in             | any group*    |
-| Total sum of ingress packet rates                               | payload\_rates\_pps\_in\_sum        | any group*    |
-| Count of ingress packet rates                                   | payload\_rates\_pps\_in\_count      | any group*    |
-| Quantiles of egress packet rates                                | payload\_rates\_pps\_out            | any group*    |
-| Total sum of egress packet rates                                | payload\_rates\_pps\_out\_sum       | any group*    |
-| Count of egress packet rates                                    | payload\_rates\_pps\_out\_count     | any group*    |
-| Quantiles of total packet rates                                 | payload\_rates\_pps\_total          | any group*    |
-| Total sum of total packet rates                                 | payload\_rates\_pps\_total\_sum     | any group*    |
-| Count of total packet rates                                     | payload\_rates\_pps\_total\_count   | any group*    |
-| Count of TCP packets                                            | packets\_tcp                        | counters      |
-| Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
-| Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
-| Top IPv4 IP addresses                                           | packets\_top\_ipv4                  | top_ips       |
-| Top IPv6 IP addresses                                           | packets\_top\_ipv6                  | top_ips       |
-| Count of packets matched by policy                              | packets\_total                      | counters      |
-| Count of UDP packets                                            | packets\_udp                        | counters      |
-| Count of packets of unknown direction                           | packets\_unknown\_dir               | counters      |
+=== "v1"
+    
+    | Metric                                                          | Prometheus Name                     | Metric Groups |
+    |-----------------------------------------------------------------|-------------------------------------|---------------|
+    | Destination IP cardinality                                      | packets\_cardinality\_dst\_ips\_out | cardinality   |
+    | Source IP cardinality                                           | packets\_cardinality\_src\_ips\_in  | cardinality   |
+    | Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*    |
+    | Count of packets sent to policy                                 | packets\_events                     | any group*    |
+    | Count of packets filtered out by policy                         | packets\_filtered                   | counters      |
+    | Count of ingress packets                                        | packets\_in                         | counters      |
+    | Count of IPv4 packets                                           | packets\_ipv4                       | counters      |
+    | Count of IPv6 packets                                           | packets\_ipv6                       | counters      |
+    | Count of packets not UDP or TCP                                 | packets\_other\_l4                  | counters      |
+    | Count of egress packets                                         | packets\_out                        | counters      |
+    | Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*    |
+    | Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
+    | Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
+    | Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
+    | Quantiles of ingress data rates                                 | payload\_rates\_bytes\_in           | any group*    |
+    | Total sum of ingress data rates                                 | payload\_rates\_bytes\_in\_sum      | any group*    |
+    | Count of ingress data rates                                     | payload\_rates\_bytes\_in\_count    | any group*    |
+    | Quantiles of egress data rates                                  | payload\_rates\_bytes\_out          | any group*    |
+    | Total sum of egress data rates                                  | payload\_rates\_bytes\_out\_sum     | any group*    |
+    | Count of egress data rates                                      | payload\_rates\_bytes\_out\_count   | any group*    |
+    | Quantiles of total data rates                                   | payload\_rates\_bytes\_total        | any group*    |
+    | Total sum of total data rates                                   | payload\_rates\_bytes\_total\_sum   | any group*    |
+    | Count of total data rates                                       | payload\_rates\_bytes\_total\_count | any group*    |
+    | Quantiles of all packets before filtering in packets per second | payload\_rates\_pps\_events         | any group*    |
+    | Total sum of all packets before filtering in packets per second | payload\_rates\_pps\_events\_sum    | any group*    |
+    | Count of all packets before filtering in packets per second     | payload\_rates\_pps\_events\_count  | any group*    |
+    | Quantiles of ingress packet rates                               | payload\_rates\_pps\_in             | any group*    |
+    | Total sum of ingress packet rates                               | payload\_rates\_pps\_in\_sum        | any group*    |
+    | Count of ingress packet rates                                   | payload\_rates\_pps\_in\_count      | any group*    |
+    | Quantiles of egress packet rates                                | payload\_rates\_pps\_out            | any group*    |
+    | Total sum of egress packet rates                                | payload\_rates\_pps\_out\_sum       | any group*    |
+    | Count of egress packet rates                                    | payload\_rates\_pps\_out\_count     | any group*    |
+    | Quantiles of total packet rates                                 | payload\_rates\_pps\_total          | any group*    |
+    | Total sum of total packet rates                                 | payload\_rates\_pps\_total\_sum     | any group*    |
+    | Count of total packet rates                                     | payload\_rates\_pps\_total\_count   | any group*    |
+    | Count of TCP packets                                            | packets\_tcp                        | counters      |
+    | Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
+    | Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
+    | Top IPv4 IP addresses                                           | packets\_top\_ipv4                  | top_ips       |
+    | Top IPv6 IP addresses                                           | packets\_top\_ipv6                  | top_ips       |
+    | Count of packets matched by policy                              | packets\_total                      | counters      |
+    | Count of UDP packets                                            | packets\_udp                        | counters      |
+    | Count of packets of unknown direction                           | packets\_unknown\_dir               | counters      |
+
+=== "v2"
+    
+    | Metric                                                                  | Prometheus Name              | Metric Groups |
+    |-------------------------------------------------------------------------|------------------------------|---------------|
+    | IP cardinality                                                          | net_cardinality_ips          | cardinality   |         
+     | Total packets that were sampled for deep inspection                     | net_deep_sampled_packets     | any group*    |    
+     | Total packets seen that did not match the configured filter(s) (if any) | net_filtered_packets         | counters      |        
+     | Count of IPv4 packets                                                   | net_ipv4_packets             | counters      |            
+     | Count of IPv6 packets                                                   | net_ipv6_packets             | counters      |            
+     | Total packets events generated                                          | net_observed_packets         | any group*    |        
+     | Count of packets which are not UDP or TCP                               | net_other_l4_packets         | counters      |        
+     | Quantiles of payload sizes, in bytes                                    | net_payload_size_bytes       | quantiles     |      
+     | Count of payload sizes, in bytes                                        | net_payload_size_bytes_count | quantiles     |
+     | Total sum of payload sizes, in bytes                                    | net_payload_size_bytes_sum   | quantiles     |  
+     | Data rate of bits per second                                            | net_rates_bps                | quantiles     |               
+     | Count of bits per second                                                | net_rates_bps_count          | quantiles     |         
+     | Total sum of bits per second                                            | net_rates_bps_sum            | quantiles     |           
+     | Rate of all packets before filtering per second                         | net_rates_observed_pps       | any group*    |      
+     | Count of all packets before filtering per second                        | net_rates_observed_pps_count | any group*    |
+     | Total sum of all packets before filtering per second                    | net_rates_observed_pps_sum   | any group*    |  
+     | Rate of packets per second                                              | net_rates_pps                | quantiles     |               
+     | Count of packets per second                                             | net_rates_pps_count          | quantiles     |         
+     | Total sum of packets per second                                         | net_rates_pps_sum            | quantiles     |           
+     | Count of TCP packets                                                    | net_tcp_packets              | counters      |             
+     | Count of TCP SYN packets                                                | net_tcp_syn_packets          | counters      |         
+     | Top ASNs by IP                                                          | net_top_asn_packets          | top_geo       |         
+     | Top GeoIP locations                                                     | net_top_geo_loc_packets      | top_geo       |     
+     | Top IPv4 addresses                                                      | net_top_ipv4_packets         | top_ips       |        
+     | Top IPv6 addresses                                                      | net_top_ipv6_packets         | top_ips       |        
+     | Count of total packets matching the configured filter(s)                | net_total_packets            | counters      |           
+     | Count of UDP packets                                                    | net_udp_packets              | counters      |             
 
 ## PCAP Metrics
 
