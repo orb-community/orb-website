@@ -31,11 +31,12 @@ A Kubernetes environment is required for both development environments and produ
 
 In order for the agent to be able to communicate with the control plane, the following outgoing ports must be permitted:
 
-| Connection Type | Protocol | Port number |
-|:---------------:|:--------:|:-----------:|
-|   `Nonsecure`   |   HTTP   |     80      |
-| `Secure (TLS)`  |   HTTP   |     443     |
-| `Secure (TLS)`  |   MQTT   |    8883     |
+| Protocol |   Port number   | 
+|:--------:|:---------------:|
+|   MQTT   |      8883       |
+|   HTTP   | 443<sup>*</sup> |
+
+> <sup>*</sup> port 443 is only required if you want the agent to [auto-provision](/documentation/running_orb_agent/#advanced-auto-provisioning-setup)
 
 
 
