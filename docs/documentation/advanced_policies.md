@@ -389,7 +389,7 @@ To disable all metric groups use the syntax:
     ```
 
 
-* Attention: enable is dominant over disable. So if both are passed, the metric will be enabled;
+* Attention: enable is dominant over disable. So if both are passed, the metrics group will be enabled;
 
 
 ### Abstract Configurations
