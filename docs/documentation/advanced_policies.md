@@ -607,7 +607,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    ###### Metrics Group <br>
+    #### Metrics Group <br>
         
     |     Metric Group     | Default  |
     |:--------------------:|:--------:|
@@ -618,43 +618,9 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |  `dns_transaction`   | enabled  |
     |     `top_qnames`     | enabled  |
     |     `top_ports`      | enabled  |
+
     
-    
-    ###### Configurations
-    - public_suffix_list: *bool*. <br>
-    - recorded_stream: 
-    - xact_ttl_secs: 
-    - xact_ttl_ms: 
-    - Abstract configurations. <br><br>
-    
-    **public_suffix_list** <br>
-    
-    Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
-    
-    The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
-    The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
-    
-    |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
-    |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
-    |  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
-    | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
-    
-    
-    The `public_suffix_list` filter usage syntax is:<br>
-    
-    === "YAML"
-        ```yaml
-        public_suffix_list: true
-        ```
-    
-    === "JSON"
-        ```json
-        {
-          "public_suffix_list": true
-        }
-        ```
-    
-    ###### Filters <br>
+    #### Filters <br>
     
             
     |         Filter         |  Type   | Input  |
@@ -876,6 +842,48 @@ The `topn_percentile_threshold` usage syntax is:<br>
           ]
         }
         ```
+    <br>
+
+    **only_qname:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname` filters dns packets based on queries and responses whose names exactly matches the strings present in the array. <br>
+    The `only_qname` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+     
+    === "YAML"
+        ```yaml
+        only_qname:
+          - www.google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "www.google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+
     **only_qname_suffix:** *str[]* <br>
     
     Input: PCAP <br>
@@ -970,6 +978,50 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
+
+
+    **only_queries:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_queries` filters out all dns response packets and its usage syntax is:<br>
+
+    
+    === "YAML"
+        ```yaml
+        only_queries: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_queries": true
+        }
+        ```
+    <br>
+
+
+
+    **only_responses:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_responses` filters out all dns queries packets and its usage syntax is: <br>
+    
+    === "YAML"
+        ```yaml
+        only_responses: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_responses": true
+        }
+        ```
+    <br>
+
+
     **dnstap_msg_type:** *str* <br>
     
     Input: DNSTAP <br>
@@ -1142,7 +1194,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    ###### Metrics Group <br>
+    #### Metrics Group <br>
     
     | Metric Group  | Default  |
     |:-------------:|:--------:|
@@ -1157,42 +1209,9 @@ The `topn_percentile_threshold` usage syntax is:<br>
     | `top_qtypes`  | enabled  |
     | `top_rcodes`  | enabled  |
     
+
     
-    ###### Configurations
-    - public_suffix_list: *bool*. <br>
-    - recorded_stream:
-    - xact_ttl_secs:
-    - xact_ttl_ms:
-    - Abstract configurations. <br><br>
-    
-    **public_suffix_list** <br>
-    
-    Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
-    
-    The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
-    The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
-    
-    |            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
-    |:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
-    |  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
-    | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
-    
-    
-    The `public_suffix_list` filter usage syntax is:<br>
-    
-    === "YAML"
-        ```yaml
-        public_suffix_list: true
-        ```
-    
-    === "JSON"
-        ```json
-        {
-          "public_suffix_list": true
-        }
-        ```
-    
-    ###### Filters <br>
+    #### Filters <br>
     
     
     |         Filter         |  Type   | Input  |
@@ -1412,6 +1431,48 @@ The `topn_percentile_threshold` usage syntax is:<br>
           ]
         }
         ```
+    <br>
+
+    **only_qname:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname` filters dns packets based on queries and responses whose names exactly matches the strings present in the array. <br>
+    The `only_qname` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+     
+    === "YAML"
+        ```yaml
+        only_qname:
+          - www.google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "www.google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+
     **only_qname_suffix:** *str[]* <br>
     
     Input: PCAP <br>
@@ -1536,260 +1597,623 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    
-    
-    
+
+#### Configurations <br>
+- public_suffix_list: *bool*.
+- recorded_stream: *bool*. 
+- xact_ttl_secs: *int*.
+- xact_ttl_ms: *int*.
+- Abstract configurations. <br><br>
+
+**public_suffix_list** <br>
+
+Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
+
+The example below illustrates the benefit of using this type of configuration. The qnames consider each part of the name to be resolved. When a name has a public suffix, generic information is generated. Note that in the standard configuration, Qname2 and Qname3 are the same for both domains. With the public suffix setting `true` (which makes the entire public part be considered as a single part), Qname3 already displays relevant information about the name. <br>
+The list of suffixes considered public can be accessed [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/PublicSuffixList.h). <br>
+
+|            Name             | Qname2 Standard | Qname3 Standard | Qname2 Public Suffix | Qname3 Public Suffix |
+|:---------------------------:|:---------------:|:---------------:|:--------------------:|:--------------------:|
+|  `www.imagine.qname.co.uk`  |      co.uk      |   qname.co.uk   |     qname.co.uk      | imagine.qname.co.uk  |
+| `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
+
+
+The `public_suffix_list` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    public_suffix_list: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "public_suffix_list": true
+    }
+    ```
+
+**recorded_stream** <br>
+
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+
+The `recorded_stream` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    recorded_stream: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "recorded_stream": true
+    }
+    ```
+
+**xact_ttl_ms** OR **xact_ttl_secs** <br>
+
+Both configurations have the same functionality, that is, defines the time to live of transactions, and only change the unit of measurement to be configured. This configuration causes the metrics to be generated for complete transactions (query and response) within the established time limit.<br>
+> - xact_ttl_ms: Defines the time to live of transactions in milliseconds.
+ - xact_ttl_secs: Defines the time to live of transactions in seconds. <br>
+
+Note that `xact_ttl_ms` is dominant over `xact_ttl_secs`, that is, if `xact_ttl_ms` exists, even if `xact_ttl_secs` also exists, the value of `xact_ttl_ms` will be considered.
+
+The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    xact_ttl_ms: 5000
+    ```
+
+    or
+
+    ```yaml
+    xact_ttl_secs: 5
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "xact_ttl_ms": 5000
+    }
+    ```
+
+    or
+
+    ```json
+    {
+      "xact_ttl_secs": 5
+    }
+    ```
 
 ### Network (L2-L3) Analyzer (net)
 
 ###### Example of policy with input pcap and handler NET
 
-=== "YAML"
-    ```yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-      modules:
-        default_net:
-          type: net
-          config:
-            deep_sample_rate: 1
-            num_periods: 2
-            topn_count: 25
-          filter:
-            geoloc_notfound: true
-            asn_notfound: true
-            only_geoloc_prefix:
-              - BR
-              - US/CA
-            only_asn_number:
-              - 7326
-              - 16136
-          metric_groups:
-            disable:
-              - cardinality
-              - counters
-              - top_geo
-              - top_ips
-    input:
-      input_type: pcap
-      tap_selector:
-        any:
-          - key1: value1
-          - key2: value2
-      filter:
-        bpf: net 192.168.1.0/24
-      config:
-        iface: wlo1
-        host_spec: 192.168.1.0/24
-        pcap_source: libpcap
-        debug: true
-    kind: collection
-    ```
+=== "NET(v1)"
 
-=== "JSON"
-    ```json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10
-        },
-        "modules": {
-          "default_net": {
-            "type": "net",
+    === "YAML"
+        ```yaml
+        handlers:
+          config:
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_net:
+              type: net
+              config:
+                deep_sample_rate: 1
+                num_periods: 2
+                topn_count: 25
+              filter:
+                geoloc_notfound: true
+                asn_notfound: true
+                only_geoloc_prefix:
+                  - BR
+                  - US/CA
+                only_asn_number:
+                  - 7326
+                  - 16136
+              metric_groups:
+                disable:
+                  - cardinality
+                  - counters
+                  - top_geo
+                  - top_ips
+        input:
+          input_type: pcap
+          tap_selector:
+            any:
+              - key1: value1
+              - key2: value2
+          filter:
+            bpf: net 192.168.1.0/24
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.0/24
+            pcap_source: libpcap
+            debug: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "handlers": {
             "config": {
-              "deep_sample_rate": 1,
-              "num_periods": 2,
-              "topn_count": 25
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_net": {
+                "type": "net",
+                "config": {
+                  "deep_sample_rate": 1,
+                  "num_periods": 2,
+                  "topn_count": 25
+                },
+                "filter": {
+                  "geoloc_notfound": true,
+                  "asn_notfound": true,
+                  "only_geoloc_prefix": [
+                    "BR",
+                    "US/CA"
+                  ],
+                  "only_asn_number": [
+                    7326,
+                    16136
+                  ]
+                },
+                "metric_groups": {
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "top_geo",
+                    "top_ips"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap_selector": {
+              "any": [
+                {
+                  "key1": "value1"
+                },
+                {
+                  "key2": "value2"
+                }
+              ]
             },
             "filter": {
-              "geoloc_notfound": true,
-              "asn_notfound": true,
-              "only_geoloc_prefix": [
-                "BR",
-                "US/CA"
-              ],
-              "only_asn_number": [
-                7326,
-                16136
-              ]
+              "bpf": "net 192.168.1.0/24"
             },
-            "metric_groups": {
-              "disable": [
-                "cardinality",
-                "counters",
-                "top_geo",
-                "top_ips"
-              ]
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.0/24",
+              "pcap_source": "libpcap",
+              "debug": true
             }
-          }
+          },
+          "kind": "collection"
         }
-      },
-      "input": {
-        "input_type": "pcap",
-        "tap_selector": {
-          "any": [
-            {
-              "key1": "value1"
-            },
-            {
-              "key2": "value2"
-            }
+        ```
+    <br>
+    
+    **Handler Type**: "net" <br>
+    
+    #### Metrics Group <br>
+    
+    | Metric Group  | Default | 
+    |:-------------:|:-------:|
+    | `cardinality` | enabled |
+    |  `counters`   | enabled |
+    |   `top_geo`   | enabled |
+    |   `top_ips`   | enabled |
+    
+    <br>
+    
+    
+    #### Filters <br>
+    
+    |        Filter        |  Type   |    Input     |
+    |:--------------------:|:-------:|:------------:|
+    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
+    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
+    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
+    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
+    
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **only_geoloc_prefix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
+    
+    The `only_geoloc_prefix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_geoloc_prefix: 
+          - array
+        ```
+        Example:
+        ```yaml
+        only_geoloc_prefix:
+          - BR
+          - US/CA
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "array"
           ]
-        },
-        "filter": {
-          "bpf": "net 192.168.1.0/24"
-        },
-        "config": {
-          "iface": "wlo1",
-          "host_spec": "192.168.1.0/24",
-          "pcap_source": "libpcap",
-          "debug": true
         }
-      },
-      "kind": "collection"
-    }
-    ```
-<br>
+        ```
+        Example:
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "BR",
+            "US/CA"
+          ]
+        }
+        ```
+    <br>
+    **only_asn_number:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
+    
+    The `only_asn_number` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_asn_number:
+          - array
+        ```
+        Example:    
+        ```yaml
+        only_asn_number:
+          - 7326
+          - 16136
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_asn_number": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_asn_number": [
+            7326,
+            16136
+          ]
+        }
+        ```
 
-**Handler Type**: "net" <br>
+=== "NET(v2)"
 
-###### Metrics Group <br>
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
+    
+    === "YAML"
+        ```yaml
+        handlers:
+          config:
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_net:
+              type: net
+              config:
+                deep_sample_rate: 1
+                num_periods: 2
+                topn_count: 25
+              filter:
+                geoloc_notfound: true
+                asn_notfound: true
+                only_geoloc_prefix:
+                  - BR
+                  - US/CA
+                only_asn_number:
+                  - 7326
+                  - 16136
+              metric_groups:
+                disable:
+                  - cardinality
+                  - counters
+                  - top_geo
+                  - top_ips
+                  - quantiles
+        input:
+          input_type: pcap
+          tap_selector:
+            any:
+              - key1: value1
+              - key2: value2
+          filter:
+            bpf: net 192.168.1.0/24
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.0/24
+            pcap_source: libpcap
+            debug: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "handlers": {
+            "config": {
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_net": {
+                "type": "net",
+                "config": {
+                  "deep_sample_rate": 1,
+                  "num_periods": 2,
+                  "topn_count": 25
+                },
+                "filter": {
+                  "geoloc_notfound": true,
+                  "asn_notfound": true,
+                  "only_geoloc_prefix": [
+                    "BR",
+                    "US/CA"
+                  ],
+                  "only_asn_number": [
+                    7326,
+                    16136
+                  ]
+                },
+                "metric_groups": {
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "top_geo",
+                    "top_ips",
+                    "quantiles"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap_selector": {
+              "any": [
+                {
+                  "key1": "value1"
+                },
+                {
+                  "key2": "value2"
+                }
+              ]
+            },
+            "filter": {
+              "bpf": "net 192.168.1.0/24"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.0/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "kind": "collection"
+        }
+        ```
+    <br>
+    
+    **Handler Type**: "net" <br>
+    
+    #### Metrics Group <br>
+    
+    | Metric Group  | Default | 
+    |:-------------:|:-------:|
+    | `cardinality` | enabled |
+    |  `counters`   | enabled |
+    |   `top_geo`   | enabled |
+    |   `top_ips`   | enabled |
+    |  `quantiles`  | enabled |
+    
+    <br>
+    
+    
+    #### Filters <br>
+    
+    |        Filter        |  Type   |    Input     |
+    |:--------------------:|:-------:|:------------:|
+    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
+    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
+    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
+    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
+    
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **only_geoloc_prefix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
+    
+    The `only_geoloc_prefix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_geoloc_prefix: 
+          - array
+        ```
+        Example:
+        ```yaml
+        only_geoloc_prefix:
+          - BR
+          - US/CA
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "BR",
+            "US/CA"
+          ]
+        }
+        ```
+    <br>
+    **only_asn_number:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
+    
+    The `only_asn_number` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_asn_number:
+          - array
+        ```
+        Example:    
+        ```yaml
+        only_asn_number:
+          - 7326
+          - 16136
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_asn_number": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_asn_number": [
+            7326,
+            16136
+          ]
+        }
+        ```
 
-| Metric Group  | Default | 
-|:-------------:|:-------:|
-| `cardinality` | enabled |
-|  `counters`   | enabled |
-|   `top_geo`   | enabled |
-|   `top_ips`   | enabled |
-
-<br>
-
-###### Configurations <br>
+#### Configurations <br>
+- recorded_stream: *bool*.
 - Abstract configurations. <br><br>
 
-###### Filters <br>
+**recorded_stream** <br>
 
-|        Filter        |  Type   |    Input     |
-|:--------------------:|:-------:|:------------:|
-|  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
-|    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
-| `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
-|  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
 
-**geoloc_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
-
-The `geoloc_notfound` filter usage syntax is:<br>
+The `recorded_stream` configuration usage syntax is:<br>
 
 === "YAML"
     ```yaml
-    geoloc_notfound: true
+    recorded_stream: true
     ```
+
 === "JSON"
     ```json
     {
-      "geoloc_notfound": true
-    }
-    ```
-<br>
-**asn_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
-
-The `asn_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    asn_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "asn_notfound": true
-    }
-    ```
-<br>
-**only_geoloc_prefix:** *str[]* <br>
-
-Input: PCAP <br>
-
-Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
-
-The `only_geoloc_prefix` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_geoloc_prefix: 
-      - array
-    ```
-    Example:
-    ```yaml
-    only_geoloc_prefix:
-      - BR
-      - US/CA
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_geoloc_prefix": [
-        "array"
-      ]
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_geoloc_prefix": [
-        "BR",
-        "US/CA"
-      ]
-    }
-    ```
-<br>
-**only_asn_number:** *str[]* <br>
-
-Input: PCAP <br>
-
-Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
-
-The `only_asn_number` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_asn_number:
-      - array
-    ```
-    Example:    
-    ```yaml
-    only_asn_number:
-      - 7326
-      - 16136
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_asn_number": [
-        "array"
-      ]
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_asn_number": [
-        7326,
-        16136
-      ]
+      "recorded_stream": true
     }
     ```
 
@@ -1875,14 +2299,14 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "dhcp" <br>
 
-###### Metrics Group 
+#### Metrics Group <br>
 
 - No metrics group available <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
 
@@ -1974,14 +2398,14 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "bgp" <br>
 
-###### Metrics Group 
+#### Metrics Group <br>
 
 - No metrics group available <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
 
@@ -2055,13 +2479,13 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "pcap" <br>
 
-###### Metrics Group
+#### Metrics Group <br>
 - No metrics group available. <br>
 
-###### Configurations
+#### Configurations <br>
 - Abstract configurations. <br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br>
 
 
@@ -2187,7 +2611,7 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "flow" <br>
 
-###### Metrics Group <br>
+#### Metrics Group <br>
 
 |   Metric Group   | Default  | 
 |:----------------:|:--------:|
@@ -2204,11 +2628,11 @@ The `only_asn_number` filter usage syntax is:<br>
 
 <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - sample_rate_scaling: *bool* <br>
 - first_filter_if_as_label: *bool* <br>
 - device_map: *str[]*
-- recorded_stream: #todo<br>
+- recorded_stream: *bool*<br>
 - Abstract configurations. <br><br>
 
 **sample_rate_scaling**
@@ -2267,8 +2691,26 @@ The `device_map` filter usage syntax is:<br>
     }
     ```
 
+**recorded_stream** <br>
 
-###### Filters <br>
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+
+The `recorded_stream` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    recorded_stream: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "recorded_stream": true
+    }
+    ```
+
+
+#### Filters <br>
 
 
 |      Filter       |  Type   | Input |
@@ -2554,7 +2996,7 @@ The `asn_notfound` filter usage syntax is:<br>
 
 **Handler Type**: "netprobe" <br>
 
-###### Metrics Group <br>
+#### Metrics Group <br>
 
 
 | Metric Group | Default  | 
@@ -2564,11 +3006,11 @@ The `asn_notfound` filter usage syntax is:<br>
 | `histograms` | enabled  |
 
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 - In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_configs/#netprobe) the available configurations for netprobe.
 
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
