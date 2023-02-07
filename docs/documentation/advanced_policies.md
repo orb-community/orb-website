@@ -306,89 +306,6 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
       }
     }
     ```
-
-### Abstract Configurations
-
-There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
-
-|   Abstract Configuration    | Type  |     Default      |
-|:---------------------------:|:-----:|:----------------:|
-|     `deep_sample_rate`      | *int* | 100 (per second) |
-|        `num_periods`        | *int* |        5         |
-|        `topn_count`         | *int* |        10        |
- | `topn_percentile_threshold` | *int* |        0         |
-
-
-**deep_sample_rate** <br>
-
-`deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
-!!! Note
-    If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
-
-
-The `deep_sample_rate` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    deep_sample_rate: int
-    ```
-=== "JSON"
-    ```json
-    {
-      "deep_sample_rate": int
-    }
-    ```
-**num_periods** <br>
-
-`num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
-
-The `num_periods` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    num_periods: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "num_periods": int
-    }
-    ```
-
-**topn_count** <br>
-
-`topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
-
-The `topn_count` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    topn_count: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "topn_count": int
-    }
-    ```
-
-**topn_percentile_threshold** <br>
-
-`topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
-The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
-
-The `topn_percentile_threshold` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    topn_percentile_threshold: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "topn_percentile_threshold": int
-    }
-    ```
 <br>
 
 To enable any metric group use the syntax:
@@ -472,7 +389,92 @@ To disable all metric groups use the syntax:
     ```
 
 
-* Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
+* Attention: enable is dominant over disable. So if both are passed, the metric will be enabled;
+
+
+### Abstract Configurations
+
+There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
+
+|   Abstract Configuration    | Type  |     Default      |
+|:---------------------------:|:-----:|:----------------:|
+|     `deep_sample_rate`      | *int* | 100 (per second) |
+|        `num_periods`        | *int* |        5         |
+|        `topn_count`         | *int* |        10        |
+ | `topn_percentile_threshold` | *int* |        0         |
+
+
+**deep_sample_rate** <br>
+
+`deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
+!!! Note
+    If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
+
+
+The `deep_sample_rate` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    deep_sample_rate: int
+    ```
+=== "JSON"
+    ```json
+    {
+      "deep_sample_rate": int
+    }
+    ```
+**num_periods** <br>
+
+`num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
+
+The `num_periods` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    num_periods: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "num_periods": int
+    }
+    ```
+
+**topn_count** <br>
+
+`topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
+
+The `topn_count` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    topn_count: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_count": int
+    }
+    ```
+
+**topn_percentile_threshold** <br>
+
+`topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
+The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
+
+The `topn_percentile_threshold` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    topn_percentile_threshold: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_percentile_threshold": int
+    }
+    ```
+
 
 
 ### DNS Analyzer (dns)
