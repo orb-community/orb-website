@@ -481,7 +481,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
 
 === " DNS(v1)"
     
-    ###### Example of policy with input pcap and handler DNS
+    ###### Example of policy with input pcap and handler DNS(v1)
     
         
     === "YAML"
@@ -1060,7 +1060,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
         Status: `Beta`. The metric names and configuration options may still change
         
-    ###### Example of policy with input pcap and handler DNS
+    ###### Example of policy with input pcap and handler DNS(v2)
         
     === "YAML"
         ``` yaml
@@ -1688,9 +1688,10 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
 
 ### Network (L2-L3) Analyzer (net)
 
-###### Example of policy with input pcap and handler NET
 
 === "NET(v1)"
+
+    ###### Example of policy with input pcap and handler NET(v1)
 
     === "YAML"
         ```yaml
@@ -1944,6 +1945,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     !!! warning
     
         Status: `Beta`. The metric names and configuration options may still change
+
+    ###### Example of policy with input pcap and handler NET(v2)
     
     === "YAML"
         ```yaml
@@ -1955,6 +1958,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
           modules:
             default_net:
               type: net
+              require_version: "2.0"
               config:
                 deep_sample_rate: 1
                 num_periods: 2
@@ -2003,6 +2007,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
             "modules": {
               "default_net": {
                 "type": "net",
+                "require_version": "2.0",
                 "config": {
                   "deep_sample_rate": 1,
                   "num_periods": 2,
