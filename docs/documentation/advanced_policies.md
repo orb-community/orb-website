@@ -265,6 +265,7 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
       modules:
         tap_name:
           type: ...
+          require_version: ...
           config: ...
           filter: ...
           metric_groups:
@@ -289,6 +290,7 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
         "modules": {
           "tap_name": {
             "type": "...",
+            "require_version": "...",
             "config": "...",
             "filter": "...",
             "metric_groups": {
@@ -304,89 +306,6 @@ Handlers are the modules responsible for extracting metrics from inputs. For eac
           }
         }
       }
-    }
-    ```
-
-### Abstract Configurations
-
-There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
-
-|   Abstract Configuration    | Type  |     Default      |
-|:---------------------------:|:-----:|:----------------:|
-|     `deep_sample_rate`      | *int* | 100 (per second) |
-|        `num_periods`        | *int* |        5         |
-|        `topn_count`         | *int* |        10        |
- | `topn_percentile_threshold` | *int* |        0         |
-
-
-**deep_sample_rate** <br>
-
-`deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
-!!! Note
-    If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
-
-
-The `deep_sample_rate` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    deep_sample_rate: int
-    ```
-=== "JSON"
-    ```json
-    {
-      "deep_sample_rate": int
-    }
-    ```
-**num_periods** <br>
-
-`num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
-
-The `num_periods` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    num_periods: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "num_periods": int
-    }
-    ```
-
-**topn_count** <br>
-
-`topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
-
-The `topn_count` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    topn_count: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "topn_count": int
-    }
-    ```
-
-**topn_percentile_threshold** <br>
-
-`topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
-The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
-
-The `topn_percentile_threshold` usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    topn_percentile_threshold: int
-    ```
-=== "JSON"
-    ```json
-    {
-    "topn_percentile_threshold": int
     }
     ```
 <br>
@@ -471,153 +390,1219 @@ To disable all metric groups use the syntax:
     }
     ```
 
+* Attention: enable is dominant over disable. So if both are passed, the metrics group will be enabled;
 
-* Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
+
+### Abstract Configurations
+
+There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
+
+|   Abstract Configuration    | Type  |     Default      |
+|:---------------------------:|:-----:|:----------------:|
+|     `deep_sample_rate`      | *int* | 100 (per second) |
+|        `num_periods`        | *int* |        5         |
+|        `topn_count`         | *int* |        10        |
+ | `topn_percentile_threshold` | *int* |        0         |
+
+
+**deep_sample_rate** <br>
+
+`deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
+!!! Note
+    If a value less than 1 is passed, the `deep_sample_rate` will be 1. If the value passed is more than 100, `deep_sample_rate` will be 100.
+
+
+The `deep_sample_rate` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    deep_sample_rate: int
+    ```
+=== "JSON"
+    ```json
+    {
+      "deep_sample_rate": int
+    }
+    ```
+**num_periods** <br>
+
+`num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
+
+The `num_periods` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    num_periods: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "num_periods": int
+    }
+    ```
+
+**topn_count** <br>
+
+`topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
+
+The `topn_count` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    topn_count: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_count": int
+    }
+    ```
+
+**topn_percentile_threshold** <br>
+
+`topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
+The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
+
+The `topn_percentile_threshold` usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    topn_percentile_threshold: int
+    ```
+=== "JSON"
+    ```json
+    {
+    "topn_percentile_threshold": int
+    }
+    ```
 
 
 ### DNS Analyzer (dns)
 
-###### Example of policy with input pcap and handler DNS
-
-=== "YAML"
-    ``` yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-      modules:
-        default_dns:
-          type: dns
+=== " DNS(v1)"
+    
+    ###### Example of policy with input pcap and handler DNS(v1)
+    
+        
+    === "YAML"
+        ``` yaml
+        handlers:
           config:
-            public_suffix_list: true
-            deep_sample_rate: 50
-            num_periods: 2
-            topn_count: 25
-            topn_percentile_threshold: 10
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_dns:
+              type: dns
+              config:
+                public_suffix_list: true
+                deep_sample_rate: 50
+                num_periods: 2
+                topn_count: 25
+                topn_percentile_threshold: 10
+              filter:
+                only_rcode: 0
+                only_dnssec_response: true
+                answer_count: 1
+                only_qtype: [1, 2]
+                only_qname_suffix: [".google.com", ".orb.live"]
+                geoloc_notfound: false
+                asn_notfound: false
+                dnstap_msg_type: "auth"
+              metric_groups:
+                enable:
+                  - top_ecs
+                  - top_qnames_details
+                disable:
+                  - cardinality
+                  - counters
+                  - dns_transaction
+                  - top_qnames
+                  - top_ports
+        input:
+          input_type: pcap
+          tap: default_pcap
           filter:
-            only_rcode: 0
-            only_dnssec_response: true
-            answer_count: 1
-            only_qtype: [1, 2]
-            only_qname_suffix: [".google.com", ".orb.live"]
-            geoloc_notfound: false
-            asn_notfound: false
-            dnstap_msg_type: "auth"
-          metric_groups:
-            enable:
-              - top_ecs
-              - top_qnames_details
-            disable:
-              - cardinality
-              - counters
-              - dns_transaction
-              - top_qnames
-              - top_ports
-    input:
-      input_type: pcap
-      tap: default_pcap
-      filter:
-        bpf: udp port 53
-      config:
-        iface: wlo1
-        host_spec: 192.168.1.167/24
-        pcap_source: libpcap
-        debug: true
-    config:
-        merge_like_handlers: true
-    kind: collection
-    ```
-
-=== "JSON"
-    ``` json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10
-        },
-        "modules": {
-          "default_dns": {
-            "type": "dns",
+            bpf: udp port 53
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.167/24
+            pcap_source: libpcap
+            debug: true
+        config:
+            merge_like_handlers: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ``` json
+        {
+          "handlers": {
             "config": {
-              "public_suffix_list": true,
-              "deep_sample_rate": 50,
-              "num_periods": 2,
-              "topn_count": 25,
-              "topn_percentile_threshold": 10
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
             },
-            "filter": {
-              "only_rcode": 0,
-              "only_dnssec_response": true,
-              "answer_count": 1,
-              "only_qtype": [
-                1,
-                2
-              ],
-              "only_qname_suffix": [
-                ".google.com",
-                ".orb.live"
-              ],
-              "geoloc_notfound": false,
-              "asn_notfound": false,
-              "dnstap_msg_type": "auth"
-            },
-            "metric_groups": {
-              "enable": [
-                "top_ecs",
-                "top_qnames_details"
-              ],
-              "disable": [
-                "cardinality",
-                "counters",
-                "dns_transaction",
-                "top_qnames",
-                "top_ports"
-              ]
+            "modules": {
+              "default_dns": {
+                "type": "dns",
+                "config": {
+                  "public_suffix_list": true,
+                  "deep_sample_rate": 50,
+                  "num_periods": 2,
+                  "topn_count": 25,
+                  "topn_percentile_threshold": 10
+                },
+                "filter": {
+                  "only_rcode": 0,
+                  "only_dnssec_response": true,
+                  "answer_count": 1,
+                  "only_qtype": [
+                    1,
+                    2
+                  ],
+                  "only_qname_suffix": [
+                    ".google.com",
+                    ".orb.live"
+                  ],
+                  "geoloc_notfound": false,
+                  "asn_notfound": false,
+                  "dnstap_msg_type": "auth"
+                },
+                "metric_groups": {
+                  "enable": [
+                    "top_ecs",
+                    "top_qnames_details"
+                  ],
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "dns_transaction",
+                    "top_qnames",
+                    "top_ports"
+                  ]
+                }
+              }
             }
-          }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap": "default_pcap",
+            "filter": {
+              "bpf": "udp port 53"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.167/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "config": {
+            "merge_like_handlers": true
+          },
+          "kind": "collection"
         }
-      },
-      "input": {
-        "input_type": "pcap",
-        "tap": "default_pcap",
-        "filter": {
-          "bpf": "udp port 53"
-        },
-        "config": {
-          "iface": "wlo1",
-          "host_spec": "192.168.1.167/24",
-          "pcap_source": "libpcap",
-          "debug": true
+        ```
+    
+    **Handler Type**: "dns" <br>
+    
+    #### Metrics Group <br>
+        
+    |     Metric Group     | Default  |
+    |:--------------------:|:--------:|
+    |      `top_ecs`       | disabled |
+    | `top_qnames_details` | disabled |
+    |    `cardinality`     | enabled  |
+    |      `counters`      | enabled  |
+    |  `dns_transaction`   | enabled  |
+    |     `top_qnames`     | enabled  |
+    |     `top_ports`      | enabled  |
+
+    
+    #### Filters <br>
+    
+            
+    |         Filter         |  Type   | Input  |
+    |:----------------------:|:-------:|:------:|
+    |      `only_rcode`      |  *int*  |  PCAP  |
+    |   `exclude_noerror`    | *bool*  |  PCAP  |
+    | `only_dnssec_response` | *bool*  |  PCAP  |
+    |     `answer_count`     |  *int*  |  PCAP  |
+    |      `only_qtype`      | *str[]* |  PCAP  |
+    |      `only_qname`      | *str[]* |  PCAP  |
+    |  `only_qname_suffix`   | *str[]* |  PCAP  |
+    |   `geoloc_notfound`    | *bool*  |  PCAP  |
+    |     `asn_notfound`     | *bool*  |  PCAP  |
+    |     `only_queries`     | *bool*  |  PCAP  |
+    |    `only_responses`    | *bool*  |  PCAP  |
+    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    
+    
+    **only_rcode:** *int*. <br>
+    
+    Input: PCAP <br>
+    
+    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+    
+    | DNS Return Code | DNS Return Message |                     Description                     |
+    |:---------------:|:------------------:|:---------------------------------------------------:|
+    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
+    |       `1`       |      FORMERR       |               DNS Query Format Error                |
+    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
+    |       `4`       |       NOTIMP       |              Function not implemented               |
+    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
+    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
+    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
+    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
+    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
+    |      `10`       |      NOTZONE       |             Name not contained in zone              |
+    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
+    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
+    |      `17`       |       BADKEY       |                 Key not recognized                  |
+    |      `18`       |      BADTIME       |            Signature out of time window             |
+    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
+    |      `20`       |      BADNAME       |                 Duplicate key name                  |
+    |      `21`       |       BADALG       |               Algorithm not supported               |
+    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
+    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
+    
+    The `only_rcode` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_rcode: int
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "only_rcode": int
         }
-      },
-      "config": {
-        "merge_like_handlers": true
-      },
-      "kind": "collection"
-    }
-    ```
-<br>
+        ```
+    with the `int` referring to the return code to be filtered. <br>
+    
+    Example: <br>
+    If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
+    === "YAML"
+        ```yaml
+        only_rcode: 0
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_rcode": 0
+        }
+        ```
+    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    
+    **exclude_noerror:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
+    The `exclude_noerror` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        exclude_noerror: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "exclude_noerror": true
+        }
+        ```
+    
+    Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
+    
+    **only_dnssec_response:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
+    To filter only responses signed by an authorized sender, use:
+    The `only_dnssec_response` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_dnssec_response: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_dnssec_response": true
+        }
+        ```
+    <br>
+    **answer_count:** *int* <br>
+    
+    Input: PCAP <br>
+    
+    One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
+    The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
+    
+    The `answer_count` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        answer_count: int
+        ```
+    === "JSON"
+        ```json
+        {
+          "answer_count": int
+        }
+        ```
+    
+    with the `int` referring to the desired amount of answer. <br>
+    Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
+    As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
+    
+    
+    A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
+    In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
+    
+    
+    Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
+    
+    **only_qtype:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
+    
+    The `only_qtype` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype: 
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "array"
+          ]
+        }
+        ```
+    If you want to filter only IPV4 record types, for example, you should use: <br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "A"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1
+          ]
+        }
+        ```
+    Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+          - 2
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1,
+            2,
+            "A"
+          ]
+        }
+        ```
+    <br>
 
-**Handler Type**: "dns" <br>
+    **only_qname:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname` filters dns packets based on queries and responses whose names exactly matches the strings present in the array. <br>
+    The `only_qname` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+     
+    === "YAML"
+        ```yaml
+        only_qname:
+          - www.google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "www.google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
 
-###### Metrics Group <br>
+    **only_qname_suffix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
+    The `only_qname_suffix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - .google.com
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            ".google.com"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
+    The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    The `asn_notfound` filter only keeps responses whose asn were not found. <br>
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
 
-|     Metric Group     | Default  | 
-|:--------------------:|:--------:|
-|      `top_ecs`       | disabled |
-| `top_qnames_details` | disabled |
-|    `cardinality`     | enabled  |
-|      `counters`      | enabled  |
-|  `dns_transaction`   | enabled  |
-|     `top_qnames`     | enabled  |
- |     `top_ports`      | enabled  |
+
+    **only_queries:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_queries` filters out all dns response packets and its usage syntax is:<br>
+
+    
+    === "YAML"
+        ```yaml
+        only_queries: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_queries": true
+        }
+        ```
+    <br>
 
 
-###### Configurations
-- public_suffix_list: *bool*. <br>
+
+    **only_responses:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_responses` filters out all dns queries packets and its usage syntax is: <br>
+    
+    === "YAML"
+        ```yaml
+        only_responses: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_responses": true
+        }
+        ```
+    <br>
+
+
+    **dnstap_msg_type:** *str* <br>
+    
+    Input: DNSTAP <br>
+    
+    With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
+    Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
+    
+    The `dnstap_msg_type` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        dnstap_msg_type: str
+        ```
+        Example:
+        ```yaml
+        dnstap_msg_type: auth
+        ```
+    === "JSON"
+        ```json
+        {
+          "dnstap_msg_type": "str"
+        }
+        ```
+        Example:
+        ```json
+        {
+          "dnstap_msg_type": "auth"
+        }
+        ```
+    <br>
+
+=== " DNS(v2)"
+
+
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
+        
+    ###### Example of policy with input pcap and handler DNS(v2)
+        
+    === "YAML"
+        ``` yaml
+        handlers:
+          config:
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_dns:
+              type: dns
+              require_version: "2.0"
+              config:
+                public_suffix_list: true
+                deep_sample_rate: 50
+                num_periods: 2
+                topn_count: 25
+                topn_percentile_threshold: 10
+              filter:
+                only_rcode: 0
+                only_dnssec_response: true
+                answer_count: 1
+                only_qtype: [1, 2]
+                only_qname_suffix: [".google.com", ".orb.live"]
+                geoloc_notfound: false
+                asn_notfound: false
+                dnstap_msg_type: "auth"
+              metric_groups:
+                enable:
+                  - cardinality
+                  - counters
+                  - quantiles
+                  - top_rcodes
+                  - top_qnames
+                  - top_qtypes
+                disable:
+                  - top_size
+                  - top_ports
+                  - xact_times
+                  - top_ecs
+        input:
+          input_type: pcap
+          tap: default_pcap
+          filter:
+            bpf: udp port 53
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.167/24
+            pcap_source: libpcap
+            debug: true
+        config:
+            merge_like_handlers: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ``` json
+        {
+          "handlers": {
+            "config": {
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_dns": {
+                "type": "dns",
+                "require_version": "2.0",
+                "config": {
+                  "public_suffix_list": true,
+                  "deep_sample_rate": 50,
+                  "num_periods": 2,
+                  "topn_count": 25,
+                  "topn_percentile_threshold": 10
+                },
+                "filter": {
+                  "only_rcode": 0,
+                  "only_dnssec_response": true,
+                  "answer_count": 1,
+                  "only_qtype": [
+                    1,
+                    2
+                  ],
+                  "only_qname_suffix": [
+                    ".google.com",
+                    ".orb.live"
+                  ],
+                  "geoloc_notfound": false,
+                  "asn_notfound": false,
+                  "dnstap_msg_type": "auth"
+                },
+                "metric_groups": {
+                  "enable": [
+                    "cardinality",
+                    "counters",
+                    "quantiles",
+                    "top_rcodes",
+                    "top_qnames",
+                    "top_qtypes"
+                  ],
+                  "disable": [
+                    "top_size",
+                    "top_ports",
+                    "xact_times",
+                    "top_ecs"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap": "default_pcap",
+            "filter": {
+              "bpf": "udp port 53"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.167/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "config": {
+            "merge_like_handlers": true
+          },
+          "kind": "collection"
+        }
+        ```
+    <br>
+    
+    **Handler Type**: "dns" <br>
+    
+    #### Metrics Group <br>
+    
+    | Metric Group  | Default  |
+    |:-------------:|:--------:|
+    |   `top_ecs`   | disabled |
+    |  `top_ports`  | disabled |
+    |  `top_size`   | disabled |
+    | `xact_times`  | disabled |
+    | `cardinality` | enabled  |
+    |  `counters`   | enabled  |
+    | `top_qnames`  | enabled  |
+    |  `quantiles`  | enabled  |
+    | `top_qtypes`  | enabled  |
+    | `top_rcodes`  | enabled  |
+    
+
+    
+    #### Filters <br>
+    
+    
+    |         Filter         |  Type   | Input  |
+    |:----------------------:|:-------:|:------:|
+    |      `only_rcode`      |  *int*  |  PCAP  |
+    |   `exclude_noerror`    | *bool*  |  PCAP  |
+    | `only_dnssec_response` | *bool*  |  PCAP  |
+    |     `answer_count`     |  *int*  |  PCAP  |
+    |      `only_qtype`      | *str[]* |  PCAP  |
+    |      `only_qname`      | *str[]* | PCAP |
+    |  `only_qname_suffix`   | *str[]* |  PCAP  |
+    |   `geoloc_notfound`    | *bool*  |  PCAP  |
+    |     `asn_notfound`     | *bool*  |  PCAP  |
+    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    
+    
+    **only_rcode:** *int*. <br>
+    
+    Input: PCAP <br>
+    
+    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+    
+    | DNS Return Code | DNS Return Message |                     Description                     |
+    |:---------------:|:------------------:|:---------------------------------------------------:|
+    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
+    |       `1`       |      FORMERR       |               DNS Query Format Error                |
+    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
+    |       `4`       |       NOTIMP       |              Function not implemented               |
+    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
+    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
+    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
+    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
+    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
+    |      `10`       |      NOTZONE       |             Name not contained in zone              |
+    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
+    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
+    |      `17`       |       BADKEY       |                 Key not recognized                  |
+    |      `18`       |      BADTIME       |            Signature out of time window             |
+    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
+    |      `20`       |      BADNAME       |                 Duplicate key name                  |
+    |      `21`       |       BADALG       |               Algorithm not supported               |
+    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
+    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
+    
+    The `only_rcode` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_rcode: int
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "only_rcode": int
+        }
+        ```
+    with the `int` referring to the return code to be filtered. <br>
+    
+    Example: <br>
+    If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
+    === "YAML"
+        ```yaml
+        only_rcode: 0
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_rcode": 0
+        }
+        ```
+    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    
+    **exclude_noerror:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
+    The `exclude_noerror` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        exclude_noerror: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "exclude_noerror": true
+        }
+        ```
+    
+    Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
+    
+    **only_dnssec_response:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
+    To filter only responses signed by an authorized sender, use:
+    The `only_dnssec_response` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_dnssec_response: true
+        ```
+    
+    === "JSON"
+        ```json
+        {
+        "only_dnssec_response": true
+        }
+        ```
+    <br>
+    **answer_count:** *int* <br>
+    
+    Input: PCAP <br>
+    
+    One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
+    The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
+    
+    The `answer_count` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        answer_count: int
+        ```
+    === "JSON"
+        ```json
+        {
+          "answer_count": int
+        }
+        ```
+    
+    with the `int` referring to the desired amount of answer. <br>
+    Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
+    As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
+    
+    
+    A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
+    In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
+    
+    
+    Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
+    
+    **only_qtype:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
+    
+    The `only_qtype` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype: 
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "array"
+          ]
+        }
+        ```
+    If you want to filter only IPV4 record types, for example, you should use: <br>
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            "A"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1
+          ]
+        }
+        ```
+    Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
+    
+    === "YAML"
+        ```yaml
+        only_qtype:
+          - 1
+          - 2
+          - "A"
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qtype": [
+            1,
+            2,
+            "A"
+          ]
+        }
+        ```
+    <br>
+
+    **only_qname:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname` filters dns packets based on queries and responses whose names exactly matches the strings present in the array. <br>
+    The `only_qname` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+     
+    === "YAML"
+        ```yaml
+        only_qname:
+          - www.google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname": [
+            "www.google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+
+    **only_qname_suffix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    
+    The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
+    The `only_qname_suffix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - array
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "array"
+          ]
+        }
+        ```
+    Examples:
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - .google.com
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            ".google.com"
+          ]
+        }
+        ```
+    or
+    
+    === "YAML"
+        ```yaml
+        only_qname_suffix:
+          - google.com
+          - .nsone.net
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_qname_suffix": [
+            "google.com",
+            ".nsone.net"
+          ]
+        }
+        ```
+    <br>
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
+    The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    
+    Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    The `asn_notfound` filter only keeps responses whose asn were not found. <br>
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **dnstap_msg_type:** *str* <br>
+    
+    Input: DNSTAP <br>
+    
+    With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
+    Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
+    
+    The `dnstap_msg_type` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        dnstap_msg_type: str
+        ```
+        Example:
+        ```yaml
+        dnstap_msg_type: auth
+        ```
+    === "JSON"
+        ```json
+        {
+          "dnstap_msg_type": "str"
+        }
+        ```
+        Example:
+        ```json
+        {
+          "dnstap_msg_type": "auth"
+        }
+        ```
+    <br>
+
+#### Configurations <br>
+- public_suffix_list: *bool*.
+- recorded_stream: *bool*. 
+- xact_ttl_secs: *int*.
+- xact_ttl_ms: *int*.
 - Abstract configurations. <br><br>
 
 **public_suffix_list** <br>
@@ -633,7 +1618,7 @@ The list of suffixes considered public can be accessed [here](https://github.com
 | `other.example.qname.co.uk` |      co.uk      |   qname.co.uk   |     qname.co.uk      | example.qname.co.uk  |
 
 
-The `public_suffix_list` filter usage syntax is:<br>
+The `public_suffix_list` configuration usage syntax is:<br>
 
 === "YAML"
     ```yaml
@@ -647,600 +1632,593 @@ The `public_suffix_list` filter usage syntax is:<br>
     }
     ```
 
-###### Filters <br>
+**recorded_stream** <br>
 
-|         Filter         |  Type   | Input  |
-|:----------------------:|:-------:|:------:|
-|      `only_rcode`      |  *int*  |  PCAP  |
-|   `exclude_noerror`    | *bool*  |  PCAP  |
-| `only_dnssec_response` | *bool*  |  PCAP  |
-|     `answer_count`     |  *int*  |  PCAP  |
-|      `only_qtype`      | *str[]* |  PCAP  |
-|  `only_qname_suffix`   | *str[]* |  PCAP  |
-|   `geoloc_notfound`    | *bool*  |  PCAP  |
-|     `asn_notfound`     | *bool*  |  PCAP  |
-|   `dnstap_msg_type`    |  *str*  | DNSTAP |
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
 
-
-
-**only_rcode:** *int*. <br>
-
-Input: PCAP <br>
-
-When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
-Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
-There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
-
-| DNS Return Code | DNS Return Message |                     Description                     |
-|:---------------:|:------------------:|:---------------------------------------------------:|
-|       `0`       |      NOERROR       |          DNS Query completed successfully           |
-|       `1`       |      FORMERR       |               DNS Query Format Error                |
-|       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
-|       `3`       |      NXDOMAIN      |             Domain name does not exist              |
-|       `4`       |       NOTIMP       |              Function not implemented               |
-|       `5`       |      REFUSED       |     The server refused to answer for the query      |
-|       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
-|       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
-|       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
-|       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
-|      `10`       |      NOTZONE       |             Name not contained in zone              |
-|      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
-|      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
-|      `17`       |       BADKEY       |                 Key not recognized                  |
-|      `18`       |      BADTIME       |            Signature out of time window             |
-|      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
-|      `20`       |      BADNAME       |                 Duplicate key name                  |
-|      `21`       |       BADALG       |               Algorithm not supported               |
-|      `22`       |      BADTRUNC      |                   Bad Truncation                    |
-|      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
-
-The `only_rcode` filter usage syntax is:<br>
+The `recorded_stream` configuration usage syntax is:<br>
 
 === "YAML"
     ```yaml
-    only_rcode: int
+    recorded_stream: true
     ```
 
 === "JSON"
     ```json
     {
-      "only_rcode": int
+      "recorded_stream": true
     }
     ```
-with the `int` referring to the return code to be filtered. <br>
 
-Example: <br>
-If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
+**xact_ttl_ms** OR **xact_ttl_secs** <br>
+
+Both configurations have the same functionality, that is, defines the time to live of transactions, and only change the unit of measurement to be configured. This configuration causes the metrics to be generated for complete transactions (query and response) within the established time limit.<br>
+> - xact_ttl_ms: Defines the time to live of transactions in milliseconds.
+ - xact_ttl_secs: Defines the time to live of transactions in seconds. <br>
+
+Note that `xact_ttl_ms` is dominant over `xact_ttl_secs`, that is, if `xact_ttl_ms` exists, even if `xact_ttl_secs` also exists, the value of `xact_ttl_ms` will be considered.
+
+The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
+
 === "YAML"
     ```yaml
-    only_rcode: 0
+    xact_ttl_ms: 5000
+    ```
+
+    or
+
+    ```yaml
+    xact_ttl_secs: 5
     ```
 
 === "JSON"
     ```json
     {
-    "only_rcode": 0
+      "xact_ttl_ms": 5000
     }
     ```
-Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
 
-**exclude_noerror:** *bool* <br>
+    or
 
-Input: PCAP <br>
-
-You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
-The `exclude_noerror` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    exclude_noerror: true
-    ```
-
-=== "JSON"
     ```json
     {
-      "exclude_noerror": true
+      "xact_ttl_secs": 5
     }
     ```
-
-Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
-
-**only_dnssec_response:** *bool* <br>
-
-Input: PCAP <br>
-
-When you make a DNS query, the response you get may have a DNSSEC signature, which authenticates that DNS records originate from an authorized sender, thus protecting DNS from falsified information. <br>
-To filter only responses signed by an authorized sender, use:
-The `only_dnssec_response` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_dnssec_response: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-    "only_dnssec_response": true
-    }
-    ```
-<br>
-**answer_count:** *int* <br>
-
-Input: PCAP <br>
-
-One of the properties present in the query message structure is `Answer RRs`, which is the count of entries in the responses section (RR stands for “resource record”). <br>
-The number of answers in the query is always zero, as a query message has only questions and no answers, and when the server sends the answer to that query, the value is set to the amount of entries in the answers section. <br>
-
-The `answer_count` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    answer_count: int
-    ```
-=== "JSON"
-    ```json
-    {
-      "answer_count": int
-    }
-    ```
-
-with the `int` referring to the desired amount of answer. <br>
-Note that any value greater than zero that is defined will exclude queries from the results, since in queries the number of answers is always 0. <br>
-As the answers count of queries is 0, whenever the value set for the answer_count is 0, both queries and responses will compose the result. <br>
-
-
-A special case is the concept of `NODATA`, which is one of the possible returns to a query made to a DNS server is known as. This happens when the query is successful (so rcode:0), but there is no data as a response, so the number of answers is 0. <br>
-In this case, to have in the results only the cases of `NODATA`, that is, the responses, the filter must be used together with the filter `exclude_noerror`.
-
-
-Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
-
-**only_qtype:** *str[]* <br>
-
-Input: PCAP <br>
-
-DNS record types are records that provide important information about a hostname or domain. Supported default types can be seen [here](https://github.com/orb-community/pktvisor/blob/develop/libs/visor_dns/dns.h#L30). <br>
-
-The `only_qtype` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_qtype: 
-      - array
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        "array"
-      ]
-    }
-    ```
-If you want to filter only IPV4 record types, for example, you should use: <br>
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - "A"
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        "A"
-      ]
-    }
-    ```
-or
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - 1
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        1
-      ]
-    }
-    ```
-Multiple types are also supported and both queries and responses that have any of the values in the array will be considered.
-
-=== "YAML"
-    ```yaml
-    only_qtype:
-      - 1
-      - 2
-      - "A"
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qtype": [
-        1,
-        2,
-        "A"
-      ]
-    }
-    ```
-**only_qname_suffix:** *str[]* <br>
-
-Input: PCAP <br>
-
-
-The `only_qname_suffix` filters queries and responses whose endings (suffixes) of the names match the strings present in the array. <br>
-The `only_qname_suffix` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - array
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        "array"
-      ]
-    }
-    ```
-Examples:
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - .google.com
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        ".google.com"
-      ]
-    }
-    ```
-or
-
-=== "YAML"
-    ```yaml
-    only_qname_suffix:
-      - google.com
-      - .nsone.net
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_qname_suffix": [
-        "google.com",
-        ".nsone.net"
-      ]
-    }
-    ```
-<br>
-**geoloc_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-
-Based on ECS (EDNS Client Subnet) information, it is possible to determine the geolocation of where the query is being made. When the Subnet refers to a region found in the standard databases, the city, state and country (approximated) are returned. However, when based on the subnet it is not possible to determine the geolocation, a `not found` is returned. <br>
-The `geoloc_notfound` filter only keeps responses whose geolocations were not found. <br>
-The `geoloc_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    geoloc_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "geoloc_notfound": true
-    }
-    ```
-<br>
-**asn_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-
-Based on ECS (EDNS Client Subnet) information, it is possible to determine the ASN (Autonomous System Number). When the IP of the subnet belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
-The `asn_notfound` filter only keeps responses whose asn were not found. <br>
-The `asn_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    asn_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "asn_notfound": true
-    }
-    ```
-<br>
-**dnstap_msg_type:** *str* <br>
-
-Input: DNSTAP <br>
-
-With a dnstap protocol it is possible to know the type of message that must be resolved in the request to the server. This filter therefore allows you to filter by response types.
-Supported message types are: `auth`, `resolver`, `client`, `forwarder`, `stub`, `tool` and `update`.
-
-The `dnstap_msg_type` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    dnstap_msg_type: str
-    ```
-    Example:
-    ```yaml
-    dnstap_msg_type: auth
-    ```
-=== "JSON"
-    ```json
-    {
-      "dnstap_msg_type": "str"
-    }
-    ```
-    Example:
-    ```json
-    {
-      "dnstap_msg_type": "auth"
-    }
-    ```
-<br>
 
 ### Network (L2-L3) Analyzer (net)
 
-###### Example of policy with input pcap and handler NET
 
-=== "YAML"
-    ```yaml
-    handlers:
-      config:
-        deep_sample_rate: 100
-        num_periods: 5
-        topn_count: 10
-      modules:
-        default_net:
-          type: net
+=== "NET(v1)"
+
+    ###### Example of policy with input pcap and handler NET(v1)
+
+    === "YAML"
+        ```yaml
+        handlers:
           config:
-            deep_sample_rate: 1
-            num_periods: 2
-            topn_count: 25
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_net:
+              type: net
+              config:
+                deep_sample_rate: 1
+                num_periods: 2
+                topn_count: 25
+              filter:
+                geoloc_notfound: true
+                asn_notfound: true
+                only_geoloc_prefix:
+                  - BR
+                  - US/CA
+                only_asn_number:
+                  - 7326
+                  - 16136
+              metric_groups:
+                disable:
+                  - cardinality
+                  - counters
+                  - top_geo
+                  - top_ips
+        input:
+          input_type: pcap
+          tap_selector:
+            any:
+              - key1: value1
+              - key2: value2
           filter:
-            geoloc_notfound: true
-            asn_notfound: true
-            only_geoloc_prefix:
-              - BR
-              - US/CA
-            only_asn_number:
-              - 7326
-              - 16136
-          metric_groups:
-            disable:
-              - cardinality
-              - counters
-              - top_geo
-              - top_ips
-    input:
-      input_type: pcap
-      tap_selector:
-        any:
-          - key1: value1
-          - key2: value2
-      filter:
-        bpf: net 192.168.1.0/24
-      config:
-        iface: wlo1
-        host_spec: 192.168.1.0/24
-        pcap_source: libpcap
-        debug: true
-    kind: collection
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "handlers": {
-        "config": {
-          "deep_sample_rate": 100,
-          "num_periods": 5,
-          "topn_count": 10
-        },
-        "modules": {
-          "default_net": {
-            "type": "net",
+            bpf: net 192.168.1.0/24
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.0/24
+            pcap_source: libpcap
+            debug: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "handlers": {
             "config": {
-              "deep_sample_rate": 1,
-              "num_periods": 2,
-              "topn_count": 25
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_net": {
+                "type": "net",
+                "config": {
+                  "deep_sample_rate": 1,
+                  "num_periods": 2,
+                  "topn_count": 25
+                },
+                "filter": {
+                  "geoloc_notfound": true,
+                  "asn_notfound": true,
+                  "only_geoloc_prefix": [
+                    "BR",
+                    "US/CA"
+                  ],
+                  "only_asn_number": [
+                    7326,
+                    16136
+                  ]
+                },
+                "metric_groups": {
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "top_geo",
+                    "top_ips"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap_selector": {
+              "any": [
+                {
+                  "key1": "value1"
+                },
+                {
+                  "key2": "value2"
+                }
+              ]
             },
             "filter": {
-              "geoloc_notfound": true,
-              "asn_notfound": true,
-              "only_geoloc_prefix": [
-                "BR",
-                "US/CA"
-              ],
-              "only_asn_number": [
-                7326,
-                16136
-              ]
+              "bpf": "net 192.168.1.0/24"
             },
-            "metric_groups": {
-              "disable": [
-                "cardinality",
-                "counters",
-                "top_geo",
-                "top_ips"
-              ]
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.0/24",
+              "pcap_source": "libpcap",
+              "debug": true
             }
-          }
+          },
+          "kind": "collection"
         }
-      },
-      "input": {
-        "input_type": "pcap",
-        "tap_selector": {
-          "any": [
-            {
-              "key1": "value1"
-            },
-            {
-              "key2": "value2"
-            }
+        ```
+    <br>
+    
+    **Handler Type**: "net" <br>
+    
+    #### Metrics Group <br>
+    
+    | Metric Group  | Default | 
+    |:-------------:|:-------:|
+    | `cardinality` | enabled |
+    |  `counters`   | enabled |
+    |   `top_geo`   | enabled |
+    |   `top_ips`   | enabled |
+    
+    <br>
+    
+    
+    #### Filters <br>
+    
+    |        Filter        |  Type   |    Input     |
+    |:--------------------:|:-------:|:------------:|
+    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
+    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
+    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
+    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
+    
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **only_geoloc_prefix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
+    
+    The `only_geoloc_prefix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_geoloc_prefix: 
+          - array
+        ```
+        Example:
+        ```yaml
+        only_geoloc_prefix:
+          - BR
+          - US/CA
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "array"
           ]
-        },
-        "filter": {
-          "bpf": "net 192.168.1.0/24"
-        },
-        "config": {
-          "iface": "wlo1",
-          "host_spec": "192.168.1.0/24",
-          "pcap_source": "libpcap",
-          "debug": true
         }
-      },
-      "kind": "collection"
-    }
-    ```
-<br>
+        ```
+        Example:
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "BR",
+            "US/CA"
+          ]
+        }
+        ```
+    <br>
+    **only_asn_number:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
+    
+    The `only_asn_number` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_asn_number:
+          - array
+        ```
+        Example:    
+        ```yaml
+        only_asn_number:
+          - 7326
+          - 16136
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_asn_number": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_asn_number": [
+            7326,
+            16136
+          ]
+        }
+        ```
 
-**Handler Type**: "net" <br>
+=== "NET(v2)"
 
-###### Metrics Group <br>
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
 
-| Metric Group  | Default | 
-|:-------------:|:-------:|
-| `cardinality` | enabled |
-|  `counters`   | enabled |
-|   `top_geo`   | enabled |
-|   `top_ips`   | enabled |
+    ###### Example of policy with input pcap and handler NET(v2)
+    
+    === "YAML"
+        ```yaml
+        handlers:
+          config:
+            deep_sample_rate: 100
+            num_periods: 5
+            topn_count: 10
+          modules:
+            default_net:
+              type: net
+              require_version: "2.0"
+              config:
+                deep_sample_rate: 1
+                num_periods: 2
+                topn_count: 25
+              filter:
+                geoloc_notfound: true
+                asn_notfound: true
+                only_geoloc_prefix:
+                  - BR
+                  - US/CA
+                only_asn_number:
+                  - 7326
+                  - 16136
+              metric_groups:
+                disable:
+                  - cardinality
+                  - counters
+                  - top_geo
+                  - top_ips
+                  - quantiles
+        input:
+          input_type: pcap
+          tap_selector:
+            any:
+              - key1: value1
+              - key2: value2
+          filter:
+            bpf: net 192.168.1.0/24
+          config:
+            iface: wlo1
+            host_spec: 192.168.1.0/24
+            pcap_source: libpcap
+            debug: true
+        kind: collection
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "handlers": {
+            "config": {
+              "deep_sample_rate": 100,
+              "num_periods": 5,
+              "topn_count": 10
+            },
+            "modules": {
+              "default_net": {
+                "type": "net",
+                "require_version": "2.0",
+                "config": {
+                  "deep_sample_rate": 1,
+                  "num_periods": 2,
+                  "topn_count": 25
+                },
+                "filter": {
+                  "geoloc_notfound": true,
+                  "asn_notfound": true,
+                  "only_geoloc_prefix": [
+                    "BR",
+                    "US/CA"
+                  ],
+                  "only_asn_number": [
+                    7326,
+                    16136
+                  ]
+                },
+                "metric_groups": {
+                  "disable": [
+                    "cardinality",
+                    "counters",
+                    "top_geo",
+                    "top_ips",
+                    "quantiles"
+                  ]
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "pcap",
+            "tap_selector": {
+              "any": [
+                {
+                  "key1": "value1"
+                },
+                {
+                  "key2": "value2"
+                }
+              ]
+            },
+            "filter": {
+              "bpf": "net 192.168.1.0/24"
+            },
+            "config": {
+              "iface": "wlo1",
+              "host_spec": "192.168.1.0/24",
+              "pcap_source": "libpcap",
+              "debug": true
+            }
+          },
+          "kind": "collection"
+        }
+        ```
+    <br>
+    
+    **Handler Type**: "net" <br>
+    
+    #### Metrics Group <br>
+    
+    | Metric Group  | Default | 
+    |:-------------:|:-------:|
+    | `cardinality` | enabled |
+    |  `counters`   | enabled |
+    |   `top_geo`   | enabled |
+    |   `top_ips`   | enabled |
+    |  `quantiles`  | enabled |
+    
+    <br>
+    
+    
+    #### Filters <br>
+    
+    |        Filter        |  Type   |    Input     |
+    |:--------------------:|:-------:|:------------:|
+    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
+    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
+    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
+    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    
+    **geoloc_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
+    
+    The `geoloc_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        geoloc_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "geoloc_notfound": true
+        }
+        ```
+    <br>
+    **asn_notfound:** *bool* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
+    
+    The `asn_notfound` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        asn_notfound: true
+        ```
+    === "JSON"
+        ```json
+        {
+          "asn_notfound": true
+        }
+        ```
+    <br>
+    **only_geoloc_prefix:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
+    
+    The `only_geoloc_prefix` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_geoloc_prefix: 
+          - array
+        ```
+        Example:
+        ```yaml
+        only_geoloc_prefix:
+          - BR
+          - US/CA
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_geoloc_prefix": [
+            "BR",
+            "US/CA"
+          ]
+        }
+        ```
+    <br>
+    **only_asn_number:** *str[]* <br>
+    
+    Input: PCAP <br>
+    
+    Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
+    
+    The `only_asn_number` filter usage syntax is:<br>
+    
+    === "YAML"
+        ```yaml
+        only_asn_number:
+          - array
+        ```
+        Example:    
+        ```yaml
+        only_asn_number:
+          - 7326
+          - 16136
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_asn_number": [
+            "array"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_asn_number": [
+            7326,
+            16136
+          ]
+        }
+        ```
 
-<br>
-
-###### Configurations <br>
+#### Configurations <br>
+- recorded_stream: *bool*.
 - Abstract configurations. <br><br>
 
-###### Filters <br>
+**recorded_stream** <br>
 
-|        Filter        |  Type   |    Input     |
-|:--------------------:|:-------:|:------------:|
-|  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
-|    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
-| `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
-|  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
 
-**geoloc_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-The source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. When the IPs refer to a region found in the standard databases, the city, state and country (approximated) are returned. However, when it is not possible to determine the IP geolocation, a `not found` is returned. <br>
-
-The `geoloc_notfound` filter usage syntax is:<br>
+The `recorded_stream` configuration usage syntax is:<br>
 
 === "YAML"
     ```yaml
-    geoloc_notfound: true
+    recorded_stream: true
     ```
+
 === "JSON"
     ```json
     {
-      "geoloc_notfound": true
-    }
-    ```
-<br>
-**asn_notfound:** *bool* <br>
-
-Input: PCAP <br>
-
-Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). When the IP of the source or destination belongs to some not known ASN in the standard databases, a `not found` is returned. <br>
-
-The `asn_notfound` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    asn_notfound: true
-    ```
-=== "JSON"
-    ```json
-    {
-      "asn_notfound": true
-    }
-    ```
-<br>
-**only_geoloc_prefix:** *str[]* <br>
-
-Input: PCAP <br>
-
-Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
-
-The `only_geoloc_prefix` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_geoloc_prefix: 
-      - array
-    ```
-    Example:
-    ```yaml
-    only_geoloc_prefix:
-      - BR
-      - US/CA
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_geoloc_prefix": [
-        "array"
-      ]
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_geoloc_prefix": [
-        "BR",
-        "US/CA"
-      ]
-    }
-    ```
-<br>
-**only_asn_number:** *str[]* <br>
-
-Input: PCAP <br>
-
-Based on source and destination IP, it is possible to determine the ASN (Autonomous System Number). In this way it is possible to filter the data considering a specific ASN using the filter `only_asn_number`. <br>
-
-The `only_asn_number` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_asn_number:
-      - array
-    ```
-    Example:    
-    ```yaml
-    only_asn_number:
-      - 7326
-      - 16136
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_asn_number": [
-        "array"
-      ]
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_asn_number": [
-        7326,
-        16136
-      ]
+      "recorded_stream": true
     }
     ```
 
@@ -1326,14 +2304,14 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "dhcp" <br>
 
-###### Metrics Group 
+#### Metrics Group <br>
 
 - No metrics group available <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
 
@@ -1425,14 +2403,14 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "bgp" <br>
 
-###### Metrics Group 
+#### Metrics Group <br>
 
 - No metrics group available <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
 
@@ -1506,13 +2484,13 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "pcap" <br>
 
-###### Metrics Group
+#### Metrics Group <br>
 - No metrics group available. <br>
 
-###### Configurations
+#### Configurations <br>
 - Abstract configurations. <br>
 
-###### Filters
+#### Filters <br>
 - No filters available. <br>
 
 
@@ -1638,7 +2616,7 @@ The `only_asn_number` filter usage syntax is:<br>
 
 **Handler Type**: "flow" <br>
 
-###### Metrics Group <br>
+#### Metrics Group <br>
 
 |   Metric Group   | Default  | 
 |:----------------:|:--------:|
@@ -1655,11 +2633,11 @@ The `only_asn_number` filter usage syntax is:<br>
 
 <br>
 
-###### Configurations <br>
+#### Configurations <br>
 - sample_rate_scaling: *bool* <br>
 - first_filter_if_as_label: *bool* <br>
 - device_map: *str[]*
-- recorded_stream: #todo<br>
+- recorded_stream: *bool*<br>
 - Abstract configurations. <br><br>
 
 **sample_rate_scaling**
@@ -1718,8 +2696,26 @@ The `device_map` filter usage syntax is:<br>
     }
     ```
 
+**recorded_stream** <br>
 
-###### Filters <br>
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+
+The `recorded_stream` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    recorded_stream: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "recorded_stream": true
+    }
+    ```
+
+
+#### Filters <br>
 
 
 |      Filter       |  Type   | Input |
@@ -2005,7 +3001,7 @@ The `asn_notfound` filter usage syntax is:<br>
 
 **Handler Type**: "netprobe" <br>
 
-###### Metrics Group <br>
+#### Metrics Group <br>
 
 
 | Metric Group | Default  | 
@@ -2015,11 +3011,11 @@ The `asn_notfound` filter usage syntax is:<br>
 | `histograms` | enabled  |
 
 
-###### Configurations <br>
+#### Configurations <br>
 - Abstract configurations. <br><br>
 - In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_configs/#netprobe) the available configurations for netprobe.
 
 
-###### Filters
+#### Filters <br>
 - No filters available. <br><br>
 
