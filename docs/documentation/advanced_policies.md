@@ -390,6 +390,9 @@ To disable all metric groups use the syntax:
     }
     ```
 
+* Attention: enable is dominant over disable. So if both are passed, the metrics group will be enabled;
+
+
 ### Abstract Configurations
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
@@ -472,9 +475,6 @@ The `topn_percentile_threshold` usage syntax is:<br>
     "topn_percentile_threshold": int
     }
     ```
-
-
-* Attention: disabling is dominant over enabling. So if both are passed, the metric will be disabled;
 
 
 ### DNS Analyzer (dns)

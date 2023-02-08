@@ -271,73 +271,73 @@ For handlers that have metric groups, the metric groups that must be enabled for
     Status: `Beta`. The metric names and configuration options may still change
 
 
-| Metric                                                                                 | Prometheus Name                              | Metric Groups               |
-|----------------------------------------------------------------------------------------|----------------------------------------------|-----------------------------|
-| Conversations cardinality                                                              | flow\_cardinality\_conversations             | cardinality + conversations |
-| Destination IP cardinality                                                             | flow\_cardinality\_dst\_ips\_out             | cardinality                 |
-| Destination ports cardinality                                                          | flow\_cardinality\_dst\_ports\_out           | cardinality                 |
-| Source IP cardinality                                                                  | flow\_cardinality\_src\_ips\_in              | cardinality                 |
-| Source ports cardinality                                                               | flow\_cardinality\_src\_ports\_in            | cardinality                 |
-| Count of in by bytes                                                                   | flow\_in\_bytes                              | counters + by_bytes         |
-| Count of in IPv4 by bytes                                                              | flow\_in\_ipv4\_bytes                        | counters + by_bytes         |
-| Count of in IPv4 by packets                                                            | flow\_in\_ipv4\_packets                      | counters + by_packets       |
-| Count of in IPv6 by bytes                                                              | flow\_in\_ipv6\_bytes                        | counters + by_bytes         |
-| Count of in IPv6 by packets                                                            | flow\_in\_ipv6\_packets                      | counters + by_packets       |
-| Count of in by bytes which are not UDP or TCP                                          | flow\_in\_other\_l4\_bytes                   | counters + by_bytes         |
-| Count of in by packtes which are not UDP or TCP                                        | flow\_in\_other\_l4\_packets                 | counters + by_packets       |
-| Count of in by packets                                                                 | flow\_in\_packets                            | counters + by_packets       |
-| Count of in TCP by bytes                                                               | flow\_in\_tcp\_bytes                         | counters + by_bytes         |
-| Count of in TCP by packets                                                             | flow\_in\_tcp\_packets                       | counters + by_packets       |
-| Count of in UDP by bytes                                                               | flow\_in\_udp\_bytes                         | counters + by_bytes         |
-| Count of in UDP by packets                                                             | flow\_in\_udp\_packets                       | counters + by_packets       |
-| Count of out by bytes                                                                  | flow\_out\_bytes                             | counters + by_bytes         |
-| Count of out IPV4 by bytes                                                             | flow\_out\_ipv4\_bytes                       | counters + by_bytes         |
-| Count of out IPV4 by packets                                                           | flow\_out\_ipv4\_packets                     | counters + by_packets       |
-| Count of out IPV6 by bytes                                                             | flow\_out\_ipv6\_bytes                       | counters + by_bytes         |
-| Count of out IPV6 by packets                                                           | flow\_out\_ipv6\_packets                     | counters + by_packets       |
-| Count of out by bytes which are not UDP or TCP                                         | flow\_out\_other\_l4\_bytes                  | counters + by_bytes         |
-| Count of out by packets which are not UDP or TCP                                       | flow\_out\_other\_l4\_packets                | counters + by_packets       |
-| Count of out by packets                                                                | flow\_out\_packets                           | counters + by_packets       |
-| Count of out TCP by bytes                                                              | flow\_out\_tcp\_bytes                        | counters + by_bytes         |
-| Count of out TCP by packets                                                            | flow\_out\_tcp\_packets                      | counters + by_packets       |
-| Count of out UDP by bytes                                                              | flow\_out\_udp\_bytes                        | counters + by_bytes         |
-| Count of out UDP by packets                                                            | flow\_out\_udp\_packets                      | counters + by_packets       |
-| Count of total flows records seen that did not match the configured filter(s) (if any) | flow\_records\_filtered                      | counters                    |
-| Count of total flows records that match the configured filter(s) (if any)              | flow\_records\_flows                         | counters                    |
-| Top ASNs by IP by bytes                                                                | flow\_top\_asn\_bytes                        | top_geo + by_bytes          |
-| Top ASNs by IP by packets                                                              | flow\_top\_asn\_packets                      | top_geo + by_packets        |
-| Top source IP addresses and port by bytes                                              | flow\_top\_conversations\_bytes              | conversations + by_bytes    |
-| Top source IP addresses and port by packets                                            | flow\_top\_conversations\_packets            | conversations + by_packets  |
-| Top GeoIP locations by bytes                                                           | flow\_top\_geo\_loc\_bytes                   | top_geo + by_bytes          |
-| Top GeoIP locations by packets                                                         | flow\_top\_geo\_loc\_packets                 | top_geo + by_packets        |
-| Top in destination IP addresses and port by bytes                                      | flow\_top\_in\_dst\_ips\_and\_port\_bytes    | top_ips_ports + by_bytes    |
-| Top in destination IP addresses and port by packets                                    | flow\_top\_in\_dst\_ips\_and\_port\_packets  | top_ips_ports + by_packets  |
-| Top in destination IP addresses by bytes                                               | flow\_top\_in\_dst\_ips\_bytes               | top_ips + by_bytes          |
-| Top in destination IP addresses by packets                                             | flow\_top\_in\_dst\_ips\_packets             | top_ips + by_packets        |
-| Top in destination ports by bytes                                                      | flow\_top\_in\_dst\_ports\_bytes             | top_ports + by_bytes        |
-| Top in destination ports by packets                                                    | flow\_top\_in\_dst\_ports\_packets           | top_ports + by_packets      |
-| Top input interfaces by bytes                                                          | flow\_top\_in\_interfaces\_bytes             | top_interfaces + by_bytes   |
-| Top input interfaces by packets                                                        | flow\_top\_in\_interfaces\_packets           | top_interfaces + by_packets |
-| Top in source IP addresses and port by bytes                                           | flow\_top\_in\_src\_ips\_and\_port\_bytes    | top_ips_ports + by_bytes    |
-| Top in source IP addresses and port by packets                                         | flow\_top\_in\_src\_ips\_and\_port\_packets  | top_ips_ports + by_packets  |
-| Top in source IP addresses by bytes                                                    | flow\_top\_in\_src\_ips\_bytes               | top_ips + by_bytes          |
-| Top in source IP addresses by packets                                                  | flow\_top\_in\_src\_ips\_packets             | top_ips + by_packets        |
-| Top in source ports by bytes                                                           | flow\_top\_in\_src\_ports\_bytes             | top_ports + by_bytes        |
-| Top in source ports by packets                                                         | flow\_top\_in\_src\_ports\_packets           | top_ports + by_packets      |
-| Top out destination IP addresses and port by bytes                                     | flow\_top\_out\_dst\_ips\_and\_port\_bytes   | top_ips_ports + by_bytes    |
-| Top out destination IP addresses and port by packets                                   | flow\_top\_out\_dst\_ips\_and\_port\_packets | top_ips_ports + by_packets  |
-| Top out destination IP addresses by bytes                                              | flow\_top\_out\_dst\_ips\_bytes              | top_ips + by_bytes          |
-| Top out destination IP addresses by packets                                            | flow\_top\_out\_dst\_ips\_packets            | top_ips + by_packets        |
-| Top out destination ports by bytes                                                     | flow\_top\_out\_dst_ports\_bytes             | top_ports + by_bytes        |
-| Top out destination ports by packets                                                   | flow\_top\_out\_dst_ports\_packets           | top_ports + by_packets      |
-| Top output interfaces by bytes                                                         | flow\_top\_out\_interfaces\_bytes            | top_interfaces + by_bytes   |
-| Top output interfaces by packets                                                       | flow\_top\_out\_interfaces\_packets          | top_interfaces + by_packets |
-| Top out source IP addresses and port by bytes                                          | flow\_top\_out\_src\_ips\_and\_port\_bytes   | top_ips_ports + by_bytes    |
-| Top out source IP addresses and port by packets                                        | flow\_top\_out\_src\_ips\_and\_port\_packets | top_ips_ports + by_packets  |
-| Top out source IP addresses by bytes                                                   | flow\_top\_out\_src\_ips\_bytes              | top_ips + by_bytes          |
-| Top out source IP addresses by packets                                                 | flow\_top\_out\_src\_ips\_packets            | top_ips + by_packets        |
-| Top out source ports by bytes                                                          | flow\_top\_out\_src\_ports\_bytes            | top_ports + by_bytes        |
-| Top out source ports by packets                                                        | flow\_top\_out\_src\_ports\_packets          | top_ports + by_packets      |
+| Metric                                                                                 | Prometheus Name                        | Metric Groups               |
+|----------------------------------------------------------------------------------------|----------------------------------------|-----------------------------|
+| Conversations cardinality                                                              | flow\_cardinality\_conversations       | cardinality + conversations |
+| Destination IP cardinality                                                             | flow\_cardinality\_dst\_ips\_out       | cardinality                 |
+| Destination ports cardinality                                                          | flow\_cardinality\_dst\_ports\_out     | cardinality                 |
+| Source IP cardinality                                                                  | flow\_cardinality\_src\_ips\_in        | cardinality                 |
+| Source ports cardinality                                                               | flow\_cardinality\_src\_ports\_in      | cardinality                 |
+| Count of in by bytes                                                                   | flow\_in\_bytes                        | counters + by_bytes         |
+| Count of in IPv4 by bytes                                                              | flow\_in\_ipv4\_bytes                  | counters + by_bytes         |
+| Count of in IPv4 by packets                                                            | flow\_in\_ipv4\_packets                | counters + by_packets       |
+| Count of in IPv6 by bytes                                                              | flow\_in\_ipv6\_bytes                  | counters + by_bytes         |
+| Count of in IPv6 by packets                                                            | flow\_in\_ipv6\_packets                | counters + by_packets       |
+| Count of in by bytes which are not UDP or TCP                                          | flow\_in\_other\_l4\_bytes             | counters + by_bytes         |
+| Count of in by packtes which are not UDP or TCP                                        | flow\_in\_other\_l4\_packets           | counters + by_packets       |
+| Count of in by packets                                                                 | flow\_in\_packets                      | counters + by_packets       |
+| Count of in TCP by bytes                                                               | flow\_in\_tcp\_bytes                   | counters + by_bytes         |
+| Count of in TCP by packets                                                             | flow\_in\_tcp\_packets                 | counters + by_packets       |
+| Count of in UDP by bytes                                                               | flow\_in\_udp\_bytes                   | counters + by_bytes         |
+| Count of in UDP by packets                                                             | flow\_in\_udp\_packets                 | counters + by_packets       |
+| Count of out by bytes                                                                  | flow\_out\_bytes                       | counters + by_bytes         |
+| Count of out IPV4 by bytes                                                             | flow\_out\_ipv4\_bytes                 | counters + by_bytes         |
+| Count of out IPV4 by packets                                                           | flow\_out\_ipv4\_packets               | counters + by_packets       |
+| Count of out IPV6 by bytes                                                             | flow\_out\_ipv6\_bytes                 | counters + by_bytes         |
+| Count of out IPV6 by packets                                                           | flow\_out\_ipv6\_packets               | counters + by_packets       |
+| Count of out by bytes which are not UDP or TCP                                         | flow\_out\_other\_l4\_bytes            | counters + by_bytes         |
+| Count of out by packets which are not UDP or TCP                                       | flow\_out\_other\_l4\_packets          | counters + by_packets       |
+| Count of out by packets                                                                | flow\_out\_packets                     | counters + by_packets       |
+| Count of out TCP by bytes                                                              | flow\_out\_tcp\_bytes                  | counters + by_bytes         |
+| Count of out TCP by packets                                                            | flow\_out\_tcp\_packets                | counters + by_packets       |
+| Count of out UDP by bytes                                                              | flow\_out\_udp\_bytes                  | counters + by_bytes         |
+| Count of out UDP by packets                                                            | flow\_out\_udp\_packets                | counters + by_packets       |
+| Count of total flows records seen that did not match the configured filter(s) (if any) | flow\_records\_filtered                | counters                    |
+| Count of total flows records that match the configured filter(s) (if any)              | flow\_records\_flows                   | counters                    |
+| Top ASNs by IP by bytes                                                                | flow\_top\_asn\_bytes                  | top_geo + by_bytes          |
+| Top ASNs by IP by packets                                                              | flow\_top\_asn\_packets                | top_geo + by_packets        |
+| Top source IP addresses and port by bytes                                              | flow\_top\_conversations\_bytes        | conversations + by_bytes    |
+| Top source IP addresses and port by packets                                            | flow\_top\_conversations\_packets      | conversations + by_packets  |
+| Top GeoIP locations by bytes                                                           | flow\_top\_geo\_loc\_bytes             | top_geo + by_bytes          |
+| Top GeoIP locations by packets                                                         | flow\_top\_geo\_loc\_packets           | top_geo + by_packets        |
+| Top in destination IP addresses and port by bytes                                      | flow\_top\_in\_dst\ip\_ports\_bytes    | top_ips_ports + by_bytes    |
+| Top in destination IP addresses and port by packets                                    | flow\_top\_in\_dst\ip\_ports\_packets  | top_ips_ports + by_packets  |
+| Top in destination IP addresses by bytes                                               | flow\_top\_in\_dst\_ips\_bytes         | top_ips + by_bytes          |
+| Top in destination IP addresses by packets                                             | flow\_top\_in\_dst\_ips\_packets       | top_ips + by_packets        |
+| Top in destination ports by bytes                                                      | flow\_top\_in\_dst\_ports\_bytes       | top_ports + by_bytes        |
+| Top in destination ports by packets                                                    | flow\_top\_in\_dst\_ports\_packets     | top_ports + by_packets      |
+| Top input interfaces by bytes                                                          | flow\_top\_in\_interfaces\_bytes       | top_interfaces + by_bytes   |
+| Top input interfaces by packets                                                        | flow\_top\_in\_interfaces\_packets     | top_interfaces + by_packets |
+| Top in source IP addresses and port by bytes                                           | flow\_top\_in\_src\ip\_ports\_bytes    | top_ips_ports + by_bytes    |
+| Top in source IP addresses and port by packets                                         | flow\_top\_in\_src\ip\_ports\_packets  | top_ips_ports + by_packets  |
+| Top in source IP addresses by bytes                                                    | flow\_top\_in\_src\_ips\_bytes         | top_ips + by_bytes          |
+| Top in source IP addresses by packets                                                  | flow\_top\_in\_src\_ips\_packets       | top_ips + by_packets        |
+| Top in source ports by bytes                                                           | flow\_top\_in\_src\_ports\_bytes       | top_ports + by_bytes        |
+| Top in source ports by packets                                                         | flow\_top\_in\_src\_ports\_packets     | top_ports + by_packets      |
+| Top out destination IP addresses and port by bytes                                     | flow\_top\_out\_dst\ip\_ports\_bytes   | top_ips_ports + by_bytes    |
+| Top out destination IP addresses and port by packets                                   | flow\_top\_out\_dst\ip\_ports\_packets | top_ips_ports + by_packets  |
+| Top out destination IP addresses by bytes                                              | flow\_top\_out\_dst\_ips\_bytes        | top_ips + by_bytes          |
+| Top out destination IP addresses by packets                                            | flow\_top\_out\_dst\_ips\_packets      | top_ips + by_packets        |
+| Top out destination ports by bytes                                                     | flow\_top\_out\_dst_ports\_bytes       | top_ports + by_bytes        |
+| Top out destination ports by packets                                                   | flow\_top\_out\_dst_ports\_packets     | top_ports + by_packets      |
+| Top output interfaces by bytes                                                         | flow\_top\_out\_interfaces\_bytes      | top_interfaces + by_bytes   |
+| Top output interfaces by packets                                                       | flow\_top\_out\_interfaces\_packets    | top_interfaces + by_packets |
+| Top out source IP addresses and port by bytes                                          | flow\_top\_out\_src\ip\_ports\_bytes   | top_ips_ports + by_bytes    |
+| Top out source IP addresses and port by packets                                        | flow\_top\_out\_src\ip\_ports\_packets | top_ips_ports + by_packets  |
+| Top out source IP addresses by bytes                                                   | flow\_top\_out\_src\_ips\_bytes        | top_ips + by_bytes          |
+| Top out source IP addresses by packets                                                 | flow\_top\_out\_src\_ips\_packets      | top_ips + by_packets        |
+| Top out source ports by bytes                                                          | flow\_top\_out\_src\_ports\_bytes      | top_ports + by_bytes        |
+| Top out source ports by packets                                                        | flow\_top\_out\_src\_ports\_packets    | top_ports + by_packets      |
 
 
 ## Netprobe Metrics [BETA]
