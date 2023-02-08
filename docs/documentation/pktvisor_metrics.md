@@ -91,53 +91,148 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Total sum of response/query size ratios                                                      | dns\_xact\_ratio\_quantiles\_sum     | dns_transaction                 |
     | Count of response/query size ratios                                                          | dns\_xact\_ratio\_quantiles\_count   | dns_transaction                 |
 
+
+=== "v2"
+    
+    | Metric                                                                                                                 | Prometheus Name                     | Metric Groups |
+    |------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------|
+    | Quantiles of all DNS wire packets before filtering per second	                                                         | dns_rates_events                    | any group*    |
+    | Count of all DNS wire packets before filtering per second		                                                            | dns_rates_events_count              | any group*    |
+    | Total sum of rates for DNS packets processed by policy	                                                                | dns_rates_events_sum                | any group*    |
+    | Total DNS transactions (query/reply pairs) with the AD flag set in the response                                        | dns_authenticated_data_xacts        | counters      |
+    | Total DNS transactions (query/reply pairs) with the AA flag set in the response                                        | dns_authoritative_answer_xacts      | counters      |
+    | Cardinality of unique QNAMES, both ingress and egress	                                                                 | dns_cardinality_qname               | cardinality   |
+    | Total DNS transactions (query/reply pairs) with the CD flag set in the query                                           | dns_checking_disabled_xacts         | counters      |
+    | Total DNS wire packets that were sampled for deep inspection                                                           | dns_deep_sampled_packets            | any group*    |
+    | Total DNS transactions (query/reply pairs) received over DNSCrypt over TCP                                             | dns_dnscrypt_tcp_xacts              | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNSCrypt over UDP                                             | dns_dnscrypt_udp_xacts              | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over HTTPS                                                | dns_doh_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over QUIC                                                 | dns_doq_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) received over DNS over TLS                                                  | dns_dot_xacts                       | counters      |
+    | Total DNS transactions (query/reply pairs) with the EDNS Client Subnet option set                                      | dns_ecs_xacts                       | counters      |
+    | Total DNS wire packets seen that did not match the configured filter(s) (if any)                                       | dns_filtered_packets                | counters      |
+    | Total DNS transactions (query/reply pairs) received over IPv4                                                          | dns_ipv4_xacts                      | counters      |
+    | Total DNS transactions (query/reply pairs) received over IPv6                                                          | dns_ipv6_xacts                      | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR but with an empty answers section | dns_nodata_xacts                    | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR                                   | dns_noerror_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code NXDOMAIN                                  | dns_nxdomain_xacts                  | counters      |
+    | Total DNS wire packets events                                                                                          | dns_observed_packets                | any group*    |
+    | Total number of DNS responses that do not have a corresponding query                                                   | dns_orphan_responses                | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code REFUSED                                   | dns_refused_xacts                   | counters      |
+    | Quantiles of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio       | top_size      |
+    | Count of ratio of packet sizes in a DNS transaction (reply/query)                                                      | dns_response_query_size_ratio_count | top_size      |
+    | Total sum of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio_sum   | top_size      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with return code SRVFAIL                                   | dns_srvfail_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) received over TCP                                                           | dns_tcp_xacts                       | counters      |
+    | Total number of DNS queries that timed out                                                                             | dns_timeout_queries                 | counters      |
+    | Top ASNs by ECS                                                                                                        | dns_top_asn_ecs_xacts               | top_ecs       |
+    | Top EDNS Client Subnet (ECS) observed in DNS transaction                                                               | dns_top_ecs_xacts                   | top_ecs       |
+    | 	     Top GeoIP ECS locations                                                                                          | dns_top_geo_loc_ecs_xacts           | top_ecs       |
+    | 	  Top QNAMES with result code NOERROR and empty answer section                                                        | dns_top_nodata_xacts                | top_rcodes    |
+    | Top QNAMES with result code NOERROR                                                                                    | dns_top_noerror_xacts               | top_rcodes    |
+    | 	    Top QNAMES with result code NXDOMAIN                                                                              | dns_top_nxdomain_xacts              | top_rcodes    |
+    | 	      Top QNAMES, aggregated at a depth of two labels                                                                 | dns_top_qname2_xacts                | top_qnames    |
+    | Top QNAMES, aggregated at a depth of three labels                                                                      | dns_top_qname3_xacts                | top_qnames    |
+    | Top QNAMES by response volume in bytes                                                                                 | dns_top_response_bytes              | top_size      |
+    | Top query types                                                                                                        | dns_top_qtype_xacts                 | top_qtypes    |
+    | 	    Top result codes                                                                                                  | dns_top_rcode_xacts                 | top_rcodes    |
+    | 	         Top QNAMES with result code REFUSED                                                                          | dns_top_refused_xacts               | top_rcodes    |
+    | Top QNAMES in transactions where host is the server and transaction speed is slower than p90                           | dns_top_slow_xacts                  | xact_times    |
+    | 	    Top QNAMES with result code SRVFAIL                                                                               | dns_top_srvfail_xacts               | top_rcodes    |
+    | 	     Top UDP source port on the query side of a transaction                                                           | dns_top_udp_ports_xacts             | top_ports     |
+    | Total DNS transactions (query/reply pairs) received over UDP                                                           | dns_udp_xacts                       | counters      |
+    | Rate of all DNS transaction (reply/query) per second                                                                   | dns_xact_rates                      | quantiles     |
+    | Count of all DNS transaction (reply/query) per second                                                                  | dns_xact_rates_count                | quantiles     |
+    | Total sum of all DNS transaction (reply/query) per second                                                              | dns_xact_rates_sum                  | quantiles     |
+    | Quantiles of transaction timing (query/reply pairs) in microseconds                                                    | dns_xact_time_us                    | xact_times    |
+    | Count of transaction timing (query/reply pairs) in microseconds                                                        | dns_xact_time_us_count              | xact_times    |
+    | Total sum of transaction timing (query/reply pairs) in microseconds                                                    | dns_xact_time_us_sum                | xact_times    |
+    | Total DNS transactions (query/reply pairs)                                                                             | dns_xacts                           | counters      |
+    
+
+
+
 ## Network Metrics
 
-| Metric                                                          | Prometheus Name                     | Metric Groups |
-|-----------------------------------------------------------------|-------------------------------------|---------------|
-| Destination IP cardinality                                      | packets\_cardinality\_dst\_ips\_out | cardinality   |
-| Source IP cardinality                                           | packets\_cardinality\_src\_ips\_in  | cardinality   |
-| Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*    |
-| Count of packets sent to policy                                 | packets\_events                     | any group*    |
-| Count of packets filtered out by policy                         | packets\_filtered                   | counters      |
-| Count of ingress packets                                        | packets\_in                         | counters      |
-| Count of IPv4 packets                                           | packets\_ipv4                       | counters      |
-| Count of IPv6 packets                                           | packets\_ipv6                       | counters      |
-| Count of packets not UDP or TCP                                 | packets\_other\_l4                  | counters      |
-| Count of egress packets                                         | packets\_out                        | counters      |
-| Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*    |
-| Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
-| Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
-| Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
-| Quantiles of ingress data rates                                 | payload\_rates\_bytes\_in           | any group*    |
-| Total sum of ingress data rates                                 | payload\_rates\_bytes\_in\_sum      | any group*    |
-| Count of ingress data rates                                     | payload\_rates\_bytes\_in\_count    | any group*    |
-| Quantiles of egress data rates                                  | payload\_rates\_bytes\_out          | any group*    |
-| Total sum of egress data rates                                  | payload\_rates\_bytes\_out\_sum     | any group*    |
-| Count of egress data rates                                      | payload\_rates\_bytes\_out\_count   | any group*    |
-| Quantiles of total data rates                                   | payload\_rates\_bytes\_total        | any group*    |
-| Total sum of total data rates                                   | payload\_rates\_bytes\_total\_sum   | any group*    |
-| Count of total data rates                                       | payload\_rates\_bytes\_total\_count | any group*    |
-| Quantiles of all packets before filtering in packets per second | payload\_rates\_pps\_events         | any group*    |
-| Total sum of all packets before filtering in packets per second | payload\_rates\_pps\_events\_sum    | any group*    |
-| Count of all packets before filtering in packets per second     | payload\_rates\_pps\_events\_count  | any group*    |
-| Quantiles of ingress packet rates                               | payload\_rates\_pps\_in             | any group*    |
-| Total sum of ingress packet rates                               | payload\_rates\_pps\_in\_sum        | any group*    |
-| Count of ingress packet rates                                   | payload\_rates\_pps\_in\_count      | any group*    |
-| Quantiles of egress packet rates                                | payload\_rates\_pps\_out            | any group*    |
-| Total sum of egress packet rates                                | payload\_rates\_pps\_out\_sum       | any group*    |
-| Count of egress packet rates                                    | payload\_rates\_pps\_out\_count     | any group*    |
-| Quantiles of total packet rates                                 | payload\_rates\_pps\_total          | any group*    |
-| Total sum of total packet rates                                 | payload\_rates\_pps\_total\_sum     | any group*    |
-| Count of total packet rates                                     | payload\_rates\_pps\_total\_count   | any group*    |
-| Count of TCP packets                                            | packets\_tcp                        | counters      |
-| Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
-| Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
-| Top IPv4 IP addresses                                           | packets\_top\_ipv4                  | top_ips       |
-| Top IPv6 IP addresses                                           | packets\_top\_ipv6                  | top_ips       |
-| Count of packets matched by policy                              | packets\_total                      | counters      |
-| Count of UDP packets                                            | packets\_udp                        | counters      |
-| Count of packets of unknown direction                           | packets\_unknown\_dir               | counters      |
+=== "v1"
+    
+    | Metric                                                          | Prometheus Name                     | Metric Groups |
+    |-----------------------------------------------------------------|-------------------------------------|---------------|
+    | Destination IP cardinality                                      | packets\_cardinality\_dst\_ips\_out | cardinality   |
+    | Source IP cardinality                                           | packets\_cardinality\_src\_ips\_in  | cardinality   |
+    | Count of packets sampled for deep inspection                    | packets\_deep\_samples              | any group*    |
+    | Count of packets sent to policy                                 | packets\_events                     | any group*    |
+    | Count of packets filtered out by policy                         | packets\_filtered                   | counters      |
+    | Count of ingress packets                                        | packets\_in                         | counters      |
+    | Count of IPv4 packets                                           | packets\_ipv4                       | counters      |
+    | Count of IPv6 packets                                           | packets\_ipv6                       | counters      |
+    | Count of packets not UDP or TCP                                 | packets\_other\_l4                  | counters      |
+    | Count of egress packets                                         | packets\_out                        | counters      |
+    | Quantiles of packet payload sizes                               | packets\_payload\_size              | any group*    |
+    | Total sum of packet payload sizes                               | packets\_payload\_size\_sum         | any group*    |
+    | Count of packet payload sizes                                   | packets\_payload\_size\_count       | any group*    |
+    | Count of TCP packets with SYN flag set                          | packets\_protocol\_tcp\_syn         | counters      |
+    | Quantiles of ingress data rates                                 | payload\_rates\_bytes\_in           | any group*    |
+    | Total sum of ingress data rates                                 | payload\_rates\_bytes\_in\_sum      | any group*    |
+    | Count of ingress data rates                                     | payload\_rates\_bytes\_in\_count    | any group*    |
+    | Quantiles of egress data rates                                  | payload\_rates\_bytes\_out          | any group*    |
+    | Total sum of egress data rates                                  | payload\_rates\_bytes\_out\_sum     | any group*    |
+    | Count of egress data rates                                      | payload\_rates\_bytes\_out\_count   | any group*    |
+    | Quantiles of total data rates                                   | payload\_rates\_bytes\_total        | any group*    |
+    | Total sum of total data rates                                   | payload\_rates\_bytes\_total\_sum   | any group*    |
+    | Count of total data rates                                       | payload\_rates\_bytes\_total\_count | any group*    |
+    | Quantiles of all packets before filtering in packets per second | payload\_rates\_pps\_events         | any group*    |
+    | Total sum of all packets before filtering in packets per second | payload\_rates\_pps\_events\_sum    | any group*    |
+    | Count of all packets before filtering in packets per second     | payload\_rates\_pps\_events\_count  | any group*    |
+    | Quantiles of ingress packet rates                               | payload\_rates\_pps\_in             | any group*    |
+    | Total sum of ingress packet rates                               | payload\_rates\_pps\_in\_sum        | any group*    |
+    | Count of ingress packet rates                                   | payload\_rates\_pps\_in\_count      | any group*    |
+    | Quantiles of egress packet rates                                | payload\_rates\_pps\_out            | any group*    |
+    | Total sum of egress packet rates                                | payload\_rates\_pps\_out\_sum       | any group*    |
+    | Count of egress packet rates                                    | payload\_rates\_pps\_out\_count     | any group*    |
+    | Quantiles of total packet rates                                 | payload\_rates\_pps\_total          | any group*    |
+    | Total sum of total packet rates                                 | payload\_rates\_pps\_total\_sum     | any group*    |
+    | Count of total packet rates                                     | payload\_rates\_pps\_total\_count   | any group*    |
+    | Count of TCP packets                                            | packets\_tcp                        | counters      |
+    | Top ASNs                                                        | packets\_top\_ASN                   | top_geo       |
+    | Top GeoIP locations                                             | packets\_top\_geoLoc                | top_geo       |
+    | Top IPv4 IP addresses                                           | packets\_top\_ipv4                  | top_ips       |
+    | Top IPv6 IP addresses                                           | packets\_top\_ipv6                  | top_ips       |
+    | Count of packets matched by policy                              | packets\_total                      | counters      |
+    | Count of UDP packets                                            | packets\_udp                        | counters      |
+    | Count of packets of unknown direction                           | packets\_unknown\_dir               | counters      |
+
+=== "v2"
+    
+    | Metric                                                                  | Prometheus Name              | Metric Groups |
+    |-------------------------------------------------------------------------|------------------------------|---------------|
+    | IP cardinality                                                          | net_cardinality_ips          | cardinality   |         
+     | Total packets that were sampled for deep inspection                     | net_deep_sampled_packets     | any group*    |    
+     | Total packets seen that did not match the configured filter(s) (if any) | net_filtered_packets         | counters      |        
+     | Count of IPv4 packets                                                   | net_ipv4_packets             | counters      |            
+     | Count of IPv6 packets                                                   | net_ipv6_packets             | counters      |            
+     | Total packets events generated                                          | net_observed_packets         | any group*    |        
+     | Count of packets which are not UDP or TCP                               | net_other_l4_packets         | counters      |        
+     | Quantiles of payload sizes, in bytes                                    | net_payload_size_bytes       | quantiles     |      
+     | Count of payload sizes, in bytes                                        | net_payload_size_bytes_count | quantiles     |
+     | Total sum of payload sizes, in bytes                                    | net_payload_size_bytes_sum   | quantiles     |  
+     | Data rate of bits per second                                            | net_rates_bps                | quantiles     |               
+     | Count of bits per second                                                | net_rates_bps_count          | quantiles     |         
+     | Total sum of bits per second                                            | net_rates_bps_sum            | quantiles     |           
+     | Rate of all packets before filtering per second                         | net_rates_observed_pps       | any group*    |      
+     | Count of all packets before filtering per second                        | net_rates_observed_pps_count | any group*    |
+     | Total sum of all packets before filtering per second                    | net_rates_observed_pps_sum   | any group*    |  
+     | Rate of packets per second                                              | net_rates_pps                | quantiles     |               
+     | Count of packets per second                                             | net_rates_pps_count          | quantiles     |         
+     | Total sum of packets per second                                         | net_rates_pps_sum            | quantiles     |           
+     | Count of TCP packets                                                    | net_tcp_packets              | counters      |             
+     | Count of TCP SYN packets                                                | net_tcp_syn_packets          | counters      |         
+     | Top ASNs by IP                                                          | net_top_asn_packets          | top_geo       |         
+     | Top GeoIP locations                                                     | net_top_geo_loc_packets      | top_geo       |     
+     | Top IPv4 addresses                                                      | net_top_ipv4_packets         | top_ips       |        
+     | Top IPv6 addresses                                                      | net_top_ipv6_packets         | top_ips       |        
+     | Count of total packets matching the configured filter(s)                | net_total_packets            | counters      |           
+     | Count of UDP packets                                                    | net_udp_packets              | counters      |             
 
 ## PCAP Metrics
 
