@@ -625,7 +625,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
             
     |         Filter         |  Type   | Input  |
     |:----------------------:|:-------:|:------:|
-    |      `only_rcode`      |  *int*  |  PCAP  |
+    |      `only_rcode`      | *str[]* |  PCAP  |
     |   `exclude_noerror`    | *bool*  |  PCAP  |
     | `only_dnssec_response` | *bool*  |  PCAP  |
     |     `answer_count`     |  *int*  |  PCAP  |
@@ -639,7 +639,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |   `dnstap_msg_type`    |  *str*  | DNSTAP |
     
     
-    **only_rcode:** *int*. <br>
+    **only_rcode:** *str[]*. <br>
     
     Input: PCAP <br>
     
@@ -651,7 +651,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |:---------------:|:------------------:|:---------------------------------------------------:|
     |       `0`       |      NOERROR       |          DNS Query completed successfully           |
     |       `1`       |      FORMERR       |               DNS Query Format Error                |
-    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
+    |       `2`       |      SRVFAIL      |      Server failed to complete the DNS request      |
     |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
     |       `4`       |       NOTIMP       |              Function not implemented               |
     |       `5`       |      REFUSED       |     The server refused to answer for the query      |
@@ -674,28 +674,32 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     === "YAML"
         ```yaml
-        only_rcode: int
+        only_rcode:
+          - str
+          - str
         ```
     
     === "JSON"
         ```json
         {
-          "only_rcode": int
+          "only_rcode": ["str", "int"]
         }
         ```
-    with the `int` referring to the return code to be filtered. <br>
+    with the `int` referring to the return code to be filtered, written as string. <br>
     
     Example: <br>
     If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
     === "YAML"
         ```yaml
-        only_rcode: 0
+        only_rcode:
+          - "NXDOMAIN"
+          - "2"
         ```
     
     === "JSON"
         ```json
         {
-        "only_rcode": 0
+        "only_rcode": ["NXDOMAIN", "2"]
         }
         ```
     Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
@@ -783,13 +787,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qtype: 
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qtype": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -855,13 +860,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qname:
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qname": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -895,13 +901,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qname_suffix:
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qname_suffix": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -1216,7 +1223,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     |         Filter         |  Type   | Input  |
     |:----------------------:|:-------:|:------:|
-    |      `only_rcode`      |  *int*  |  PCAP  |
+    |      `only_rcode`      |  *str[]*  |  PCAP  |
     |   `exclude_noerror`    | *bool*  |  PCAP  |
     | `only_dnssec_response` | *bool*  |  PCAP  |
     |     `answer_count`     |  *int*  |  PCAP  |
@@ -1228,7 +1235,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |   `dnstap_msg_type`    |  *str*  | DNSTAP |
     
     
-    **only_rcode:** *int*. <br>
+    **only_rcode:** *str[]*. <br>
     
     Input: PCAP <br>
     
@@ -1263,28 +1270,32 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     === "YAML"
         ```yaml
-        only_rcode: int
+        only_rcode:
+          - str
+          - str
         ```
     
     === "JSON"
         ```json
         {
-          "only_rcode": int
+          "only_rcode": ["str", "int"]
         }
         ```
-    with the `int` referring to the return code to be filtered. <br>
+    with the `int` referring to the return code to be filtered, written as string. <br>
     
     Example: <br>
     If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
     === "YAML"
         ```yaml
-        only_rcode: 0
+        only_rcode:
+          - "NXDOMAIN"
+          - "2"
         ```
     
     === "JSON"
         ```json
         {
-        "only_rcode": 0
+        "only_rcode": ["NXDOMAIN", "2"]
         }
         ```
     Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
@@ -1372,13 +1383,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qtype: 
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qtype": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -1444,13 +1456,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qname:
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qname": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -1484,13 +1497,14 @@ The `topn_percentile_threshold` usage syntax is:<br>
     === "YAML"
         ```yaml
         only_qname_suffix:
-          - array
+          - str
+          - str
         ```
     === "JSON"
         ```json
         {
           "only_qname_suffix": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -1877,7 +1891,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     === "YAML"
         ```yaml
         only_geoloc_prefix: 
-          - array
+          - str
+          - str
         ```
         Example:
         ```yaml
@@ -1889,7 +1904,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         ```json
         {
           "only_geoloc_prefix": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -1914,7 +1929,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     === "YAML"
         ```yaml
         only_asn_number:
-          - array
+          - str
+          - str
         ```
         Example:    
         ```yaml
@@ -1926,7 +1942,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         ```json
         {
           "only_asn_number": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -2137,7 +2153,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     === "YAML"
         ```yaml
         only_geoloc_prefix: 
-          - array
+          - str
+          - str
         ```
         Example:
         ```yaml
@@ -2149,7 +2166,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         ```json
         {
           "only_geoloc_prefix": [
-            "array"
+            "str", "str"
           ]
         }
         ```
@@ -2174,7 +2191,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     === "YAML"
         ```yaml
         only_asn_number:
-          - array
+          - str
+          - str
         ```
         Example:    
         ```yaml
@@ -2186,7 +2204,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         ```json
         {
           "only_asn_number": [
-            "array"
+            "str", "str"
           ]
         }
         ```
