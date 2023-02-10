@@ -93,6 +93,10 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 === "v2"
+
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
     
     | Metric                                                                                                                 | Prometheus Name                     | Metric Groups |
     |------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------|
@@ -148,7 +152,6 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Count of transaction timing (query/reply pairs) in microseconds                                                        | dns_xact_time_us_count              | xact_times    |
     | Total sum of transaction timing (query/reply pairs) in microseconds                                                    | dns_xact_time_us_sum                | xact_times    |
     | Total DNS transactions (query/reply pairs)                                                                             | dns_xacts                           | counters      |
-    
 
 
 
@@ -203,6 +206,10 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Count of packets of unknown direction                           | packets\_unknown\_dir               | counters      |
 
 === "v2"
+
+    !!! warning
+    
+        Status: `Beta`. The metric names and configuration options may still change
     
     | Metric                                                                  | Prometheus Name              | Metric Groups |
     |-------------------------------------------------------------------------|------------------------------|---------------|
