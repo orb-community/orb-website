@@ -33,7 +33,17 @@ You create a set of agent credentials for each node you want to monitor. Agents 
 
 ### Start your Agent
 
-7. Paste the *Provisioning Command* into a terminal on the node where you want your agent to run (optionally edit "mock" to be the real interface name) and run the command. See [Running Orb Agent](documentation/running_orb_agent.md) for more details.  
+!!! warning
+
+    To connect an agent to the [self-hosted development control plane](/documentation/install/#self-host), disable TLS verification using the enviromental variable below in your provisioning command:
+    
+    ``` shell
+    -e ORB_TLS_VERIFY=false
+    ```
+
+    Check an example [here](/documentation/running_orb_agent/#sample-provisioning-commands).
+
+7. Paste the *Provisioning Command* into a terminal on the node where you want your agent to run (optionally edit "mock" to be the real interface name) and run the command. See [Running Orb Agent](documentation/running_orb_agent.md) for more details.
 8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The agent you just created should display an *Online* status.  
 ![Agent List: agent online](./img/agent_online.png)  
 9. Optionally, click the agent's name to view the *Agent View* screen. This screen will contain more information as you add the agent to an agent group and add corresponding policies and datasets.  
