@@ -100,9 +100,9 @@ For handlers that have metric groups, the metric groups that must be enabled for
     
     | Metric                                                                                                                 | Prometheus Name                     | Metric Groups |
     |------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------|
-    | Quantiles of all DNS wire packets before filtering per second	                                                         | dns_rates_events                    | any group*    |
-    | Count of all DNS wire packets before filtering per second		                                                            | dns_rates_events_count              | any group*    |
-    | Total sum of rates for DNS packets processed by policy	                                                                | dns_rates_events_sum                | any group*    |
+    | Quantiles of all DNS wire packets before filtering per second	                                                         | dns_rates_observed_pps              | any group*    |
+    | Count of all DNS wire packets before filtering per second		                                                         | dns_rates_observed_pps_count        | any group*    |
+    | Total sum of rates for DNS packets processed by policy	                                                             | dns_rates_observed_pps_sum          | any group*    |
     | Total DNS transactions (query/reply pairs) with the AD flag set in the response                                        | dns_authenticated_data_xacts        | counters      |
     | Total DNS transactions (query/reply pairs) with the AA flag set in the response                                        | dns_authoritative_answer_xacts      | counters      |
     | Cardinality of unique QNAMES, both ingress and egress	                                                                 | dns_cardinality_qname               | cardinality   |
