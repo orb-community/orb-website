@@ -484,6 +484,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
 ### DNS Analyzer (dns)
 
 - [Example of policy](#DnsPolicyExample)
+- [Metrics Group](#dnsv1_metrics_group)
 - [Filters](#dns_filters_v1)
 - [Configurations](#dns_configurations)
 
@@ -615,7 +616,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    #### Metrics Group - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br>
+    #### Metrics Group - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br> <a name="dnsv1_metrics_group"></a>
 
         
     |     Metric Group     | Default  |
@@ -1222,7 +1223,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    #### Metrics Group  - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br>
+    #### Metrics Group  - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br> <a name="dnsv2_metrics_group"></a>
     
     | Metric Group  | Default  |
     |:-------------:|:--------:|
@@ -1737,6 +1738,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
 ### Network (L2-L3) Analyzer (net)
 
 - [Example of policy](#NetPolicyExample)
+- [Metrics Group](#netv1_metrics_group)
 - [Filters](#net_filters_v1)
 - [Configurations](#net_configurations)
 
@@ -1859,7 +1861,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     
     **Handler Type**: "net" <br>
     
-    #### Metrics Group  - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br>
+    #### Metrics Group  - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br> <a name="netv1_metrics_group"></a>
     
     | Metric Group  | Default | 
     |:-------------:|:-------:|
@@ -2124,7 +2126,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     
     **Handler Type**: "net" <br>
     
-    #### Metrics Group - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br>
+    #### Metrics Group - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br> <a name="netv2_metrics_group"></a>
     
     | Metric Group  | Default | 
     |:-------------:|:-------:|
@@ -2290,6 +2292,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 ### DHCP Analyzer (dhcp)
 
 - [Example of policy](#DhcpPolicyExample)
+- [Metrics Group](#dhcp_metrics_group)
 - [Filters](#dhcp_filters)
 - [Configurations](#dhcp_configurations)
 
@@ -2373,7 +2376,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "dhcp" <br>
 
-#### Metrics Group - <font size="1">[Check dhcp metrics](/documentation/pktvisor_metrics/#dhcp-metrics)</font><br>
+#### Metrics Group - <font size="1">[Check dhcp metrics](/documentation/pktvisor_metrics/#dhcp-metrics)</font><br> <a name="dhcp_metrics_group"></a>
 
 - No metrics group available <br>
 
@@ -2387,6 +2390,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 ### BGP Analyzer (bgp)
 
 - [Example of policy](#BgpPolicyExample)
+- [Metrics Group](#bgp_metrics_group)
 - [Filters](#bgp_filters)
 - [Configurations](#bgp_configurations)
 
@@ -2476,7 +2480,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "bgp" <br>
 
-#### Metrics Group - <font size="1">[Check BGP metrics](/documentation/pktvisor_metrics/#bgp-metrics)</font><br>
+#### Metrics Group - <font size="1">[Check BGP metrics](/documentation/pktvisor_metrics/#bgp-metrics)</font><br> <a name="bgp_metrics_group"></a>
 
 - No metrics group available <br>
 
@@ -2491,6 +2495,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 ### Packet Capture Analyzer (pcap)
 
 - [Example of policy](#PcapPolicyExample)
+- [Metrics Group](#pcap_metrics_group)
 - [Filters](#pcap_filters)
 - [Configurations](#pcap_configurations)
 
@@ -2562,7 +2567,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "pcap" <br>
 
-#### Metrics Group - <font size="1">[Check pcap metrics](/documentation/pktvisor_metrics/#pcap-metrics)</font><br>
+#### Metrics Group - <font size="1">[Check pcap metrics](/documentation/pktvisor_metrics/#pcap-metrics)</font><br> <a name="pcap_metrics_group"></a>
 - No metrics group available. <br>
 
 
@@ -2581,6 +2586,7 @@ The `recorded_stream` configuration usage syntax is:<br>
     Status: `Beta`. The metric names and configuration options may still change
 
 - [Example of policy](#FlowPolicyExample)
+- [Metrics Group](#flow_metrics_group)
 - [Filters](#flow_filters)
 - [Configurations](#flow_configurations)
 
@@ -2699,7 +2705,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "flow" <br>
 
-#### Metrics Group - <font size="1">[Check the flow metrics belonging to each group](/documentation/pktvisor_metrics/#flow-metrics-beta)</font><br>
+#### Metrics Group - <font size="1">[Check the flow metrics belonging to each group](/documentation/pktvisor_metrics/#flow-metrics-beta)</font><br> <a name="flow_metrics_group"></a>
 
 |   Metric Group   | Default  | 
 |:----------------:|:--------:|
@@ -3020,6 +3026,7 @@ The `recorded_stream` configuration usage syntax is:<br>
     Status: `Beta`. The metric names and configuration options may still change
 
 - [Example of policy](#NetprobePolicyExample)
+- [Metrics Group](#netprobe_metrics_group)
 - [Filters](#netprobe_filters)
 - [Configurations](#netprobe_configurations)
 
@@ -3098,7 +3105,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "netprobe" <br>
 
-#### Metrics Group - <font size="1">[Check the netprobe metrics belonging to each group](/documentation/pktvisor_metrics/#netprobe-metrics-beta)</font><br>
+#### Metrics Group - <font size="1">[Check the netprobe metrics belonging to each group](/documentation/pktvisor_metrics/#netprobe-metrics-beta)</font><br> <a name="netprobe_metrics_group"></a>
 
 
 | Metric Group | Default  | 
