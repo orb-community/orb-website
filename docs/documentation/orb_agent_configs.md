@@ -172,19 +172,21 @@ The following inputs are supported: `pcap`, `flow`, `dnstap` and `netprobe`. For
     ```
 <br>
 
-#### Configurations
+#### Configurations <a name="input_pcap_configurations"></a><br>
 
 There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
 
-|   Config    | Type |
-|:-----------:|:-----|
-|  pcap_file  | str  |
-| pcap_source | str  |
-|    iface    | str  |
-|  host_spec  | str  |
-|    debug    | bool |
+|                 Config                 | Type |
+|:--------------------------------------:|:-----|
+|   [pcap_file](#pcap_file_input_pcap)   | str  |
+| [pcap_source](#pcap_source_input_pcap) | str  |
+|    [iface](#pcap_source_input_pcap)    | str  |
+|   [host_spec](#host_spec_input_pcap)   | str  |
+|       [debug](#debug_input_pcap)       | bool |
 
-`pcap_file`: *str* <br>
+**pcap_file**: *str* <a name="pcap_file_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
+
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
 
 === "YAML"
@@ -193,17 +195,9 @@ pcap_file: "path/to/file"
 ```
 
 <br>
-`debug`: *bool* <br>
 
-When `true` activate debug logs
-
-=== "YAML"
-```yaml
-debug: true
-```
-
-<br>
-`pcap_source`: *str* <br>
+**pcap_source**: *str* <a name="pcap_source_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
 
 `pcap_source` specifies the type of library to use. Default: libpcap. Options: libpcap or af_packet (linux).
 
@@ -213,7 +207,9 @@ pcap_source: "af_packet"
 ```
 
 <br>
-`iface`: *str* <br>
+
+**iface**: *str* <a name="iface_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
 
 Name of the interface to bind.
 
@@ -236,8 +232,9 @@ iface: eth0
     ```
 
 
-<br>
-`host_spec`: *str* <br>
+
+**host_spec**: *str* <a name="host_spec_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
 The `host_spec` setting is useful to determine the direction of observed packets, once knowing the host ip, it is possible to determine the data flow direction, ie if they are being sent by the observed host (from host) or received (to host). <br>
 
 === "YAML"
@@ -249,14 +246,30 @@ Example:
 host_spec: "192.168.0.1/24"
 ```
 
-#### Filters
-
-There is only one filter referring to the input PCAP: `bpf`.
-
 <br>
-`bpf`: *str* <br>
 
-filter data based on Berkeley Packet Filters (BPF).
+**debug**: *bool* <a name="debug_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
+
+When `true` activate debug logs
+
+=== "YAML"
+```yaml
+debug: true
+```
+
+
+#### Filters <a name="input_pcap_filters"></a><br>
+
+
+|          Filter          | Type |
+|:------------------------:|:-----|
+| [`bpf`](#bpf_input_pcap) | str  |
+
+**bpf:** *str* <a name="bpf_input_pcap"></a><br>
+<font size="1">[Back to pcap filters list](#input_pcap_filters)</font>
+
+`bpf` filter data based on Berkeley Packet Filters (BPF).
 
 === "YAML"
 ```yaml
@@ -284,19 +297,20 @@ bpf: "port 53"
     ```
 <br>
 
-#### Configurations
+#### Configurations <a name="input_flow_configurations"></a><br>
 
-There are 4 configs for flow inputs: `port`, `bind` and `flow_type`. `pcap_file` and `port+bind` are mutually exclusive and one of them must exist.
+There are 3 configs for flow inputs: `port`, `bind` and `flow_type`.
 
-|  Config   | Type |
-|:---------:|:-----|
-|   port    | int  |
-|   bind    | str  |
-| flow_type | str  |
+|               Config               | Type |
+|:----------------------------------:|:-----|
+|   [port](#port_bind_input_flow)    | int  |
+|   [bind](#port_bind_input_flow)    | str  |
+| [flow_type](#flow_type_input_flow) | str  |
 
 
 
-`port`: *int* and `bind`: *str* <br>
+**port**: *int* and **bind**: *str* <a name="port_bind_input_flow"></a><br>
+<font size="1">[Back to sFlow/Netflow filters list](#input_flow_configurations)</font>
 
 The other option for using flow is specifying a port AND an ip to bind (only udp bind is supported). Note that, in this case, both variables must be set.
 
@@ -312,7 +326,9 @@ bind: 192.168.1.1
 ```
 
 <br>
-`flow_type`: *str* <br>
+
+**flow_type**: *str* <a name="flow_type_input_flow"></a><br>
+<font size="1">[Back to sFlow/Netflow filters list](#input_flow_configurations)</font>
 
 Default: sflow. options: sflow or netflow (ipfix is supported on netflow). <br><br>
 
@@ -347,17 +363,18 @@ There are no specific filters for the FLOW input.<br><br>
     ```
 <br>
 
-#### Configurations
+#### Configurations <a name="input_dnstap_configurations"></a><br>
 
 The 3 existing DNSTAP configurations (`dnstap_file`, `socket` and `tcp`) are mutually exclusive, that is, only one can be used in each input and one of them must exist. They are arranged in order of priority. <br>
 
-|   Config    | Type |
-|:-----------:|:-----|
-| dnstap_file | str  |
-|   socket    | int  |
-|     tcp     | str  |
+|                  Config                  | Type |
+|:----------------------------------------:|:-----|
+| [dnstap_file](#dnstap_file_input_dnstap) | str  |
+|      [socket](#socket_input_dnstap)      | int  |
+|         [tcp](#tcp_input_dnstap)         | str  |
 
-`dnstap_file`: *str* <br>
+**dnstap_file**: *str* <a name="dnstap_file_input_dnstap"></a><br>
+<font size="1">[Back to dnstap configurations list](#input_dnstap_configurations)</font>
 
 One option of using pktvisor is for reading existing network data files. In this case, the path to the file must be passed. This variable is dominant, so if a file is passed, pktvisor will do the entire process based on the file. <br>
 
@@ -367,7 +384,9 @@ dnstap_file: path/to/file
 ```
 
 <br>
-`socket`: *str* <br>
+
+**socket**: *str* <a name="socket_input_dnstap"></a><br>
+<font size="1">[Back to dnstap configurations list](#input_dnstap_configurations)</font>
 
 Path to socket file containing port and ip to bind
 
@@ -377,7 +396,9 @@ socket: path/to/file.sock
 ```
 
 <br>
-`tcp`: *str* <br>
+
+**tcp**: *str* <a name="tcp_input_dnstap"></a><br>
+<font size="1">[Back to dnstap configurations list](#input_dnstap_configurations)</font>
 
 The other way to inform the ip and port to be monitored is through the 'tcp' configuration. Usage syntax is a string with port:ip (only ipv4 is supported for now). <br>
 
@@ -391,9 +412,16 @@ tcp: 192.168.8.2:235
 ```
 
 <br>
-#### Filters
 
-`only_hosts`: *str* <br>
+#### Filters <a name="input_dnstap_filters"></a><br>
+
+
+|                  Filter                  | Type |
+|:----------------------------------------:|:-----|
+| [`only_hosts`](#only_hosts_input_dnstap) | str  |
+
+**only_hosts**: *str* <a name="only_hosts_input_dnstap"></a><br>
+<font size="1">[Back to dnstap filters list](#input_dnstap_filters)</font>
 
 `only_hosts` filters data from a specific host.
 
@@ -432,23 +460,24 @@ only_hosts: 192.168.1.4/32
     ```
 <br>
 
-#### Configurations
+#### Configurations <a name="input_netprobe_configurations"></a><br>
 
 The following configs are available for netprobe inputs: `test_type`, `interval_msec`, `timeout_msec`, `packets_per_test`, `packets_interval_msec`, `packet_payload_size`. 
 
-|        Config         | Type | Required | Default |
-|:---------------------:|:----:|:--------:|:-------:|
-|       test_type       | str  |    ✅     |    -    |
-|     interval_msec     | int  |    ❌     |  5000   |
-|     timeout_msec      | int  |    ❌     |  2000   |
-|   packets_per_test    | int  |    ❌     |    1    |
-| packets_interval_msec | int  |    ❌     |   25    |
-|  packet_payload_size  | int  |    ❌     |   48    |
-|        targets        | map  |    ✅     |    -    |
+|                             Config                             | Type | Required | Default |
+|:--------------------------------------------------------------:|:----:|:--------:|:-------:|
+|             [test_type](#test_type_input_netprobe)             | str  |    ✅     |    -    |
+|         [interval_msec](#interval_msec_input_netprobe)         | int  |    ❌     |  5000   |
+|         [timeout_msec](#interval_msec_input_netprobe)          | int  |    ❌     |  2000   |
+|      [packets_per_test](#packets_per_test_input_netprobe)      | int  |    ❌     |    1    |
+| [packets_interval_msec](#packets_interval_msec_input_netprobe) | int  |    ❌     |   25    |
+|   [packet_payload_size](#packet_payload_size_input_netprobe)   | int  |    ❌     |   48    |
+|               [targets](#targets_input_netprobe)               | map  |    ✅     |    -    |
 
 
 
-`test_type`: *str*<br>
+**test_type**: *str* <a name="test_type_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Defines the type of the test to be performed. Type options are listed below:
 
@@ -465,7 +494,8 @@ test_type: ping
 
 <br>
 
-`interval_msec`: *int* <br>
+**interval_msec**: *int* <a name="interval_msec_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 How often to run the probe (in milliseconds). <br><br>
 
@@ -480,7 +510,8 @@ interval_msec: 5000
 
 <br>
 
-`timeout_msec`: *int* <br>
+**timeout_msec**: *int* <a name="timeout_msec_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Probe timeout (in milliseconds). <br><br>
 
@@ -495,7 +526,8 @@ timeout_msec: 2000
 
 <br>
 
-`packets_per_test`: *int* <br>
+**packets_per_test**: *int* <a name="packets_per_test_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Number of packets to be sent in each test.
 
@@ -510,7 +542,8 @@ packets_per_test: 1
 
 <br>
 
-`packets_interval_msec`: *int* <br>
+**packets_interval_msec**: *int* <a name="packets_interval_msec_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Time interval between packets per test (in milliseconds).
 
@@ -526,7 +559,8 @@ packets_interval_msec: 25
 
 <br>
 
-`packet_payload_size`: *int* <br>
+**packet_payload_size**: *int* <a name="packet_payload_size_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Defines the payload of the packets sent in the tests.
 
@@ -542,7 +576,8 @@ packet_payload_size: 48
 
 <br>
 
-`targets`: *map* <br>
+**targets**: *map* <a name="targets_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
 
 Here, the targets against which the probe will run are defined.
 For each target is required to specify the target name and the address to be tested.

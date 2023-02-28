@@ -55,7 +55,7 @@ The `tags` usage syntax is:<br>
     ```
 
 - **Backend**<br><br>
-Backend determine to which backend the policy will be attached. Check the available backends [here](/documentation/orb_agent_configs). <br><br>
+Backend determine to which backend the policy will be attached. Check the available backends [here](/documentation/orb_agent_configs/#backends). <br><br>
 
 - **Schema version**<br><br>
 Each backend supported on Orb must have a policy schema to be validated, parsed and applied. `schema_version` is the field responsible for allowing different schema versions and backward compatibility. Default should be "1.0".<br><br>
@@ -109,7 +109,7 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
 
 ### Default input structure
 
-*Using specific tap ([check the application in a policy here](#examples-of-dns-policy)):*
+*Using specific tap ([check the application in a policy here](#DnsPolicyExample)):*
 
 === "YAML"
     ```yaml
@@ -135,7 +135,7 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
     }
     ```
 
-*or using tap selector matching any ([check the application in a policy here](#examples-of-net-policy)):*
+*or using tap selector matching any ([check the application in a policy here](#NetPolicyExample)):*
 
 === "YAML"
     ```yaml
@@ -173,7 +173,7 @@ If `tap_selector` is used, it can be chosen whether taps with any of the tags or
       }
     }
     ```
-*or using tap selector matching all ([check the application in a policy here](#examples-of-dhcp-policy)):*
+*or using tap selector matching all ([check the application in a policy here](#DhcpPolicyExample)):*
 
 === "YAML"
     ```yaml
@@ -397,15 +397,16 @@ To disable all metric groups use the syntax:
 
 There are general configurations, which can be applied to all handlers. These settings can be reset for each module, within the specific module configs. In this case, the configuration inside the module will override the configuration passed in general handler. <br>
 
-|   Abstract Configuration    | Type  |     Default      |
-|:---------------------------:|:-----:|:----------------:|
-|     `deep_sample_rate`      | *int* | 100 (per second) |
-|        `num_periods`        | *int* |        5         |
-|        `topn_count`         | *int* |        10        |
- | `topn_percentile_threshold` | *int* |        0         |
+|                  Abstract Configuration                   | Type  |     Default      |
+|:---------------------------------------------------------:|:-----:|:----------------:|
+|          [`deep_sample_rate`](#deep_sample_rate)          | *int* | 100 (per second) |
+|               [`num_periods`](#num_periods)               | *int* |        5         |
+|                [`topn_count`](#topn_count)                | *int* |        10        |
+ | [`topn_percentile_threshold`](#topn_percentile_threshold) | *int* |        0         |
 
 
-**deep_sample_rate** <br>
+**deep_sample_rate** <a name="deep_sample_rate"></a><br>
+<font size="1">[Back to Top - Abstract Configurations](#abstract-configurations)</font>
 
 `deep_sample_rate` determines the number of data packets that will be analyzed deeply per second. Some metrics are operationally expensive to generate, such as metrics that require string parsing (qname2, qtype, etc.). For this reason, a maximum number of packets per second to be analyzed is determined. If in one second fewer packages than the maximum amount are transacted, all packages will compose the deep metrics sample, if there are more packages than the established one, the value of the variable will be used. Allowed values are in the range [1,100]. Default value is 100. <br>
 !!! Note
@@ -424,7 +425,8 @@ The `deep_sample_rate` usage syntax is:<br>
       "deep_sample_rate": int
     }
     ```
-**num_periods** <br>
+**num_periods** <a name="num_periods"></a><br>
+<font size="1">[Back to Top - Abstract Configurations](#abstract-configurations)</font>
 
 `num_periods` determines the amount of minutes of data that will be available on the metrics endpoint. Allowed values are in the range [2,10]. Default value is 5. <br>
 
@@ -441,7 +443,8 @@ The `num_periods` usage syntax is:<br>
     }
     ```
 
-**topn_count** <br>
+**topn_count** <a name="topn_count"></a><br>
+<font size="1">[Back to Top - Abstract Configurations](#abstract-configurations)</font>
 
 `topn_count` sets the maximum amount of elements displayed in top metrics. If there is less quantity than the configured value, the composite metrics will have the existing value. But if there are more metrics than the configured value, the variable will be actively limiting. Any positive integer is valid and the default value is 10. <br>
 
@@ -458,7 +461,8 @@ The `topn_count` usage syntax is:<br>
     }
     ```
 
-**topn_percentile_threshold** <br>
+**topn_percentile_threshold** <a name="topn_percentile_threshold"></a><br>
+<font size="1">[Back to Top - Abstract Configurations](#abstract-configurations)</font>
 
 `topn_percentile_threshold` sets the threshold of data to be considered based on the percentiles, so allowed values are in the range [0,100].
 The default value is 0, that is, all data is considered. If, for example, the value 10 is set, scraped topn metrics will only consider data from the 10th percentile, that is, data between the highest 90%.
@@ -479,9 +483,13 @@ The `topn_percentile_threshold` usage syntax is:<br>
 
 ### DNS Analyzer (dns)
 
+- [Example of policy](#DnsPolicyExample)
+- [Filters](#dns_filters_v1)
+- [Configurations](#dns_configurations)
+
 === " DNS(v1)"
     
-    ###### Example of policy with input pcap and handler DNS(v1)
+    ###### Example of policy with input pcap and handler DNS(v1) <a name="DnsPolicyExample"></a>
     
         
     === "YAML"
@@ -607,7 +615,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    #### Metrics Group <br>
+    #### Metrics Group - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br>
+
         
     |     Metric Group     | Default  |
     |:--------------------:|:--------:|
@@ -620,26 +629,27 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |     `top_ports`      | enabled  |
 
     
-    #### Filters <br>
+    #### Filters <a name="dns_filters_v1"></a><br>
     
             
-    |         Filter         |  Type   | Input  |
-    |:----------------------:|:-------:|:------:|
-    |      `only_rcode`      | *str[]* |  PCAP  |
-    |   `exclude_noerror`    | *bool*  |  PCAP  |
-    | `only_dnssec_response` | *bool*  |  PCAP  |
-    |     `answer_count`     |  *int*  |  PCAP  |
-    |      `only_qtype`      | *str[]* |  PCAP  |
-    |      `only_qname`      | *str[]* |  PCAP  |
-    |  `only_qname_suffix`   | *str[]* |  PCAP  |
-    |   `geoloc_notfound`    | *bool*  |  PCAP  |
-    |     `asn_notfound`     | *bool*  |  PCAP  |
-    |     `only_queries`     | *bool*  |  PCAP  |
-    |    `only_responses`    | *bool*  |  PCAP  |
-    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    |                       Filter                       |  Type   | Input  |
+    |:--------------------------------------------------:|:-------:|:------:|
+    |           [`only_rcode`](#only_rcode_v1)           | *str[]* |  PCAP  |
+    |      [`exclude_noerror`](#exclude_noerror_v1)      | *bool*  |  PCAP  |
+    | [`only_dnssec_response`](#only_dnssec_response_v1) | *bool*  |  PCAP  |
+    |         [`answer_count`](#answer_count_v1)         |  *int*  |  PCAP  |
+    |           [`only_qtype`](#only_qtype_v1)           | *str[]* |  PCAP  |
+    |           [`only_qname`](#only_qname_v1)           | *str[]* |  PCAP  |
+    |    [`only_qname_suffix`](#only_qname_suffix_v1)    | *str[]* |  PCAP  |
+    |      [`geoloc_notfound`](#geoloc_notfound_v1)      | *bool*  |  PCAP  |
+    |         [`asn_notfound`](#asn_notfound_v1)         | *bool*  |  PCAP  |
+    |         [`only_queries`](#only_queries_v1)         | *bool*  |  PCAP  |
+    |       [`only_responses`](#only_responses_v1)       | *bool*  |  PCAP  |
+    |      [`dnstap_msg_type`](#dnstap_msg_type_v1)      |  *str*  | DNSTAP |
     
     
-    **only_rcode:** *str[]*. <br>
+    **only_rcode:** *str[]*. <a name="only_rcode_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -704,7 +714,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
     
-    **exclude_noerror:** *bool* <br>
+    **exclude_noerror:** *bool* <a name="exclude_noerror_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -725,7 +736,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
     
-    **only_dnssec_response:** *bool* <br>
+    **only_dnssec_response:** *bool* <a name="only_dnssec_response_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -745,7 +757,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **answer_count:** *int* <br>
+    **answer_count:** *int* <a name="answer_count_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -776,7 +789,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
     
-    **only_qtype:** *str[]* <br>
+    **only_qtype:** *str[]* <a name="only_qtype_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -849,7 +863,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     <br>
 
-    **only_qname:** *str[]* <br>
+    **only_qname:** *str[]* <a name="only_qname_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -890,7 +905,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     <br>
 
-    **only_qname_suffix:** *str[]* <br>
+    **only_qname_suffix:** *str[]* <a name="only_qname_suffix_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -945,7 +961,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **geoloc_notfound:** *bool* <br>
+    **geoloc_notfound:** *bool* <a name="geoloc_notfound_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -965,7 +982,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **asn_notfound:** *bool* <br>
+    **asn_notfound:** *bool* <a name="asn_notfound_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -987,7 +1005,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     <br>
 
 
-    **only_queries:** *bool* <br>
+    **only_queries:** *bool* <a name="only_queries_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -1009,7 +1028,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
 
 
 
-    **only_responses:** *bool* <br>
+    **only_responses:** *bool* <a name="only_responses_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -1029,7 +1049,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     <br>
 
 
-    **dnstap_msg_type:** *str* <br>
+    **dnstap_msg_type:** *str* <a name="dnstap_msg_type_v1"></a><br>
+    <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
     
     Input: DNSTAP <br>
     
@@ -1201,7 +1222,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     **Handler Type**: "dns" <br>
     
-    #### Metrics Group <br>
+    #### Metrics Group  - <font size="1">[Check the dns metrics belonging to each group](/documentation/pktvisor_metrics/#dns-metrics)</font><br>
     
     | Metric Group  | Default  |
     |:-------------:|:--------:|
@@ -1218,24 +1239,25 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
 
     
-    #### Filters <br>
+    #### Filters <a name="dns_filters_v2"></a><br>
     
     
-    |         Filter         |  Type   | Input  |
-    |:----------------------:|:-------:|:------:|
-    |      `only_rcode`      |  *str[]*  |  PCAP  |
-    |   `exclude_noerror`    | *bool*  |  PCAP  |
-    | `only_dnssec_response` | *bool*  |  PCAP  |
-    |     `answer_count`     |  *int*  |  PCAP  |
-    |      `only_qtype`      | *str[]* |  PCAP  |
-    |      `only_qname`      | *str[]* | PCAP |
-    |  `only_qname_suffix`   | *str[]* |  PCAP  |
-    |   `geoloc_notfound`    | *bool*  |  PCAP  |
-    |     `asn_notfound`     | *bool*  |  PCAP  |
-    |   `dnstap_msg_type`    |  *str*  | DNSTAP |
+    |                       Filter                       |  Type   | Input  |
+    |:--------------------------------------------------:|:-------:|:------:|
+    |           [`only_rcode`](#only_rcode_v2)           | *str[]* |  PCAP  |
+    |      [`exclude_noerror`](#exclude_noerror_v2)      | *bool*  |  PCAP  |
+    | [`only_dnssec_response`](#only_dnssec_response_v2) | *bool*  |  PCAP  |
+    |         [`answer_count`](#answer_count_v2)         |  *int*  |  PCAP  |
+    |           [`only_qtype`](#only_qtype_v2)           | *str[]* |  PCAP  |
+    |           [`only_qname`](#only_qname_v2)           | *str[]* |  PCAP  |
+    |    [`only_qname_suffix`](#only_qname_suffix_v2)    | *str[]* |  PCAP  |
+    |      [`geoloc_notfound`](#geoloc_notfound_v2)      | *bool*  |  PCAP  |
+    |         [`asn_notfound`](#asn_notfound_v2)         | *bool*  |  PCAP  |
+    |      [`dnstap_msg_type`](#dnstap_msg_type_v2)      |  *str*  | DNSTAP |
     
     
-    **only_rcode:** *str[]*. <br>
+    **only_rcode:** *str[]*. <a name="only_rcode_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1300,7 +1322,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
     
-    **exclude_noerror:** *bool* <br>
+    **exclude_noerror:** *bool* <a name="exclude_noerror_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1321,7 +1344,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
     
-    **only_dnssec_response:** *bool* <br>
+    **only_dnssec_response:** *bool* <a name="only_dnssec_response_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1341,7 +1365,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **answer_count:** *int* <br>
+    **answer_count:** *int* <a name="answer_count_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1372,7 +1397,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Important information is that only one answer_count is possible for each handler. So, in order to have multiple counts on the same policy, multiple handlers must be created, each with an amount of answers.
     
-    **only_qtype:** *str[]* <br>
+    **only_qtype:** *str[]* <a name="only_qtype_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1445,7 +1471,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     <br>
 
-    **only_qname:** *str[]* <br>
+    **only_qname:** *str[]* <a name="only_qname_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1486,7 +1513,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     <br>
 
-    **only_qname_suffix:** *str[]* <br>
+    **only_qname_suffix:** *str[]* <a name="only_qname_suffix_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1541,7 +1569,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **geoloc_notfound:** *bool* <br>
+    **geoloc_notfound:** *bool* <a name="geoloc_notfound_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1561,7 +1590,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **asn_notfound:** *bool* <br>
+    **asn_notfound:** *bool* <a name="asn_notfound_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -1581,7 +1611,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     <br>
-    **dnstap_msg_type:** *str* <br>
+    **dnstap_msg_type:** *str* <a name="dnstap_msg_type_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
     
     Input: DNSTAP <br>
     
@@ -1612,14 +1643,15 @@ The `topn_percentile_threshold` usage syntax is:<br>
         ```
     <br>
 
-#### Configurations <br>
-- public_suffix_list: *bool*.
-- recorded_stream: *bool*. 
-- xact_ttl_secs: *int*.
-- xact_ttl_ms: *int*.
-- Abstract configurations. <br><br>
+#### Configurations <a name="dns_configurations"></a><br>
+- [public_suffix_list](#public_suffix_list): *bool*.
+- [recorded_stream](#recorded_stream): *bool*. 
+- [xact_ttl_secs](#xact_ttl): *int*.
+- [xact_ttl_ms](#xact_ttl): *int*.
+- [Abstract configurations](#abstract-configurations). <br><br>
 
-**public_suffix_list** <br>
+**public_suffix_list** <a name="public_suffix_list"></a><br>
+<font size="1">[Back to DNS configurations list](#dns_configurations)</font>
 
 Some names to be resolved by a dns server have public suffixes. These suffixes cause metrics to be generated considering non-relevant data. <br>
 
@@ -1646,9 +1678,10 @@ The `public_suffix_list` configuration usage syntax is:<br>
     }
     ```
 
-**recorded_stream** <br>
+**recorded_stream** <a name="recorded_stream"></a><br>
+<font size="1">[Back to DNS configurations list](#dns_configurations)</font>
 
-This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#pcap_file_input_pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
 
 The `recorded_stream` configuration usage syntax is:<br>
 
@@ -1664,7 +1697,8 @@ The `recorded_stream` configuration usage syntax is:<br>
     }
     ```
 
-**xact_ttl_ms** OR **xact_ttl_secs** <br>
+**xact_ttl_ms** OR **xact_ttl_secs** <a name="xact_ttl"></a><br>
+<font size="1">[Back to DNS configurations list](#dns_configurations)</font>
 
 Both configurations have the same functionality, that is, defines the time to live of transactions, and only change the unit of measurement to be configured. This configuration causes the metrics to be generated for complete transactions (query and response) within the established time limit.<br>
 > - xact_ttl_ms: Defines the time to live of transactions in milliseconds.
@@ -1702,10 +1736,14 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
 
 ### Network (L2-L3) Analyzer (net)
 
+- [Example of policy](#NetPolicyExample)
+- [Filters](#net_filters_v1)
+- [Configurations](#net_configurations)
+
 
 === "NET(v1)"
 
-    ###### Example of policy with input pcap and handler NET(v1)
+    ###### Example of policy with input pcap and handler NET(v1) <a name="NetPolicyExample"></a>
 
     === "YAML"
         ```yaml
@@ -1821,7 +1859,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     
     **Handler Type**: "net" <br>
     
-    #### Metrics Group <br>
+    #### Metrics Group  - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br>
     
     | Metric Group  | Default | 
     |:-------------:|:-------:|
@@ -1833,16 +1871,17 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     <br>
     
     
-    #### Filters <br>
+    #### Filters <a name="net_filters_v1"></a><br>
     
-    |        Filter        |  Type   |    Input     |
-    |:--------------------:|:-------:|:------------:|
-    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
-    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
-    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
-    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    |                     Filter                     |  Type   |    Input     |
+    |:----------------------------------------------:|:-------:|:------------:|
+    |  [`geoloc_notfound`](#geoloc_notfound_net_v1)  | *bool*  | PCAP, DNSTAP |
+    |     [`asn_notfound`](#asn_notfound_net_v1)     | *bool*  | PCAP, DNSTAP |
+    | [`only_geoloc_prefix`](#only_geoloc_prefix_v1) | *str[]* | PCAP, DNSTAP |
+    |    [`only_asn_number`](#only_asn_number_v1)    | *str[]* | PCAP, DNSTAP |
     
-    **geoloc_notfound:** *bool* <br>
+    **geoloc_notfound:** *bool* <a name="geoloc_notfound_net_v1"></a><br>
+    <font size="1">[Back to net-v1 filters list](#net_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -1861,7 +1900,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **asn_notfound:** *bool* <br>
+    **asn_notfound:** *bool* <a name="asn_notfound_net_v1"></a><br>
+    <font size="1">[Back to net-v1 filters list](#net_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -1880,7 +1920,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **only_geoloc_prefix:** *str[]* <br>
+    **only_geoloc_prefix:** *str[]* <a name="only_geoloc_prefix_v1"></a><br>
+    <font size="1">[Back to net-v1 filters list](#net_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -1918,7 +1959,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **only_asn_number:** *str[]* <br>
+    **only_asn_number:** *str[]* <a name="only_asn_number_v1"></a><br>
+    <font size="1">[Back to net-v1 filters list](#net_filters_v1)</font>
     
     Input: PCAP <br>
     
@@ -2082,7 +2124,7 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     
     **Handler Type**: "net" <br>
     
-    #### Metrics Group <br>
+    #### Metrics Group - <font size="1">[Check the net metrics belonging to each group](/documentation/pktvisor_metrics/#network-metrics)</font><br>
     
     | Metric Group  | Default | 
     |:-------------:|:-------:|
@@ -2095,16 +2137,17 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     <br>
     
     
-    #### Filters <br>
+    #### Filters <a name="net_filters_v2"></a><br>
     
-    |        Filter        |  Type   |    Input     |
-    |:--------------------:|:-------:|:------------:|
-    |  `geoloc_notfound`   | *bool*  | PCAP, DNSTAP |
-    |    `asn_notfound`    | *bool*  | PCAP, DNSTAP |
-    | `only_geoloc_prefix` | *str[]* | PCAP, DNSTAP |
-    |  `only_asn_number`   | *str[]* | PCAP, DNSTAP |
+    |                     Filter                     |  Type   |    Input     |
+    |:----------------------------------------------:|:-------:|:------------:|
+    |  [`geoloc_notfound`](#geoloc_notfound_net_v2)  | *bool*  | PCAP, DNSTAP |
+    |     [`asn_notfound`](#asn_notfound_net_v2)     | *bool*  | PCAP, DNSTAP |
+    | [`only_geoloc_prefix`](#only_geoloc_prefix_v2) | *str[]* | PCAP, DNSTAP |
+    |    [`only_asn_number`](#only_asn_number_v2)    | *str[]* | PCAP, DNSTAP |
     
-    **geoloc_notfound:** *bool* <br>
+    **geoloc_notfound:** *bool* <a name="geoloc_notfound_net_v2"></a><br>
+    <font size="1">[Back to net-v2 filters list](#net_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -2123,7 +2166,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **asn_notfound:** *bool* <br>
+    **asn_notfound:** *bool* <a name="asn_notfound_net_v2"></a><br>
+    <font size="1">[Back to net-v2 filters list](#net_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -2142,7 +2186,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **only_geoloc_prefix:** *str[]* <br>
+    **only_geoloc_prefix:** *str[]* <a name="only_geoloc_prefix_v2"></a><br>
+    <font size="1">[Back to net-v2 filters list](#net_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -2180,7 +2225,8 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
     <br>
-    **only_asn_number:** *str[]* <br>
+    **only_asn_number:** *str[]* <a name="only_asn_number_v2"></a><br>
+    <font size="1">[Back to net-v2 filters list](#net_filters_v2)</font>
     
     Input: PCAP <br>
     
@@ -2218,13 +2264,14 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
         }
         ```
 
-#### Configurations <br>
-- recorded_stream: *bool*.
-- Abstract configurations. <br><br>
+#### Configurations <a name="net_configurations"></a><br>
+- [recorded_stream](#recorded_stream_net): *bool*.
+- [Abstract configurations](#abstract-configurations). <br><br>
 
-**recorded_stream** <br>
+**recorded_stream** <a name="recorded_stream_net"></a><br>
+<font size="1">[Back to net configurations list](#net_configurations)</font>
 
-This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#pcap_file_input_pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
 
 The `recorded_stream` configuration usage syntax is:<br>
 
@@ -2242,7 +2289,11 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 ### DHCP Analyzer (dhcp)
 
-###### Example of policy with input pcap and handler DHCP
+- [Example of policy](#DhcpPolicyExample)
+- [Filters](#dhcp_filters)
+- [Configurations](#dhcp_configurations)
+
+###### Example of policy with input pcap and handler DHCP <a name="DhcpPolicyExample"></a>
 
 === "YAML"
     ```yaml
@@ -2322,20 +2373,24 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "dhcp" <br>
 
-#### Metrics Group <br>
+#### Metrics Group - <font size="1">[Check dhcp metrics](/documentation/pktvisor_metrics/#dhcp-metrics)</font><br>
 
 - No metrics group available <br>
 
-#### Configurations <br>
-- Abstract configurations. <br><br>
-
-#### Filters <br>
+#### Filters <a name="dhcp_filters"></a><br>
 - No filters available. <br><br>
+
+#### Configurations <a name="dhcp_configurations"></a><br>
+- [Abstract configurations](#abstract-configurations). <br><br>
 
 
 ### BGP Analyzer (bgp)
 
-###### Example of policy with input pcap and handler BGP
+- [Example of policy](#BgpPolicyExample)
+- [Filters](#bgp_filters)
+- [Configurations](#bgp_configurations)
+
+###### Example of policy with input pcap and handler BGP <a name="BgpPolicyExample"></a>
 
 
 === "YAML"
@@ -2421,20 +2476,25 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "bgp" <br>
 
-#### Metrics Group <br>
+#### Metrics Group - <font size="1">[Check BGP metrics](/documentation/pktvisor_metrics/#bgp-metrics)</font><br>
 
 - No metrics group available <br>
 
-#### Configurations <br>
-- Abstract configurations. <br><br>
 
-#### Filters <br>
+#### Filters <a name="bgp_filters"></a><br>
 - No filters available. <br><br>
+
+#### Configurations <a name="bgp_configurations"></a><br>
+- [Abstract configurations](#abstract-configurations). <br><br>
 
 
 ### Packet Capture Analyzer (pcap)
 
-###### Example of policy with input pcap and handler PCAP
+- [Example of policy](#PcapPolicyExample)
+- [Filters](#pcap_filters)
+- [Configurations](#pcap_configurations)
+
+###### Example of policy with input pcap and handler PCAP <a name="PcapPolicyExample"></a>
 
 === "YAML"
     ```yaml
@@ -2502,14 +2562,15 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "pcap" <br>
 
-#### Metrics Group <br>
+#### Metrics Group - <font size="1">[Check pcap metrics](/documentation/pktvisor_metrics/#pcap-metrics)</font><br>
 - No metrics group available. <br>
 
-#### Configurations <br>
-- Abstract configurations. <br>
 
-#### Filters <br>
+#### Filters <a name="pcap_filters"></a><br>
 - No filters available. <br>
+
+#### Configurations <a name="pcap_configurations"></a><br>
+- [Abstract configurations](#abstract-configurations). <br>
 
 
 
@@ -2519,7 +2580,11 @@ The `recorded_stream` configuration usage syntax is:<br>
 
     Status: `Beta`. The metric names and configuration options may still change
 
-###### Example of policy with input flow and handler FLOW
+- [Example of policy](#FlowPolicyExample)
+- [Filters](#flow_filters)
+- [Configurations](#flow_configurations)
+
+###### Example of policy with input flow and handler FLOW <a name="FlowPolicyExample"></a>
 
 === "YAML"
     ```yaml
@@ -2634,7 +2699,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 **Handler Type**: "flow" <br>
 
-#### Metrics Group <br>
+#### Metrics Group - <font size="1">[Check the flow metrics belonging to each group](/documentation/pktvisor_metrics/#flow-metrics-beta)</font><br>
 
 |   Metric Group   | Default  | 
 |:----------------:|:--------:|
@@ -2649,104 +2714,22 @@ The `recorded_stream` configuration usage syntax is:<br>
 | `conversations`  | disabled |
 | `top_interfaces` | disabled |
 
-<br>
 
-#### Configurations <br>
-- sample_rate_scaling: *bool* <br>
-- first_filter_if_as_label: *bool* <br>
-- device_map: *str[]*
-- recorded_stream: *bool*<br>
-- Abstract configurations. <br><br>
-
-**sample_rate_scaling**
-
-By default, flow metrics are generated by an approximation based on sampling the data. 1 packet every N is analyzed and the prediction of the entire population is made from the sample. If you want to see exactly all the exact data, you can disable `sample_rate_scaling`. <br>
-
-The `sample_rate_scaling` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    sample_rate_scaling: false
-    ```
-=== "JSON"
-    ```json
-    {
-      "sample_rate_scaling": false
-    }
-    ```
-
-**first_filter_if_as_label**
-
-This configuration requires the `only_interfaces` filter to be active (true). If this setting is `true`, the interfaces will be used as labels for the metrics.
-
-The `first_filter_if_as_label` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    first_filter_if_as_label: true
-    ```
-=== "JSON"
-    ```json
-    {
-    "first_filter_if_as_label": true
-    }
-    ```
-
-**device_map**
-
-This configuration allows the user to assign a custom name to devices and/or interfaces.
-You can also set only the device, as long as the pair [custom_name, default_identifier] is passed.
+#### Filters <a name="flow_filters"></a><br>
 
 
-The `device_map` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    device_map:
-      - device_custom_name,device_ip,interface_custom_name,interface_index
-    ```
-=== "JSON"
-    ```json
-    {
-      "device_map": [
-        "device_custom_name,device_ip,interface_custom_name,interface_index"
-      ]
-    }
-    ```
-
-**recorded_stream** <br>
-
-This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#packet-capture-pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
-
-The `recorded_stream` configuration usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    recorded_stream: true
-    ```
-
-=== "JSON"
-    ```json
-    {
-      "recorded_stream": true
-    }
-    ```
+|                   Filter                   |  Type   | Input |
+|:------------------------------------------:|:-------:|:-----:|
+|    [`only_devices`](#only_devices_flow)    | *str[]* | FLOW  |
+|        [`only_ips`](#only_ips_flow)        | *str[]* | FLOW  |
+|      [`only_ports`](#only_ports_flow)      | *str[]* | FLOW  |
+| [`only_interfaces`](#only_interfaces_flow) | *str[]* | FLOW  |
+| [`geoloc_notfound`](#geoloc_notfound_flow) | *bool*  | FLOW  |
+|    [`asn_notfound`](#asn_notfound_flow)    | *bool*  | FLOW  |
 
 
-#### Filters <br>
-
-
-|      Filter       |  Type   | Input |
-|:-----------------:|:-------:|:-----:|
-|  `only_devices`   | *str[]* | FLOW  |
-|    `only_ips`     | *str[]* | FLOW  |
-|   `only_ports`    | *str[]* | FLOW  |
-| `only_interfaces` | *str[]* | FLOW  |
-| `geoloc_notfound` | *bool*  | FLOW  |
-|  `asn_notfound`   | *bool*  | FLOW  |
-
-
-**only_devices:** *str[]* <br>
+**only_devices:** *str[]* <a name="only_devices_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2784,7 +2767,8 @@ The `only_devices` filter usage syntax is:<br>
     }
     ```
 <br>
-**only_ips:** *str[]* <br>
+**only_ips:** *str[]* <a name="only_ips_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2821,7 +2805,8 @@ The `only_ips` filter usage syntax is:<br>
     }
     ```
 <br>
-**only_ports:** *str[]* <br>
+**only_ports:** *str[]* <a name="only_ports_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2860,7 +2845,8 @@ The `only_ports` filter usage syntax is:<br>
     }
     ```
 <br>
-**only_interfaces:** *str* <br>
+**only_interfaces:** *str* <a name="only_interfaces_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2899,7 +2885,8 @@ The `only_interfaces` filter usage syntax is:<br>
     }
     ```
 <br>
-**geoloc_notfound:** *bool* <br>
+**geoloc_notfound:** *bool* <a name="geoloc_notfound_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2918,7 +2905,8 @@ The `geoloc_notfound` filter usage syntax is:<br>
     }
     ```
 <br>
-**asn_notfound:** *bool* <br>
+**asn_notfound:** *bool* <a name="asn_notfound_flow"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
@@ -2937,6 +2925,93 @@ The `asn_notfound` filter usage syntax is:<br>
     }
     ```
 
+<br>
+
+#### Configurations <a name="flow_configurations"></a><br>
+- [sample_rate_scaling](#sample_rate_scaling_flow): *bool* <br>
+- [first_filter_if_as_label](#first_filter_if_as_label_flow): *bool* <br>
+- [device_map](#device_map_flow): *str[]*
+- [recorded_stream](#recorded_stream_flow): *bool*<br>
+- [Abstract configurations](#abstract-configurations). <br><br>
+
+**sample_rate_scaling** <a name="sample_rate_scaling_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+By default, flow metrics are generated by an approximation based on sampling the data. 1 packet every N is analyzed and the prediction of the entire population is made from the sample. If you want to see exactly all the exact data, you can disable `sample_rate_scaling`. <br>
+
+The `sample_rate_scaling` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    sample_rate_scaling: false
+    ```
+=== "JSON"
+    ```json
+    {
+      "sample_rate_scaling": false
+    }
+    ```
+
+**first_filter_if_as_label** <a name="first_filter_if_as_label_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration requires the `only_interfaces` filter to be active (true). If this setting is `true`, the interfaces will be used as labels for the metrics.
+
+The `first_filter_if_as_label` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    first_filter_if_as_label: true
+    ```
+=== "JSON"
+    ```json
+    {
+    "first_filter_if_as_label": true
+    }
+    ```
+
+**device_map** <a name="device_map_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration allows the user to assign a custom name to devices and/or interfaces.
+You can also set only the device, as long as the pair [custom_name, default_identifier] is passed.
+
+
+The `device_map` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    device_map:
+      - device_custom_name,device_ip,interface_custom_name,interface_index
+    ```
+=== "JSON"
+    ```json
+    {
+      "device_map": [
+        "device_custom_name,device_ip,interface_custom_name,interface_index"
+      ]
+    }
+    ```
+
+**recorded_stream** <a name="recorded_stream_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration is useful when a [pcap_file](/documentation/orb_agent_configs/#pcap_file_input_pcap) is used in taps/input configuration. Set it to True when you want to load an offline traffic (from a pcap_file). <br>
+
+The `recorded_stream` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    recorded_stream: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "recorded_stream": true
+    }
+    ```
+
 
 ### Netprobe [BETA]
 
@@ -2944,7 +3019,11 @@ The `asn_notfound` filter usage syntax is:<br>
 
     Status: `Beta`. The metric names and configuration options may still change
 
-###### Example of policy with input netprobe and handler NETPROBE
+- [Example of policy](#NetprobePolicyExample)
+- [Filters](#netprobe_filters)
+- [Configurations](#netprobe_configurations)
+
+###### Example of policy with input netprobe and handler NETPROBE <a name="NetprobePolicyExample"></a>
 
 
 === "YAML"
@@ -3019,7 +3098,7 @@ The `asn_notfound` filter usage syntax is:<br>
 
 **Handler Type**: "netprobe" <br>
 
-#### Metrics Group <br>
+#### Metrics Group - <font size="1">[Check the netprobe metrics belonging to each group](/documentation/pktvisor_metrics/#netprobe-metrics-beta)</font><br>
 
 
 | Metric Group | Default  | 
@@ -3029,11 +3108,12 @@ The `asn_notfound` filter usage syntax is:<br>
 | `histograms` | enabled  |
 
 
-#### Configurations <br>
-- Abstract configurations. <br><br>
+#### Filters <a name="netprobe_filters"></a><br>
+- No filters available. <br><br>
+
+
+#### Configurations <a name="netprobe_configurations"></a><br>
+- [Abstract configurations](#abstract-configurations). <br><br>
 - In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_configs/#netprobe) the available configurations for netprobe.
 
-
-#### Filters <br>
-- No filters available. <br><br>
 

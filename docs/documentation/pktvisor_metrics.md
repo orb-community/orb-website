@@ -5,6 +5,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 ## DHCP Metrics
+<font size="1">[Check how to activate dhcp metrics](/documentation/advanced_policies/#dhcp-analyzer-dhcp)</font>
 
 | Metric                                                                                   | Prometheus Name                    |
 |------------------------------------------------------------------------------------------|------------------------------------|
@@ -30,6 +31,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | DORA packet counts                                                                       | dhcp\_wire\_packets\_total         |
 
 ## DNS Metrics
+<font size="1">[Check how to activate/deactivate dns metrics](/documentation/advanced_policies/#dns-analyzer-dns)</font>
 
 
 === "v1"
@@ -156,6 +158,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 ## Network Metrics
+<font size="1">[Check how to activate/deactivate network metrics](/documentation/advanced_policies/#network-l2-l3-analyzer-net)</font>
 
 === "v1"
     
@@ -242,6 +245,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
      | Count of UDP packets                                                    | net_udp_packets              | counters      |             
 
 ## PCAP Metrics
+<font size="1">[Check how to activate pcap metrics](/documentation/advanced_policies/#packet-capture-analyzer-pcap)</font>
 
 | Metric                                        | Prometheus Name               |
 |-----------------------------------------------|-------------------------------|
@@ -251,6 +255,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 ## BGP metrics
+<font size="1">[Check how to activate bgp metrics](/documentation/advanced_policies/#bgp-analyzer-bgp)</font>
 
 | Metric                                                                                | Prometheus Name                   |
 |---------------------------------------------------------------------------------------|-----------------------------------|
@@ -272,6 +277,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 ## Flow metrics [BETA]
+<font size="1">[Check how to activate/deactivate flow metrics](/documentation/advanced_policies/#flow-analyzer-flow-beta)</font>
 
 !!! warning
 
@@ -348,6 +354,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 
 
 ## Netprobe Metrics [BETA]
+<font size="1">[Check how to activate/deactivate netprobe metrics](/documentation/advanced_policies/#netprobe-beta)</font>
 
 !!! warning
 
