@@ -720,7 +720,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Input: PCAP <br>
     
-    You may still want to filter out only responses with any kind of error. For this, there is the `exclude_noerror` filter, which removes from its results all responses that did not return any type of error.
+    The `exclude_noerror` filter removes from its results all responses that did not return any type of error (RCODE=0)
+    
     The `exclude_noerror` filter usage syntax is:<br>
     
     === "YAML"
@@ -735,7 +736,8 @@ The `topn_percentile_threshold` usage syntax is:<br>
         }
         ```
     
-    Attention: the filter of `exclude_noerror` is dominant in relation to the filter of only_rcode, that is, if the filter of `exclude_noerror` is true, even if the filter of only_rcode is set, the results will be composed only by responses without any type of error (all type of errors will be kept). <br>
+    `exclude_noerror` takes precedence over the "only_rcode" filter. If exclude_noerror = True, then the results will be composed only of responses WITH an error, that is, responses with RCODE=0 will not be returned.
+ <br>
     
     **only_dnssec_response:** *bool* <a name="only_dnssec_response_v1"></a><br>
     <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>
