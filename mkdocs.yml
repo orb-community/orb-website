@@ -73,7 +73,7 @@ extra:
       link: "mailto:info@pktvisor.dev"
   analytics:
     provider: google
-    property: UA-41778111-9
+    property: G-XYK19RRHLW
 copyright: Copyright &copy; 2023
 extra_css:
   - stylesheets/extra.css
