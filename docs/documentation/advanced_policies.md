@@ -669,33 +669,33 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Input: PCAP <br>
     
-    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
-    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
-    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+    When a DNS server returns a response to a query made, one of the properties of the response is the "response code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most response codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    Supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
     
-    | DNS Return Code | DNS Return Message |                     Description                     |
-    |:---------------:|:------------------:|:---------------------------------------------------:|
-    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
-    |       `1`       |      FORMERR       |               DNS Query Format Error                |
-    |       `2`       |      SERVFAIL      |      Server failed to complete the DNS request      |
-    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
-    |       `4`       |       NOTIMP       |              Function not implemented               |
-    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
-    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
-    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
-    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
-    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
-    |      `10`       |      NOTZONE       |             Name not contained in zone              |
-    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
-    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
-    |      `17`       |       BADKEY       |                 Key not recognized                  |
-    |      `18`       |      BADTIME       |            Signature out of time window             |
-    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
-    |      `20`       |      BADNAME       |                 Duplicate key name                  |
-    |      `21`       |       BADALG       |               Algorithm not supported               |
-    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
-    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
-    
+    | DNS response code |      Name      |                                                                                                                          Description                                                                                                                          |                         Reference                         |
+    |:-----------------:|:--------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|
+    |        `0`        |    NOERROR     |                                                                                                                      No error condition                                                                                                                       | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `1`        |    FORMERR     |                                                                                               Format error - The name server was unable to interpret the query.                                                                                               | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `2`        |    SRVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `3`        |    NXDOMAIN    |                                                Name Error - Meaningful only for responses from an authoritative name server, this code signifies that the domain name referenced in the query does not exist.                                                 | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `4`        |     NOTIMP     |                                                                                        Not Implemented - The name server does not support the requested kind of query.                                                                                        | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `5`        |    REFUSED     | The name server refuses to perform the specified operation for  policy reasons.  For example, a name server may not wish to provide the information to the particular requester, or a name server may not wish to perform a particular operation (e.g., zone) | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `6`        |    YXDOMAIN    |                                                                                                            Name that should not exist, does exist                                                                                                             | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `7`        |    YXRRSET     |                                                                                                           RR set that should not exist, does exist                                                                                                            | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `8`        |    NXRRSET     |                                                                                                           RR Set that should exist, does not exist                                                                                                            | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `9`        |    NOTAUTH     |                                                                                                      Server Not Authoritative for zone or Not Authorized                                                                                                      | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |       `10`        |    NOTZONE     |                                                                                                                  Name not contained in zone                                                                                                                   | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |       `11`        |   DSOTYPENI    |                                                                                                                   DSO-TYPE Not Implemented                                                                                                                    |       [[RFC8490]](https://www.iana.org/go/rfc8490)        |
+    |       `16`        | BADVERS/BADSIG |                                                                                                           Bad OPT Version or TSIG Signature Failure                                                                                                           | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `17`        |     BADKEY     |                                                                                                                      Key not recognized                                                                                                                       | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `18`        |    BADTIME     |                                                                                                                 Signature out of time window                                                                                                                  | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `19`        |    BADMODE     |                                                                                                                         Bad TKEY Mode                                                                                                                         | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `20`        |    BADNAME     |                                                                                                                      Duplicate key name                                                                                                                       | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `21`        |     BADALG     |                                                                                                                    Algorithm not supported                                                                                                                    | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `22`        |    BADTRUNC    |                                                                                                                        Bad Truncation                                                                                                                         | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `23`        |   BADCOOKIE    |                                                                                                                   Bad/missing Server Cookie                                                                                                                   | [[RFC7873]](https://www.rfc-editor.org/rfc/rfc7873.html)  |
+      
     The `only_rcode` filter usage syntax is:<br>
     
     === "YAML"
@@ -711,7 +711,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
           "only_rcode": ["str", "int"]
         }
         ```
-    with the `int` referring to the return code to be filtered, written as string. <br>
+    with the `int` referring to the response code to be filtered, written as string. <br>
     
     Example: <br>
     If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
@@ -728,7 +728,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
         "only_rcode": ["NXDOMAIN", "2"]
         }
         ```
-    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    Important information is that only one response code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
     
     **exclude_noerror:** *bool* <a name="exclude_noerror_v2"></a><br>
     <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
@@ -1221,33 +1221,33 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Input: PCAP <br>
     
-    When a DNS server returns a response to a query made, one of the properties of the response is the "return code" (rcode), a code that describes what happened to the query that was made. <br>  
-    Most return codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
-    There are several possible return codes for a DNS server response, which you can access [here](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6), but supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
-    
-    | DNS Return Code | DNS Return Message |                     Description                     |
-    |:---------------:|:------------------:|:---------------------------------------------------:|
-    |       `0`       |      NOERROR       |          DNS Query completed successfully           |
-    |       `1`       |      FORMERR       |               DNS Query Format Error                |
-    |       `2`       |      SRVFAIL      |      Server failed to complete the DNS request      |
-    |       `3`       |      NXDOMAIN      |             Domain name does not exist              |
-    |       `4`       |       NOTIMP       |              Function not implemented               |
-    |       `5`       |      REFUSED       |     The server refused to answer for the query      |
-    |       `6`       |      YXDOMAIN      |       Name that should not exist, does exist        |
-    |       `7`       |      YXRRSET       |      RR set that should not exist, does exist       |
-    |       `8`       |      NXRRSET       |      RR Set that should exist, does not exist       |
-    |       `9`       |      NOTAUTH       | Server Not Authoritative for zone or Not Authorized |
-    |      `10`       |      NOTZONE       |             Name not contained in zone              |
-    |      `11`       |     DSOTYPENI      |              DSO-TYPE Not Implemented               |
-    |      `16`       |   BADVERS/BADSIG   |      Bad OPT Version or TSIG Signature Failure      |
-    |      `17`       |       BADKEY       |                 Key not recognized                  |
-    |      `18`       |      BADTIME       |            Signature out of time window             |
-    |      `19`       |      BADMODE       |                    Bad TKEY Mode                    |
-    |      `20`       |      BADNAME       |                 Duplicate key name                  |
-    |      `21`       |       BADALG       |               Algorithm not supported               |
-    |      `22`       |      BADTRUNC      |                   Bad Truncation                    |
-    |      `23`       |     BADCOOKIE      |              Bad/missing Server Cookie              |
-    
+    When a DNS server returns a response to a query made, one of the properties of the response is the "response code" (rcode), a code that describes what happened to the query that was made. <br>  
+    Most response codes indicate why the query failed and when the query succeeds, the return is an RCODE:0, whose name is NOERROR. <br>
+    Supported types are in the table below (if you use any other code that is not in the table below, your policy will fail): <br>
+        
+    | DNS response code |      Name      |                                                                                                                          Description                                                                                                                          |                         Reference                         |
+    |:-----------------:|:--------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|
+    |        `0`        |    NOERROR     |                                                                                                                      No error condition                                                                                                                       | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `1`        |    FORMERR     |                                                                                               Format error - The name server was unable to interpret the query.                                                                                               | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `2`        |    SRVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `3`        |    NXDOMAIN    |                                                Name Error - Meaningful only for responses from an authoritative name server, this code signifies that the domain name referenced in the query does not exist.                                                 | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `4`        |     NOTIMP     |                                                                                        Not Implemented - The name server does not support the requested kind of query.                                                                                        | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `5`        |    REFUSED     | The name server refuses to perform the specified operation for  policy reasons.  For example, a name server may not wish to provide the information to the particular requester, or a name server may not wish to perform a particular operation (e.g., zone) | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `6`        |    YXDOMAIN    |                                                                                                            Name that should not exist, does exist                                                                                                             | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `7`        |    YXRRSET     |                                                                                                           RR set that should not exist, does exist                                                                                                            | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `8`        |    NXRRSET     |                                                                                                           RR Set that should exist, does not exist                                                                                                            | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |        `9`        |    NOTAUTH     |                                                                                                      Server Not Authoritative for zone or Not Authorized                                                                                                      | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |       `10`        |    NOTZONE     |                                                                                                                  Name not contained in zone                                                                                                                   | [[RFC2136]](https://www.rfc-editor.org/rfc/rfc2136.html)  |
+    |       `11`        |   DSOTYPENI    |                                                                                                                   DSO-TYPE Not Implemented                                                                                                                    |       [[RFC8490]](https://www.iana.org/go/rfc8490)        |
+    |       `16`        | BADVERS/BADSIG |                                                                                                           Bad OPT Version or TSIG Signature Failure                                                                                                           | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `17`        |     BADKEY     |                                                                                                                      Key not recognized                                                                                                                       | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `18`        |    BADTIME     |                                                                                                                 Signature out of time window                                                                                                                  | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `19`        |    BADMODE     |                                                                                                                         Bad TKEY Mode                                                                                                                         | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `20`        |    BADNAME     |                                                                                                                      Duplicate key name                                                                                                                       | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `21`        |     BADALG     |                                                                                                                    Algorithm not supported                                                                                                                    | [[RFC2930]](https://www.rfc-editor.org/rfc/rfc2930.html) |
+    |       `22`        |    BADTRUNC    |                                                                                                                        Bad Truncation                                                                                                                         | [[RFC8945]](https://www.rfc-editor.org/rfc/rfc8945.html)  |
+    |       `23`        |   BADCOOKIE    |                                                                                                                   Bad/missing Server Cookie                                                                                                                   | [[RFC7873]](https://www.rfc-editor.org/rfc/rfc7873.html)  |
+        
     The `only_rcode` filter usage syntax is:<br>
     
     === "YAML"
@@ -1263,7 +1263,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
           "only_rcode": ["str", "int"]
         }
         ```
-    with the `int` referring to the return code to be filtered, written as string. <br>
+    with the `int` referring to the response code to be filtered, written as string. <br>
     
     Example: <br>
     If you want to filter only successful queries responses you should use (note that all that the query will be discarded and the result will be just the responses): <br>
@@ -1280,7 +1280,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
         "only_rcode": ["NXDOMAIN", "2"]
         }
         ```
-    Important information is that only one return code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
+    Important information is that only one response code is possible for each handler. So, in order to have multiple filters on the same policy, multiple handlers must be created, each with a rcode type.
     
     **exclude_noerror:** *bool* <a name="exclude_noerror_v1"></a><br>
     <font size="1">[Back to DNS-v1 filters list](#dns_filters_v1)</font>

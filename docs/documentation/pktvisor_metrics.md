@@ -59,16 +59,16 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Total DNS wire packets seen that did not match the configured filter(s) (if any)                                       | dns_filtered_packets                | counters      |
     | Total DNS transactions (query/reply pairs) received over IPv4                                                          | dns_ipv4_xacts                      | counters      |
     | Total DNS transactions (query/reply pairs) received over IPv6                                                          | dns_ipv6_xacts                      | counters      |
-    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR but with an empty answers section | dns_nodata_xacts                    | counters      |
-    | Total DNS transactions (query/reply pairs) flagged as reply with return code NOERROR                                   | dns_noerror_xacts                   | counters      |
-    | Total DNS transactions (query/reply pairs) flagged as reply with return code NXDOMAIN                                  | dns_nxdomain_xacts                  | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with response code NOERROR but with an empty answers section | dns_nodata_xacts                    | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with response code NOERROR                                   | dns_noerror_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with response code NXDOMAIN                                  | dns_nxdomain_xacts                  | counters      |
     | Total DNS wire packets events                                                                                          | dns_observed_packets                | any group*    |
     | Total number of DNS responses that do not have a corresponding query                                                   | dns_orphan_responses                | counters      |
-    | Total DNS transactions (query/reply pairs) flagged as reply with return code REFUSED                                   | dns_refused_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with response code REFUSED                                   | dns_refused_xacts                   | counters      |
     | Quantiles of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio       | top_size      |
     | Count of ratio of packet sizes in a DNS transaction (reply/query)                                                      | dns_response_query_size_ratio_count | top_size      |
     | Total sum of ratio of packet sizes in a DNS transaction (reply/query)                                                  | dns_response_query_size_ratio_sum   | top_size      |
-    | Total DNS transactions (query/reply pairs) flagged as reply with return code SRVFAIL                                   | dns_srvfail_xacts                   | counters      |
+    | Total DNS transactions (query/reply pairs) flagged as reply with response code SRVFAIL                                   | dns_srvfail_xacts                   | counters      |
     | Total DNS transactions (query/reply pairs) received over TCP                                                           | dns_tcp_xacts                       | counters      |
     | Total number of DNS queries that timed out                                                                             | dns_timeout_queries                 | counters      |
     | Top ASNs by ECS                                                                                                        | dns_top_asn_ecs_xacts               | top_ecs       |
