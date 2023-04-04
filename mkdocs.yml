@@ -66,7 +66,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/orb-community/orb
     - icon: fontawesome/brands/docker
-      link: https://hub.docker.com/r/ns1labs
+      link: https://hub.docker.com/r/orbcommunity
     - icon: fontawesome/brands/slack
       link: https://netdev.chat/
     - icon: octicons/mail-24

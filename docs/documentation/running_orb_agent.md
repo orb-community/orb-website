@@ -5,7 +5,7 @@ An Orb agent needs to run on all the infrastructure (computers, servers, switche
 To run an agent, you will need:
 
 
-1. Docker, to run the agent image ([ns1labs/orb-agent:develop](https://hub.docker.com/repository/docker/ns1labs/orb-agent))
+1. Docker, to run the agent image ([orbcommunity/orb-agent:develop](https://hub.docker.com/repository/docker/orbcommunity/orb-agent))
 2. [Agent Credentials](#agent-credentials), which are provided to you by the Orb UI or REST API after [creating an agent](/getting_started/#create-agent-credentials)
 3. The Orb Control Plane host address (e.g. `localhost` or `orb.live`)
 
@@ -50,7 +50,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=<CHANNELID>
         -e ORB_CLOUD_MQTT_KEY=<AGENTKEY>
         -e PKTVISOR_PCAP_IFACE_DEFAULT=auto
-        ns1labs/orb-agent
+        orbcommunity/orb-agent
       ```
       
     === "Localhost, Docker Compose"
@@ -66,7 +66,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=mock
         -e ORB_TLS_VERIFY=false
-        ns1labs/orb-agent
+        orbcommunity/orb-agent
       ```
 
     === "Orb.live, eth0"
@@ -80,7 +80,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent
+        orbcommunity/orb-agent
       ```
 
     === "Specifying agent port"
@@ -95,7 +95,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
         -e ORB_BACKENDS_PKTVISOR_API_PORT=10854
-        ns1labs/orb-agent
+        orbcommunity/orb-agent
       ```
 
     === "🎁 BONUS - Debug"
@@ -109,7 +109,7 @@ The agent credentials include *three pieces of information*, each of which is a 
         -e ORB_CLOUD_MQTT_CHANNEL_ID=3e60e85d-4414-44d9-b564-0c1874898a4d
         -e ORB_CLOUD_MQTT_KEY=44e42d90-aaef-45de-9bc2-2b2581eb30b3
         -e PKTVISOR_PCAP_IFACE_DEFAULT=eth0
-        ns1labs/orb-agent run -d
+        orbcommunity/orb-agent run -d
       ```
 
 !!! question
@@ -180,7 +180,7 @@ is on the host at `/local/orb/agent.yaml`, you can mount it into the container w
 
 ```shell
 docker run -v /local/orb:/opt/orb/ --net=host \
-      ns1labs/orb-agent run -c /opt/orb/agent.yaml
+      orbcommunity/orb-agent run -c /opt/orb/agent.yaml
 ```
 
 
@@ -257,11 +257,11 @@ orb:
          address: tls://HOST:8883
 ```
 
-8. You can now pull and run `ns1labs/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
+8. You can now pull and run `orbcommunity/orb-agent` to auto-provision, substituting in the `PERMANENT_TOKEN` and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:
 
 ```shell
-docker pull ns1labs/orb-agent
+docker pull orbcommunity/orb-agent
 docker run -v /local/orb:/opt/orb/ --net=host \
        -e ORB_CLOUD_API_TOKEN=<PERMANENT_TOKEN> \
-      ns1labs/orb-agent run -c /opt/orb/agent.yaml
+      orbcommunity/orb-agent run -c /opt/orb/agent.yaml
 ```
