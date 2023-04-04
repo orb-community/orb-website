@@ -87,8 +87,8 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | 	    Top QNAMES with result code SRVFAIL                                                                               | dns_top_srvfail_xacts               | top_rcodes    |
     | 	     Top UDP source port on the query side of a transaction                                                           | dns_top_udp_ports_xacts             | top_ports     |
     | Total DNS transactions (query/reply pairs) received over UDP                                                           | dns_udp_xacts                       | counters      |
-    | Cumulative counters of transaction timing (query/reply pairs) in microseconds                                          | dns_xact_histogram_us_bucket        | histograms    |
-    | Counts of transaction timing (query/reply pairs) in microseconds                                                       | dns_xact_histogram_us_count         | histograms    |
+    | Cumulative counters of transaction timing (query/reply pairs) in microseconds                                          | dns_xact_histogram_us_bucket        | xact_times    |
+    | Counts of transaction timing (query/reply pairs) in microseconds                                                       | dns_xact_histogram_us_count         | xact_times    |
     | Rate of all DNS transaction (reply/query) per second                                                                   | dns_xact_rates                      | quantiles     |
     | Count of all DNS transaction (reply/query) per second                                                                  | dns_xact_rates_count                | quantiles     |
     | Total sum of all DNS transaction (reply/query) per second                                                              | dns_xact_rates_sum                  | quantiles     |
@@ -142,23 +142,23 @@ For handlers that have metric groups, the metric groups that must be enabled for
     | Total DNS wire packets received over DNS over TLS                                                                  | dns\_wire\_packets\_dot               | counters (dnstap)               |
     | Total number of DNS transactions that timed out                                                                    | dns\_xact\_counts\_timed\_out         | dns_transaction                 |
     | Total DNS transactions (query/reply pairs)                                                                         | dns\_xact\_counts\_total              | dns_transaction                 |
-    | Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is server, in microseconds | dns\_xact\_in\_histogram\_us\_bucket  | histograms                      |
-    | Count of transaction timing (query/reply pairs) when host is server, in microseconds                               | dns\_xact\_in\_histogram\_us\_count   | histograms                      |
-    | Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is client, in microseconds | dns\_xact\_out\_histogram\_us\_bucket | histograms                      |
-    | Count of transaction timing (query/reply pairs) when host is client, in microseconds                               | dns\_xact\_out\_histogram\_us\_count  | histograms                      |
-    | Quantiles of transaction timing (query/reply pairs) when host is server, in microseconds                           | dns\_xact\_in\_quantiles\_us          | dns_transaction                 |
-    | Total sum of transaction timing (query/reply pairs) when host is server, in microseconds                           | dns\_xact\_in\_quantiles\_us\_sum     | dns_transaction                 |
-    | Count of transaction timing (query/reply pairs) when host is server, in microseconds                               | dns\_xact\_in\_quantiles\_us\_count   | dns_transaction                 |
+    | Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is server, in microseconds | dns\_xact\_in\_histogram\_us\_bucket  | dns_transaction + histograms                      |
+    | Count of transaction timing (query/reply pairs) when host is server, in microseconds                               | dns\_xact\_in\_histogram\_us\_count   | dns_transaction + histograms                      |
+    | Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is client, in microseconds | dns\_xact\_out\_histogram\_us\_bucket | dns_transaction + histograms                      |
+    | Count of transaction timing (query/reply pairs) when host is client, in microseconds                               | dns\_xact\_out\_histogram\_us\_count  | dns_transaction + histograms                      |
+    | Quantiles of transaction timing (query/reply pairs) when host is server, in microseconds                           | dns\_xact\_in\_quantiles\_us          | dns_transaction + quantiles                 |
+    | Total sum of transaction timing (query/reply pairs) when host is server, in microseconds                           | dns\_xact\_in\_quantiles\_us\_sum     | dns_transaction + quantiles                |
+    | Count of transaction timing (query/reply pairs) when host is server, in microseconds                               | dns\_xact\_in\_quantiles\_us\_count   | dns_transaction + quantiles                |
     | Top QNAMES in transactions where host is the server and transaction speed is slower than p90                       | dns\_xact\_in\_top\_slow              | dns_transaction                 |
     | Total ingress DNS transactions (host is server)                                                                    | dns\_xact\_in\_total                  | dns_transaction                 |
-    | Quantiles of transaction timing (query/reply pairs) when host is client, in microseconds                           | dns\_xact\_out\_quantiles\_us         | dns_transaction                 |
-    | Total sum of transaction timing (query/reply pairs) when host is client, in microseconds                           | dns\_xact\_out\_quantiles\_us\_sum    | dns_transaction                 |
-    | Count of transaction timing (query/reply pairs) when host is client, in microseconds                               | dns\_xact\_out\_quantiles\_us\_count  | dns_transaction                 |
+    | Quantiles of transaction timing (query/reply pairs) when host is client, in microseconds                           | dns\_xact\_out\_quantiles\_us         | dns_transaction + quantiles                |
+    | Total sum of transaction timing (query/reply pairs) when host is client, in microseconds                           | dns\_xact\_out\_quantiles\_us\_sum    | dns_transaction + quantiles                |
+    | Count of transaction timing (query/reply pairs) when host is client, in microseconds                               | dns\_xact\_out\_quantiles\_us\_count  | dns_transaction + quantiles                |
     | Top QNAMES in transactions where host is the client and transaction speed is slower than p90                       | dns\_xact\_out\_top\_slow             | dns_transaction                 |
     | Total egress DNS transactions (host is client)                                                                     | dns\_xact\_out\_total                 | dns_transaction                 |
-    | Distribution of response/query size ratios                                                                         | dns\_xact\_ratio\_quantiles           | dns_transaction                 |
-    | Total sum of response/query size ratios                                                                            | dns\_xact\_ratio\_quantiles\_sum      | dns_transaction                 |
-    | Count of response/query size ratios                                                                                | dns\_xact\_ratio\_quantiles\_count    | dns_transaction                 |
+    | Distribution of response/query size ratios                                                                         | dns\_xact\_ratio\_quantiles           | dns_transaction + quantiles                |
+    | Total sum of response/query size ratios                                                                            | dns\_xact\_ratio\_quantiles\_sum      | dns_transaction + quantiles                |
+    | Count of response/query size ratios                                                                                | dns\_xact\_ratio\_quantiles\_count    | dns_transaction + quantiles                |
 
 
 
@@ -357,6 +357,14 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Top out source IP addresses by packets                                                 | flow\_top\_out\_src\_ips\_packets      | top_ips + by_packets        |
 | Top out source ports by bytes                                                          | flow\_top\_out\_src\_ports\_bytes      | top_ports + by_bytes        |
 | Top out source ports by packets                                                        | flow\_top\_out\_src\_ports\_packets    | top_ports + by_packets      |
+| Top in DSCP by bytes                                                                   | flow_top_in_dscp_bytes                 | top_tos + by_bytes          |
+| Top out DSCP by bytes                                                                  | flow_top_out_dscp_bytes                | top_tos + by_bytes          |
+| Top in ECN by bytes                                                                    | flow_top_in_ecn_bytes                  | top_tos + by_bytes          |
+| Top out ECN by bytes                                                                   | flow_top_out_ecn_bytes                 | top_tos + by_bytes          |
+| Top in DSCP by packets                                                                 | flow_top_in_dscp_packets               | top_tos + by_packets        |
+| Top out DSCP by packets                                                                | flow_top_out_dscp_packets              | top_tos + by_packets        |
+| Top in ECN by packets                                                                  | flow_top_in_ecn_packets                | top_tos + by_packets        |
+| Top out ECN by packets                                                                 | flow_top_out_ecn_packets               | top_tos + by_packets        |
 
 
 ## Netprobe Metrics [BETA]
