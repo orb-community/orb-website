@@ -126,7 +126,7 @@ If `True`, this will cause more agent logs (debug type) to be provided.
 
 ## Pktvisor Configuration
 
-For configure pktvisor you could specify `taps`. It's defined under `visor` top level key ([check an example](https://raw.githubusercontent.com/ns1labs/orb/develop/cmd/agent/agent.example.yaml)).<br>
+For configure pktvisor you could specify `taps`. It's defined under `visor` top level key ([check an example](https://raw.githubusercontent.com/orb-community/orb/develop/cmd/agent/agent.example.yaml)).<br>
 The tap section specifies what data the agent should be listening in on and the goal of Taps is to abstract away host level details such as ethernet interface or dnstap socket location so that collection policies can apply to a broad set of pktvisor agents without worrying about these details. See [here](https://github.com/orb-community/pktvisor/blob/develop/RFCs/2021-04-16-75-taps.md) for more information. <br>
 Single or multiple taps can be configured in the same agent.
 
