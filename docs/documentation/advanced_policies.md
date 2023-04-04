@@ -531,7 +531,6 @@ The `topn_percentile_threshold` usage syntax is:<br>
                   - top_rcodes
                   - top_qnames
                   - top_qtypes
-                  - histograms
                 disable:
                   - top_size
                   - top_ports
@@ -638,7 +637,6 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |  `top_ports`  | disabled |
     |  `top_size`   | disabled |
     | `xact_times`  | disabled |
-    | `histograms`  | disabled |
     | `cardinality` | enabled  |
     |  `counters`   | enabled  |
     | `top_qnames`  | enabled  |
@@ -677,7 +675,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |:-----------------:|:--------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|
     |        `0`        |    NOERROR     |                                                                                                                      No error condition                                                                                                                       | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `1`        |    FORMERR     |                                                                                               Format error - The name server was unable to interpret the query.                                                                                               | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
-    |        `2`        |    SRVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `2`        |    SERVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `3`        |    NXDOMAIN    |                                                Name Error - Meaningful only for responses from an authoritative name server, this code signifies that the domain name referenced in the query does not exist.                                                 | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `4`        |     NOTIMP     |                                                                                        Not Implemented - The name server does not support the requested kind of query.                                                                                        | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `5`        |    REFUSED     | The name server refuses to perform the specified operation for  policy reasons.  For example, a name server may not wish to provide the information to the particular requester, or a name server may not wish to perform a particular operation (e.g., zone) | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
@@ -1229,7 +1227,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     |:-----------------:|:--------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|
     |        `0`        |    NOERROR     |                                                                                                                      No error condition                                                                                                                       | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `1`        |    FORMERR     |                                                                                               Format error - The name server was unable to interpret the query.                                                                                               | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
-    |        `2`        |    SRVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
+    |        `2`        |    SERVFAIL     |                                                                           Server failure - The name server was unable to process this query due to a problem with the name server.                                                                            | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `3`        |    NXDOMAIN    |                                                Name Error - Meaningful only for responses from an authoritative name server, this code signifies that the domain name referenced in the query does not exist.                                                 | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `4`        |     NOTIMP     |                                                                                        Not Implemented - The name server does not support the requested kind of query.                                                                                        | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
     |        `5`        |    REFUSED     | The name server refuses to perform the specified operation for  policy reasons.  For example, a name server may not wish to provide the information to the particular requester, or a name server may not wish to perform a particular operation (e.g., zone) | [[RFC1035]](https://www.rfc-editor.org/rfc/rfc1035.html)  |
@@ -2620,7 +2618,7 @@ The `recorded_stream` configuration usage syntax is:<br>
                         - router01,192.168.0.127,eth0,5
                         - router01,192.168.0.127,eth1,6
                 metric_groups:
-                    disable:
+                    enable:
                         - cardinality
                         - counters
                         - top_geo
@@ -2631,6 +2629,7 @@ The `recorded_stream` configuration usage syntax is:<br>
                         - top_ips
                         - top_interfaces
                         - top_ips_ports
+                        - top_tos
                 filter:
                     only_devices:
                         - 216.239.38.10/24
@@ -2671,7 +2670,7 @@ The `recorded_stream` configuration usage syntax is:<br>
               ]
             },
             "metric_groups": {
-              "disable": [
+              "enable": [
                 "cardinality",
                 "counters",
                 "top_geo",
@@ -2681,7 +2680,8 @@ The `recorded_stream` configuration usage syntax is:<br>
                 "top_ports",
                 "top_ips",
                 "top_interfaces",
-                "top_ips_ports"
+                "top_ips_ports",
+                "top_tos"
               ]
             },
             "filter": {
@@ -2727,6 +2727,7 @@ The `recorded_stream` configuration usage syntax is:<br>
 |    `top_geo`     | disabled |
 | `conversations`  | disabled |
 | `top_interfaces` | disabled |
+|    `top_tos`     | disabled | 
 
 
 #### Filters <a name="flow_filters"></a><br>
