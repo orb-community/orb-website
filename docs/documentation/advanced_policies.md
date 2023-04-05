@@ -2198,7 +2198,18 @@ The `xact_ttl_ms` or `xact_ttl_secs` configuration usage syntax is:<br>
     
     Input: PCAP <br>
     
-    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data considering the geolocation using the filter `only_geoloc_prefix`. <br>
+    Source and destination IPs are used to determine the geolocation to know where the data is from and where it is going. In this way it is possible to filter the data using the geolocation using the filter `only_geoloc_prefix`. <br>.  The filter supports the following strings:
+* Continents:  two-character continent code, as follows:
+AF - Africa
+AN - Antarctica
+AS - Asia
+EU - Europe
+NA - North America
+OC - Oceania
+SA - South America
+
+* Country: the two-character ISO 3166-1 country code
+* Subdivision: the region-portion of the ISO 3166-2 code for the region
     
     The `only_geoloc_prefix` filter usage syntax is:<br>
     
