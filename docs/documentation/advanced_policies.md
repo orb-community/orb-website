@@ -648,18 +648,19 @@ The `topn_percentile_threshold` usage syntax is:<br>
     #### Filters <a name="dns_filters_v2"></a><br>
     
     
-    |                       Filter                       |  Type   | Input  |
-    |:--------------------------------------------------:|:-------:|:------:|
-    |           [`only_rcode`](#only_rcode_v2)           | *str[]* |  PCAP  |
-    |      [`exclude_noerror`](#exclude_noerror_v2)      | *bool*  |  PCAP  |
-    | [`only_dnssec_response`](#only_dnssec_response_v2) | *bool*  |  PCAP  |
-    |         [`answer_count`](#answer_count_v2)         |  *int*  |  PCAP  |
-    |           [`only_qtype`](#only_qtype_v2)           | *str[]* |  PCAP  |
-    |           [`only_qname`](#only_qname_v2)           | *str[]* |  PCAP  |
-    |    [`only_qname_suffix`](#only_qname_suffix_v2)    | *str[]* |  PCAP  |
-    |      [`geoloc_notfound`](#geoloc_notfound_v2)      | *bool*  |  PCAP  |
-    |         [`asn_notfound`](#asn_notfound_v2)         | *bool*  |  PCAP  |
-    |      [`dnstap_msg_type`](#dnstap_msg_type_v2)      |  *str*  | DNSTAP |
+    |                         Filter                          |  Type   | Input  |
+    |:-------------------------------------------------------:|:-------:|:------:|
+    |             [`only_rcode`](#only_rcode_v2)              | *str[]* |  PCAP  |
+    |        [`exclude_noerror`](#exclude_noerror_v2)         | *bool*  |  PCAP  |
+    |   [`only_dnssec_response`](#only_dnssec_response_v2)    | *bool*  |  PCAP  |
+    |           [`answer_count`](#answer_count_v2)            |  *int*  |  PCAP  |
+    |             [`only_qtype`](#only_qtype_v2)              | *str[]* |  PCAP  |
+    |             [`only_qname`](#only_qname_v2)              | *str[]* |  PCAP  |
+    |      [`only_qname_suffix`](#only_qname_suffix_v2)       | *str[]* |  PCAP  |
+    |        [`geoloc_notfound`](#geoloc_notfound_v2)         | *bool*  |  PCAP  |
+    |           [`asn_notfound`](#asn_notfound_v2)            | *bool*  |  PCAP  |
+    | [`only_xact_directions`](#only_xact_directions_type_v2) | *str[]* |  PCAP  |
+    |        [`dnstap_msg_type`](#dnstap_msg_type_v2)         |  *str*  | DNSTAP |
     
     
     **only_rcode:** *str[]*. <a name="only_rcode_v2"></a><br>
@@ -1016,6 +1017,44 @@ The `topn_percentile_threshold` usage syntax is:<br>
           "asn_notfound": true
         }
         ```
+    <br>
+    **only_xact_directions:** *str[]* <a name="only_xact_directions_type_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
+    
+    Input: PCAP <br>
+    
+    Filters metrics according to the exact direction of the transaction. Options are: `in`, `out` and `unknown`.
+    === "YAML"
+        ```yaml
+        only_xact_directions:
+          - str
+          - str
+        ```
+        Example:
+        ```yaml
+        only_xact_directions:
+        - in
+        - unknown
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_xact_directions": [
+            "str",
+            "str"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_xact_directions": [
+            "in",
+            "unknown"
+          ]
+        }
+        ```
+
     <br>
     **dnstap_msg_type:** *str* <a name="dnstap_msg_type_v2"></a><br>
     <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
