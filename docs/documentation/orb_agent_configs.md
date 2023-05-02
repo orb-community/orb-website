@@ -262,7 +262,7 @@ debug: true
 **tcp_packet_reassembly_cache_limit**: *int* <a name="tcp_packet_reassembly_cache_limit_input_pcap"></a><br>
 <font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
 
-Sets the limit of cached packages to be reassembled. Default value: `300000`. <br>
+Sets the limit of cached packets to be reassembled. Default value: `300000`. <br>
 To remove limit set `tcp_packet_reassembly_cache_limit` to `0`.
 
 === "YAML"
@@ -495,7 +495,7 @@ The following configs are available for netprobe inputs: `test_type`, `interval_
 Defines the type of the test to be performed. Type options are listed below:
 
 - ping: implements a ping prober that can probe multiple targets. The test will run against the targets to verify if the systems are working fine.
-- tcp: TCP probe sends a TCP packet to the configured targets. The test will run against the targets using the defined port.
+- tcp: TCP probe sets up a TCP connection to the configured targets using the defined port.
 
 === "YAML"
 ```yaml

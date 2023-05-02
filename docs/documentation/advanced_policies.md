@@ -1023,7 +1023,7 @@ The `topn_percentile_threshold` usage syntax is:<br>
     
     Input: PCAP <br>
     
-    Filters metrics according to the exact direction of the transaction. Options are: `in`, `out` and `unknown`.
+    Filters metrics according to the direction of the transaction. Options are: `in`, `out` and `unknown`.
     === "YAML"
         ```yaml
         only_xact_directions:
@@ -2834,8 +2834,8 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 Input: FLOW <br>
 
-`only_device_interfaces` filters data by device ports (not IP ports). <br>
-The difference between `only_device_interfaces` and `only_ips` is that while this one filters the ips of the device that is sending the data, the `only_ips` filters based on internal flow data ips that are communicating with each other (source or destination). <br>
+`only_device_interfaces` filters data by only retaining flows coming from the specific devices and interfaces defined in this filter. <br>
+The difference between `only_device_interfaces` and `only_ips` is that `only_ips` filters based on the IPs observed *inside* the flows, while `only_device_interfaces` filters based on the device and interface *sending* the flows. <br>
 
 The `only_device_interfaces` filter usage syntax is:<br>
 
@@ -2972,7 +2972,7 @@ The `only_ips` filter usage syntax is:<br>
 
 Input: FLOW <br>
 
-`only_ports` filter only filters data being sent to or received on one of the selected IP ports (or range of ports). <br>
+`only_ports` filter only filters data being sent to or received on one of the selected TCP/UDP ports (or range of ports). <br>
 
 The `only_ports` filter usage syntax is:<br>
 
@@ -3271,7 +3271,7 @@ The `subnets_for_summarization` configuration usage syntax is:<br>
 !!! tip
 
     It is possible to define a summary pattern by defining the CIDR only. In this way, all present IPs will be summarized. 
-    For this to be done, just pass the default host mask for ipv4 or/and ipv6 and the desired CIDR for grouping. 
+    For this to be done, just pass the default host mask for IPv4 or/and IPv6 and the desired CIDR for grouping. 
     This pattern has less priority than the explicitly defined subnets, so only IPs not belonging to any set subnet will be summarized following the general pattern.
 
 
