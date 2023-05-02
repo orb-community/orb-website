@@ -176,13 +176,14 @@ The following inputs are supported: `pcap`, `flow`, `dnstap` and `netprobe`. For
 
 There are 5 configurations for pcap input: `pcap_file`, `pcap_source`, `iface`, `host_spec` and `debug`.
 
-|                 Config                 | Type |
-|:--------------------------------------:|:-----|
-|   [pcap_file](#pcap_file_input_pcap)   | str  |
-| [pcap_source](#pcap_source_input_pcap) | str  |
-|    [iface](#pcap_source_input_pcap)    | str  |
-|   [host_spec](#host_spec_input_pcap)   | str  |
-|       [debug](#debug_input_pcap)       | bool |
+|                                       Config                                       | Type |
+|:----------------------------------------------------------------------------------:|:-----|
+|                         [pcap_file](#pcap_file_input_pcap)                         | str  |
+|                       [pcap_source](#pcap_source_input_pcap)                       | str  |
+|                          [iface](#pcap_source_input_pcap)                          | str  |
+|                         [host_spec](#host_spec_input_pcap)                         | str  |
+|                             [debug](#debug_input_pcap)                             | bool |
+| [tcp_packet_reassembly_cache_limit](#tcp_packet_reassembly_cache_limit_input_pcap) | int  |
 
 **pcap_file**: *str* <a name="pcap_file_input_pcap"></a><br>
 <font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
@@ -256,6 +257,17 @@ When `true` activate debug logs
 === "YAML"
 ```yaml
 debug: true
+```
+
+**tcp_packet_reassembly_cache_limit**: *int* <a name="tcp_packet_reassembly_cache_limit_input_pcap"></a><br>
+<font size="1">[Back to pcap configurations list](#input_pcap_configurations)</font>
+
+Sets the limit of cached packages to be reassembled. Default value: `300000`. <br>
+To remove limit set `tcp_packet_reassembly_cache_limit` to `0`.
+
+=== "YAML"
+```yaml
+tcp_packet_reassembly_cache_limit: 300000
 ```
 
 
@@ -464,15 +476,16 @@ only_hosts: 192.168.1.4/32
 
 The following configs are available for netprobe inputs: `test_type`, `interval_msec`, `timeout_msec`, `packets_per_test`, `packets_interval_msec`, `packet_payload_size`. 
 
-|                             Config                             | Type | Required | Default |
-|:--------------------------------------------------------------:|:----:|:--------:|:-------:|
-|             [test_type](#test_type_input_netprobe)             | str  |    ✅     |    -    |
-|         [interval_msec](#interval_msec_input_netprobe)         | int  |    ❌     |  5000   |
-|         [timeout_msec](#interval_msec_input_netprobe)          | int  |    ❌     |  2000   |
-|      [packets_per_test](#packets_per_test_input_netprobe)      | int  |    ❌     |    1    |
-| [packets_interval_msec](#packets_interval_msec_input_netprobe) | int  |    ❌     |   25    |
-|   [packet_payload_size](#packet_payload_size_input_netprobe)   | int  |    ❌     |   48    |
-|               [targets](#targets_input_netprobe)               | map  |    ✅     |    -    |
+|                             Config                             | Type |          Required           | Default |
+|:--------------------------------------------------------------:|:----:|:---------------------------:|:-------:|
+|             [test_type](#test_type_input_netprobe)             | str  |              ✅              |    -    |
+|         [interval_msec](#interval_msec_input_netprobe)         | int  |              ❌              |  5000   |
+|         [timeout_msec](#interval_msec_input_netprobe)          | int  |              ❌              |  2000   |
+|      [packets_per_test](#packets_per_test_input_netprobe)      | int  |              ❌              |    1    |
+| [packets_interval_msec](#packets_interval_msec_input_netprobe) | int  |              ❌              |   25    |
+|   [packet_payload_size](#packet_payload_size_input_netprobe)   | int  |              ❌              |   48    |
+|               [targets](#targets_input_netprobe)               | map  |              ✅              |    -    |
+|                  [port](#port_input_netprobe)                  | int  | `Required if test_type=tcp` |    -    |
 
 
 
@@ -482,6 +495,7 @@ The following configs are available for netprobe inputs: `test_type`, `interval_
 Defines the type of the test to be performed. Type options are listed below:
 
 - ping: implements a ping prober that can probe multiple targets. The test will run against the targets to verify if the systems are working fine.
+- tcp: TCP probe sends a TCP packet to the configured targets. The test will run against the targets using the defined port.
 
 === "YAML"
 ```yaml
@@ -597,6 +611,20 @@ Generic Example:
 targets:
   google:
     target: www.google.com
+```
+
+**port**: *int* <a name="port_input_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
+
+Specifies the port on which the TCP test will run (It is only used if the test_type is TCP. Otherwise, is ignored if set).
+
+=== "YAML"
+```yaml
+port: int
+```
+Example:
+```yaml
+port: 80
 ```
 
 #### Filters
