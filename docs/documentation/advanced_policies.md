@@ -648,18 +648,19 @@ The `topn_percentile_threshold` usage syntax is:<br>
     #### Filters <a name="dns_filters_v2"></a><br>
     
     
-    |                       Filter                       |  Type   | Input  |
-    |:--------------------------------------------------:|:-------:|:------:|
-    |           [`only_rcode`](#only_rcode_v2)           | *str[]* |  PCAP  |
-    |      [`exclude_noerror`](#exclude_noerror_v2)      | *bool*  |  PCAP  |
-    | [`only_dnssec_response`](#only_dnssec_response_v2) | *bool*  |  PCAP  |
-    |         [`answer_count`](#answer_count_v2)         |  *int*  |  PCAP  |
-    |           [`only_qtype`](#only_qtype_v2)           | *str[]* |  PCAP  |
-    |           [`only_qname`](#only_qname_v2)           | *str[]* |  PCAP  |
-    |    [`only_qname_suffix`](#only_qname_suffix_v2)    | *str[]* |  PCAP  |
-    |      [`geoloc_notfound`](#geoloc_notfound_v2)      | *bool*  |  PCAP  |
-    |         [`asn_notfound`](#asn_notfound_v2)         | *bool*  |  PCAP  |
-    |      [`dnstap_msg_type`](#dnstap_msg_type_v2)      |  *str*  | DNSTAP |
+    |                         Filter                          |  Type   | Input  |
+    |:-------------------------------------------------------:|:-------:|:------:|
+    |             [`only_rcode`](#only_rcode_v2)              | *str[]* |  PCAP  |
+    |        [`exclude_noerror`](#exclude_noerror_v2)         | *bool*  |  PCAP  |
+    |   [`only_dnssec_response`](#only_dnssec_response_v2)    | *bool*  |  PCAP  |
+    |           [`answer_count`](#answer_count_v2)            |  *int*  |  PCAP  |
+    |             [`only_qtype`](#only_qtype_v2)              | *str[]* |  PCAP  |
+    |             [`only_qname`](#only_qname_v2)              | *str[]* |  PCAP  |
+    |      [`only_qname_suffix`](#only_qname_suffix_v2)       | *str[]* |  PCAP  |
+    |        [`geoloc_notfound`](#geoloc_notfound_v2)         | *bool*  |  PCAP  |
+    |           [`asn_notfound`](#asn_notfound_v2)            | *bool*  |  PCAP  |
+    | [`only_xact_directions`](#only_xact_directions_type_v2) | *str[]* |  PCAP  |
+    |        [`dnstap_msg_type`](#dnstap_msg_type_v2)         |  *str*  | DNSTAP |
     
     
     **only_rcode:** *str[]*. <a name="only_rcode_v2"></a><br>
@@ -1016,6 +1017,44 @@ The `topn_percentile_threshold` usage syntax is:<br>
           "asn_notfound": true
         }
         ```
+    <br>
+    **only_xact_directions:** *str[]* <a name="only_xact_directions_type_v2"></a><br>
+    <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
+    
+    Input: PCAP <br>
+    
+    Filters metrics according to the direction of the transaction. Options are: `in`, `out` and `unknown`.
+    === "YAML"
+        ```yaml
+        only_xact_directions:
+          - str
+          - str
+        ```
+        Example:
+        ```yaml
+        only_xact_directions:
+        - in
+        - unknown
+        ```
+    === "JSON"
+        ```json
+        {
+          "only_xact_directions": [
+            "str",
+            "str"
+          ]
+        }
+        ```
+        Example:
+        ```json
+        {
+          "only_xact_directions": [
+            "in",
+            "unknown"
+          ]
+        }
+        ```
+
     <br>
     **dnstap_msg_type:** *str* <a name="dnstap_msg_type_v2"></a><br>
     <font size="1">[Back to DNS-v2 filters list](#dns_filters_v2)</font>
@@ -2625,9 +2664,21 @@ The `recorded_stream` configuration usage syntax is:<br>
                     num_periods: 5
                     topn_count: 7
                     first_filter_if_as_label: true
+                    enrichment: true
                     device_map:
-                        - router01,192.168.0.127,eth0,5
-                        - router01,192.168.0.127,eth1,6
+                      192.168.3.32:
+                        name: Device1
+                        description: This is a device map example
+                        interfaces:
+                          2:
+                            name: Prov1
+                            description: This is an interface map example
+                    summarize_ips_by_asn: true
+                    exclude_unknown_asns_from_summarization: true
+                    exclude_asns_from_summarization:
+                      - 16509
+                    exclude_ips_from_summarization_flow:
+                      - 192.168.3.32/32
                 metric_groups:
                     enable:
                         - cardinality
@@ -2642,14 +2693,16 @@ The `recorded_stream` configuration usage syntax is:<br>
                         - top_ips_ports
                         - top_tos
                 filter:
-                    only_devices:
-                        - 216.239.38.10/24
-                        - 192.158.1.38/32
                     only_ports:
                         - 10853
                         - 10860-10890
-                    only_interfaces:
-                        - 10-16
+                    only_device_interfaces:
+                        - 216.239.38.10:
+                            - 2
+                    only_directions: "in"
+                    only_ips:
+                      - 192.168.2.1/24
+                      - 192.158.1.38/32
                     geoloc_notfound: true
                     asn_notfound: true
     input:
@@ -2675,9 +2728,26 @@ The `recorded_stream` configuration usage syntax is:<br>
               "num_periods": 5,
               "topn_count": 7,
               "first_filter_if_as_label": true,
-              "device_map": [
-                "router01,192.168.0.127,eth0,5",
-                "router01,192.168.0.127,eth1,6"
+              "enrichment": true,
+              "device_map": {
+                "192.168.3.32": {
+                  "name": "Device1",
+                  "description": "This is a device map example",
+                  "interfaces": {
+                    "2": {
+                      "name": "Prov1",
+                      "description": "This is an interface map example"
+                    }
+                  }
+                }
+              },
+              "summarize_ips_by_asn": true,
+              "exclude_unknown_asns_from_summarization": true,
+              "exclude_asns_from_summarization": [
+                16509
+              ],
+              "exclude_ips_from_summarization_flow": [
+                "192.168.3.32/32"
               ]
             },
             "metric_groups": {
@@ -2696,16 +2766,21 @@ The `recorded_stream` configuration usage syntax is:<br>
               ]
             },
             "filter": {
-              "only_devices": [
-                "216.239.38.10/24",
-                "192.158.1.38/32"
-              ],
               "only_ports": [
                 10853,
                 "10860-10890"
               ],
-              "only_interfaces": [
-                "10-16"
+              "only_device_interfaces": [
+                {
+                  "216.239.38.10": [
+                    2
+                  ]
+                }
+              ],
+              "only_directions": "in",
+              "only_ips": [
+                "192.168.2.1/24",
+                "192.158.1.38/32"
               ],
               "geoloc_notfound": true,
               "asn_notfound": true
@@ -2744,55 +2819,116 @@ The `recorded_stream` configuration usage syntax is:<br>
 #### Filters <a name="flow_filters"></a><br>
 
 
-|                   Filter                   |  Type   | Input |
-|:------------------------------------------:|:-------:|:-----:|
-|    [`only_devices`](#only_devices_flow)    | *str[]* | FLOW  |
-|        [`only_ips`](#only_ips_flow)        | *str[]* | FLOW  |
-|      [`only_ports`](#only_ports_flow)      | *str[]* | FLOW  |
-| [`only_interfaces`](#only_interfaces_flow) | *str[]* | FLOW  |
-| [`geoloc_notfound`](#geoloc_notfound_flow) | *bool*  | FLOW  |
-|    [`asn_notfound`](#asn_notfound_flow)    | *bool*  | FLOW  |
+|                       Filter                        |  Type   | Input |
+|:---------------------------------------------------:|:-------:|:-----:|
+| [`only_device_interfaces`](#only_device_interfaces) | *str[]* | FLOW  |
+|        [`only_directions`](#only_directions)        |  *str*  | FLOW  |
+|            [`only_ips`](#only_ips_flow)             | *str[]* | FLOW  |
+|          [`only_ports`](#only_ports_flow)           | *str[]* | FLOW  |
+|     [`geoloc_notfound`](#geoloc_notfound_flow)      | *bool*  | FLOW  |
+|        [`asn_notfound`](#asn_notfound_flow)         | *bool*  | FLOW  |
 
 
-**only_devices:** *str[]* <a name="only_devices_flow"></a><br>
+**only_device_interfaces:** *str[]* <a name="only_device_interfaces"></a><br>
 <font size="1">[Back to flow filters list](#flow_filters)</font>
 
 Input: FLOW <br>
 
-Considering a flow traffic, the same port can be monitoring data from different routers or/and switches. If you want to filter the flow data coming from a specific device, the `only_devices` filter should be used. CIDR (Inter-Domain Routing Classes) ranges are supported on this filter.<br>
-The difference between `only_devices` and `only_ips` is that while this one filters the ids of the device that is sending the data, the other filters the ips that are communicating with each other (source or destination). <br>
+`only_device_interfaces` filters data by only retaining flows coming from the specific devices and interfaces defined in this filter. <br>
+The difference between `only_device_interfaces` and `only_ips` is that `only_ips` filters based on the IPs observed *inside* the flows, while `only_device_interfaces` filters based on the device and interface *sending* the flows. <br>
 
-The `only_devices` filter usage syntax is:<br>
+The `only_device_interfaces` filter usage syntax is:<br>
 
 === "YAML"
     ```yaml
-    only_devices:
-      - array
+    only_device_interfaces:
+      - device:
+        - interface
     ```
     Example:
     ```yaml
-    only_devices:
-      - 216.239.38.10/24
-      - 192.158.1.38/32
+    only_device_interfaces:
+      - 216.239.38.10:
+        - 2 #port can be passed as int
+        - 4-10 #port can be passed as range. Ports from 4 to 10: all ports in this interval will be accepted.
+        - "1" #port can be passed as str
+      - 192.158.1.38: [9, 4-10]
+      - 192.168.2.32:
+        - "*" #all ports
     ```
 === "JSON"
     ```json
     {
-      "only_devices": [
-        "array"
+      "only_device_interfaces": [
+        {
+          "device": [
+            "interface"
+          ]
+        }
       ]
     }
     ```
     Example:
     ```json
     {
-      "only_devices": [
-        "216.239.38.10/24",
-        "192.158.1.38/32"
+      "only_device_interfaces": [
+        {
+          "216.239.38.10": [
+            2,
+            "4-10",
+            "10853"
+          ]
+        },
+        {
+          "192.158.1.38": [
+            3,
+            "10860-10890"
+          ]
+        },
+        {
+          "192.168.2.32": [
+            "*"
+          ]
+        }
       ]
     }
     ```
 <br>
+**only_directions:** *str[]* <a name="only_directions"></a><br>
+<font size="1">[Back to flow filters list](#flow_filters)</font>
+
+`only_directions` filters data by its direction. Options are: "in" and/or "out". 
+
+The `only_directions` filter usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    only_directions: [str]
+    ```
+    Example:
+    ```yaml
+    only_directions:
+        - "in"
+    ```
+=== "JSON"
+    ```json
+    {
+      "only_directions": [
+        "str"
+      ]
+    }
+    ```
+    Example:
+    ```json
+    {
+      "only_directions": [
+        "in"
+      ]
+    }
+    ```
+
+<br>
+
 **only_ips:** *str[]* <a name="only_ips_flow"></a><br>
 <font size="1">[Back to flow filters list](#flow_filters)</font>
 
@@ -2825,7 +2961,7 @@ The `only_ips` filter usage syntax is:<br>
     ```json
     {
       "only_ips": [
-        "192.168.1.1/24",
+        "192.168.2.1/24",
         "192.158.1.38/32"
       ]
     }
@@ -2836,7 +2972,7 @@ The `only_ips` filter usage syntax is:<br>
 
 Input: FLOW <br>
 
-`only_ports` filter only filters data being sent to or received on one of the selected IP ports (or range of ports). <br>
+`only_ports` filter only filters data being sent to or received on one of the selected TCP/UDP ports (or range of ports). <br>
 
 The `only_ports` filter usage syntax is:<br>
 
@@ -2867,46 +3003,6 @@ The `only_ports` filter usage syntax is:<br>
         10853,
         "10854",
         "10860-10890"
-      ]
-    }
-    ```
-<br>
-**only_interfaces:** *str* <a name="only_interfaces_flow"></a><br>
-<font size="1">[Back to flow filters list](#flow_filters)</font>
-
-Input: FLOW <br>
-
-`only_interfaces` filters data by device ports (not IP ports). In this way, it is possible to filter data referring to a specific type of network connected to the corresponding device port. <br>
-
-The `only_interfaces` filter usage syntax is:<br>
-
-=== "YAML"
-    ```yaml
-    only_interfaces:
-      - array
-    ```
-    Example:
-    ```yaml
-    only_interfaces:
-      - 10 #port can be passed as int
-      - "11" #port can be passed as str
-      - 12-16 #range from 12 to 16. All ports in this interval will be accepted
-    ```
-=== "JSON"
-    ```json
-    {
-      "only_interfaces": [
-        "array"
-      ]
-    }
-    ```
-    Example:
-    ```json
-    {
-      "only_interfaces": [
-        10,
-        "11",
-        "12-16"
       ]
     }
     ```
@@ -2956,7 +3052,13 @@ The `asn_notfound` filter usage syntax is:<br>
 #### Configurations <a name="flow_configurations"></a><br>
 - [sample_rate_scaling](#sample_rate_scaling_flow): *bool* <br>
 - [first_filter_if_as_label](#first_filter_if_as_label_flow): *bool* <br>
-- [device_map](#device_map_flow): *str[]*
+- [enrichment](#enrichment_flow): *bool* <br>
+- [device_map](#device_map_flow): *map* <br>
+- [summarize_ips_by_asn](#summarize_ips_by_asn_flow): *bool* <br>
+- [exclude_asns_from_summarization](#exclude_asns_from_summarization_flow): *str[]* <br>
+- [exclude_unknown_asns_from_summarization](#exclude_unknown_asns_from_summarization_flow): *bool* <br>
+- [subnets_for_summarization](#subnets_for_summarization_flow): *str[]* <br>
+- [exclude_ips_from_summarization](#exclude_ips_from_summarization_flow) *str[]* <br>
 - [recorded_stream](#recorded_stream_flow): *bool*<br>
 - [Abstract configurations](#abstract-configurations). <br><br>
 
@@ -2995,26 +3097,219 @@ The `first_filter_if_as_label` filter usage syntax is:<br>
     "first_filter_if_as_label": true
     }
     ```
-
-**device_map** <a name="device_map_flow"></a><br>
+**enrichment** <a name="enrichment_flow"></a><br>
 <font size="1">[Back to flow configurations list](#flow_configurations)</font>
 
-This configuration allows the user to assign a custom name to devices and/or interfaces.
-You can also set only the device, as long as the pair [custom_name, default_identifier] is passed.
+When true, uses device map settings.
 
-
-The `device_map` filter usage syntax is:<br>
+The `enrichment` configuration usage syntax is:<br>
 
 === "YAML"
     ```yaml
-    device_map:
-      - device_custom_name,device_ip,interface_custom_name,interface_index
+    enrichment: True
     ```
 === "JSON"
     ```json
     {
-      "device_map": [
-        "device_custom_name,device_ip,interface_custom_name,interface_index"
+    "enrichment": true
+    }
+    ```
+
+**device_map** <a name="device_map_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration allows the user to assign a custom name to devices and interfaces, and the proper functioning of this configuration depends on the [enrichment](#enrichment_flow) being True.
+
+
+The `device_map` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    device_map:
+      device_ip:
+        name: "str" #name is required
+        description: "Optionally set a description"
+        interfaces: #Interfaces are optional
+            interface:
+                name: "str" #required
+                description: "Optionally set a description"
+    ```
+    Example:
+    ```yaml
+    device_map:
+      192.168.2.32:
+        name: Cisco
+        description: This is a device map example
+        interfaces:
+          2:
+            name: GoogleProv
+            description: This is an interface map example
+    ```
+=== "JSON"
+    ```json
+    {
+      "device_map": {
+        "device_ip": {
+          "name": "str",
+          "description": "Optionally set a description",
+          "interfaces": {
+            "interface": {
+              "name": "str",
+              "description": "Optionally set a description"
+            }
+          }
+        }
+      }
+    }
+    ```
+    Example:
+    ```json
+    {
+      "device_map": {
+        "192.168.2.32": {
+          "name": "Cisco",
+          "description": "This is a device map example",
+          "interfaces": {
+            "2": {
+              "name": "GoogleProv",
+              "description": "This is an interface map example"
+            }
+          }
+        }
+      }
+    }
+    ```
+
+Summarization is a useful strategy for visualization, but also for decreasing the cardinality of the data, and two types of summarization are supported: by [asn](#summarize_ips_by_asn_flow) and by [subnets](#subnets_for_summarization_flow), and summarization by ASN is dominant over subnet, i.e. If both configurations are present, only the IPs of an excluded asn or an unknown asn (if [exclude_unknown_asns_from_summarization](#exclude_unknown_asns_from_summarization_flow) is true) will be summarized by subnet.
+
+
+
+**summarize_ips_by_asn** <a name="summarize_ips_by_asn_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+When True, it summarizes data by ASN (Autonomous System Number).
+
+The `summarize_ips_by_asn` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    summarize_ips_by_asn: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "summarize_ips_by_asn": true
+    }
+    ```
+
+**exclude_asns_from_summarization** <a name="exclude_asns_from_summarization_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration must be used in conjunction with [summarize_ips_by_asn](#summarize_ips_by_asn_flow), in order to exclude ASNs from summarization. In this case, packets transacted by excluded ASNs will be exposed by IPs.
+
+The `exclude_asns_from_summarization` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    exclude_asns_from_summarization:
+      - 8075
+      - 16509
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "exclude_asns_from_summarization": [
+        8075,
+        16509
+      ]
+    }
+    ```
+
+**exclude_unknown_asns_from_summarization** <a name="exclude_unknown_asns_from_summarization_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration must be used in conjunction with [summarize_ips_by_asn](#summarize_ips_by_asn_flow), in order to expose IPs from packets transacted by unknown ASNs.
+
+The `exclude_unknown_asns_from_summarization` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    exclude_unknown_asns_from_summarization: true
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "exclude_unknown_asns_from_summarization": true
+    }
+    ```
+
+**subnets_for_summarization** <a name="subnets_for_summarization_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration allows the summarization of flow data by subnets. Attention: This configuration will only work properly if the [summarize_ips_by_asn](#summarize_ips_by_asn_flow) configuration is not set for the IP, since [summarize_ips_by_asn](#summarize_ips_by_asn_flow) is dominant.
+
+The `subnets_for_summarization` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    subnets_for_summarization:
+      - 192.168.2.1/24
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "subnets_for_summarization": [
+        "192.168.2.1/24"
+      ]
+    }
+    ```
+
+!!! tip
+
+    It is possible to define a summary pattern by defining the CIDR only. In this way, all present IPs will be summarized. 
+    For this to be done, just pass the default host mask for IPv4 or/and IPv6 and the desired CIDR for grouping. 
+    This pattern has less priority than the explicitly defined subnets, so only IPs not belonging to any set subnet will be summarized following the general pattern.
+
+
+    === "YAML"
+        ```yaml
+        subnets_for_summarization:
+          - 0.0.0.0/16
+          - ::/64
+        ```
+    
+    === "JSON"
+        ```json
+        {
+          "subnets_for_summarization": [
+            "0.0.0.0/16",
+            "::/64"
+          ]
+        }
+        ```
+ 
+**exclude_ips_from_summarization_flow** <a name="exclude_ips_from_summarization_flow"></a><br>
+<font size="1">[Back to flow configurations list](#flow_configurations)</font>
+
+This configuration must be used in conjunction with [summarize_ips_by_asn](#summarize_ips_by_asn_flow) or [subnets_for_summarization](#subnets_for_summarization_flow) and will remove the specified IPs from the summarization.
+
+The `exclude_ips_from_summarization_flow` configuration usage syntax is:<br>
+
+=== "YAML"
+    ```yaml
+    exclude_ips_from_summarization_flow:
+      - 192.168.2.1/31
+    ```
+
+=== "JSON"
+    ```json
+    {
+      "exclude_ips_from_summarization_flow": [
+        "192.168.2.1/31"
       ]
     }
     ```
