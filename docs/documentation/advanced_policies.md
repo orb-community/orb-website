@@ -3359,21 +3359,15 @@ The `recorded_stream` configuration usage syntax is:<br>
               - counters
               - quantiles
               - histograms
+          config:
+            targets:
+              www.google.com:
+                target: www.google.com
+              orb_community:
+                target: orb.community
     input:
       input_type: netprobe
       tap: default_netprobe
-      config:
-        test_type: ping
-        interval_msec: 2000
-        timeout_msec: 1000
-        packets_per_test: 10
-        packets_interval_msec: 25
-        packet_payload_size: 56
-        targets:
-          www.google.com:
-            target: www.google.com
-          orb_community:
-            target: orb.community 
     kind: collection
     ```
 === "JSON"
@@ -3389,29 +3383,23 @@ The `recorded_stream` configuration usage syntax is:<br>
                 "quantiles",
                 "histograms"
               ]
+            },
+            "config": {
+              "targets": {
+                "www.google.com": {
+                  "target": "www.google.com"
+                },
+                "orb_community": {
+                  "target": "orb.community"
+                }
+              }
             }
           }
         }
       },
       "input": {
         "input_type": "netprobe",
-        "tap": "default_netprobe",
-        "config": {
-          "test_type": "ping",
-          "interval_msec": 2000,
-          "timeout_msec": 1000,
-          "packets_per_test": 10,
-          "packets_interval_msec": 25,
-          "packet_payload_size": 56,
-          "targets": {
-            "www.google.com": {
-              "target": "www.google.com"
-            },
-            "orb_community": {
-              "target": "orb.community"
-            }
-          }
-        }
+        "tap": "default_netprobe"
       },
       "kind": "collection"
     }
@@ -3436,6 +3424,105 @@ The `recorded_stream` configuration usage syntax is:<br>
 
 #### Configurations <a name="netprobe_configurations"></a><br>
 - [Abstract configurations](#abstract-configurations). <br><br>
+
+
+|                          Config                          | Type |          Required           | Default |
+|:--------------------------------------------------------:|:----:|:---------------------------:|:-------:|
+|               [targets](#targets_netprobe)               | map  |              ✅              |    -    |
+
+**targets**: *map* <a name="targets_netprobe"></a><br>
+<font size="1">[Back to netprobe configurations list](#netprobe_configurations)</font>
+
+Here, the targets against which the probe will run are defined.
+For each target is required to specify the target name and the address to be tested.
+
+=== "YAML"
+```yaml
+targets: map
+```
+Example:
+```yaml
+targets:
+  target_name:
+    target: ipv4 address to test
+```
+Generic Example:
+```yaml
+targets:
+  google:
+    target: www.google.com
+```
+
 - In netprobe policies it makes a lot of sense to use the settings from the input directly in the policy, since the settings are more related to the probe than the device the orb agent is running on. Therefore, it is worth reinforcing here the ability to override all tap settings in the policy. See [here](/documentation/orb_agent_configs/#netprobe) the available configurations for netprobe.
 
-
+=== "YAML"
+    ```yaml
+        handlers:
+          modules:
+            default_netprobe:
+              type: netprobe
+              metric_groups:
+                enable:
+                  - counters
+                  - quantiles
+                  - histograms
+              config:
+                targets:
+                  www.google.com:
+                    target: www.google.com
+                  orb_community:
+                    target: orb.community
+        input:
+          input_type: netprobe
+          tap: default_netprobe
+          config:
+            test_type: ping
+            interval_msec: 2500
+            timeout_msec: 2000
+            packets_per_test: 5
+            packets_interval_msec: 20
+            packet_payload_size: 56
+        kind: collection
+    ```
+=== "JSON"
+    ```json
+        {
+          "handlers": {
+            "modules": {
+              "default_netprobe": {
+                "type": "netprobe",
+                "metric_groups": {
+                  "enable": [
+                    "counters",
+                    "quantiles",
+                    "histograms"
+                  ]
+                },
+                "config": {
+                  "targets": {
+                    "www.google.com": {
+                      "target": "www.google.com"
+                    },
+                    "orb_community": {
+                      "target": "orb.community"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "input": {
+            "input_type": "netprobe",
+            "tap": "default_netprobe",
+            "config": {
+              "test_type": "ping",
+              "interval_msec": 2500,
+              "timeout_msec": 2000,
+              "packets_per_test": 5,
+              "packets_interval_msec": 20,
+              "packet_payload_size": 56
+            }
+          },
+          "kind": "collection"
+        }
+    ```
