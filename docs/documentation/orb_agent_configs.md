@@ -462,11 +462,6 @@ only_hosts: 192.168.1.4/32
             packets_per_test: 10
             packets_interval_msec: 25
             packet_payload_size: 56
-            targets:
-              www.google.com:
-                target: www.google.com
-              orb_community:
-                target: orb.community
           tags:
             netprobe: true
     ```
@@ -474,7 +469,7 @@ only_hosts: 192.168.1.4/32
 
 #### Configurations <a name="input_netprobe_configurations"></a><br>
 
-The following configs are available for netprobe inputs: `test_type`, `interval_msec`, `timeout_msec`, `packets_per_test`, `packets_interval_msec`, `packet_payload_size`. 
+The following configs are available for netprobe inputs:
 
 |                             Config                             | Type |          Required           | Default |
 |:--------------------------------------------------------------:|:----:|:---------------------------:|:-------:|
@@ -484,7 +479,6 @@ The following configs are available for netprobe inputs: `test_type`, `interval_
 |      [packets_per_test](#packets_per_test_input_netprobe)      | int  |              ❌              |    1    |
 | [packets_interval_msec](#packets_interval_msec_input_netprobe) | int  |              ❌              |   25    |
 |   [packet_payload_size](#packet_payload_size_input_netprobe)   | int  |              ❌              |   48    |
-|               [targets](#targets_input_netprobe)               | map  |              ✅              |    -    |
 |                  [port](#port_input_netprobe)                  | int  | `Required if test_type=tcp` |    -    |
 
 
@@ -589,29 +583,6 @@ packet_payload_size: 48
 ```
 
 <br>
-
-**targets**: *map* <a name="targets_input_netprobe"></a><br>
-<font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
-
-Here, the targets against which the probe will run are defined.
-For each target is required to specify the target name and the address to be tested.
-
-=== "YAML"
-```yaml
-targets: map
-```
-Example:
-```yaml
-targets:
-  target_name:
-    target: ipv4 address to test
-```
-Generic Example:
-```yaml
-targets:
-  google:
-    target: www.google.com
-```
 
 **port**: *int* <a name="port_input_netprobe"></a><br>
 <font size="1">[Back to netprobe configurations list](#input_netprobe_configurations)</font>
