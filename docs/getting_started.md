@@ -111,11 +111,11 @@ Policies tell agents which metrics to collect and how to collect them.
 Datasets essentially connect all the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize and action on the data.
 
 1. Navigate to the ==DATASETS== tab in Policy View
-Navigate to ==DATASETS== tab in the policy you would like to create a Dataset for, then click on New Dataset.  
+    - Navigate to `DATASETS` tab in the policy you would like to create a Dataset for, then click on New Dataset.  
 ![Dataset Creation from policy view](./img/new_dataset_from_policy.png)
 2. Select the Agent Group and Sink(s) and click ==Create==
-![Select Agent Group](./img/new_dataset_modal.png)
-    - The policy will be sent in real time to the Agents in the Agent Group and begin running.  
+    - The policy will be sent in real time to the Agents in the Agent Group and begin running. 
+![Select Agent Group](./img/new_dataset_modal.png) 
 ### Verify policy running
 - Navigate to ==Agents== and click on the name of the agent that matches the group you selected in creating the dataset. <br> The *Agent View* screen displays under the *Policies & Datasets* tab information about your policy and dataset. Your policy must have a <span style="color:green">**running**</span> status. 
 ![View Dataset](./img/agent_view_dataset.png)  
