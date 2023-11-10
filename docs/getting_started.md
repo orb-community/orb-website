@@ -175,6 +175,7 @@ The dataset will always be `valid` as long as the policy, the group *AND* the si
 🔴 `Error`  - The sink tried to publish the metrics but failed. ==Attention==: In this case, check that the sink credentials are configured correctly.
 
 🔵 `Provisioning` - Intermediate status which means that the sink collector is being provisioned.
+
 ![Sink Status](./img/sink_status.png)
 
 ## Visualize and alert on your metrics
