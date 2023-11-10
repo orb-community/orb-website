@@ -97,12 +97,12 @@ Policies tell agents which metrics to collect and how to collect them.
 1. Navigate to ==Policy Management==, and then click ==New Policy==.  
 ![Agent Policy View](./img/new_policy.png)  
 2. Fill in a policy name and (optionally) a description and tags.  
-    The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click ==Next==.  
-![Name your policy](./img/policy_name.png)  
-3. You can start using the suggested policy. Click ==Next== .
-![Save Agent Policy](./img/policy_setup.png)
+    - The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click ==Next==.
+![Name your policy](./img/policy_name.png)
+3. You can start using the suggested policy. Click ==Next==.
     - In this policy, *tap* (input stream) is “default_pcap” which is the default for Packet Capture. *Handlers* specifies how to analyze the input stream selected and, in this case, we want to analyze DNS and Network (L2-L3) traffic.
     - For a more tailored observability policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](/documentation/advanced_policies).
+![Save Agent Policy](./img/policy_setup.png)
 4. Click ==Save== to save the policy.  
 ![Save Agent Policy](./img/policy_save.png)  
 
