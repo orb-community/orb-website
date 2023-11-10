@@ -77,18 +77,36 @@ By clicking in ==EXPAND== you can see the agents that are matching with the grou
 
 ### Create a Sink
 
-A sink is a location to send the metrics collected from the agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a sink.
+A sink is a location to send the metrics collected from the agents. The current version supports OpenTelemetry Protocol (OTLP) and Prometheus.
 
-1. Navigate to ==Sink Management==, and then click ==New Sink==.  
-![Sink List View](./img/new_sink.png)
-2. Fill in a sink name and set sink backend to Prometheus.
-    - Optionally, add a description and sink tags by filling in the *Tag Key* and *Tag Value* fields. Click ==+== after each key-value pair.
-3. Fill in your sink destination details.  
-   This includes the host/username/password from your Prometheus `remote_write` configuration.
-4. Click ==Create== .  
-![Save Sink](./img/sink_save.png)  
-6. View your newly created sink in the *All Sinks* list.  
-![Sink List View](./img/new_sink_list.png)  
+=== "Try Orb with OTLP 🔥"
+
+    You can use a free [Grafana Cloud](https://grafana.com/docs/grafana-cloud/send-data/otlp/send-data-otlp/) account as a sink.
+
+    1. Navigate to ==Sink Management==, and then click ==New Sink==.  
+       ![Sink List View](./img/new_sink.png)
+    2. Fill in a sink name and set sink backend to Otlphtp.
+        - Optionally, add a description and sink tags by filling in the *Tag Key* and *Tag Value* fields. Click ==+== after each key-value pair.
+    3. Fill in your sink destination details and click ==Create== .  
+       ![Save Sink](./img/sink_save_2.png)
+    5. View your newly created sink in the *All Sinks* list.  
+       ![Sink List View](./img/new_sink_list_2.png)
+
+=== "Prometheus"
+
+    You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a sink.
+
+    1. Navigate to ==Sink Management==, and then click ==New Sink==.  
+       ![Sink List View](./img/new_sink.png)
+    2. Fill in a sink name and set sink backend to Prometheus.
+        - Optionally, add a description and sink tags by filling in the *Tag Key* and *Tag Value* fields. Click ==+== after each key-value pair.
+    3. Fill in your sink destination details.  
+       This includes the host/username/password from your Prometheus `remote_write` configuration.
+    4. Click ==Create== .  
+       ![Save Sink](./img/sink_save.png)
+    5. View your newly created sink in the *All Sinks* list.  
+       ![Sink List View](./img/new_sink_list.png)
+
 
 ### Create a Policy
 
