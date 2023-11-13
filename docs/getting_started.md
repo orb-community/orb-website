@@ -43,7 +43,7 @@ You create a set of agent credentials for each node you want to monitor. Agents 
 
     Check an example [here](/documentation/running_orb_agent/#sample-provisioning-commands).
 
-7. Paste the *Provisioning Command* into a terminal on the node where you want your agent to run (optionally edit "mock" to be the real interface name) and run the command. See [Running Orb Agent](documentation/running_orb_agent.md) for more details.
+7. Run the *Provisioning Command* into a terminal on the node where you want your agent to run. See [Running Orb Agent](documentation/running_orb_agent.md) for more details.
 8. Close out of the *Agent Credentials* menu. Refresh the *Agents List* in UI. The agent you just created should display an *Online* status.  
 ![Agent List: agent online](./img/agent_online.png)  
 9. Optionally, click the agent's name to view the *Agent View* screen. This screen will contain more information as you add the agent to an agent group and add corresponding policies and datasets.  
@@ -77,66 +77,70 @@ By clicking in ==EXPAND== you can see the agents that are matching with the grou
 
 ### Create a Sink
 
-A sink is a location to send the metrics collected from the agents. The current version supports Prometheus, and future versions will support more options. You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a sink.
+A sink is a location to send the metrics collected from the agents. The current version supports OpenTelemetry Protocol (OTLP) and Prometheus.
 
-1. Navigate to ==Sink Management==, and then click ==New Sink==.  
-![Sink List View](./img/new_sink.png)  
-2. Fill in a sink name and click ==Next==.  
-![Name your sink](./img/new_sink_test.png)  
-3. Fill in your sink destination details.  
-    This includes the host/username/password from your Prometheus `remote_write` configuration.
-![Sink destination](./img/sink_destination.png)  
-4. Add tags  
-    Optionally, add sink tags by filling in the *Key* and *Value* fields. Click ==+== after each key-value pair, and then click ==Next==.  
-![Sink tags](./img/sink_tags.png)  
-5. Review and confirm your sink details and click ==Save==.  
-![Save Sink](./img/sink_save.png)  
-6. View your newly created sink in the *All Sinks* list.  
-![Sink List View](./img/new_sink_list.png)  
+=== "Try Orb with OTLP 🔥"
+
+    You can use a free [Grafana Cloud](https://grafana.com/docs/grafana-cloud/send-data/otlp/send-data-otlp/) account as a sink.
+
+    1. Navigate to ==Sink Management==, and then click ==New Sink==.  
+       ![Sink List View](./img/new_sink.png)
+    2. Fill in a sink name and set sink backend to Otlphtp.
+        - Optionally, add a description and sink tags by filling in the *Tag Key* and *Tag Value* fields. Click ==+== after each key-value pair.
+    3. Fill in your sink destination details and click ==Create== .  
+       ![Save Sink](./img/sink_save_2.png)
+    5. View your newly created sink in the *All Sinks* list.  
+       ![Sink List View](./img/new_sink_list_2.png)
+
+=== "Prometheus"
+
+    You can use a private Prometheus instance or use a free [Grafana Cloud](https://grafana.com/products/cloud/) account as a sink.
+
+    1. Navigate to ==Sink Management==, and then click ==New Sink==.  
+       ![Sink List View](./img/new_sink.png)
+    2. Fill in a sink name and set sink backend to Prometheus.
+        - Optionally, add a description and sink tags by filling in the *Tag Key* and *Tag Value* fields. Click ==+== after each key-value pair.
+    3. Fill in your sink destination details.  
+       This includes the host/username/password from your Prometheus `remote_write` configuration.
+    4. Click ==Create== .  
+       ![Save Sink](./img/sink_save.png)
+    5. View your newly created sink in the *All Sinks* list.  
+       ![Sink List View](./img/new_sink_list.png)
+
 
 ### Create a Policy
 
-Policies tell agents which metrics to collect and ho    w to collect them.
+Policies tell agents which metrics to collect and how to collect them.
 
 1. Navigate to ==Policy Management==, and then click ==New Policy==.  
 ![Agent Policy View](./img/new_policy.png)  
-2. Fill in a policy name and (optionally) a description.  
-    The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click ==Next==.  
-![Name your policy](./img/policy_name.png)  
-3. Select the *Tap* (input stream) to analyze.  
-     In this example, we use “default_pcap” which is the default for Packet Capture.  
-     All other options are advanced and can be left as is. Click ==Next==.  
-![Tap selection](./img/policy_tap_setup.png)  
-4. Click ==Add Handler==  
-    Add a *Stream Handler* to the policy, which specifies how to analyze the input stream selected in the previous step.  
-![Handler setup](./img/policy_data_handlers.png)  
-5. Add a *Handler Label* for each handler you add. In this example, we want to analyze DNS traffic, so we select the “dns” handler. The only required field here is the *Handler Label*, which is automatically generated for you (handler_dns_1 in this case).  
-![Handler configuration](./img/policy_handler_config.png)  
-6. Enter any customization variables.  
-    In this example, we customize the analysis by analyzing only domain names ending in ".ua" or ".ru". This is done with the filter labeled "Include Only QNames With Suffix." We input a comma delimited list of suffixes, so enter ".ua,.ru". Click ==Save== after entering any customization to save this Handler.  
-![Handler configuration](./img/policy_handler_config2.png)  
-7. You should see your new handler label on the screen.  
-    Optionally, add more handlers. Click ==Save== to save the policy.  
+2. Fill in a policy name and (optionally) a description and tags.  
+    - The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click ==Next==.
+![Name your policy](./img/policy_name.png)
+3. You can start using the suggested policy. Click ==Next==.
+    - In this policy, *tap* (input stream) is “default_pcap” which is the default for Packet Capture. *Handlers* specifies how to analyze the input stream selected and, in this case, we want to analyze DNS and Network (L2-L3) traffic.
+    - For a more tailored observability policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the [Orb Policy Reference](/documentation/advanced_policies).
+![Save Agent Policy](./img/policy_setup.png)
+4. Click ==Save== to save the policy.  
 ![Save Agent Policy](./img/policy_save.png)  
 
 ### Create a Dataset
 
-Datasets essentially connect all of the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize and action on the data.
+Datasets essentially connect all the previous pieces. By creating and defining a dataset, you send a specific *policy* to a specific *agent group* and establish a *sink* to receive the resulting metrics which allows you to visualize and action on the data.
 
-1. Navigate to the ==Policy==  
-    Navigate to the policy you would like to create a Dataset for, then click on New Dataset.  
-![Dataset Creation from policy view](./img/new_dataset_from_policy.png)  
-2. Select the Agent Group and Sink(s)
-![Select Agent Group](./img/new_dataset_modal.png)  
-3. Click ==Save==  
-    The policy will be sent in real time to the Agents in the Agent Group and begin running.  
-4. Verify your dataset  
-    Navigate to ==Agents== and click on the name of the agent that matches the group you selected in creating the dataset. The *Agent View* screen displays. Under the *Active Policies/Datasets* category, click the ==Policy== drop-down (which should accompany a "running" status), and your ==Dataset== should display.  
+1. Navigate to the ==DATASETS== tab in Policy View
+    - Navigate to `DATASETS` tab in the policy you would like to create a Dataset for, then click on New Dataset.  
+![Dataset Creation from policy view](./img/new_dataset_from_policy.png)
+2. Select the Agent Group and Sink(s) and click ==Create==
+    - The policy will be sent in real time to the Agents in the Agent Group and begin running. 
+![Select Agent Group](./img/new_dataset_modal.png) 
+### Verify policy running
+- Navigate to ==Agents== and click on the name of the agent that matches the group you selected in creating the dataset. <br> The *Agent View* screen displays under the *Policies & Datasets* tab information about your policy and dataset. Your policy must have a <span style="color:green">**running**</span> status. 
 ![View Dataset](./img/agent_view_dataset.png)  
 
 ## Check Orb Health
 
-Orb objects have status variables whose functions are to help you understand the health of your system. Below is a guide to the correct interpretations of each status.
+Orb objects have variables status whose functions are to help you understand the health of your system. A guide on how to interpret this is provided below.
 
 ### Agent Status
 
@@ -160,11 +164,11 @@ The status of each policy can be seen on the preview page of an agent to which i
 
 The policy will be:
 
-<span style="color:green">running</span> if agent policy is being managed from the control plane (policy-related metrics are being requested/scraped by this agent)
+<span style="color:green">**running**</span> if agent policy is being managed from the control plane (policy-related metrics are being requested/scraped by this agent)
 
-<span style="color:red">failed_to_apply</span> if an error prevents the policy from being applied by the agent. By clicking on the expand icon you can see the cause of the error
+<span style="color:red">**failed_to_apply**</span> if an error prevents the policy from being applied by the agent. By clicking on the expand icon you can see the cause of the error
 
-<span style="color:grey">offline</span> if the policy was stopped by agent request
+<span style="color:grey">**offline**</span> if the policy was stopped by agent request
 
 ![Policies Running and Failed](./img/policies_running_and_failed.png)
 
@@ -180,13 +184,15 @@ The dataset will always be `valid` as long as the policy, the group *AND* the si
 
 ### Sinks Status
 
-🟠 `Unknown` - No metrics have ever been published to this sink
+🟣 `Unknown` - No metrics have ever been published to this sink
 
 🟢 `Active` - Metrics are actively being published to this sink
 
-⚪ `Idle` - The last metrics published to this sink were more than 5 minutes ago
+🟠 `Idle` - The last metrics published to this sink were more than 5 minutes ago
 
 🔴 `Error`  - The sink tried to publish the metrics but failed. ==Attention==: In this case, check that the sink credentials are configured correctly.
+
+🔵 `Provisioning` - Intermediate status which means that the sink collector is being provisioned.
 
 ![Sink Status](./img/sink_status.png)
 
