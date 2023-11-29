@@ -382,6 +382,7 @@ For handlers that have metric groups, the metric groups that must be enabled for
 | Count of Net Probe quantile in microseconds                                | netprobe_response_quantiles_us_count  | quantiles                            |
 | Total Net Probe attempts                                                   | netprobe_attempts                     | counters                             |
 | Total Net Probe failures when performed DNS lookup                         | netprobe_dns_lookup_failures          | counters                             |
+| Total Net Probe failures when performing a TCP socket connection           | netprobe_connect_failures             | counters                             |
 | Total Net Probe timeout transactions                                       | netprobe_packets_timeout              | counters                             |
 | Maximum response time measured in the reporting interval                   | netprobe_response_max_us              | counters + (quantiles or histograms) |
 | Minimum response time measured in the reporting interval                   | netprobe_response_min_us              | counters + (quantiles or histograms) |
