@@ -19,6 +19,12 @@ We are very interested to hear about your use cases, feature requests, and contr
 * Check out the [NetBox Labs YouTube channel](https://www.youtube.com/channel/UCs5FgE5p03tP-8InKVIojdw)
 * Send mail to [info@netboxlabs.com](mailto:info@netboxlabs.com)
 
+## Policies
+Our policies here at NetboxLabs
+
+* [Terms of service](https://netboxlabs.com/terms-of-service/)
+* [Privacy Policy](https://netboxlabs.com/privacy/)
+
 ## Explore
 ### Articles
 * [Orb Data Sheet: Actionable Edge Observability](https://ns1.com/writable/resources/orb-actionable-edge-observability/ns1-ds-orb.pdf)
