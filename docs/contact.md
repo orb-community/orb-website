@@ -20,7 +20,7 @@ We are very interested to hear about your use cases, feature requests, and contr
 * Send mail to [info@netboxlabs.com](mailto:info@netboxlabs.com)
 
 ## Policies
-Our policies here at NetboxLabs
+Our policies here at NetBox Labs
 
 * [Terms of service](https://netboxlabs.com/terms-of-service/)
 * [Privacy Policy](https://netboxlabs.com/privacy/)
