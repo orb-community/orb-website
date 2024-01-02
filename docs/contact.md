@@ -22,7 +22,7 @@ We are very interested to hear about your use cases, feature requests, and contr
 ## Policies
 Our policies here at NetBox Labs
 
-* [Terms of service](https://netboxlabs.com/terms-of-service/)
+* [Terms of Service](https://netboxlabs.com/terms-of-service/)
 * [Privacy Policy](https://netboxlabs.com/privacy/)
 
 ## Explore
