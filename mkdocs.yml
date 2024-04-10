@@ -70,11 +70,11 @@ extra:
     - icon: fontawesome/brands/slack
       link: https://netdev.chat/
     - icon: octicons/mail-24
-      link: "mailto:info@pktvisor.dev"
+      link: "mailto:info@netboxlabs.com"
   analytics:
     provider: google
     property: G-XYK19RRHLW
-copyright: Copyright &copy; 2023
+copyright: Copyright &copy; 2024 | <a href="https://netboxlabs.com/privacy/">Privacy Policy</a>
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
