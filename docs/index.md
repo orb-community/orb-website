@@ -12,9 +12,9 @@ hide:
 ![](img/01_Edge-Observability.png){ align=right .observability }
 ### Introducing Orb
 
-**Orb** is a modern network observability platform built to provide critical visibility into increasingly complex and distributed networks. It can analyze network traffic, run synthetic network probes, and connect the resulting telemetry directly to your existing observability stacks with OpenTelemetry.
+**Orb** is a modern network observability platform built to provide critical visibility into increasingly complex, segmented, and distributed networks. It can discover devices, analyze network traffic, run synthetic network probes, and connect telemetry to your existing observability stacks with OpenTelemetry.
 
-**Orb** differentiates from other solutions by pushing analysis close to the traffic sources (reducing inactionable metrics and processing costs), and allows for dynamic reconfiguration of remote agents in real time.
+**Orb** differentiates from other solutions by providing agent fleet management and allowing for dynamic reconfiguration of remote agents in real time.
 
 <div class="grid orb-home-content">
 
@@ -53,7 +53,7 @@ to modern observability stacks via OpenTelemetry
 <div class="md-typeset">
 <h3>Integrate</h3>
 <p>
-The Orb control plane is a modern microservices application with well defined APIs that can be deployed to any Kubernetes service in a private or public cloud, avoiding vendor lock-in. The Orb agent is a lightweight, modular analyzer that can scale down
+The Orb control plane is a modern microservices application with well defined APIs that can be deployed to any Kubernetes service in a private or public cloud, avoiding vendor lock-in. The Orb agent is lightweight and modular, and can scale down
 to embedded platforms or up to full servers.
 Orb is designed to easily integrate into the larger Network Automation ecosystem.
 </p>
@@ -64,10 +64,8 @@ Orb is designed to easily integrate into the larger Network Automation ecosystem
 ![](img/06_WhereOrbFits.png){ align=left .wherefits .small}
 ### Where Orb fits
 
-**Orb**’s focus is on providing full network visibility across control and data planes by pushing analysis close to devices and dynamically defining observability parameters which can change in real time via automation.
+**Orb**’s focus is enabling network automation and visibility across network device control and data planes using a dynamically reconfigurable agent based system.
 
 It is free, open-source software released under Mozilla Public License (MPL). 
-
-You can host **Orb** yourself, or run it through our hosted SaaS platform at <a href="https://orb.live" target="_blank">orb.live</a>.
 
 ***
