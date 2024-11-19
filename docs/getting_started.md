@@ -1,9 +1,7 @@
 !!! info
-    To get started, we suggest registering for a free account on our SaaS <a href="https://orb.live" target="_blank">Orb.live</a> platform. For those who prefer self hosting Orb, you can find detailed installation instructions in the Documentation section of this site ([Installation](documentation/install.md)).
+    You can find detailed installation instructions in the Documentation section of this site ([Installation](documentation/install.md)).
 
 ## Connect to Orb
-
-Register for a free Orb.live account <a href="https://orb.live/auth/register" target="_blank">here</a>
 
 1. **Register a new account**  
 ![Register](./img/register.png)
