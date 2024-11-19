@@ -1,0 +1,1329 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../img/ORB-logo-ring.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Getting Started - Orb Dynamic Edge Observability</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Montserrat";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-XYK19RRHLW"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-XYK19RRHLW",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYK19RRHLW"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#connect-to-orb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Determine class according to configuration -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href=".."
+      title="Orb Dynamic Edge Observability"
+      class="md-header__button md-logo"
+      aria-label="Orb Dynamic Edge Observability"
+      data-md-component="logo"
+    >
+      <!-- Logo -->
+
+  <img src="../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orb Dynamic Edge Observability
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette -->
+    
+
+    <!-- Site language selector -->
+    
+    <!-- Navigation tabs (sticky) -->
+    
+    
+    
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Getting Started
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../guides/" class="md-tabs__link">
+        Guides
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../documentation/running_orb_agent/" class="md-tabs__link">
+        Documentation
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../contact/" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Orb Dynamic Edge Observability" class="md-nav__button md-logo" aria-label="Orb Dynamic Edge Observability" data-md-component="logo">
+      <!-- Logo -->
+
+  <img src="../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+    Orb Dynamic Edge Observability
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Getting Started
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connect-to-orb" class="md-nav__link">
+    Connect to Orb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-your-first-agent" class="md-nav__link">
+    Deploy your first Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy your first Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-agent-credentials" class="md-nav__link">
+    Create Agent Credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-your-agent" class="md-nav__link">
+    Start your Agent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-agent" class="md-nav__link">
+    Configure your Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure your Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-agent-group" class="md-nav__link">
+    Create an Agent Group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-sink" class="md-nav__link">
+    Create a Sink
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-policy" class="md-nav__link">
+    Create a Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-dataset" class="md-nav__link">
+    Create a Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-policy-running" class="md-nav__link">
+    Verify policy running
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-orb-health" class="md-nav__link">
+    Check Orb Health
+  </a>
+  
+    <nav class="md-nav" aria-label="Check Orb Health">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-status" class="md-nav__link">
+    Agent Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies-status" class="md-nav__link">
+    Policies Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datasets-validity" class="md-nav__link">
+    Datasets Validity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinks-status" class="md-nav__link">
+    Sinks Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-and-alert-on-your-metrics" class="md-nav__link">
+    Visualize and alert on your metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../guides/">Guides</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/edge_networks/" class="md-nav__link">
+        Edge Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/authoritative_dns/" class="md-nav__link">
+        Authoritative DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/recursive_dns/" class="md-nav__link">
+        Recursive DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/dhcp_services/" class="md-nav__link">
+        DHCP Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/flow/" class="md-nav__link">
+        Network Traffic (Flow)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/response_testing/" class="md-nav__link">
+        Response Testing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/running_orb_agent/" class="md-nav__link">
+        Running Orb Agents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/orb_agent_configs/" class="md-nav__link">
+        Configuring Orb Agent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/advanced_policies/" class="md-nav__link">
+        Orb Policy Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/pktvisor_metrics/" class="md-nav__link">
+        Orb Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/install/" class="md-nav__link">
+        Installing Orb control plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/orb_rest_api/" class="md-nav__link">
+        Orb REST API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contact/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connect-to-orb" class="md-nav__link">
+    Connect to Orb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-your-first-agent" class="md-nav__link">
+    Deploy your first Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy your first Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-agent-credentials" class="md-nav__link">
+    Create Agent Credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-your-agent" class="md-nav__link">
+    Start your Agent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-agent" class="md-nav__link">
+    Configure your Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure your Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-agent-group" class="md-nav__link">
+    Create an Agent Group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-sink" class="md-nav__link">
+    Create a Sink
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-policy" class="md-nav__link">
+    Create a Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-dataset" class="md-nav__link">
+    Create a Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-policy-running" class="md-nav__link">
+    Verify policy running
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-orb-health" class="md-nav__link">
+    Check Orb Health
+  </a>
+  
+    <nav class="md-nav" aria-label="Check Orb Health">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-status" class="md-nav__link">
+    Agent Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies-status" class="md-nav__link">
+    Policies Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datasets-validity" class="md-nav__link">
+    Datasets Validity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinks-status" class="md-nav__link">
+    Sinks Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-and-alert-on-your-metrics" class="md-nav__link">
+    Visualize and alert on your metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Getting Started</h1>
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can find detailed installation instructions in the Documentation section of this site (<a href="../documentation/install/">Installation</a>).</p>
+</div>
+<h2 id="connect-to-orb">Connect to Orb</h2>
+<ol>
+<li>
+<p><strong>Register a new account</strong><br />
+<img alt="Register" src="../img/register.png" /></p>
+</li>
+<li>
+<p><strong>After registering</strong>, you should see the home page with a welcome message.<br />
+<img alt="Home Page" src="../img/welcome_to_orb.png" /></p>
+</li>
+</ol>
+<h2 id="deploy-your-first-agent">Deploy your first Agent</h2>
+<p>Follow the steps below after logging in to the Orb Portal to get an Orb agent up and running.</p>
+<h3 id="create-agent-credentials">Create Agent Credentials</h3>
+<p>You create a set of agent credentials for each node you want to monitor. Agents are organized by tags. Each agent has a set of corresponding credentials used during provisioning. You may also <a href="../documentation/running_orb_agent/#advanced-auto-provisioning-setup">provision agents directly at the edge</a> instead of through the UI.  </p>
+<ol>
+<li>Navigate to <mark>Agents</mark>, and then click <mark>New Agent</mark>.<br />
+<img alt="Agent List View" src="../img/new_agent.png" /></li>
+<li>Fill in an <em>Agent Name</em> and click <mark>Next</mark>.  </li>
+<li>Optionally, fill in <em>Key</em> and <em>Value</em> tags, then click the <mark>+</mark> on the right side of the menu. These tags represent the way you will assign the agent to an agent group. Reasonable tags might be "location", "region", "pop", "type", etc.<br />
+<img alt="Add tags to the agent" src="../img/new_agent_tag_add.png" />  </li>
+<li>You should see an icon with your key and value tags appear above the <em>Key</em> and <em>Value</em> textboxes. Click <mark>Next</mark>.<br />
+<img alt="Agent tag detail" src="../img/new_agent_tag.png" />  </li>
+<li>Click <mark>Save</mark> to confirm your agent’s name and tags.<br />
+<img alt="Save your agent" src="../img/new_agent_tag_save.png" />  </li>
+<li>Your agent credentials should appear. Copy the <em>Provisioning Command</em>. This command contains all the information you need to run the Docker container with the given credentials you now have for the agent.<br />
+<img alt="Provisioning Command" src="../img/provisioning_command.png" />  </li>
+</ol>
+<h3 id="start-your-agent">Start your Agent</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To connect an agent to the <a href="/documentation/install/#self-host">self-hosted development control plane</a>, disable TLS verification using the enviromental variable below in your provisioning command:</p>
+<div class="highlight"><pre><span></span><code>-e<span class="w"> </span><span class="nv">ORB_TLS_VERIFY</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+<p>Check an example <a href="/documentation/running_orb_agent/#sample-provisioning-commands">here</a>.</p>
+</div>
+<ol>
+<li>Run the <em>Provisioning Command</em> into a terminal on the node where you want your agent to run. See <a href="../documentation/running_orb_agent/">Running Orb Agent</a> for more details.</li>
+<li>Close out of the <em>Agent Credentials</em> menu. Refresh the <em>Agents List</em> in UI. The agent you just created should display an <em>Online</em> status.<br />
+<img alt="Agent List: agent online" src="../img/agent_online.png" />  </li>
+<li>Optionally, click the agent's name to view the <em>Agent View</em> screen. This screen will contain more information as you add the agent to an agent group and add corresponding policies and datasets.<br />
+<img alt="Agent View" src="../img/agent_view_agent.png" /></li>
+</ol>
+<h2 id="configure-your-agent">Configure your Agent</h2>
+<h3 id="create-an-agent-group">Create an Agent Group</h3>
+<p>Agents are organized into agent groups based on key-value tag matching.</p>
+<ol>
+<li>Navigate to <mark>Agent Groups</mark>, and then click <mark>New Agent Group</mark>.<br />
+<img alt="Agent Group List" src="../img/new_agent_group.png" />  </li>
+<li>Fill in an <em>Agent Group Name</em> and click <mark>Next</mark>.<br />
+<img alt="Name the group" src="../img/new_agent_group_name.png" />  </li>
+<li>Fill in the <em>Key</em> and <em>Value</em> tags,
+    <mark>which need to match the tags of the corresponding Agent</mark>, and click the <mark>+</mark> on the right side of the menu. 
+    You should see an icon with your key and value tags appear above the <em>Key</em> and <em>Value</em> textboxes.<br />
+<img alt="Agent Group Tags" src="../img/new_agent_group_name_plus.png" />  </li>
+<li>Click <mark>Next</mark>.<br />
+    You should see a message about the number of agents matching. Then click <mark>Save</mark>.<br />
+<img alt="Review Agent Group" src="../img/new_agent_group_name_next.png" /><br />
+By clicking in <mark>EXPAND</mark> you can see the agents that are matching with the group (This is optional).<br />
+<img alt="Group Matching Agents" src="../img/new_agent_group_expand_matching.png" />  </li>
+<li>View the newly created group in the <mark>Agent Groups</mark> list.<br />
+<img alt="Agent Group List" src="../img/agent_group_list.png" />  </li>
+<li>View Matching Agents<br />
+    Click the number in the <em>Agents</em> column to view the matching agents.<br />
+<img alt="Group Matching Agents Detail" src="../img/matching_agent.png" />  </li>
+</ol>
+<h3 id="create-a-sink">Create a Sink</h3>
+<p>A sink is a location to send the metrics collected from the agents. The current version supports OpenTelemetry Protocol (OTLP) and Prometheus.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Try Orb with OTLP 🔥</label><label for="__tabbed_1_2">Prometheus</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>You can use a free <a href="https://grafana.com/docs/grafana-cloud/send-data/otlp/send-data-otlp/">Grafana Cloud</a> account as a sink.</p>
+<ol>
+<li>Navigate to <mark>Sink Management</mark>, and then click <mark>New Sink</mark>.<br />
+<img alt="Sink List View" src="../img/new_sink.png" /></li>
+<li>Fill in a sink name and set sink backend to Otlphtp.<ul>
+<li>Optionally, add a description and sink tags by filling in the <em>Tag Key</em> and <em>Tag Value</em> fields. Click <mark>+</mark> after each key-value pair.</li>
+</ul>
+</li>
+<li>Fill in your sink destination details and click <mark>Create</mark> .<br />
+<img alt="Save Sink" src="../img/sink_save_2.png" /></li>
+<li>View your newly created sink in the <em>All Sinks</em> list.<br />
+<img alt="Sink List View" src="../img/new_sink_list_2.png" /></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>You can use a private Prometheus instance or use a free <a href="https://grafana.com/products/cloud/">Grafana Cloud</a> account as a sink.</p>
+<ol>
+<li>Navigate to <mark>Sink Management</mark>, and then click <mark>New Sink</mark>.<br />
+<img alt="Sink List View" src="../img/new_sink.png" /></li>
+<li>Fill in a sink name and set sink backend to Prometheus.<ul>
+<li>Optionally, add a description and sink tags by filling in the <em>Tag Key</em> and <em>Tag Value</em> fields. Click <mark>+</mark> after each key-value pair.</li>
+</ul>
+</li>
+<li>Fill in your sink destination details.<br />
+   This includes the host/username/password from your Prometheus <code>remote_write</code> configuration.</li>
+<li>Click <mark>Create</mark> .<br />
+<img alt="Save Sink" src="../img/sink_save.png" /></li>
+<li>View your newly created sink in the <em>All Sinks</em> list.<br />
+<img alt="Sink List View" src="../img/new_sink_list.png" /></li>
+</ol>
+</div>
+</div>
+</div>
+<h3 id="create-a-policy">Create a Policy</h3>
+<p>Policies tell agents which metrics to collect and how to collect them.</p>
+<ol>
+<li>Navigate to <mark>Policy Management</mark>, and then click <mark>New Policy</mark>.<br />
+<img alt="Agent Policy View" src="../img/new_policy.png" />  </li>
+<li>Fill in a policy name and (optionally) a description and tags.  <ul>
+<li>The policy name needs to be unique and cannot contain spaces (use underscores or dashes instead). Then click <mark>Next</mark>.
+<img alt="Name your policy" src="../img/policy_name.png" /></li>
+</ul>
+</li>
+<li>You can start using the suggested policy. Click <mark>Next</mark>.<ul>
+<li>In this policy, <em>tap</em> (input stream) is “default_pcap” which is the default for Packet Capture. <em>Handlers</em> specifies how to analyze the input stream selected and, in this case, we want to analyze DNS and Network (L2-L3) traffic.</li>
+<li>For a more tailored observability policy to filter on specific traffic or to add (or exclude) specific metrics, please refer to the <a href="/documentation/advanced_policies">Orb Policy Reference</a>.
+<img alt="Save Agent Policy" src="../img/policy_setup.png" /></li>
+</ul>
+</li>
+<li>Click <mark>Save</mark> to save the policy.<br />
+<img alt="Save Agent Policy" src="../img/policy_save.png" />  </li>
+</ol>
+<h3 id="create-a-dataset">Create a Dataset</h3>
+<p>Datasets essentially connect all the previous pieces. By creating and defining a dataset, you send a specific <em>policy</em> to a specific <em>agent group</em> and establish a <em>sink</em> to receive the resulting metrics which allows you to visualize and action on the data.</p>
+<ol>
+<li>Navigate to the <mark>DATASETS</mark> tab in Policy View<ul>
+<li>Navigate to <code>DATASETS</code> tab in the policy you would like to create a Dataset for, then click on New Dataset.<br />
+<img alt="Dataset Creation from policy view" src="../img/new_dataset_from_policy.png" /></li>
+</ul>
+</li>
+<li>Select the Agent Group and Sink(s) and click <mark>Create</mark><ul>
+<li>The policy will be sent in real time to the Agents in the Agent Group and begin running. 
+<img alt="Select Agent Group" src="../img/new_dataset_modal.png" /> </li>
+</ul>
+</li>
+</ol>
+<h3 id="verify-policy-running">Verify policy running</h3>
+<ul>
+<li>Navigate to <mark>Agents</mark> and click on the name of the agent that matches the group you selected in creating the dataset. <br> The <em>Agent View</em> screen displays under the <em>Policies &amp; Datasets</em> tab information about your policy and dataset. Your policy must have a <span style="color:green"><strong>running</strong></span> status. 
+<img alt="View Dataset" src="../img/agent_view_dataset.png" />  </li>
+</ul>
+<h2 id="check-orb-health">Check Orb Health</h2>
+<p>Orb objects have variables status whose functions are to help you understand the health of your system. A guide on how to interpret this is provided below.</p>
+<h3 id="agent-status">Agent Status</h3>
+<p>There are 4 expected status for agents: <code>new</code>, <code>online</code>, <code>offline</code> and <code>stale</code></p>
+<p><img alt="Agent Status" src="../img/agents_status.png" /></p>
+<p>These status are related to the agent's last activity (heartbeat):</p>
+<p>🟣 <code>new</code> means that the agent never sent a heartbeat (i.e. has never connected to the control plane)</p>
+<p>🟢 <code>online</code> means that the agent is sending heartbeats right now (is running and healthy).</p>
+<p>⚪ <code>offline</code> means that the control plane received a heartbeat saying that the agent is going offline.</p>
+<p>🟠 <code>stale</code> means that the control plane has not received a heartbeat for 5 minutes (without having received a heartbeat stating that it would go offline)</p>
+<h3 id="policies-status">Policies Status</h3>
+<p>The status of each policy can be seen on the preview page of an agent to which it is applied</p>
+<p>The policy will be:</p>
+<p><span style="color:green"><strong>running</strong></span> if agent policy is being managed from the control plane (policy-related metrics are being requested/scraped by this agent)</p>
+<p><span style="color:red"><strong>failed_to_apply</strong></span> if an error prevents the policy from being applied by the agent. By clicking on the expand icon you can see the cause of the error</p>
+<p><span style="color:grey"><strong>offline</strong></span> if the policy was stopped by agent request</p>
+<p><img alt="Policies Running and Failed" src="../img/policies_running_and_failed.png" /></p>
+<p><img alt="Policy Offline" src="../img/policy_offline.png" /></p>
+<h3 id="datasets-validity">Datasets Validity</h3>
+<p>Once created a dataset can only be <code>valid</code> (🟢) or <code>invalid</code> (🔴)</p>
+<p><img alt="Dataset Status" src="../img/datasets_status.png" /></p>
+<p>The dataset will always be <code>valid</code> as long as the policy, the group <em>AND</em> the sink linked to it exist in Orb. If the policy, the group <em>OR</em> the sink is removed from Orb, the dataset will become <code>invalid</code>. Note, in the image above, that the invalid dataset does not contain the group listed, as it has been removed from the Orb.</p>
+<h3 id="sinks-status">Sinks Status</h3>
+<p>🟣 <code>Unknown</code> - No metrics have ever been published to this sink</p>
+<p>🟢 <code>Active</code> - Metrics are actively being published to this sink</p>
+<p>🟠 <code>Idle</code> - The last metrics published to this sink were more than 5 minutes ago</p>
+<p>🔴 <code>Error</code>  - The sink tried to publish the metrics but failed. <mark>Attention</mark>: In this case, check that the sink credentials are configured correctly.</p>
+<p>🔵 <code>Provisioning</code> - Intermediate status which means that the sink collector is being provisioned.</p>
+<p><img alt="Sink Status" src="../img/sink_status.png" /></p>
+<h2 id="visualize-and-alert-on-your-metrics">Visualize and alert on your metrics</h2>
+<ul>
+<li>Your agent should now be running the policy you created. After one minute of collection time, the metrics will be sent to your Prometheus sink.</li>
+<li>You may use standard tools for visualizing and alerting on your Prometheus metrics. A popular option is <a href="https://grafana.com" target="_blank">Grafana</a>.</li>
+<li>A pre-made dashboard for visualizing Orb/pktvisor metrics is <a href="https://grafana.com/grafana/dashboards/14221" target="_blank">available for import here</a>.
+<img alt="Grafana Dashboard" src="../img/grafana_dash.png" /></li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../about/" class="md-footer__link md-footer__link--prev" aria-label="Previous: About" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              About
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../guides/" class="md-footer__link md-footer__link--next" aria-label="Next: Solution Guides" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Solution Guides
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 | <a href="https://netboxlabs.com/privacy/">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/orb-community/orb" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/orbcommunity" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://netdev.chat/" target="_blank" rel="noopener" title="netdev.chat" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@netboxlabs.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 0 0 0 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0 0 24 18.75v-14A1.75 1.75 0 0 0 22.25 3H1.75zM1.5 4.75a.25.25 0 0 1 .25-.25h20.5a.25.25 0 0 1 .25.25v.852l-10.36 7a.25.25 0 0 1-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.sections", "navigation.prune", "search.suggest"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>

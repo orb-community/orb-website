@@ -1,0 +1,2623 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../img/ORB-logo-ring.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Orb Metrics - Orb Dynamic Edge Observability</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Montserrat";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-XYK19RRHLW"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-XYK19RRHLW",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYK19RRHLW"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#orb-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Determine class according to configuration -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="../.."
+      title="Orb Dynamic Edge Observability"
+      class="md-header__button md-logo"
+      aria-label="Orb Dynamic Edge Observability"
+      data-md-component="logo"
+    >
+      <!-- Logo -->
+
+  <img src="../../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orb Dynamic Edge Observability
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Orb Metrics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette -->
+    
+
+    <!-- Site language selector -->
+    
+    <!-- Navigation tabs (sticky) -->
+    
+    
+    
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../getting_started/" class="md-tabs__link">
+      Getting Started
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guides/" class="md-tabs__link">
+        Guides
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../running_orb_agent/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../contact/" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Orb Dynamic Edge Observability" class="md-nav__button md-logo" aria-label="Orb Dynamic Edge Observability" data-md-component="logo">
+      <!-- Logo -->
+
+  <img src="../../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+    Orb Dynamic Edge Observability
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../guides/">Guides</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/edge_networks/" class="md-nav__link">
+        Edge Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/authoritative_dns/" class="md-nav__link">
+        Authoritative DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/recursive_dns/" class="md-nav__link">
+        Recursive DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/dhcp_services/" class="md-nav__link">
+        DHCP Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/flow/" class="md-nav__link">
+        Network Traffic (Flow)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/response_testing/" class="md-nav__link">
+        Response Testing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_orb_agent/" class="md-nav__link">
+        Running Orb Agents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orb_agent_configs/" class="md-nav__link">
+        Configuring Orb Agent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_policies/" class="md-nav__link">
+        Orb Policy Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Orb Metrics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Orb Metrics
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-metrics" class="md-nav__link">
+    DHCP Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-metrics" class="md-nav__link">
+    DNS Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-metrics" class="md-nav__link">
+    Network Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pcap-metrics" class="md-nav__link">
+    PCAP Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bgp-metrics" class="md-nav__link">
+    BGP metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-metrics-beta" class="md-nav__link">
+    Flow metrics [BETA]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netprobe-metrics-beta" class="md-nav__link">
+    Netprobe Metrics [BETA]
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        Installing Orb control plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/orb_rest_api/" class="md-nav__link">
+        Orb REST API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-metrics" class="md-nav__link">
+    DHCP Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-metrics" class="md-nav__link">
+    DNS Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-metrics" class="md-nav__link">
+    Network Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pcap-metrics" class="md-nav__link">
+    PCAP Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bgp-metrics" class="md-nav__link">
+    BGP metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-metrics-beta" class="md-nav__link">
+    Flow metrics [BETA]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netprobe-metrics-beta" class="md-nav__link">
+    Netprobe Metrics [BETA]
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="orb-metrics">Orb Metrics</h1>
+<p>The Orb metrics currently provided come from the various supported pktvisor handlers and are listed here by handler.<br>
+For handlers that have metric groups, the metric groups that must be enabled for the metric to exist are listed in "Metric Groups" column. <code>any group*</code> means that the metric will exist for any valid metric groups that is enabled.</p>
+<h2 id="dhcp-metrics">DHCP Metrics</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#dhcp-analyzer-dhcp">Check how to activate dhcp metrics</a></font></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantiles of all DHCP wire packets (combined ingress and egress) in packets per second</td>
+<td>dhcp_rates_total</td>
+</tr>
+<tr>
+<td>Total sum of all DHCP wire packets (combined ingress and egress) in packets per second</td>
+<td>dhcp_rates_total_sum</td>
+</tr>
+<tr>
+<td>Count of all DHCP wire packets (combined ingress and egress) in packets per second</td>
+<td>dhcp_rates_total_count</td>
+</tr>
+<tr>
+<td>Quantiles of all DHCP wire packets before filtering per second</td>
+<td>dhcp_rates_events</td>
+</tr>
+<tr>
+<td>Total sum of all DHCP wire packets before filtering per second</td>
+<td>dhcp_rates_events_sum</td>
+</tr>
+<tr>
+<td>Count of all DHCP wire packets before filtering per second</td>
+<td>dhcp_rates_events_count</td>
+</tr>
+<tr>
+<td>Top DHCP servers</td>
+<td>dhcp_top_servers</td>
+</tr>
+<tr>
+<td>Top DHCP clients</td>
+<td>dhcp_top_clients</td>
+</tr>
+<tr>
+<td>Total DHCP packets with message type ACK</td>
+<td>dhcp_wire_packets_ack</td>
+</tr>
+<tr>
+<td>Total DHCPv6 packets with message type ADVERTISE</td>
+<td>dhcp_wire_packets_advertise</td>
+</tr>
+<tr>
+<td>Total DHCP wire packets that were sampled for deep inspection</td>
+<td>dhcp_wire_packets_deep_samples</td>
+</tr>
+<tr>
+<td>Total DHCP packets with message type DISCOVER</td>
+<td>dhcp_wire_packets_discover</td>
+</tr>
+<tr>
+<td>Total DHCP wire packets events</td>
+<td>dhcp_wire_packets_events</td>
+</tr>
+<tr>
+<td>Total DHCP/DHCPv6 wire packets seen that did not match the configured filter(s) (if any)</td>
+<td>dhcp_wire_packets_filtered</td>
+</tr>
+<tr>
+<td>Total DHCP packets with message type OFFER</td>
+<td>dhcp_wire_packets_offer</td>
+</tr>
+<tr>
+<td>Total DHCPv6 packets with message type REPLY</td>
+<td>dhcp_wire_packets_reply</td>
+</tr>
+<tr>
+<td>Total DHCP packets with message type REQUEST</td>
+<td>dhcp_wire_packets_request</td>
+</tr>
+<tr>
+<td>Total DHCPv6 packets with message type REQUEST</td>
+<td>dhcp_wire_packets_request_v6</td>
+</tr>
+<tr>
+<td>Total DHCPv6 packets with message type SOLICIT</td>
+<td>dhcp_wire_packets_solicit</td>
+</tr>
+<tr>
+<td>DORA packet counts</td>
+<td>dhcp_wire_packets_total</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dns-metrics">DNS Metrics</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#dns-analyzer-dns">Check how to activate/deactivate dns metrics</a></font></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">v2</label><label for="__tabbed_1_2">v1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Status: <code>Beta</code>. The metric names and configuration options may still change</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantiles of all DNS wire packets before filtering per second</td>
+<td>dns_rates_observed_pps</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of all DNS wire packets before filtering per second</td>
+<td>dns_rates_observed_pps_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of rates for DNS packets processed by policy</td>
+<td>dns_rates_observed_pps_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) with the AD flag set in the response</td>
+<td>dns_authenticated_data_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) with the AA flag set in the response</td>
+<td>dns_authoritative_answer_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Cardinality of unique QNAMES, both ingress and egress</td>
+<td>dns_cardinality_qname</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) with the CD flag set in the query</td>
+<td>dns_checking_disabled_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS wire packets that were sampled for deep inspection</td>
+<td>dns_deep_sampled_packets</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over DNSCrypt over TCP</td>
+<td>dns_dnscrypt_tcp_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over DNSCrypt over UDP</td>
+<td>dns_dnscrypt_udp_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over DNS over HTTPS</td>
+<td>dns_doh_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over DNS over QUIC</td>
+<td>dns_doq_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over DNS over TLS</td>
+<td>dns_dot_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) with the EDNS Client Subnet option set</td>
+<td>dns_ecs_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS wire packets seen that did not match the configured filter(s) (if any)</td>
+<td>dns_filtered_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over IPv4</td>
+<td>dns_ipv4_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over IPv6</td>
+<td>dns_ipv6_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) flagged as reply with response code NOERROR but with an empty answers section</td>
+<td>dns_nodata_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) flagged as reply with response code NOERROR</td>
+<td>dns_noerror_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) flagged as reply with response code NXDOMAIN</td>
+<td>dns_nxdomain_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS wire packets events</td>
+<td>dns_observed_packets</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total number of DNS responses that do not have a corresponding query</td>
+<td>dns_orphan_responses</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) flagged as reply with response code REFUSED</td>
+<td>dns_refused_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Quantiles of ratio of packet sizes in a DNS transaction (reply/query)</td>
+<td>dns_response_query_size_ratio</td>
+<td>top_size</td>
+</tr>
+<tr>
+<td>Count of ratio of packet sizes in a DNS transaction (reply/query)</td>
+<td>dns_response_query_size_ratio_count</td>
+<td>top_size</td>
+</tr>
+<tr>
+<td>Total sum of ratio of packet sizes in a DNS transaction (reply/query)</td>
+<td>dns_response_query_size_ratio_sum</td>
+<td>top_size</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) flagged as reply with response code SRVFAIL</td>
+<td>dns_srvfail_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over TCP</td>
+<td>dns_tcp_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total number of DNS queries that timed out</td>
+<td>dns_timeout_queries</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Top ASNs by ECS</td>
+<td>dns_top_asn_ecs_xacts</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top EDNS Client Subnet (ECS) observed in DNS transaction</td>
+<td>dns_top_ecs_xacts</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top GeoIP ECS locations</td>
+<td>dns_top_geo_loc_ecs_xacts</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code NOERROR and empty answer section</td>
+<td>dns_top_nodata_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code NOERROR</td>
+<td>dns_top_noerror_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code NXDOMAIN</td>
+<td>dns_top_nxdomain_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top QNAMES, aggregated at a depth of two labels</td>
+<td>dns_top_qname2_xacts</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES, aggregated at a depth of three labels</td>
+<td>dns_top_qname3_xacts</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES by response volume in bytes</td>
+<td>dns_top_response_bytes</td>
+<td>top_size</td>
+</tr>
+<tr>
+<td>Top query types</td>
+<td>dns_top_qtype_xacts</td>
+<td>top_qtypes</td>
+</tr>
+<tr>
+<td>Top result codes</td>
+<td>dns_top_rcode_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code REFUSED</td>
+<td>dns_top_refused_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top QNAMES in transactions where host is the server and transaction speed is slower than p90</td>
+<td>dns_top_slow_xacts</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code SRVFAIL</td>
+<td>dns_top_srvfail_xacts</td>
+<td>top_rcodes</td>
+</tr>
+<tr>
+<td>Top UDP source port on the query side of a transaction</td>
+<td>dns_top_udp_ports_xacts</td>
+<td>top_ports</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs) received over UDP</td>
+<td>dns_udp_xacts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Cumulative counters of transaction timing (query/reply pairs) in microseconds</td>
+<td>dns_xact_histogram_us_bucket</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Counts of transaction timing (query/reply pairs) in microseconds</td>
+<td>dns_xact_histogram_us_count</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Rate of all DNS transaction (reply/query) per second</td>
+<td>dns_xact_rates</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of all DNS transaction (reply/query) per second</td>
+<td>dns_xact_rates_count</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total sum of all DNS transaction (reply/query) per second</td>
+<td>dns_xact_rates_sum</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Quantiles of transaction timing (query/reply pairs) in microseconds</td>
+<td>dns_xact_time_us</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Count of transaction timing (query/reply pairs) in microseconds</td>
+<td>dns_xact_time_us_count</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Total sum of transaction timing (query/reply pairs) in microseconds</td>
+<td>dns_xact_time_us_sum</td>
+<td>xact_times</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs)</td>
+<td>dns_xacts</td>
+<td>counters</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cardinality of unique QNAMES, both ingress and egress</td>
+<td>dns_cardinality_qname</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Quantiles of rates for DNS packets processed by policy</td>
+<td>dns_rates_total</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of rates for DNS packets processed by policy</td>
+<td>dns_rates_total_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of rates for DNS packets processed by policy</td>
+<td>dns_rates_total_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of all DNS wire packets before filtering per second</td>
+<td>dns_rates_events</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of all DNS wire packets before filtering per second</td>
+<td>dns_rates_events_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of all DNS wire packets before filtering per second</td>
+<td>dns_rates_events_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Top ECS ASNs</td>
+<td>dns_top_asn_ecs</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top ECS GeoIP locations</td>
+<td>dns_top_geoLoc_ecs</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top QNAMES with response code NOERROR and no data in the response (NODATA)</td>
+<td>dns_top_nodata</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES with response code NXDOMAIN</td>
+<td>dns_top_nxdomain</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES by response volume</td>
+<td>dns_top_qname_by_resp_bytes</td>
+<td>top_qnames_details + top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES with result code NOERROR</td>
+<td>dns_top_noerror</td>
+<td>top_qname_details + top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES aggregated at a depth of two labels</td>
+<td>dns_top_qname2</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES aggregated at a depth of three labels</td>
+<td>dns_top_qname3</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QTYPEs</td>
+<td>dns_top_qtype</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Top EDNS Client Subnets (ECS)</td>
+<td>dns_top_query_ecs</td>
+<td>top_ecs</td>
+</tr>
+<tr>
+<td>Top RCODEs</td>
+<td>dns_top_rcode</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Top QNAMES with response code REFUSED</td>
+<td>dns_top_refused</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top QNAMES with response code SRVFAIL</td>
+<td>dns_top_srvfail</td>
+<td>top_qnames</td>
+</tr>
+<tr>
+<td>Top UDP source ports of DNS queries</td>
+<td>dns_top_udp_ports</td>
+<td>top_ports</td>
+</tr>
+<tr>
+<td>Total DNS wire packets sampled for deep inspection</td>
+<td>dns_wire_packets_deep_samples</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of DNS packets sent to policy</td>
+<td>dns_wire_packets_events</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of DNS packets filtered out by policy</td>
+<td>dns_wire_packets_filtered</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets received over IPv4</td>
+<td>dns_wire_packets_ipv4</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets received over IPv6</td>
+<td>dns_wire_packets_ipv6</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply and identified as NODATA</td>
+<td>dns_wire_packets_nodata</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply with response code NOERROR</td>
+<td>dns_wire_packets_noerror</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply with response code NXDOMAIN</td>
+<td>dns_wire_packets_nxdomain</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as query</td>
+<td>dns_wire_packets_queries</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets with EDNS Client Subnet (ECS) option set</td>
+<td>dns_wire_packets_query_ecs</td>
+<td>counters + top_ecs</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply with response code REFUSED</td>
+<td>dns_wire_packets_refused</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply</td>
+<td>dns_wire_packets_replies</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets flagged as reply with response code SRVFAIL</td>
+<td>dns_wire_packets_srvfail</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets received over TCP</td>
+<td>dns_wire_packets_tcp</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets matched by policy</td>
+<td>dns_wire_packets_total</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of DNS packets received over UDP</td>
+<td>dns_wire_packets_udp</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total DNS wire packets received over DNS over HTTPS</td>
+<td>dns_wire_packets_doh</td>
+<td>counters (dnstap)</td>
+</tr>
+<tr>
+<td>Total DNS wire packets received over DNS over TLS</td>
+<td>dns_wire_packets_dot</td>
+<td>counters (dnstap)</td>
+</tr>
+<tr>
+<td>Total number of DNS transactions that timed out</td>
+<td>dns_xact_counts_timed_out</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Total DNS transactions (query/reply pairs)</td>
+<td>dns_xact_counts_total</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is server, in microseconds</td>
+<td>dns_xact_in_histogram_us_bucket</td>
+<td>dns_transaction + histograms</td>
+</tr>
+<tr>
+<td>Count of transaction timing (query/reply pairs) when host is server, in microseconds</td>
+<td>dns_xact_in_histogram_us_count</td>
+<td>dns_transaction + histograms</td>
+</tr>
+<tr>
+<td>Cumulative counters for the buckets of transaction timing (query/reply pairs) when host is client, in microseconds</td>
+<td>dns_xact_out_histogram_us_bucket</td>
+<td>dns_transaction + histograms</td>
+</tr>
+<tr>
+<td>Count of transaction timing (query/reply pairs) when host is client, in microseconds</td>
+<td>dns_xact_out_histogram_us_count</td>
+<td>dns_transaction + histograms</td>
+</tr>
+<tr>
+<td>Quantiles of transaction timing (query/reply pairs) when host is server, in microseconds</td>
+<td>dns_xact_in_quantiles_us</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Total sum of transaction timing (query/reply pairs) when host is server, in microseconds</td>
+<td>dns_xact_in_quantiles_us_sum</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Count of transaction timing (query/reply pairs) when host is server, in microseconds</td>
+<td>dns_xact_in_quantiles_us_count</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Top QNAMES in transactions where host is the server and transaction speed is slower than p90</td>
+<td>dns_xact_in_top_slow</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Total ingress DNS transactions (host is server)</td>
+<td>dns_xact_in_total</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Quantiles of transaction timing (query/reply pairs) when host is client, in microseconds</td>
+<td>dns_xact_out_quantiles_us</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Total sum of transaction timing (query/reply pairs) when host is client, in microseconds</td>
+<td>dns_xact_out_quantiles_us_sum</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Count of transaction timing (query/reply pairs) when host is client, in microseconds</td>
+<td>dns_xact_out_quantiles_us_count</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Top QNAMES in transactions where host is the client and transaction speed is slower than p90</td>
+<td>dns_xact_out_top_slow</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Total egress DNS transactions (host is client)</td>
+<td>dns_xact_out_total</td>
+<td>dns_transaction</td>
+</tr>
+<tr>
+<td>Distribution of response/query size ratios</td>
+<td>dns_xact_ratio_quantiles</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Total sum of response/query size ratios</td>
+<td>dns_xact_ratio_quantiles_sum</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+<tr>
+<td>Count of response/query size ratios</td>
+<td>dns_xact_ratio_quantiles_count</td>
+<td>dns_transaction + quantiles</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h2 id="network-metrics">Network Metrics</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#network-l2-l3-analyzer-net">Check how to activate/deactivate network metrics</a></font></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">v2</label><label for="__tabbed_2_2">v1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Status: <code>Beta</code>. The metric names and configuration options may still change</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP cardinality</td>
+<td>net_cardinality_ips</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Total packets that were sampled for deep inspection</td>
+<td>net_deep_sampled_packets</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total packets seen that did not match the configured filter(s) (if any)</td>
+<td>net_filtered_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of IPv4 packets</td>
+<td>net_ipv4_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of IPv6 packets</td>
+<td>net_ipv6_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total packets events generated</td>
+<td>net_observed_packets</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of packets which are not UDP or TCP</td>
+<td>net_other_l4_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Quantiles of payload sizes, in bytes</td>
+<td>net_payload_size_bytes</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of payload sizes, in bytes</td>
+<td>net_payload_size_bytes_count</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total sum of payload sizes, in bytes</td>
+<td>net_payload_size_bytes_sum</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Data rate of bits per second</td>
+<td>net_rates_bps</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of bits per second</td>
+<td>net_rates_bps_count</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total sum of bits per second</td>
+<td>net_rates_bps_sum</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Rate of all packets before filtering per second</td>
+<td>net_rates_observed_pps</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of all packets before filtering per second</td>
+<td>net_rates_observed_pps_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of all packets before filtering per second</td>
+<td>net_rates_observed_pps_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Rate of packets per second</td>
+<td>net_rates_pps</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of packets per second</td>
+<td>net_rates_pps_count</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total sum of packets per second</td>
+<td>net_rates_pps_sum</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of TCP packets</td>
+<td>net_tcp_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of TCP SYN packets</td>
+<td>net_tcp_syn_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Top ASNs by IP</td>
+<td>net_top_asn_packets</td>
+<td>top_geo</td>
+</tr>
+<tr>
+<td>Top GeoIP locations</td>
+<td>net_top_geo_loc_packets</td>
+<td>top_geo</td>
+</tr>
+<tr>
+<td>Top IPv4 addresses</td>
+<td>net_top_ipv4_packets</td>
+<td>top_ips</td>
+</tr>
+<tr>
+<td>Top IPv6 addresses</td>
+<td>net_top_ipv6_packets</td>
+<td>top_ips</td>
+</tr>
+<tr>
+<td>Count of total packets matching the configured filter(s)</td>
+<td>net_total_packets</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of UDP packets</td>
+<td>net_udp_packets</td>
+<td>counters</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Destination IP cardinality</td>
+<td>packets_cardinality_dst_ips_out</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Source IP cardinality</td>
+<td>packets_cardinality_src_ips_in</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Count of packets sampled for deep inspection</td>
+<td>packets_deep_samples</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of packets sent to policy</td>
+<td>packets_events</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of packets filtered out by policy</td>
+<td>packets_filtered</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of ingress packets</td>
+<td>packets_in</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of IPv4 packets</td>
+<td>packets_ipv4</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of IPv6 packets</td>
+<td>packets_ipv6</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of packets not UDP or TCP</td>
+<td>packets_other_l4</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of egress packets</td>
+<td>packets_out</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Quantiles of packet payload sizes</td>
+<td>packets_payload_size</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of packet payload sizes</td>
+<td>packets_payload_size_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of packet payload sizes</td>
+<td>packets_payload_size_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of TCP packets with SYN flag set</td>
+<td>packets_protocol_tcp_syn</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Quantiles of ingress data rates</td>
+<td>payload_rates_bytes_in</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of ingress data rates</td>
+<td>payload_rates_bytes_in_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of ingress data rates</td>
+<td>payload_rates_bytes_in_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of egress data rates</td>
+<td>payload_rates_bytes_out</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of egress data rates</td>
+<td>payload_rates_bytes_out_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of egress data rates</td>
+<td>payload_rates_bytes_out_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of total data rates</td>
+<td>payload_rates_bytes_total</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of total data rates</td>
+<td>payload_rates_bytes_total_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of total data rates</td>
+<td>payload_rates_bytes_total_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of all packets before filtering in packets per second</td>
+<td>payload_rates_pps_events</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of all packets before filtering in packets per second</td>
+<td>payload_rates_pps_events_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of all packets before filtering in packets per second</td>
+<td>payload_rates_pps_events_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of ingress packet rates</td>
+<td>payload_rates_pps_in</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of ingress packet rates</td>
+<td>payload_rates_pps_in_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of ingress packet rates</td>
+<td>payload_rates_pps_in_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of egress packet rates</td>
+<td>payload_rates_pps_out</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of egress packet rates</td>
+<td>payload_rates_pps_out_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of egress packet rates</td>
+<td>payload_rates_pps_out_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Quantiles of total packet rates</td>
+<td>payload_rates_pps_total</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Total sum of total packet rates</td>
+<td>payload_rates_pps_total_sum</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of total packet rates</td>
+<td>payload_rates_pps_total_count</td>
+<td>any group*</td>
+</tr>
+<tr>
+<td>Count of TCP packets</td>
+<td>packets_tcp</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Top ASNs</td>
+<td>packets_top_ASN</td>
+<td>top_geo</td>
+</tr>
+<tr>
+<td>Top GeoIP locations</td>
+<td>packets_top_geoLoc</td>
+<td>top_geo</td>
+</tr>
+<tr>
+<td>Top IPv4 IP addresses</td>
+<td>packets_top_ipv4</td>
+<td>top_ips</td>
+</tr>
+<tr>
+<td>Top IPv6 IP addresses</td>
+<td>packets_top_ipv6</td>
+<td>top_ips</td>
+</tr>
+<tr>
+<td>Count of packets matched by policy</td>
+<td>packets_total</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of UDP packets</td>
+<td>packets_udp</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of packets of unknown direction</td>
+<td>packets_unknown_dir</td>
+<td>counters</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h2 id="pcap-metrics">PCAP Metrics</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#packet-capture-analyzer-pcap">Check how to activate pcap metrics</a></font></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total wire packets dropped by the interface</td>
+<td>pcap_if_drops</td>
+</tr>
+<tr>
+<td>Total wire packets dropped by the OS</td>
+<td>pcap_os_drops</td>
+</tr>
+<tr>
+<td>Total TCP wire packets that failed reassembly</td>
+<td>pcap_tcp_reassembly_errors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bgp-metrics">BGP metrics</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#bgp-analyzer-bgp">Check how to activate bgp metrics</a></font></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantiles of all BGP wire packets before filtering per second</td>
+<td>bgp_rates_events</td>
+</tr>
+<tr>
+<td>Count of all BGP wire packets before filtering per second</td>
+<td>bgp_rates_events_count</td>
+</tr>
+<tr>
+<td>Total sum of all BGP wire packets before filtering per second</td>
+<td>bgp_rates_events_sum</td>
+</tr>
+<tr>
+<td>Quantiles of all BGP wire packets (combined ingress and egress) in packets per second</td>
+<td>bgp_rates_total</td>
+</tr>
+<tr>
+<td>Count of all BGP wire packets (combined ingress and egress) in packets per second</td>
+<td>bgp_rates_total_count</td>
+</tr>
+<tr>
+<td>Total sum of all BGP wire packets (combined ingress and egress) in packets per second</td>
+<td>bgp_rates_total_sum</td>
+</tr>
+<tr>
+<td>Total BGP wire packets that were sampled for deep inspection</td>
+<td>bgp_wire_packets_deep_samples</td>
+</tr>
+<tr>
+<td>Total BGP wire packets events</td>
+<td>bgp_wire_packets_events</td>
+</tr>
+<tr>
+<td>Total BGP wire packets seen that did not match the configured filter(s) (if any)</td>
+<td>bgp_wire_packets_filtered</td>
+</tr>
+<tr>
+<td>Total BGP packets with message type KEEPALIVE</td>
+<td>bgp_wire_packets_keepalive</td>
+</tr>
+<tr>
+<td>Total BGP packets with message type NOTIFICATION</td>
+<td>bgp_wire_packets_notification</td>
+</tr>
+<tr>
+<td>Total BGP packets with message type UPDATE</td>
+<td>bgp_wire_packets_update</td>
+</tr>
+<tr>
+<td>Total BGP packets with message type OPEN</td>
+<td>bgp_wire_packets_open</td>
+</tr>
+<tr>
+<td>Total BGP packets with message type ROUTEREFRESH</td>
+<td>bgp_wire_packets_routerefresh</td>
+</tr>
+<tr>
+<td>Total BGP wire packets matching the configured filter(s)</td>
+<td>bgp_wire_packets_total</td>
+</tr>
+</tbody>
+</table>
+<h2 id="flow-metrics-beta">Flow metrics [BETA]</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#flow-analyzer-flow-beta">Check how to activate/deactivate flow metrics</a></font></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Status: <code>Beta</code>. The metric names and configuration options may still change</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conversations cardinality</td>
+<td>flow_cardinality_conversations</td>
+<td>cardinality + conversations</td>
+</tr>
+<tr>
+<td>Destination IP cardinality</td>
+<td>flow_cardinality_dst_ips_out</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Destination ports cardinality</td>
+<td>flow_cardinality_dst_ports_out</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Source IP cardinality</td>
+<td>flow_cardinality_src_ips_in</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Source ports cardinality</td>
+<td>flow_cardinality_src_ports_in</td>
+<td>cardinality</td>
+</tr>
+<tr>
+<td>Count of in by bytes</td>
+<td>flow_in_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in IPv4 by bytes</td>
+<td>flow_in_ipv4_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in IPv4 by packets</td>
+<td>flow_in_ipv4_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of in IPv6 by bytes</td>
+<td>flow_in_ipv6_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in IPv6 by packets</td>
+<td>flow_in_ipv6_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of in by bytes which are not UDP or TCP</td>
+<td>flow_in_other_l4_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in by packtes which are not UDP or TCP</td>
+<td>flow_in_other_l4_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of in by packets</td>
+<td>flow_in_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of in TCP by bytes</td>
+<td>flow_in_tcp_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in TCP by packets</td>
+<td>flow_in_tcp_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of in UDP by bytes</td>
+<td>flow_in_udp_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of in UDP by packets</td>
+<td>flow_in_udp_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out by bytes</td>
+<td>flow_out_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out IPV4 by bytes</td>
+<td>flow_out_ipv4_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out IPV4 by packets</td>
+<td>flow_out_ipv4_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out IPV6 by bytes</td>
+<td>flow_out_ipv6_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out IPV6 by packets</td>
+<td>flow_out_ipv6_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out by bytes which are not UDP or TCP</td>
+<td>flow_out_other_l4_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out by packets which are not UDP or TCP</td>
+<td>flow_out_other_l4_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out by packets</td>
+<td>flow_out_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out TCP by bytes</td>
+<td>flow_out_tcp_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out TCP by packets</td>
+<td>flow_out_tcp_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of out UDP by bytes</td>
+<td>flow_out_udp_bytes</td>
+<td>counters + by_bytes</td>
+</tr>
+<tr>
+<td>Count of out UDP by packets</td>
+<td>flow_out_udp_packets</td>
+<td>counters + by_packets</td>
+</tr>
+<tr>
+<td>Count of total flows records seen that did not match the configured filter(s) (if any)</td>
+<td>flow_records_filtered</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Count of total flows records that match the configured filter(s) (if any)</td>
+<td>flow_records_flows</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Top ASNs by IP by bytes</td>
+<td>flow_top_asn_bytes</td>
+<td>top_geo + by_bytes</td>
+</tr>
+<tr>
+<td>Top ASNs by IP by packets</td>
+<td>flow_top_asn_packets</td>
+<td>top_geo + by_packets</td>
+</tr>
+<tr>
+<td>Top source IP addresses and port by bytes</td>
+<td>flow_top_conversations_bytes</td>
+<td>conversations + by_bytes</td>
+</tr>
+<tr>
+<td>Top source IP addresses and port by packets</td>
+<td>flow_top_conversations_packets</td>
+<td>conversations + by_packets</td>
+</tr>
+<tr>
+<td>Top GeoIP locations by bytes</td>
+<td>flow_top_geo_loc_bytes</td>
+<td>top_geo + by_bytes</td>
+</tr>
+<tr>
+<td>Top GeoIP locations by packets</td>
+<td>flow_top_geo_loc_packets</td>
+<td>top_geo + by_packets</td>
+</tr>
+<tr>
+<td>Top in destination IP addresses and port by bytes</td>
+<td>flow_top_in_dst_ip_ports_bytes</td>
+<td>top_ips_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top in destination IP addresses and port by packets</td>
+<td>flow_top_in_dst_ip_ports_packets</td>
+<td>top_ips_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top in destination IP addresses by bytes</td>
+<td>flow_top_in_dst_ips_bytes</td>
+<td>top_ips + by_bytes</td>
+</tr>
+<tr>
+<td>Top in destination IP addresses by packets</td>
+<td>flow_top_in_dst_ips_packets</td>
+<td>top_ips + by_packets</td>
+</tr>
+<tr>
+<td>Top in destination ports by bytes</td>
+<td>flow_top_in_dst_ports_bytes</td>
+<td>top_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top in destination ports by packets</td>
+<td>flow_top_in_dst_ports_packets</td>
+<td>top_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top input interfaces by bytes</td>
+<td>flow_top_in_interfaces_bytes</td>
+<td>top_interfaces + by_bytes</td>
+</tr>
+<tr>
+<td>Top input interfaces by packets</td>
+<td>flow_top_in_interfaces_packets</td>
+<td>top_interfaces + by_packets</td>
+</tr>
+<tr>
+<td>Top in source IP addresses and port by bytes</td>
+<td>flow_top_in_src_ip_ports_bytes</td>
+<td>top_ips_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top in source IP addresses and port by packets</td>
+<td>flow_top_in_src_ip_ports_packets</td>
+<td>top_ips_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top in source IP addresses by bytes</td>
+<td>flow_top_in_src_ips_bytes</td>
+<td>top_ips + by_bytes</td>
+</tr>
+<tr>
+<td>Top in source IP addresses by packets</td>
+<td>flow_top_in_src_ips_packets</td>
+<td>top_ips + by_packets</td>
+</tr>
+<tr>
+<td>Top in source ports by bytes</td>
+<td>flow_top_in_src_ports_bytes</td>
+<td>top_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top in source ports by packets</td>
+<td>flow_top_in_src_ports_packets</td>
+<td>top_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top out destination IP addresses and port by bytes</td>
+<td>flow_top_out_dst_ip_ports_bytes</td>
+<td>top_ips_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top out destination IP addresses and port by packets</td>
+<td>flow_top_out_dst_ip_ports_packets</td>
+<td>top_ips_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top out destination IP addresses by bytes</td>
+<td>flow_top_out_dst_ips_bytes</td>
+<td>top_ips + by_bytes</td>
+</tr>
+<tr>
+<td>Top out destination IP addresses by packets</td>
+<td>flow_top_out_dst_ips_packets</td>
+<td>top_ips + by_packets</td>
+</tr>
+<tr>
+<td>Top out destination ports by bytes</td>
+<td>flow_top_out_dst_ports_bytes</td>
+<td>top_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top out destination ports by packets</td>
+<td>flow_top_out_dst_ports_packets</td>
+<td>top_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top output interfaces by bytes</td>
+<td>flow_top_out_interfaces_bytes</td>
+<td>top_interfaces + by_bytes</td>
+</tr>
+<tr>
+<td>Top output interfaces by packets</td>
+<td>flow_top_out_interfaces_packets</td>
+<td>top_interfaces + by_packets</td>
+</tr>
+<tr>
+<td>Top out source IP addresses and port by bytes</td>
+<td>flow_top_out_src_ip_ports_bytes</td>
+<td>top_ips_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top out source IP addresses and port by packets</td>
+<td>flow_top_out_src_ip_ports_packets</td>
+<td>top_ips_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top out source IP addresses by bytes</td>
+<td>flow_top_out_src_ips_bytes</td>
+<td>top_ips + by_bytes</td>
+</tr>
+<tr>
+<td>Top out source IP addresses by packets</td>
+<td>flow_top_out_src_ips_packets</td>
+<td>top_ips + by_packets</td>
+</tr>
+<tr>
+<td>Top out source ports by bytes</td>
+<td>flow_top_out_src_ports_bytes</td>
+<td>top_ports + by_bytes</td>
+</tr>
+<tr>
+<td>Top out source ports by packets</td>
+<td>flow_top_out_src_ports_packets</td>
+<td>top_ports + by_packets</td>
+</tr>
+<tr>
+<td>Top in DSCP by bytes</td>
+<td>flow_top_in_dscp_bytes</td>
+<td>top_tos + by_bytes</td>
+</tr>
+<tr>
+<td>Top out DSCP by bytes</td>
+<td>flow_top_out_dscp_bytes</td>
+<td>top_tos + by_bytes</td>
+</tr>
+<tr>
+<td>Top in ECN by bytes</td>
+<td>flow_top_in_ecn_bytes</td>
+<td>top_tos + by_bytes</td>
+</tr>
+<tr>
+<td>Top out ECN by bytes</td>
+<td>flow_top_out_ecn_bytes</td>
+<td>top_tos + by_bytes</td>
+</tr>
+<tr>
+<td>Top in DSCP by packets</td>
+<td>flow_top_in_dscp_packets</td>
+<td>top_tos + by_packets</td>
+</tr>
+<tr>
+<td>Top out DSCP by packets</td>
+<td>flow_top_out_dscp_packets</td>
+<td>top_tos + by_packets</td>
+</tr>
+<tr>
+<td>Top in ECN by packets</td>
+<td>flow_top_in_ecn_packets</td>
+<td>top_tos + by_packets</td>
+</tr>
+<tr>
+<td>Top out ECN by packets</td>
+<td>flow_top_out_ecn_packets</td>
+<td>top_tos + by_packets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="netprobe-metrics-beta">Netprobe Metrics [BETA]</h2>
+<p><font size="1"><a href="/documentation/advanced_policies/#netprobe-beta">Check how to activate/deactivate netprobe metrics</a></font></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Status: <code>Beta</code>. The metric names and configuration options may still change</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Prometheus Name</th>
+<th>Metric Groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantiles of Net Probe quantile in microseconds</td>
+<td>netprobe_response_quantiles_us</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total sum of Net Probe quantile in microseconds</td>
+<td>netprobe_response_quantiles_us_sum</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Count of Net Probe quantile in microseconds</td>
+<td>netprobe_response_quantiles_us_count</td>
+<td>quantiles</td>
+</tr>
+<tr>
+<td>Total Net Probe attempts</td>
+<td>netprobe_attempts</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total Net Probe failures when performed DNS lookup</td>
+<td>netprobe_dns_lookup_failures</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total Net Probe failures when performing a TCP socket connection</td>
+<td>netprobe_connect_failures</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Total Net Probe timeout transactions</td>
+<td>netprobe_packets_timeout</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Maximum response time measured in the reporting interval</td>
+<td>netprobe_response_max_us</td>
+<td>counters + (quantiles or histograms)</td>
+</tr>
+<tr>
+<td>Minimum response time measured in the reporting interval</td>
+<td>netprobe_response_min_us</td>
+<td>counters + (quantiles or histograms)</td>
+</tr>
+<tr>
+<td>Total Net Probe successes</td>
+<td>netprobe_successes</td>
+<td>counters</td>
+</tr>
+<tr>
+<td>Cumulative counters for the buckets of Net Probe histogram in microseconds</td>
+<td>netprobe_response_histogram_us_bucket</td>
+<td>histograms</td>
+</tr>
+<tr>
+<td>Count of events of Net Probe histogram in microseconds</td>
+<td>netprobe_response_histogram_us_count</td>
+<td>histograms</td>
+</tr>
+</tbody>
+</table>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../advanced_policies/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Orb Policy Reference" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Orb Policy Reference
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../install/" class="md-footer__link md-footer__link--next" aria-label="Next: Installing Orb control plane" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Installing Orb control plane
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 | <a href="https://netboxlabs.com/privacy/">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/orb-community/orb" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/orbcommunity" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://netdev.chat/" target="_blank" rel="noopener" title="netdev.chat" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@netboxlabs.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 0 0 0 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0 0 24 18.75v-14A1.75 1.75 0 0 0 22.25 3H1.75zM1.5 4.75a.25.25 0 0 1 .25-.25h20.5a.25.25 0 0 1 .25.25v.852l-10.36 7a.25.25 0 0 1-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.sections", "navigation.prune", "search.suggest"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>

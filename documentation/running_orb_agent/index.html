@@ -1,0 +1,1209 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../img/ORB-logo-ring.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Running Orb Agents - Orb Dynamic Edge Observability</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Montserrat";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-XYK19RRHLW"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-XYK19RRHLW",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYK19RRHLW"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-orb-agent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Determine class according to configuration -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="../.."
+      title="Orb Dynamic Edge Observability"
+      class="md-header__button md-logo"
+      aria-label="Orb Dynamic Edge Observability"
+      data-md-component="logo"
+    >
+      <!-- Logo -->
+
+  <img src="../../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orb Dynamic Edge Observability
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Running Orb Agents
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette -->
+    
+
+    <!-- Site language selector -->
+    
+    <!-- Navigation tabs (sticky) -->
+    
+    
+    
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../getting_started/" class="md-tabs__link">
+      Getting Started
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guides/" class="md-tabs__link">
+        Guides
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../contact/" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Orb Dynamic Edge Observability" class="md-nav__button md-logo" aria-label="Orb Dynamic Edge Observability" data-md-component="logo">
+      <!-- Logo -->
+
+  <img src="../../img/orb_logo_original.png" class="orb-logo" alt="logo" />
+
+    </a>
+    Orb Dynamic Edge Observability
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/orb-community/orb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    orb-community/orb
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../guides/">Guides</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/edge_networks/" class="md-nav__link">
+        Edge Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/authoritative_dns/" class="md-nav__link">
+        Authoritative DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/recursive_dns/" class="md-nav__link">
+        Recursive DNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/dhcp_services/" class="md-nav__link">
+        DHCP Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/flow/" class="md-nav__link">
+        Network Traffic (Flow)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/response_testing/" class="md-nav__link">
+        Response Testing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Running Orb Agents
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Running Orb Agents
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agent-credentials" class="md-nav__link">
+    Agent credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-provisioning-commands" class="md-nav__link">
+    Sample provisioning commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    Configuration files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-auto-provisioning-setup" class="md-nav__link">
+    Advanced auto-provisioning setup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orb_agent_configs/" class="md-nav__link">
+        Configuring Orb Agent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_policies/" class="md-nav__link">
+        Orb Policy Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pktvisor_metrics/" class="md-nav__link">
+        Orb Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        Installing Orb control plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/orb_rest_api/" class="md-nav__link">
+        Orb REST API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agent-credentials" class="md-nav__link">
+    Agent credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-provisioning-commands" class="md-nav__link">
+    Sample provisioning commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    Configuration files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-auto-provisioning-setup" class="md-nav__link">
+    Advanced auto-provisioning setup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="running-orb-agent">Running Orb Agent</h1>
+<p>An Orb agent needs to run on all the infrastructure (computers, servers, switches, VMs, k8s, etc.) to be monitored. It is a small, lightweight Docker process with an embedded <a href="https://pktvisor.dev">pktvisor agent</a> which connects into the Orb control plane to receive policies and send its metric output.</p>
+<p>To run an agent, you will need:</p>
+<ol>
+<li>Docker, to run the agent image (<a href="https://hub.docker.com/repository/docker/orbcommunity/orb-agent">orbcommunity/orb-agent:develop</a>)</li>
+<li><a href="#agent-credentials">Agent Credentials</a>, which are provided to you by the Orb UI or REST API after <a href="/getting_started/#create-agent-credentials">creating an agent</a></li>
+<li>The Orb Control Plane host address (e.g. <code>localhost</code> or <code>orb.live</code>)</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are unsure which network interface to monitor, you may list the available interfaces on your host. Note that to allow 
+the agent access to these interfaces, you must run the container with <code>--net=host</code></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Linux</label><label for="__tabbed_1_2">OSX</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip<span class="w"> </span>-stats<span class="w"> </span>-color<span class="w"> </span>-human<span class="w"> </span>addr
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ifconfig
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<h2 id="agent-credentials">Agent credentials</h2>
+<p>The agent credentials include <em>three pieces of information</em>, each of which is a UUID in the form <code>5dc34ded-6a53-44c0-8d15-7e9c8c95391a</code>.</p>
+<ol>
+<li><mark>Agent ID</mark>, which uniquely identifies the agent.</li>
+<li><mark>Agent Channel ID</mark>, which uniquely identifies the agent's communication channel.</li>
+<li><mark>Agent Key</mark>, which is a private access token for the agent. Note you will only be shown the key once upon creation!</li>
+</ol>
+<h2 id="sample-provisioning-commands">Sample provisioning commands</h2>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Generic</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>Use this command as a template by substituting in the appropriate values:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--net<span class="o">=</span>host
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_ADDRESS</span><span class="o">=</span>&lt;HOST&gt;
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_ID</span><span class="o">=</span>&lt;AGENTID&gt;
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_CHANNEL_ID</span><span class="o">=</span>&lt;CHANNELID&gt;
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_KEY</span><span class="o">=</span>&lt;AGENTKEY&gt;
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">PKTVISOR_PCAP_IFACE_DEFAULT</span><span class="o">=</span>auto
+<span class="w">  </span>orbcommunity/orb-agent
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Localhost, Docker Compose</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>This command is useful for connecting to a local develop environment, perhaps running on <a href="/documentation/install/#orb-with-docker-compose">Docker compose</a>. 
+  Note that the "mock" interface will generate random traffic rather than observe real traffic.</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--net<span class="o">=</span>host
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_ADDRESS</span><span class="o">=</span>localhost
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_ID</span><span class="o">=</span>7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_CHANNEL_ID</span><span class="o">=</span>3e60e85d-4414-44d9-b564-0c1874898a4d
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_KEY</span><span class="o">=</span>44e42d90-aaef-45de-9bc2-2b2581eb30b3
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">PKTVISOR_PCAP_IFACE_DEFAULT</span><span class="o">=</span>mock
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_TLS_VERIFY</span><span class="o">=</span><span class="nb">false</span>
+<span class="w">  </span>orbcommunity/orb-agent
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Orb.live, eth0</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>This command is similar to one you would use on the orb.live SaaS platform</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--net<span class="o">=</span>host
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_ADDRESS</span><span class="o">=</span>orb.live
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_ID</span><span class="o">=</span>7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_CHANNEL_ID</span><span class="o">=</span>3e60e85d-4414-44d9-b564-0c1874898a4d
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_KEY</span><span class="o">=</span>44e42d90-aaef-45de-9bc2-2b2581eb30b3
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">PKTVISOR_PCAP_IFACE_DEFAULT</span><span class="o">=</span>eth0
+<span class="w">  </span>orbcommunity/orb-agent
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Specifying agent port</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>You may want to run more than one agent on the same node and for that you must specify different pktvisor control ports for them, since the containers run in host networking mode, only one is allowed to run per port. By default, the pktvisor control port runs on port <em>10853</em>, but this value can be set through the environment variable <code>ORB_BACKENDS_PKTVISOR_API_PORT</code></p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--net<span class="o">=</span>host
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_ADDRESS</span><span class="o">=</span>orb.live
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_ID</span><span class="o">=</span>7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_CHANNEL_ID</span><span class="o">=</span>3e60e85d-4414-44d9-b564-0c1874898a4d
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_KEY</span><span class="o">=</span>44e42d90-aaef-45de-9bc2-2b2581eb30b3
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">PKTVISOR_PCAP_IFACE_DEFAULT</span><span class="o">=</span>eth0
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_BACKENDS_PKTVISOR_API_PORT</span><span class="o">=</span><span class="m">10854</span>
+<span class="w">  </span>orbcommunity/orb-agent
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">🎁 BONUS - Debug</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>You can access agent debug logs by passing the <code>-d</code> command</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--net<span class="o">=</span>host
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_ADDRESS</span><span class="o">=</span>orb.live
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_ID</span><span class="o">=</span>7fb96f61-5de1-4f56-99d6-4eb8b43f8bad
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_CHANNEL_ID</span><span class="o">=</span>3e60e85d-4414-44d9-b564-0c1874898a4d
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_MQTT_KEY</span><span class="o">=</span>44e42d90-aaef-45de-9bc2-2b2581eb30b3
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">PKTVISOR_PCAP_IFACE_DEFAULT</span><span class="o">=</span>eth0
+<span class="w">  </span>orbcommunity/orb-agent<span class="w"> </span>run<span class="w"> </span>-d
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Is the agent Docker image not starting correctly? Do you have a specific use case? Have you found a bug? Come talk to us <a href="https://netdev.chat/">live on Slack</a> in the <code>#orb</code> channel,
+or <a href="https://github.com/orb-community/orb/issues/new/choose">file a GitHub issue here</a>.</p>
+</div>
+<h2 id="configuration-files">Configuration files</h2>
+<p>Most configuration options can be passed to the container as environment variables, but there are some situations that require a configuration file.</p>
+<p>You will need to use a configuration file if:</p>
+<ul>
+<li>You want to assign tags to the agent at the edge</li>
+<li>You want to set up custom pktvisor Taps</li>
+<li>You want the agent to <a href="#advanced-auto-provisioning-setup">auto-provision</a></li>
+</ul>
+<p>The configuration file is written in YAML.
+You can use the latest <a href="https://raw.githubusercontent.com/orb-community/orb/develop/cmd/agent/agent.example.yaml">template configuration file</a> as a starting point and check more information in <a href="/documentation/orb_agent_configs/#orb-agent-configuration">Configuring Orb Agent</a>, or
+start here:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># this section is used by orb-agent</span>
+<span class="c1"># most sections and keys are optional</span>
+<span class="nt">orb</span><span class="p">:</span>
+<span class="w">   </span><span class="c1"># these are arbitrary key value pairs used for dynamically define a group of agents by matching against agent group tags </span>
+<span class="w">   </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EU</span>
+<span class="w">      </span><span class="nt">pop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ams02</span>
+<span class="w">      </span><span class="nt">node_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dns</span>
+<span class="w">   </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">         </span><span class="c1"># optionally specify an agent name to use during auto provisioning</span>
+<span class="w">         </span><span class="c1"># hostname will be used if it&#39;s not specified here</span>
+<span class="w">         </span><span class="nt">agent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-agent1</span>
+<span class="w">         </span><span class="nt">auto_provision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://orb.live</span>
+<span class="w">         </span><span class="c1"># if auto provisioning, specify API token here (or pass on the command line)</span>
+<span class="w">         </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOKEN</span>
+<span class="w">      </span><span class="nt">mqtt</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls://agents.orb.live:8883</span>
+<span class="w">         </span><span class="c1"># if not auto provisioning, specify agent connection details here</span>
+<span class="w">         </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;AGENT_UUID&quot;</span>
+<span class="w">         </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;AGENT_KEY_UUID&quot;</span>
+<span class="w">         </span><span class="nt">channel_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;AGENT_CHANNEL_UUID&quot;</span>
+<span class="w">   </span><span class="nt">backends</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">pktvisor</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">binary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/sbin/pktvisord&quot;</span>
+<span class="w">         </span><span class="c1"># this example assumes the file is saved as agent.yaml. If your file has another name, you must replace it with the proper name</span>
+<span class="w">         </span><span class="nt">config_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/orb/agent.yaml&quot;</span>
+
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+
+<span class="c1"># this section is used by pktvisor</span>
+<span class="c1"># see https://orb.community/documentation/orb_agent_configs/#pktvisor-configuration</span>
+<span class="nt">visor</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">taps</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">default_pcap</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">input_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pcap</span>
+<span class="w">         </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">iface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eth0&quot;</span>
+<span class="w">            </span><span class="nt">host_spec</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;192.168.0.54/32,192.168.0.55/32,127.0.0.1/32&quot;</span>
+</code></pre></div>
+<p>You must mount your configuration file into the <code>orb-agent</code> container. For example, if your configuration file
+is on the host at <code>/local/orb/agent.yaml</code>, you can mount it into the container with this command:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/local/orb:/opt/orb/<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>orbcommunity/orb-agent<span class="w"> </span>run<span class="w"> </span>-c<span class="w"> </span>/opt/orb/agent.yaml
+</code></pre></div>
+<h2 id="advanced-auto-provisioning-setup">Advanced auto-provisioning setup</h2>
+<p>Some use cases require a way to provision agents directly on edge infrastructure without creating an agent manually in the UI or REST API ahead of time. To do so, you will need to create an API key which can be used by <code>orb-agent</code> to provision itself.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Auto-provisioning is an advanced use case. Most users will find <a href="/getting_started/#create-agent-credentials">creating an agent in the UI</a> easier.</p>
+</div>
+<ol>
+<li>
+<p>If you have not already done so, register a new account with an email address and password at https://HOST/auth/register.</p>
+</li>
+<li>
+<p>Create a <code>SESSION_TOKEN</code> with the <code>EMAIL_ADDRESS</code> and <code>PASSWORD</code> from registration:</p>
+<div class="highlight"><pre><span></span><code>curl --location --request POST &#39;https://HOST/api/v1/tokens&#39; \
+--header &#39;Content-Type: application/json&#39; \
+--data-raw &#39;{
+&quot;email&quot;: &quot;&lt;EMAIL_ADDRESS&gt;&quot;,
+&quot;password&quot;: &quot;&lt;PASSWORD&gt;&quot;
+}&#39;
+</code></pre></div>
+</li>
+<li>
+<p>The output from creating a session token looks like this:</p>
+<div class="highlight"><pre><span></span><code>{
+    &quot;token&quot;: &quot;SESSION_TOKEN&quot;
+}
+</code></pre></div>
+</li>
+<li>
+<p>Because session tokens expire after 24 hours, you can create a permanent API token for agent provisioning by using the <code>SESSION_TOKEN</code> above:</p>
+<div class="highlight"><pre><span></span><code>curl --location --request POST &#39;https://HOST/api/v1/keys&#39; \
+--header &#39;Authorization: Bearer &lt;SESSION_TOKEN&gt;&#39; \
+--header &#39;Content-Type: application/json&#39; \
+--data-raw &#39;{
+&quot;type&quot;: 2
+}&#39;
+</code></pre></div>
+</li>
+<li>
+<p>The output from creating a <code>PERMANENT_TOKEN</code> looks like the following. Please take note of the <code>id</code> (used later to revoke) and the <code>value</code> (the permanent API token):</p>
+<div class="highlight"><pre><span></span><code>{
+    &quot;id&quot;: &quot;710c6a92-b463-42ec-bf24-8ae24eb13081&quot;,
+    &quot;value&quot;: &quot;PERMANENT_TOKEN&quot;,
+    &quot;issued_at&quot;: &quot;2021-09-07T15:29:49.70146088Z&quot;
+}
+</code></pre></div>
+</li>
+<li>
+<p><mark>Currently, the permanent token allows access to all API functionality, not just provisioning.</mark> You can revoke this permanent token at any time with the following call, using the <code>id</code> field above:</p>
+<div class="highlight"><pre><span></span><code>curl --location --request DELETE &#39;HOST:80/api/v1/keys/&lt;PERMANENT_TOKEN_ID&gt;&#39; \
+--header &#39;Authorization: Bearer &lt;SESSION_TOKEN&gt;&#39;
+</code></pre></div>
+</li>
+<li>
+<p>Create a config for Orb and pktvisor taps, for example, <code>/opt/orb/agent.yaml</code>:
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+
+<span class="nt">visor</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">taps</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ethernet</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">input_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pcap</span>
+<span class="w">         </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">iface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eth0&quot;</span>
+
+<span class="nt">orb</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/orb/orb-agent.db</span>
+<span class="w">   </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EU</span>
+<span class="w">      </span><span class="nt">pop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ams02</span>
+<span class="w">      </span><span class="nt">node_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dns</span>
+<span class="w">   </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">agent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myagent1</span>
+<span class="w">      </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://HOST</span>
+<span class="w">      </span><span class="nt">mqtt</span><span class="p">:</span>
+<span class="w">         </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls://HOST:8883</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>You can now pull and run <code>orbcommunity/orb-agent</code> to auto-provision, substituting in the <code>PERMANENT_TOKEN</code> and optionally configuring agent name and Orb tags. If you don't set the agent name, it will attempt to use a hostname. You must mount the directory to save the agent state database and the config file:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>orbcommunity/orb-agent
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/local/orb:/opt/orb/<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-e<span class="w"> </span><span class="nv">ORB_CLOUD_API_TOKEN</span><span class="o">=</span>&lt;PERMANENT_TOKEN&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>orbcommunity/orb-agent<span class="w"> </span>run<span class="w"> </span>-c<span class="w"> </span>/opt/orb/agent.yaml
+</code></pre></div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../guides/response_testing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Response Testing" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Response Testing
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../orb_agent_configs/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuring Orb Agent" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Configuring Orb Agent
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 | <a href="https://netboxlabs.com/privacy/">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/orb-community/orb" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/orbcommunity" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://netdev.chat/" target="_blank" rel="noopener" title="netdev.chat" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@netboxlabs.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 0 0 0 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0 0 24 18.75v-14A1.75 1.75 0 0 0 22.25 3H1.75zM1.5 4.75a.25.25 0 0 1 .25-.25h20.5a.25.25 0 0 1 .25.25v.852l-10.36 7a.25.25 0 0 1-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.sections", "navigation.prune", "search.suggest"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>
