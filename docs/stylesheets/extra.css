@@ -346,6 +346,24 @@ div > .md-banner {
   width: 100%;
 }
 
+/* Archive notice (overrides/main.html) */
+.md-banner {
+  background-color: #ffc53d;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.md-banner__inner {
+  margin: 0.5rem auto;
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+}
+
+.md-banner a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .md-typeset img {
   margin: 1rem 0 !important;
 }
